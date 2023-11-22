@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var searchBar: UISearchBar!
+  
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -19,6 +19,7 @@ class ViewController: UIViewController {
 
 
 }
+//
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1

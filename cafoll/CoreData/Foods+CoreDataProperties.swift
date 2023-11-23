@@ -16,11 +16,7 @@ extension Foods {
         return NSFetchRequest<Foods>(entityName: "Foods")
     }
 
-    @NSManaged public var carbon: String
-    @NSManaged public var fat: String
-    @NSManaged public var calori: String
-    @NSManaged public var protein: String
-    @NSManaged public var title: String
+    @NSManaged public var title: String?
 
 }
 

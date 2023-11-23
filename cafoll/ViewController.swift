@@ -82,6 +82,39 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+            // Handle the delete action here
+
+            // Delete the item from your data source (e.g., CoreData)
+            if let foodToDelete = self?.helper.foods?[indexPath.row] {
+                self?.helper.context.delete(foodToDelete)
+                self?.helper.saveData()
+                self?.helper.fetchFoods()
+
+                // Update the table view
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+
+            completionHandler(true)
+        }
+
+        // Set the trash bin image for the delete action and tint it pink
+        if let trashImage = UIImage(systemName: "trash")?.withTintColor(.systemPink) {
+            // Set the trash bin image for the delete action
+            deleteAction.image = trashImage
+
+            // Set the background color to white
+            deleteAction.backgroundColor = .red
+            
+        }
+
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+
+
     
     
 }

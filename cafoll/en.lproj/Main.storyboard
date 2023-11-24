@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pyb-Pn-8Uk">
-                                <rect key="frame" x="0.0" y="167" width="320" height="300"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="317"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="75" id="f6d-10-8i7" customClass="Cell" customModule="cafoll" customModuleProvider="target">
@@ -88,10 +88,18 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hcN-FI-gkz"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e5L-61-qB9">
+                                <rect key="frame" x="18" y="64" width="284" height="56"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="npd-0W-SLX"/>
+                                </connections>
+                            </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K3F-6D-8qD">
-                                <rect key="frame" x="30" y="479" width="260" height="41"/>
+                                <rect key="frame" x="50" y="453" width="220" height="51"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="HcA-oy-27K"/>
+                                    <constraint firstAttribute="height" constant="50" id="HcA-oy-27K"/>
                                 </constraints>
                                 <segments>
                                     <segment title="Foods"/>
@@ -101,26 +109,19 @@
                                     <action selector="segmentButtonPressed:" destination="BYZ-38-t0r" eventType="valueChanged" id="4JF-qa-YC5"/>
                                 </connections>
                             </segmentedControl>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e5L-61-qB9">
-                                <rect key="frame" x="18" y="111" width="284" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="npd-0W-SLX"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="K3F-6D-8qD" firstAttribute="top" secondItem="Pyb-Pn-8Uk" secondAttribute="bottom" constant="12" id="5ne-oz-pAE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="K3F-6D-8qD" secondAttribute="trailing" constant="30" id="B18-Xs-NDz"/>
-                            <constraint firstItem="K3F-6D-8qD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CZa-ZR-yz1"/>
+                            <constraint firstItem="K3F-6D-8qD" firstAttribute="top" secondItem="Pyb-Pn-8Uk" secondAttribute="bottom" constant="16" id="0dd-MO-ZZ9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="K3F-6D-8qD" secondAttribute="bottom" constant="16" id="BCN-27-3yI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="K3F-6D-8qD" secondAttribute="trailing" constant="50" id="CGg-AD-xzN"/>
                             <constraint firstItem="Pyb-Pn-8Uk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GTT-Co-muM"/>
                             <constraint firstItem="e5L-61-qB9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="18" id="GUx-m3-JvP"/>
-                            <constraint firstItem="K3F-6D-8qD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="YiI-Jf-1eE"/>
                             <constraint firstItem="Pyb-Pn-8Uk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Zzl-Sr-t6y"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="e5L-61-qB9" secondAttribute="trailing" constant="18" id="r5b-ci-INX"/>
                             <constraint firstItem="e5L-61-qB9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sbi-Ds-KaD"/>
+                            <constraint firstItem="K3F-6D-8qD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="taO-2a-tgL"/>
                             <constraint firstItem="Pyb-Pn-8Uk" firstAttribute="top" secondItem="e5L-61-qB9" secondAttribute="bottom" id="vTr-KV-9Ui"/>
                         </constraints>
                     </view>

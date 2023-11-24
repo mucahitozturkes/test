@@ -36,9 +36,12 @@ class ViewController: UIViewController {
             
             let alert = UIAlertController(title: "\(foodName ?? "Unknown")", message: "\(foodDescription)\n\n\(protein)\n\(carbon)\n\(fat)\n\(calori)", preferredStyle: .alert)
 
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-
-            alert.addAction(cancel)
+            // Cancel Button
+                let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                    // Handle cancel action if needed
+                }
+                cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
+                alert.addAction(cancelButton)
 
             present(alert, animated: true, completion: nil)
         }
@@ -109,11 +112,15 @@ class ViewController: UIViewController {
             self?.tableView.reloadData()
         }
         
-        //Cancel Button
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)
+        // Cancel Button
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                // Handle cancel action if needed
+            }
+            cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
+            alert.addAction(cancelButton)
         
         alert.addAction(addButton)
-        alert.addAction(cancelButton)
+        
         
         present(alert, animated: true, completion: nil)
     }
@@ -211,6 +218,60 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRow = indexPath.row
+
+        let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
+
+        // Options for selecting food type
+        let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
+            self?.handleFoodOptionSelection("Breakfast", for: selectedRow)
+        }
+
+        let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
+            self?.handleFoodOptionSelection("Lunch", for: selectedRow)
+        }
+
+        let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
+            self?.handleFoodOptionSelection("Dinner", for: selectedRow)
+        }
+
+        let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
+            self?.handleFoodOptionSelection("Snack", for: selectedRow)
+        }
+
+        let editFavoriteOption = UIAlertAction(title: "Edit Favorite", style: .default) { [weak self] _ in
+            self?.handleFoodOptionSelection("Edit Favorite", for: selectedRow)
+        }
+
+        // Add actions to the alert
+        alert.addAction(breakfastOption)
+        alert.addAction(lunchOption)
+        alert.addAction(dinnerOption)
+        alert.addAction(snackOption)
+        alert.addAction(editFavoriteOption)
+
+        // Cancel Button
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                // Handle cancel action if needed
+            }
+            cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
+            alert.addAction(cancelButton)
+
+        // Present the alert
+        present(alert, animated: true, completion: nil)
+
+        // Deselect the selected row to visually indicate the tap
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+
+    // Helper method to handle food type option selection
+    private func handleFoodOptionSelection(_ option: String, for selectedRow: Int) {
+        // Implement your logic based on the selected option and the selected row
+        print("Selected option: \(option) for row: \(selectedRow)")
+        // You can perform additional actions based on the selected option and row
     }
 }
 //MARK: - SearchBar

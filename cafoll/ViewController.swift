@@ -11,8 +11,9 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
-  
     
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,30 +24,47 @@ class ViewController: UIViewController {
         helper.fetchFoods()
         helper.fetchFavorite()
     }
-    @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
-        
-        print("Search Food")
-    }
-    
+   
     @IBAction func infoButtonPressed(_ sender: UIButton) {
-        
-        print("look at info")
+        if let indexPath = indexPathForRow(sender) {
+            let foodName = self.helper.foods?[indexPath.row].title
+            let foodDescription = "A delicious dish with various toppings."
+            let protein = "Protein: 10"
+            let carbon = "Carbohydrates: 20"
+            let fat = "Fat: 30"
+            let calori = "Calories: 40"
+            
+            let alert = UIAlertController(title: "\(foodName ?? "Unknown")", message: "\(foodDescription)\n\n\(protein)\n\(carbon)\n\(fat)\n\(calori)", preferredStyle: .alert)
+
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+
+            alert.addAction(cancel)
+
+            present(alert, animated: true, completion: nil)
+        }
     }
-    
+
+    // Helper method to get the indexPath for the button pressed
+    private func indexPathForRow(_ button: UIButton) -> IndexPath? {
+        let point = button.convert(CGPoint.zero, to: tableView)
+        return tableView.indexPathForRow(at: point)
+    }
+
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
         if let indexPath = indexPathForButton(sender) {
             if let selectedFood = helper.foods?[indexPath.row] {
-                let favored = Favori(context: self.helper.context)
+                let favored = Favorite(context: self.helper.context)
                 favored.title = selectedFood.title
                 self.helper.saveData()
                 print("added to favorite")
 
                 // Provide a single haptic feedback
                 generateHapticFeedback(style: .light)
-            } else if let selectedFavori = helper.favori?[indexPath.row] {
+            } else if let selectedFavori = helper.favorite?[indexPath.row] {
                 self.helper.context.delete(selectedFavori)
                 self.helper.saveData()
                 self.helper.fetchFavorite()
+                
                 print("remove from favori")
 
                 // Provide a single haptic feedback
@@ -59,9 +77,6 @@ class ViewController: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()
     }
-
-
-
 
     func indexPathForButton(_ button: UIButton) -> IndexPath? {
         let buttonPosition = button.convert(CGPoint.zero, to: tableView)
@@ -83,12 +98,13 @@ class ViewController: UIViewController {
             
             //Equal with Labels
             let equalInfo = Foods(context: (self?.helper.context)!)
-            equalInfo.title = foodTitle!
-        
+            equalInfo.title = foodTitle!.capitalized
             //Save Data
             self?.helper.saveData()
             //fetch Data
             self?.helper.fetchFoods()
+            // Reverse the array to show the most recently added items at the top
+            self?.helper.foods?.reverse()
             //call cell
             self?.tableView.reloadData()
         }
@@ -108,14 +124,18 @@ class ViewController: UIViewController {
         switch currentSegmentIndex {
         case 0:
             // show foods
-            helper.favori = nil
+            helper.favorite = nil
             helper.fetchFoods()
+            // Reverse the array to show the most recently added items at the top
+            self.helper.foods?.reverse()
             navigationItem.title = "Food"
         case 1:
             // show favori & hide foods
             helper.foods = nil
             helper.fetchFavorite()
-            navigationItem.title = "Favori"
+            // Reverse the array to show the most recently added items at the top
+            self.helper.favorite?.reverse()
+            navigationItem.title = "Favorite"
         default:
             break
         }
@@ -123,15 +143,13 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
 
-
-    
 }
-//
+//MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let addFoodCount = self.helper.foods?.count, addFoodCount > 0 {
             return addFoodCount
-        } else if let favoriteCount = self.helper.favori?.count, favoriteCount > 0 {
+        } else if let favoriteCount = self.helper.favorite?.count, favoriteCount > 0 {
             return favoriteCount
         } else {
             return 0
@@ -146,8 +164,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let indexFoods = helper.foods?[row]
             cell.foodTitleLabel?.text = indexFoods?.title
             cell.favoriteButton.isUserInteractionEnabled = true // enable interaction
-        } else if let favoriCount = self.helper.favori?.count, favoriCount > 0 {
-            let indexFavori = helper.favori?[row]
+        } else if let favoriCount = self.helper.favorite?.count, favoriCount > 0 {
+            let indexFavori = helper.favorite?[row]
             cell.foodTitleLabel.text = indexFavori?.title
             cell.favoriteButton.isUserInteractionEnabled = false // Disable interaction
         }
@@ -158,9 +176,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             // Haptic feedback
             let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
             feedbackGenerator.impactOccurred()
-
-            // Handle the delete action here
-
             // Assuming you have a property named segmentedControl
             let selectedSegmentIndex = self?.segmentedControl.selectedSegmentIndex ?? 0
 
@@ -174,7 +189,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             case 1:
                 // Delete from favori
-                if let favoriToDelete = self?.helper.favori?[indexPath.row] {
+                if let favoriToDelete = self?.helper.favorite?[indexPath.row] {
                     self?.helper.context.delete(favoriToDelete)
                     self?.helper.saveData()
                     self?.helper.fetchFavorite()
@@ -197,9 +212,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-
-
-
-    
-    
+}
+//MARK: - SearchBar
+extension ViewController: UISearchControllerDelegate, UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            // Dismiss the keyboard
+            searchBar.resignFirstResponder()
+            
+            // Clear the search text
+            searchBar.text = nil
+            
+            // Reload the table view with the original data
+            helper.fetchFoods()
+            helper.fetchFavorite()
+            tableView.reloadData()
+            
+        }
+    //search Foods & favoriteis
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            // If the search text is empty, show all data
+            helper.fetchFoods()
+            helper.fetchFavorite()
+        } else {
+            // If there is search text, filter the data based on the search text
+            helper.foods = helper.foods?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+            helper.favorite = helper.favorite?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+        }
+        // Update the table view with the filtered data
+        tableView.reloadData()
+    }
 }

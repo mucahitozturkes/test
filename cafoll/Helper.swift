@@ -44,5 +44,10 @@ class Helper: UIViewController, UISearchControllerDelegate, UISearchBarDelegate 
             print("fetch Favorite: ", error)
         }
     }
+    //Haptic
+    func generateHapticFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred()
+    }
     
 }

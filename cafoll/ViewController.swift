@@ -60,10 +60,11 @@ class ViewController: UIViewController {
                 let favored = Favorite(context: self.helper.context)
                 favored.title = selectedFood.title
                 self.helper.saveData()
+                
                 print("added to favorite")
 
                 // Provide a single haptic feedback
-                generateHapticFeedback(style: .light)
+                helper.generateHapticFeedback(style: .light)
             } else if let selectedFavori = helper.favorite?[indexPath.row] {
                 self.helper.context.delete(selectedFavori)
                 self.helper.saveData()
@@ -72,14 +73,9 @@ class ViewController: UIViewController {
                 print("remove from favori")
 
                 // Provide a single haptic feedback
-                generateHapticFeedback(style: .light)
+                helper.generateHapticFeedback(style: .light)
             }
         }
-    }
-
-    func generateHapticFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
-        let generator = UIImpactFeedbackGenerator(style: style)
-        generator.impactOccurred()
     }
 
     func indexPathForButton(_ button: UIButton) -> IndexPath? {

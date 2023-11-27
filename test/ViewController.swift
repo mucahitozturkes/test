@@ -8,7 +8,7 @@ class ViewController: UIViewController {
        print("Hello!")
     }
     func delta() {
-        print("test")
+        print("tested")
     }
 
 }

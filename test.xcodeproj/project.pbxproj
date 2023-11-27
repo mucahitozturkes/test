@@ -14,6 +14,7 @@
 		0807F5B12B149CFA0068A5DA /* test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0807F5AF2B149CFA0068A5DA /* test.xcdatamodeld */; };
 		0807F5B32B149CFA0068A5DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0807F5B22B149CFA0068A5DA /* Assets.xcassets */; };
 		0807F5B62B149CFA0068A5DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0807F5B42B149CFA0068A5DA /* LaunchScreen.storyboard */; };
+		0807F5BE2B14A87F0068A5DA /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807F5BD2B14A87F0068A5DA /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0807F5B22B149CFA0068A5DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0807F5B52B149CFA0068A5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0807F5B72B149CFA0068A5DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0807F5BD2B14A87F0068A5DA /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				0807F5A62B149CFA0068A5DA /* AppDelegate.swift */,
 				0807F5A82B149CFA0068A5DA /* SceneDelegate.swift */,
 				0807F5AA2B149CFA0068A5DA /* ViewController.swift */,
+				0807F5BD2B14A87F0068A5DA /* Cell.swift */,
 				0807F5AC2B149CFA0068A5DA /* Main.storyboard */,
 				0807F5B22B149CFA0068A5DA /* Assets.xcassets */,
 				0807F5B42B149CFA0068A5DA /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			files = (
 				0807F5AB2B149CFA0068A5DA /* ViewController.swift in Sources */,
 				0807F5B12B149CFA0068A5DA /* test.xcdatamodeld in Sources */,
+				0807F5BE2B14A87F0068A5DA /* Cell.swift in Sources */,
 				0807F5A72B149CFA0068A5DA /* AppDelegate.swift in Sources */,
 				0807F5A92B149CFA0068A5DA /* SceneDelegate.swift in Sources */,
 			);

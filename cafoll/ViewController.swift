@@ -109,43 +109,56 @@ class ViewController: UIViewController {
         alert.addTextField { textfield in
             textfield.placeholder = " + Calori"
         }
-        //Add Button Way
+
+        // Add Button Way
         let addButton = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-            let foodTitle = alert.textFields?[0].text
-            let foodProtein = alert.textFields?[1].text
-            let foodCarbon = alert.textFields?[2].text
-            let foodFat = alert.textFields?[3].text
-            let foodCalori = alert.textFields?[4].text
-            
-            //Equal with Labels
+            // Check if all textfields are filled
+           let foodTitle = alert.textFields?[0].text
+           let foodProtein = alert.textFields?[1].text
+           let foodCarbon = alert.textFields?[2].text
+           let foodFat = alert.textFields?[3].text
+           let foodCalori = alert.textFields?[4].text
+        
+            // Equal with Labels
             let equalInfo = Foods(context: (self?.helper.context)!)
-            equalInfo.title = foodTitle!.capitalized
-            equalInfo.protein = foodProtein!
-            equalInfo.carbon = foodCarbon!
-            equalInfo.fat = foodFat!
-            equalInfo.calori = foodCalori!
-            //Save Data
+            equalInfo.title = foodTitle?.capitalized
+            equalInfo.protein = foodProtein
+            equalInfo.carbon = foodCarbon
+            equalInfo.fat = foodFat
+            equalInfo.calori = foodCalori
+
+            // Save Data
             self?.helper.saveData()
-            //fetch Data
+            // Fetch Data
             self?.helper.fetchFoods()
             // Reverse the array to show the most recently added items at the top
             self?.helper.foods?.reverse()
-            //call cell
+            // Call cell
             self?.tableView.reloadData()
         }
-        
+
         // Cancel Button
-            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                // Handle cancel action if needed
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            // Handle cancel action if needed
+        }
+        cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
+        alert.addAction(cancelButton)
+
+        // Initially disable the Add button
+        addButton.isEnabled = false
+
+        // Add observers to all textfields to enable/disable the Add button based on their content
+        for textField in alert.textFields! {
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
+                addButton.isEnabled = alert.textFields?.allSatisfy { !$0.text!.isEmpty } ?? false
             }
-            cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
-            alert.addAction(cancelButton)
-        
+        }
+
         alert.addAction(addButton)
-        
-        
+
         present(alert, animated: true, completion: nil)
     }
+
     
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
         let currentSegmentIndex = sender.selectedSegmentIndex
@@ -158,6 +171,9 @@ class ViewController: UIViewController {
             // Reverse the array to show the most recently added items at the top
             self.helper.foods?.reverse()
             navigationItem.title = "Food"
+            let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewFoodButtonPressed))
+                    addButton.tintColor = UIColor.darkGray  // Set the color you want
+                    navigationItem.rightBarButtonItem = addButton
         case 1:
             // show favori & hide foods
             helper.foods = nil
@@ -165,6 +181,7 @@ class ViewController: UIViewController {
             // Reverse the array to show the most recently added items at the top
             self.helper.favorite?.reverse()
             navigationItem.title = "Favorite"
+            navigationItem.rightBarButtonItem = nil
             
         default:
             break
@@ -207,6 +224,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             // Haptic feedback
             let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
             feedbackGenerator.impactOccurred()
+            
             // Assuming you have a property named segmentedControl
             let selectedSegmentIndex = self?.segmentedControl.selectedSegmentIndex ?? 0
             
@@ -214,13 +232,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 // Delete from foods
                 if let foodToDelete = self?.helper.foods?[indexPath.row] {
+                    // Check if there is a corresponding favorite item
+                    if let favoriteToDelete = self?.helper.favorite?.first(where: { $0.id == foodToDelete.id }) {
+                        // Delete the corresponding favorite item
+                        self?.helper.context.delete(favoriteToDelete)
+                        self?.helper.saveData()
+                        self?.helper.fetchFavorite() // Make sure to fetch favorites after deletion
+                    }
+                    
+                    // Delete the food item
                     self?.helper.context.delete(foodToDelete)
                     self?.helper.saveData()
                     self?.helper.fetchFoods()
                 }
+
             case 1:
                 // Delete from favori
                 if let favoriToDelete = self?.helper.favorite?[indexPath.row] {
+                    // Delete the favorite item
                     self?.helper.context.delete(favoriToDelete)
                     self?.helper.saveData()
                     self?.helper.fetchFavorite()
@@ -243,6 +272,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
+
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = indexPath.row
         

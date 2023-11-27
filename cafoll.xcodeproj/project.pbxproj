@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0807F5972B1495430068A5DA /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807F5962B1495430068A5DA /* Cell.swift */; };
+		0807F5992B1495500068A5DA /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807F5982B1495500068A5DA /* Helper.swift */; };
 		082E2D612B0FBF0E0070FF0F /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E2D5D2B0FBF0E0070FF0F /* Favorite+CoreDataClass.swift */; };
 		082E2D622B0FBF0E0070FF0F /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E2D5E2B0FBF0E0070FF0F /* Favorite+CoreDataProperties.swift */; };
 		082E2D632B0FBF0E0070FF0F /* Foods+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E2D5F2B0FBF0E0070FF0F /* Foods+CoreDataClass.swift */; };
@@ -18,11 +20,11 @@
 		0883C0C12B0E160D00D55176 /* cafoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0BF2B0E160D00D55176 /* cafoll.xcdatamodeld */; };
 		0883C0C32B0E160F00D55176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0883C0C22B0E160F00D55176 /* Assets.xcassets */; };
 		0883C0C62B0E160F00D55176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0883C0C42B0E160F00D55176 /* LaunchScreen.storyboard */; };
-		0883C0F72B0F0D1100D55176 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0F62B0F0D1100D55176 /* Helper.swift */; };
-		0883C0F92B0F0D3100D55176 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0F82B0F0D3100D55176 /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0807F5962B1495430068A5DA /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Cell.swift; path = ../Cell.swift; sourceTree = "<group>"; };
+		0807F5982B1495500068A5DA /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		082E2D542B0FBDFB0070FF0F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		082E2D5D2B0FBF0E0070FF0F /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		082E2D5E2B0FBF0E0070FF0F /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -37,8 +39,6 @@
 		0883C0C22B0E160F00D55176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0883C0C52B0E160F00D55176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0883C0C72B0E160F00D55176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0883C0F62B0F0D1100D55176 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = ../../../Desktop/cafoll/cafoll/Helper.swift; sourceTree = "<group>"; };
-		0883C0F82B0F0D3100D55176 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cell.swift; path = ../../../Desktop/cafoll/cafoll/Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +76,8 @@
 				0883C0B82B0E160D00D55176 /* SceneDelegate.swift */,
 				0883C0C22B0E160F00D55176 /* Assets.xcassets */,
 				0883C0BA2B0E160D00D55176 /* ViewController.swift */,
-				0883C0F62B0F0D1100D55176 /* Helper.swift */,
-				0883C0F82B0F0D3100D55176 /* Cell.swift */,
+				0807F5962B1495430068A5DA /* Cell.swift */,
+				0807F5982B1495500068A5DA /* Helper.swift */,
 				0883C0BF2B0E160D00D55176 /* cafoll.xcdatamodeld */,
 				0883C0BC2B0E160D00D55176 /* Main.storyboard */,
 				0883C0C42B0E160F00D55176 /* LaunchScreen.storyboard */,
@@ -171,13 +171,13 @@
 				0883C0C12B0E160D00D55176 /* cafoll.xcdatamodeld in Sources */,
 				082E2D642B0FBF0E0070FF0F /* Foods+CoreDataProperties.swift in Sources */,
 				0883C0BB2B0E160D00D55176 /* ViewController.swift in Sources */,
-				0883C0F72B0F0D1100D55176 /* Helper.swift in Sources */,
 				082E2D612B0FBF0E0070FF0F /* Favorite+CoreDataClass.swift in Sources */,
 				082E2D632B0FBF0E0070FF0F /* Foods+CoreDataClass.swift in Sources */,
+				0807F5972B1495430068A5DA /* Cell.swift in Sources */,
 				0883C0B72B0E160D00D55176 /* AppDelegate.swift in Sources */,
+				0807F5992B1495500068A5DA /* Helper.swift in Sources */,
 				082E2D622B0FBF0E0070FF0F /* Favorite+CoreDataProperties.swift in Sources */,
 				0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */,
-				0883C0F92B0F0D3100D55176 /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

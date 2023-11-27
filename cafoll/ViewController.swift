@@ -165,12 +165,14 @@ class ViewController: UIViewController {
             // Reverse the array to show the most recently added items at the top
             self.helper.favorite?.reverse()
             navigationItem.title = "Favorite"
+            
         default:
             break
         }
         // Update the table
         tableView.reloadData()
     }
+    
 
 }
 //MARK: - Table View
@@ -207,7 +209,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             feedbackGenerator.impactOccurred()
             // Assuming you have a property named segmentedControl
             let selectedSegmentIndex = self?.segmentedControl.selectedSegmentIndex ?? 0
-
+            
             switch selectedSegmentIndex {
             case 0:
                 // Delete from foods
@@ -226,69 +228,137 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             default:
                 break
             }
-
+            
             // Update the table view
             tableView.deleteRows(at: [indexPath], with: .fade)
             completionHandler(true)
         }
-
+        
         // Set the trash bin image for the delete action and tint it pink
         if let trashImage = UIImage(systemName: "trash")?.withTintColor(.systemPink) {
             // Set the trash bin image for the delete action
             deleteAction.image = trashImage
         }
-
+        
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = indexPath.row
-
+        
         let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
-
+        
         // Options for selecting food type
         let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
             self?.handleFoodOptionSelection("Breakfast", for: selectedRow)
         }
-
+        
         let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
             self?.handleFoodOptionSelection("Lunch", for: selectedRow)
         }
-
+        
         let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
             self?.handleFoodOptionSelection("Dinner", for: selectedRow)
         }
-
+        
         let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
             self?.handleFoodOptionSelection("Snack", for: selectedRow)
         }
-
-        let editFavoriteOption = UIAlertAction(title: "Edit Favorite", style: .default) { [weak self] _ in
-            self?.handleFoodOptionSelection("Edit Favorite", for: selectedRow)
+        if segmentedControl.selectedSegmentIndex != 1 {
+            let editOption = UIAlertAction(title: "Edit", style: .default) { _ in
+                guard let food = self.helper.foods?[indexPath.row] else {
+                    return
+                }
+                
+                // Edit Row
+                let editAlert = UIAlertController(title: "Editor", message: "You can change!", preferredStyle: .alert)
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Title"
+                    textField.text = food.title
+                }
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Protein"
+                    textField.text = food.protein
+                }
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Carbon"
+                    textField.text = food.carbon
+                }
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Fat"
+                    textField.text = food.fat
+                }
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Calories"
+                    textField.text = food.calori
+                }
+                
+                // Save button
+                let saveButton = UIAlertAction(title: "Edit", style: .default) { (action) in
+                    guard let textfieldTitle = editAlert.textFields?[0],
+                          let textfieldProtein = editAlert.textFields?[1],
+                          let textfieldCarbon = editAlert.textFields?[2],
+                          let textfieldFat = editAlert.textFields?[3],
+                          let textfieldCalori = editAlert.textFields?[4] else {
+                        return
+                    }
+                    
+                    // Edit TextField
+                    food.title = textfieldTitle.text
+                    food.protein = textfieldProtein.text
+                    food.carbon = textfieldCarbon.text
+                    food.fat = textfieldFat.text
+                    food.calori = textfieldCalori.text
+                    
+                    self.helper.saveData()
+                    self.helper.fetchFoods()
+                    self.helper.fetchFavorite()
+                    tableView.reloadData()
+                }
+                
+                // Cancel button
+                let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+                
+                // Show buttons
+                editAlert.addAction(cancelButton)
+                editAlert.addAction(saveButton)
+                
+                self.present(editAlert, animated: true, completion: nil)
+            }
+            alert.addAction(editOption)
+            // You can set the text color of the "Edit" option in the first alert here
+                    //editOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+            
         }
-
         // Add actions to the alert
         alert.addAction(breakfastOption)
         alert.addAction(lunchOption)
         alert.addAction(dinnerOption)
         alert.addAction(snackOption)
-        alert.addAction(editFavoriteOption)
-
+        // You can set the text color of the "Edit" option in the first alert here
+                breakfastOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        // You can set the text color of the "Edit" option in the first alert here
+                lunchOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        // You can set the text color of the "Edit" option in the first alert here
+                dinnerOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        // You can set the text color of the "Edit" option in the first alert here
+                snackOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+      
+        
         // Cancel Button
-            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                // Handle cancel action if needed
-            }
-            cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
-            alert.addAction(cancelButton)
-
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            // Handle cancel action if needed
+        }
+        cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
+        alert.addAction(cancelButton)
+        
         // Present the alert
         present(alert, animated: true, completion: nil)
-
+        
         // Deselect the selected row to visually indicate the tap
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-
+    
     // Helper method to handle food type option selection
     private func handleFoodOptionSelection(_ option: String, for selectedRow: Int) {
         // Implement your logic based on the selected option and the selected row

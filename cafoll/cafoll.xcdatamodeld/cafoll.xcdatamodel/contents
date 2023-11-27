@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Favorite" representedClassName=".Favorite" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="Foods" representedClassName=".Foods" syncable="YES">

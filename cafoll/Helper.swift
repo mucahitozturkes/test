@@ -14,6 +14,7 @@ class Helper: UIViewController, UISearchControllerDelegate, UISearchBarDelegate 
     var filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     var foods: [Foods]?
     var favorite: [Favorite]?
+    var isEditAlertPresented = false
    
     
     //Save context
@@ -45,6 +46,5 @@ class Helper: UIViewController, UISearchControllerDelegate, UISearchBarDelegate 
             print("fetch Favorite: ", error)
         }
     }
-   
     
 }

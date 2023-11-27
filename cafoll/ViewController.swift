@@ -29,19 +29,19 @@ class ViewController: UIViewController {
         if let indexPath = indexPathForRow(sender) {
             let foodName = self.helper.foods?[indexPath.row].title
             let foodDescription = "A delicious dish with various toppings."
-            let protein = "Protein: 10"
-            let carbon = "Carbohydrates: 20"
-            let fat = "Fat: 30"
-            let calori = "Calories: 40"
-            
-            let alert = UIAlertController(title: "\(foodName ?? "Unknown")", message: "\(foodDescription)\n\n\(protein)\n\(carbon)\n\(fat)\n\(calori)", preferredStyle: .alert)
+            let protein = helper.foods?[indexPath.row].protein
+            let carbon = helper.foods?[indexPath.row].carbon
+            let fat = helper.foods?[indexPath.row].fat
+            let calori = helper.foods?[indexPath.row].calori
+
+            let alert = UIAlertController(title: "\(foodName ?? "Unknown")", message: "\(foodDescription)\n\nProtein: \(protein ?? "0")\nCarbon: \(carbon ?? "0")\nFat: \(fat ?? "0")\nCalories: \(calori ?? "0")", preferredStyle: .alert)
 
             // Cancel Button
-                let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                    // Handle cancel action if needed
-                }
-                cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
-                alert.addAction(cancelButton)
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                // Handle cancel action if needed
+            }
+            cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
+            alert.addAction(cancelButton)
 
             present(alert, animated: true, completion: nil)
         }
@@ -52,6 +52,7 @@ class ViewController: UIViewController {
         let point = button.convert(CGPoint.zero, to: tableView)
         return tableView.indexPathForRow(at: point)
     }
+
 
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
         if let indexPath = indexPathForButton(sender) {
@@ -93,15 +94,36 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "New Food", message: "Just write your food", preferredStyle: .alert)
 
         alert.addTextField { textfield in
-            textfield.placeholder = "Which food do want to add?"
+            textfield.placeholder = " + Food"
+            textfield.textAlignment = .center
+        }
+        alert.addTextField { textfield in
+            textfield.placeholder = " + Protein"
+        }
+        alert.addTextField { textfield in
+            textfield.placeholder = " + Carbon"
+        }
+        alert.addTextField { textfield in
+            textfield.placeholder = " + Fat"
+        }
+        alert.addTextField { textfield in
+            textfield.placeholder = " + Calori"
         }
         //Add Button Way
         let addButton = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             let foodTitle = alert.textFields?[0].text
+            let foodProtein = alert.textFields?[1].text
+            let foodCarbon = alert.textFields?[2].text
+            let foodFat = alert.textFields?[3].text
+            let foodCalori = alert.textFields?[4].text
             
             //Equal with Labels
             let equalInfo = Foods(context: (self?.helper.context)!)
             equalInfo.title = foodTitle!.capitalized
+            equalInfo.protein = foodProtein!
+            equalInfo.carbon = foodCarbon!
+            equalInfo.fat = foodFat!
+            equalInfo.calori = foodCalori!
             //Save Data
             self?.helper.saveData()
             //fetch Data

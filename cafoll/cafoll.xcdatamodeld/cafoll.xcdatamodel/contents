@@ -4,6 +4,10 @@
         <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="Foods" representedClassName=".Foods" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
     </entity>
 </model>

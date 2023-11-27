@@ -7,7 +7,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
        print("Hello!")
     }
-
+    func delta() {
+        print("test")
+    }
 
 }
 

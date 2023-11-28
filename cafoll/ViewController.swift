@@ -11,8 +11,7 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
-    
-    
+
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -43,7 +42,27 @@ class ViewController: UIViewController {
             let fat = (food as? Foods)?.fat ?? (food as? Favorite)?.fat ?? "0"
             let calori = (food as? Foods)?.calori ?? (food as? Favorite)?.calori ?? "0"
 
-            let alert = UIAlertController(title: "\(foodName)", message: "\(foodDescription)\n\nProtein: \(protein)\nCarbon: \(carbon)\nFat: \(fat)\nCalories: \(calori)", preferredStyle: .alert)
+            // Create the detail string with right alignment
+            let detailString = """
+                            \n
+                Protein             \(protein.padding(toLength: 15, withPad: " ", startingAt: 0))\n
+                Carbon             \(carbon.padding(toLength: 15, withPad: " ", startingAt: 0))\n
+                Fat                    \(fat.padding(toLength: 15, withPad: " ", startingAt: 0))\n
+                Calories           \(calori.padding(toLength: 15, withPad: " ", startingAt: 0))
+                """
+
+            // Create the paragraph style
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .left
+
+            // Create the attributed message with the paragraph style
+            let attributedMessage = NSAttributedString(string: detailString, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+
+            // Create the alert controller
+            let alert = UIAlertController(title: foodName, message: nil, preferredStyle: .alert)
+
+            // Set the attributed message to the alert controller
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
 
             // Cancel Button
             let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -52,9 +71,12 @@ class ViewController: UIViewController {
             cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
             alert.addAction(cancelButton)
 
+            // Present the alert
             present(alert, animated: true, completion: nil)
         }
     }
+
+
 
     // Helper method to get the indexPath for the button pressed
     private func indexPathForRow(_ button: UIButton) -> IndexPath? {
@@ -418,49 +440,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 //MARK: - SearchBar
 extension ViewController: UISearchControllerDelegate, UISearchBarDelegate {
-
-    // Search Foods & Favorites
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            // Dismiss the keyboard
+            searchBar.resignFirstResponder()
+            
+            // Clear the search text
+            searchBar.text = nil
+            
+            // Reload the table view with the original data
+            helper.fetchFoods()
+            helper.fetchFavorite()
+            tableView.reloadData()
+            
+        }
+    //search Foods & favoriteis
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             // If the search text is empty, show all data
             helper.fetchFoods()
             helper.fetchFavorite()
         } else {
-            // If there is search text
-            let originalFoods = helper.foods // Save the original foods
-            let originalFavorites = helper.favorite // Save the original favorites
-
-            // If the new search text is shorter than the previous one, revert to the original data
-            if searchText.count < (searchBar.text?.count ?? 0) {
-                helper.fetchFoods()
-                helper.fetchFavorite()
-            }
-
-            // Clear existing data
-            helper.foods = nil
-            helper.favorite = nil
-
-            // Update the search results with each character
-            for char in searchText {
-                helper.foods = originalFoods?.filter { $0.title?.lowercased().contains(String(char).lowercased()) ?? false }
-                helper.favorite = originalFavorites?.filter { $0.title?.lowercased().contains(String(char).lowercased()) ?? false }
-            }
+            // If there is search text, filter the data based on the search text
+            helper.foods = helper.foods?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+            helper.favorite = helper.favorite?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
         }
         // Update the table view with the filtered data
         tableView.reloadData()
     }
-
-    // SearchBar'da "Search" butonuna tıklandığında tetiklenen fonksiyon
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        // Arama işlemi sonrasında tüm verileri tekrar yükle
-        helper.fetchFoods()
-        helper.fetchFavorite()
-
-        // TableView'i güncelle
-        tableView.reloadData()
-
-        // Klavyeyi kapat
-        searchBar.resignFirstResponder()
-    }
 }
-

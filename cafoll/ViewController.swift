@@ -11,13 +11,12 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
-    
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var caloriLabel: UILabel!
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var carbonLabel: UILabel!
-    @IBOutlet weak var proteinLabel: UILabel!
+   
+    @IBOutlet weak var titleLabelTextfield: UITextField!
+    @IBOutlet weak var caloriLabel: UITextField!
+    @IBOutlet weak var fatLabel: UITextField!
+    @IBOutlet weak var carbonLabel: UITextField!
+    @IBOutlet weak var proteinLabel: UITextField!
     //Bar
     @IBOutlet weak var caloriBar: UIProgressView!
     @IBOutlet weak var fatBar: UIProgressView!
@@ -45,9 +44,8 @@ class ViewController: UIViewController {
         // UITapGestureRecognizer ekleyin
                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                blurView.addGestureRecognizer(tapGesture)
-     
-       
     }
+    
     func updateProgressBars(protein: Float, carbon: Float, fat: Float, calories: Float) {
         let maxProtein: Float = 35.0  // Protein maksimum değeri
         let maxCarbon: Float = 25.0   // Karbonhidrat maksimum değeri
@@ -87,13 +85,14 @@ class ViewController: UIViewController {
         }
         
         if let food = food {
-            var foodName = (food as? Foods)?.title ?? (food as? Favorite)?.title ?? "Unknown"
-            var protein = (food as? Foods)?.protein ?? (food as? Favorite)?.protein ?? "0"
-            var carbon = (food as? Foods)?.carbon ?? (food as? Favorite)?.carbon ?? "0"
-            var fat = (food as? Foods)?.fat ?? (food as? Favorite)?.fat ?? "0"
-            var calori = (food as? Foods)?.calori ?? (food as? Favorite)?.calori ?? "0"
+            let foodName = (food as? Foods)?.title ?? (food as? Favorite)?.title ?? "Unknown"
+            let protein = (food as? Foods)?.protein ?? (food as? Favorite)?.protein ?? "0"
+            let carbon = (food as? Foods)?.carbon ?? (food as? Favorite)?.carbon ?? "0"
+            let fat = (food as? Foods)?.fat ?? (food as? Favorite)?.fat ?? "0"
+            let calori = (food as? Foods)?.calori ?? (food as? Favorite)?.calori ?? "0"
             
-            titleLabel.text = foodName
+            // titleLabelButton
+            titleLabelTextfield.text = foodName
             proteinLabel.text = protein
             carbonLabel.text = carbon
             fatLabel.text = fat
@@ -106,29 +105,45 @@ class ViewController: UIViewController {
                                calories: Float(calori) ?? 0.0)
         }
     }
-
+    // Helper method to get the indexPath for the button pressed
+    private func indexPathForRow(_ button: UIButton) -> IndexPath? {
+        let point = button.convert(CGPoint.zero, to: tableView)
+        return tableView.indexPathForRow(at: point)
+    }
+    
     
     func animated(desiredView: UIView) {
         let backgroundView = self.view!
-            
-        //popupView.backgroundColor = UIColor.white
+
         popupView.layer.cornerRadius = 12
-        popupView.layer.shadowColor = UIColor.black.cgColor
-        popupView.layer.shadowOpacity = 0.5
-        popupView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        popupView.layer.shadowRadius = 4
-        backgroundView.addSubview(desiredView)
         
+        // Shadow rengini güncelle
+        if backgroundView.traitCollection.userInterfaceStyle == .dark {
+            // Dark mode'da beyaz shadow color
+            popupView.layer.shadowColor = UIColor.white.cgColor
+            popupView.layer.shadowOffset = CGSize(width: 1, height: 1)
+            popupView.layer.shadowRadius = 3
+            popupView.layer.shadowOpacity = 1
+        } else {
+            // Light mode'da siyah shadow color
+            popupView.layer.shadowColor = UIColor.black.cgColor
+            popupView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            popupView.layer.shadowRadius = 4
+            popupView.layer.shadowOpacity = 0.5
+        }
+
+        backgroundView.addSubview(desiredView)
+
         desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
         desiredView.alpha = 0
         desiredView.center = backgroundView.center
-        
-        UIView.animate(withDuration: 0.5, animations: {
+
+        UIView.animate(withDuration: 0.3, animations: {
             desiredView.transform = CGAffineTransform(scaleX: 1, y: 1)
             desiredView.alpha = 1
-            
         })
     }
+
     func animatedOut(desiredView: UIView) {
         UIView.animate(withDuration: 0.3, animations: {
             desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
@@ -139,11 +154,7 @@ class ViewController: UIViewController {
     }
     
 
-    // Helper method to get the indexPath for the button pressed
-    private func indexPathForRow(_ button: UIButton) -> IndexPath? {
-        let point = button.convert(CGPoint.zero, to: tableView)
-        return tableView.indexPathForRow(at: point)
-    }
+    
 
 
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
@@ -392,6 +403,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
             self?.handleFoodOptionSelection("Snack", for: selectedRow)
         }
+        
         if segmentedControl.selectedSegmentIndex != 1 {
             let editOption = UIAlertAction(title: "Edit", style: .default) { _ in
                 guard let food = self.helper.foods?[indexPath.row] else {
@@ -437,7 +449,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     // Edit TextField
-                    food.title = textfieldTitle.text
+                        if var editedTitle = textfieldTitle.text {
+                            editedTitle = editedTitle.capitalized // Büyük harfle başlatma işlemi
+                            food.title = editedTitle
+                        }
+                    
                     food.protein = textfieldProtein.text
                     food.carbon = textfieldCarbon.text
                     food.fat = textfieldFat.text
@@ -460,23 +476,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
             alert.addAction(editOption)
             // You can set the text color of the "Edit" option in the first alert here
-                    //editOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
-            
+            //editOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
         }
+        
         // Add actions to the alert
         alert.addAction(breakfastOption)
         alert.addAction(lunchOption)
         alert.addAction(dinnerOption)
         alert.addAction(snackOption)
         // You can set the text color of the "Edit" option in the first alert here
-                breakfastOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        breakfastOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
         // You can set the text color of the "Edit" option in the first alert here
-                lunchOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        lunchOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
         // You can set the text color of the "Edit" option in the first alert here
-                dinnerOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        dinnerOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
         // You can set the text color of the "Edit" option in the first alert here
-                snackOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
-      
+        snackOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        
         
         // Cancel Button
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -491,6 +507,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // Deselect the selected row to visually indicate the tap
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
     
     // Helper method to handle food type option selection
     private func handleFoodOptionSelection(_ option: String, for selectedRow: Int) {

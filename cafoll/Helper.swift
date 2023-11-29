@@ -49,5 +49,6 @@ class Helper: UIViewController, UISearchControllerDelegate, UISearchBarDelegate 
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()
     }
-    
+
+   
 }

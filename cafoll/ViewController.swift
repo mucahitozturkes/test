@@ -11,7 +11,22 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
-
+    
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var caloriLabel: UILabel!
+    @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var carbonLabel: UILabel!
+    @IBOutlet weak var proteinLabel: UILabel!
+    //Bar
+    @IBOutlet weak var caloriBar: UIProgressView!
+    @IBOutlet weak var fatBar: UIProgressView!
+    @IBOutlet weak var carbonBar: UIProgressView!
+    @IBOutlet weak var proteinBar: UIProgressView!
+    //popup
+    @IBOutlet var popupView: UIView!
+    @IBOutlet var blurView: UIVisualEffectView!
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -22,8 +37,45 @@ class ViewController: UIViewController {
         helper = Helper()
         helper.fetchFoods()
         helper.fetchFavorite()
+     
+        blurView.bounds = self.view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.7, height: self.view.bounds.height * 0.3)
+        
+        // UITapGestureRecognizer ekleyin
+               let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+               blurView.addGestureRecognizer(tapGesture)
+     
+       
     }
-    @IBAction func infoButtonPressed(_ sender: UIButton) {
+    func updateProgressBars(protein: Float, carbon: Float, fat: Float, calories: Float) {
+        let maxProtein: Float = 35.0  // Protein maksimum değeri
+        let maxCarbon: Float = 25.0   // Karbonhidrat maksimum değeri
+        let maxFat: Float = 25.0      // Yağ maksimum değeri
+        let maxCalories: Float = 500.0 // Kalori maksimum değeri
+
+        // Protein bar
+        proteinBar.progress = protein / maxProtein
+
+        // Karbonhidrat bar
+        carbonBar.progress = carbon / maxCarbon
+
+        // Yağ bar
+        fatBar.progress = fat / maxFat
+
+        // Kalori bar
+        caloriBar.progress = calories / maxCalories
+    }
+    
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+           animatedOut(desiredView: popupView)
+           animatedOut(desiredView: blurView)
+       }
+    
+    @IBAction func popupButtonPressed(_ sender: UIButton) {
+        animated(desiredView: blurView)
+        animated(desiredView: popupView)
+        
         guard let indexPath = indexPathForRow(sender) else { return }
 
         var food: Any?
@@ -33,50 +85,59 @@ class ViewController: UIViewController {
         } else if let selectedFavorite = helper.favorite?[indexPath.row] {
             food = selectedFavorite
         }
-
+        
         if let food = food {
-            let foodName = (food as? Foods)?.title ?? (food as? Favorite)?.title ?? "Unknown"
-            let foodDescription = "A delicious dish with various toppings."
-            let protein = (food as? Foods)?.protein ?? (food as? Favorite)?.protein ?? "0"
-            let carbon = (food as? Foods)?.carbon ?? (food as? Favorite)?.carbon ?? "0"
-            let fat = (food as? Foods)?.fat ?? (food as? Favorite)?.fat ?? "0"
-            let calori = (food as? Foods)?.calori ?? (food as? Favorite)?.calori ?? "0"
-
-            // Create the detail string with right alignment
-            let detailString = """
-                            \n
-                Protein             \(protein.padding(toLength: 15, withPad: " ", startingAt: 0))\n
-                Carbon             \(carbon.padding(toLength: 15, withPad: " ", startingAt: 0))\n
-                Fat                    \(fat.padding(toLength: 15, withPad: " ", startingAt: 0))\n
-                Calories           \(calori.padding(toLength: 15, withPad: " ", startingAt: 0))
-                """
-
-            // Create the paragraph style
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .left
-
-            // Create the attributed message with the paragraph style
-            let attributedMessage = NSAttributedString(string: detailString, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
-
-            // Create the alert controller
-            let alert = UIAlertController(title: foodName, message: nil, preferredStyle: .alert)
-
-            // Set the attributed message to the alert controller
-            alert.setValue(attributedMessage, forKey: "attributedMessage")
-
-            // Cancel Button
-            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                // Handle cancel action if needed
-            }
-            cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
-            alert.addAction(cancelButton)
-
-            // Present the alert
-            present(alert, animated: true, completion: nil)
+            var foodName = (food as? Foods)?.title ?? (food as? Favorite)?.title ?? "Unknown"
+            var protein = (food as? Foods)?.protein ?? (food as? Favorite)?.protein ?? "0"
+            var carbon = (food as? Foods)?.carbon ?? (food as? Favorite)?.carbon ?? "0"
+            var fat = (food as? Foods)?.fat ?? (food as? Favorite)?.fat ?? "0"
+            var calori = (food as? Foods)?.calori ?? (food as? Favorite)?.calori ?? "0"
+            
+            titleLabel.text = foodName
+            proteinLabel.text = protein
+            carbonLabel.text = carbon
+            fatLabel.text = fat
+            caloriLabel.text = calori
+            
+            // Progress barları güncelle
+            updateProgressBars(protein: Float(protein) ?? 0.0,
+                               carbon: Float(carbon) ?? 0.0,
+                               fat: Float(fat) ?? 0.0,
+                               calories: Float(calori) ?? 0.0)
         }
     }
 
-
+    
+    func animated(desiredView: UIView) {
+        let backgroundView = self.view!
+            
+        //popupView.backgroundColor = UIColor.white
+        popupView.layer.cornerRadius = 12
+        popupView.layer.shadowColor = UIColor.black.cgColor
+        popupView.layer.shadowOpacity = 0.5
+        popupView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        popupView.layer.shadowRadius = 4
+        backgroundView.addSubview(desiredView)
+        
+        desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+        desiredView.alpha = 0
+        desiredView.center = backgroundView.center
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            desiredView.alpha = 1
+            
+        })
+    }
+    func animatedOut(desiredView: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+            desiredView.alpha = 0
+        },completion: { _ in
+            desiredView.removeFromSuperview()
+        })
+    }
+    
 
     // Helper method to get the indexPath for the button pressed
     private func indexPathForRow(_ button: UIButton) -> IndexPath? {

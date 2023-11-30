@@ -2,7 +2,7 @@
 //  Favorite+CoreDataProperties.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 27.11.2023.
+//  Created by mücahit öztürk on 30.11.2023.
 //
 //
 
@@ -16,11 +16,12 @@ extension Favorite {
         return NSFetchRequest<Favorite>(entityName: "Favorite")
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var calori: String?
     @NSManaged public var carbon: String?
     @NSManaged public var fat: String?
     @NSManaged public var protein: String?
+    @NSManaged public var title: String?
+    @NSManaged public var idFavorite: UUID?
 
 }
 

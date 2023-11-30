@@ -36,11 +36,12 @@ class ViewController: UIViewController {
         helper = Helper()
         helper.fetchFoods()
         helper.fetchFavorite()
-     
+       
+        
         blurView.bounds = self.view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.7, height: self.view.bounds.height * 0.3)
-        
+        navigationItem.leftBarButtonItem = .none
         // UITapGestureRecognizer ekleyin
                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                blurView.addGestureRecognizer(tapGesture)
@@ -153,34 +154,21 @@ class ViewController: UIViewController {
         })
     }
     
-
-    
-
-
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
-        if let indexPath = indexPathForButton(sender) {
-            if let selectedFood = helper.foods?[indexPath.row] {
-                let favored = Favorite(context: self.helper.context)
-                favored.title = selectedFood.title
-                favored.protein = selectedFood.protein
-                favored.carbon = selectedFood.carbon
-                favored.fat = selectedFood.fat
-                favored.calori = selectedFood.calori
-                self.helper.saveData()
-                
-                print("added to favorite")
-
-                // Provide a single haptic feedback
+        if let indexPath = indexPathForButton(sender), let selectedFood = helper.foods?[indexPath.row] as? Foods {
+            if selectedFood.isFavorited {
+                selectedFood.isFavorited = false
+            
+                sender.isUserInteractionEnabled = true
+                selectedFood.isFavorited = true
+                print("removed from favorites")
+             
+            } else {
+                sender.isUserInteractionEnabled = false
+                let favoriteItem = selectedFood.asFavorite()
+                helper.favorite?.append(favoriteItem)
                 helper.generateHapticFeedback(style: .light)
-            } else if let selectedFavori = helper.favorite?[indexPath.row] {
-                self.helper.context.delete(selectedFavori)
-                self.helper.saveData()
-                self.helper.fetchFavorite()
-                
-                print("remove from favori")
-
-                // Provide a single haptic feedback
-                helper.generateHapticFeedback(style: .light)
+                print("added to favorites")
             }
         }
     }
@@ -234,6 +222,7 @@ class ViewController: UIViewController {
             equalInfo.carbon = foodCarbon
             equalInfo.fat = foodFat
             equalInfo.calori = foodCalori
+            equalInfo.idFood = UUID()
 
             // Save Data
             self?.helper.saveData()
@@ -275,6 +264,7 @@ class ViewController: UIViewController {
         case 0:
             // show foods
             helper.favorite = nil
+            helper.saveData()
             helper.fetchFoods()
             // Reverse the array to show the most recently added items at the top
             self.helper.foods?.reverse()
@@ -282,14 +272,19 @@ class ViewController: UIViewController {
             let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewFoodButtonPressed))
                     addButton.tintColor = UIColor.darkGray  // Set the color you want
                     navigationItem.rightBarButtonItem = addButton
+            navigationItem.leftBarButtonItem = .none
         case 1:
             // show favori & hide foods
             helper.foods = nil
+            helper.saveData()
             helper.fetchFavorite()
             // Reverse the array to show the most recently added items at the top
             self.helper.favorite?.reverse()
             navigationItem.title = "Favorite"
-            navigationItem.rightBarButtonItem = nil
+            let delete = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteAllFavorited))
+                    delete.tintColor = UIColor.darkGray  // Set the color you want
+                    navigationItem.leftBarButtonItem = delete
+                navigationItem.rightBarButtonItem = .none
             
         default:
             break
@@ -297,7 +292,52 @@ class ViewController: UIViewController {
         // Update the table
         tableView.reloadData()
     }
-    
+    @IBAction func deleteAllFavorited(_ sender: UIBarButtonItem) {
+        guard let favoritedItems = helper.favorite else {
+            return
+        }
+
+        let alertController = UIAlertController(
+            title: "Delete All Favorites",
+            message: "Are you sure you want to delete all favorited items?",
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.performDeletion()
+        }
+        alertController.addAction(deleteAction)
+
+     
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func performDeletion() {
+        guard let favoritedItems = helper.favorite else {
+            return
+        }
+
+        for favoritedItem in favoritedItems {
+            helper.context.delete(favoritedItem)
+        }
+
+        helper.favorite?.removeAll()
+        self.helper.saveData()
+        helper.fetchFavorite()
+
+        // Reload your data or update your UI as needed
+        helper.generateHapticFeedback(style: .heavy)
+        tableView.reloadData()
+
+    }
+
+
+
+   
 
 }
 //MARK: - Table View
@@ -458,6 +498,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     food.carbon = textfieldCarbon.text
                     food.fat = textfieldFat.text
                     food.calori = textfieldCalori.text
+                    food.idFood = UUID()
                     
                     self.helper.saveData()
                     self.helper.fetchFoods()

@@ -2,7 +2,7 @@
 //  Foods+CoreDataClass.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 27.11.2023.
+//  Created by mücahit öztürk on 30.11.2023.
 //
 //
 

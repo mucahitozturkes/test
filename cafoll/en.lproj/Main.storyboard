@@ -29,45 +29,45 @@
                                 <rect key="frame" x="0.0" y="167" width="320" height="270"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="75" id="f6d-10-8i7" customClass="Cell" customModule="cafoll" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="75"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="70" id="f6d-10-8i7" customClass="Cell" customModule="cafoll" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f6d-10-8i7" id="x4x-uA-Fyf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yNh-oI-3oI">
-                                                    <rect key="frame" x="24" y="11" width="272" height="53"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="yNh-oI-3oI">
+                                                    <rect key="frame" x="32" y="11" width="256" height="48"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chn-Vh-WpT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="34" height="53"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="idF-v8-Wvm"/>
-                                                            </constraints>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chn-Vh-WpT">
+                                                            <rect key="frame" x="0.0" y="0.0" width="30.5" height="48"/>
+                                                            <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.60391659768211925" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                                <imageReference key="image" image="suit.heart.fill" catalog="system" symbolScale="large"/>
-                                                                <backgroundConfiguration key="background"/>
-                                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
-                                                                <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                                                <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                                                <backgroundConfiguration key="background">
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </backgroundConfiguration>
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="23" scale="large"/>
                                                             </buttonConfiguration>
                                                             <connections>
-                                                                <action selector="favoriFoodsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LcK-UC-sjy"/>
+                                                                <action selector="favoriFoodsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PGe-RV-B5y"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yoğurtlu Izgara Köfte " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AU-rl-77T">
-                                                            <rect key="frame" x="46.5" y="0.0" width="163.5" height="53"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yoğurtlu Izgara Köfte " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AU-rl-77T">
+                                                            <rect key="frame" x="30.5" y="0.0" width="187" height="48"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbV-e3-Jum">
-                                                            <rect key="frame" x="222" y="0.0" width="50" height="53"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbV-e3-Jum">
+                                                            <rect key="frame" x="217.5" y="0.0" width="38.5" height="48"/>
                                                             <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="info.circle" catalog="system">
+                                                            <buttonConfiguration key="configuration" style="plain" image="info.bubble" catalog="system">
                                                                 <backgroundConfiguration key="background">
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </backgroundConfiguration>
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                                                                 <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </buttonConfiguration>
                                                             <connections>
@@ -78,10 +78,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="yNh-oI-3oI" firstAttribute="top" secondItem="x4x-uA-Fyf" secondAttribute="topMargin" id="FTa-Di-gtu"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="yNh-oI-3oI" secondAttribute="bottom" id="LP6-qZ-5Sy"/>
-                                                <constraint firstItem="yNh-oI-3oI" firstAttribute="leading" secondItem="x4x-uA-Fyf" secondAttribute="leadingMargin" constant="8" id="Z9m-mq-PZd"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="yNh-oI-3oI" secondAttribute="trailing" constant="8" id="vif-dw-tHB"/>
+                                                <constraint firstItem="yNh-oI-3oI" firstAttribute="top" secondItem="x4x-uA-Fyf" secondAttribute="topMargin" id="7oa-gG-ii0"/>
+                                                <constraint firstItem="yNh-oI-3oI" firstAttribute="leading" secondItem="x4x-uA-Fyf" secondAttribute="leadingMargin" constant="16" id="F3B-9c-Way"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yNh-oI-3oI" secondAttribute="bottom" id="jXY-vG-EZj"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yNh-oI-3oI" secondAttribute="trailing" constant="16" id="xgZ-GZ-q3f"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -126,6 +126,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Food" id="Fkp-5B-m23">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="E3q-6M-bm2">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="deleteAllFavorited:" destination="BYZ-38-t0r" id="tyR-xb-kdg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZLq-4B-7dJ">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -177,7 +183,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="187" height="38.5"/>
                                                     <color key="backgroundColor" red="1" green="0.58431372550000005" blue="0.0" alpha="0.76722889072847678" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="textColor" systemColor="secondarySystemBackgroundColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhq-Ph-7KT">
@@ -459,9 +465,8 @@
     <resources>
         <image name="carrot" catalog="system" width="128" height="122"/>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="info.bubble" catalog="system" width="128" height="110"/>
-        <image name="info.circle" catalog="system" width="128" height="123"/>
-        <image name="suit.heart.fill" catalog="system" width="128" height="107"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -476,9 +481,6 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>

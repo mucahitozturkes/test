@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     var helper: Helper!
    
+ 
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
     @IBOutlet weak var fatLabel: UITextField!
@@ -29,22 +30,73 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         //print(helper.filePath)
         helper = Helper()
         helper.fetchFoods()
         helper.fetchFavorite()
-       
+        titleLabelTextfield.layer.cornerRadius = 12
+        titleLabelTextfield.layer.shadowColor = UIColor.black.cgColor
+        titleLabelTextfield.layer.shadowOffset = CGSize(width: 1, height: 1)
+        titleLabelTextfield.layer.shadowRadius = 1
+        titleLabelTextfield.layer.shadowOpacity = 0.3
         
-        blurView.bounds = self.view.bounds
+        blurView.frame = UIScreen.main.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.7, height: self.view.bounds.height * 0.3)
+      
         navigationItem.leftBarButtonItem = .none
         // UITapGestureRecognizer ekleyin
                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                blurView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+           animatedOut(desiredView: popupView)
+           animatedOut(desiredView: blurView)
+       }
+    
+    func animated(desiredView: UIView) {
+        let backgroundView = self.view!
+
+        popupView.layer.cornerRadius = 12
+        
+        // Shadow rengini güncelle
+        if backgroundView.traitCollection.userInterfaceStyle == .dark {
+            // Dark mode'da beyaz shadow color
+            popupView.layer.shadowColor = UIColor.white.cgColor
+            popupView.layer.shadowOffset = CGSize(width: 1, height: 1)
+            popupView.layer.shadowRadius = 3
+            popupView.layer.shadowOpacity = 1
+        } else {
+            // Light mode'da siyah shadow color
+            popupView.layer.shadowColor = UIColor.black.cgColor
+            popupView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            popupView.layer.shadowRadius = 4
+            popupView.layer.shadowOpacity = 0.5
+        }
+
+        backgroundView.addSubview(desiredView)
+
+        desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+        desiredView.alpha = 0
+        desiredView.center = backgroundView.center
+
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            desiredView.alpha = 1
+        })
+    }
+
+    func animatedOut(desiredView: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+            desiredView.alpha = 0
+        },completion: { _ in
+            desiredView.removeFromSuperview()
+        })
     }
     
     func updateProgressBars(protein: Float, carbon: Float, fat: Float, calories: Float) {
@@ -66,10 +118,7 @@ class ViewController: UIViewController {
         caloriBar.progress = calories / maxCalories
     }
     
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-           animatedOut(desiredView: popupView)
-           animatedOut(desiredView: blurView)
-       }
+   
     
     @IBAction func popupButtonPressed(_ sender: UIButton) {
         animated(desiredView: blurView)
@@ -113,50 +162,12 @@ class ViewController: UIViewController {
     }
     
     
-    func animated(desiredView: UIView) {
-        let backgroundView = self.view!
-
-        popupView.layer.cornerRadius = 12
-        
-        // Shadow rengini güncelle
-        if backgroundView.traitCollection.userInterfaceStyle == .dark {
-            // Dark mode'da beyaz shadow color
-            popupView.layer.shadowColor = UIColor.white.cgColor
-            popupView.layer.shadowOffset = CGSize(width: 1, height: 1)
-            popupView.layer.shadowRadius = 3
-            popupView.layer.shadowOpacity = 1
-        } else {
-            // Light mode'da siyah shadow color
-            popupView.layer.shadowColor = UIColor.black.cgColor
-            popupView.layer.shadowOffset = CGSize(width: 0, height: 2)
-            popupView.layer.shadowRadius = 4
-            popupView.layer.shadowOpacity = 0.5
-        }
-
-        backgroundView.addSubview(desiredView)
-
-        desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
-        desiredView.alpha = 0
-        desiredView.center = backgroundView.center
-
-        UIView.animate(withDuration: 0.3, animations: {
-            desiredView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            desiredView.alpha = 1
-        })
-    }
-
-    func animatedOut(desiredView: UIView) {
-        UIView.animate(withDuration: 0.3, animations: {
-            desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
-            desiredView.alpha = 0
-        },completion: { _ in
-            desiredView.removeFromSuperview()
-        })
-    }
+    
     
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
         if let indexPath = indexPathForButton(sender), let selectedFood = helper.foods?[indexPath.row] as? Foods {
             if selectedFood.isFavorited {
+                
                 selectedFood.isFavorited = false
             
                 sender.isUserInteractionEnabled = true
@@ -187,23 +198,28 @@ class ViewController: UIViewController {
         alert.addTextField { textfield in
             textfield.placeholder = " + Food"
             textfield.textAlignment = .center
+            textfield.borderStyle = .none
             
         }
         alert.addTextField { textfield in
             textfield.placeholder = " + Protein"
             textfield.keyboardType = .decimalPad
+            textfield.borderStyle = .none
         }
         alert.addTextField { textfield in
             textfield.placeholder = " + Carbon"
             textfield.keyboardType = .decimalPad
+            textfield.borderStyle = .none
         }
         alert.addTextField { textfield in
             textfield.placeholder = " + Fat"
             textfield.keyboardType = .decimalPad
+            textfield.borderStyle = .none
         }
         alert.addTextField { textfield in
             textfield.placeholder = " + Calori"
             textfield.keyboardType = .decimalPad
+            textfield.borderStyle = .none
         }
 
         // Add Button Way
@@ -293,9 +309,6 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     @IBAction func deleteAllFavorited(_ sender: UIBarButtonItem) {
-        guard let favoritedItems = helper.favorite else {
-            return
-        }
 
         let alertController = UIAlertController(
             title: "Delete All Favorites",

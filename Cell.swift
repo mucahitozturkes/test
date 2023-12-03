@@ -14,7 +14,7 @@ class Cell: UITableViewCell {
         favoriteButton.isHidden = true // Favori butonunu gizle
         
         // Belirli bir süre sonra eski haline dönmesi için DispatchQueue kullanıyoruz
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 1.5 saniye sonra
             self.favoriteIndicator.stopAnimating() // Indicator'ı durdur
             self.favoriteButton.isHidden = false // Favori butonunu

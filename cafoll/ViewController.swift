@@ -32,11 +32,11 @@ class ViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(helper.filePath)
+        //print(helper?.filePath ?? "Not Found")
         helper = Helper()
         helper.fetchFoods()
         helper.fetchFavorite()
-        
+
         titleLabelTextfield.layer.cornerRadius = 12
         titleLabelTextfield.layer.shadowColor = UIColor.black.cgColor
         titleLabelTextfield.layer.shadowOffset = CGSize(width: 1, height: 1)
@@ -155,24 +155,70 @@ class ViewController: UIViewController {
     }
     
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
-        if let indexPath = indexPathForButton(sender), let selectedFood = helper.foods?[indexPath.row] as? Foods {
-            if selectedFood.isFavorited {
-                
-                selectedFood.isFavorited = false
-            
-                sender.isUserInteractionEnabled = true
-                selectedFood.isFavorited = true
-                print("removed from favorites")
-             
-            } else {
-                sender.isUserInteractionEnabled = false
-                let favoriteItem = selectedFood.asFavorite()
-                helper.favorite?.append(favoriteItem)
+        guard let indexPath = indexPathForButton(sender),
+              let selectedFood = helper.foods?[indexPath.row] as? Foods,
+              let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        // Kontrol et, eğer seçilen yemek zaten favorideyse kaldır
+        if isFoodInFavorites(selectedFood, forSegment: segmentedControl.selectedSegmentIndex) {
+            if let index = helper.favorite?.firstIndex(where: { $0.idFavorite == selectedFood.idFood }) {
+                helper.favorite?.remove(at: index)
                 helper.generateHapticFeedback(style: .light)
-                print("added to favorites")
+                print(selectedFood.title!, " Removed from favorites")
             }
+        } else {
+            // Yemek favoride değilse ekle
+            let favoriteItem = selectedFood.asFavorite()
+            helper.favorite?.append(favoriteItem)
+            helper.generateHapticFeedback(style: .light)
+            print(favoriteItem.title!, " Added to favorites")
+
+            // Animasyon
+            let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
+            heartImageView.tintColor = .red
+            heartImageView.contentMode = .scaleAspectFit
+
+            // Set the starting point for the animation (top-left corner of the cell)
+            let startingPoint = cell.contentView.convert(cell.contentView.bounds.origin, to: view)
+            heartImageView.frame = CGRect(x: startingPoint.x, y: startingPoint.y, width: 0, height: 0)
+
+            view.addSubview(heartImageView)
+
+            UIView.animate(withDuration: 0.3, animations: {
+                heartImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                heartImageView.tintColor = .systemRed
+                heartImageView.frame = CGRect(x: startingPoint.x + 100, y: startingPoint.y - 20, width: 80, height: 80)
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.3, animations: {
+                    heartImageView.transform = CGAffineTransform.identity
+                    heartImageView.center = CGPoint(x: self.view.bounds.width / 2, y: self.view.bounds.height - 100)
+                }, completion: { _ in
+                    heartImageView.removeFromSuperview()
+                })
+            })
         }
     }
+
+
+
+
+
+
+
+
+    func isFoodInFavorites(_ food: Foods, forSegment segmentIndex: Int) -> Bool {
+        if segmentIndex == 0{
+            return helper.favorite?.contains(where: { $0.idFavorite == food.idFood }) ?? false
+        } else if segmentIndex == 1, let favorites = helper.favorite {
+            return favorites.contains(where: { $0.idFavorite == food.idFood })
+        }
+        return false
+    }
+
+
+
     func indexPathForButton(_ button: UIButton) -> IndexPath? {
         let buttonPosition = button.convert(CGPoint.zero, to: tableView)
         if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
@@ -271,7 +317,7 @@ class ViewController: UIViewController {
             helper.saveData()
             helper.fetchFoods()
             // Reverse the array to show the most recently added items at the top
-            self.helper.foods?.reverse()
+            //self.helper.foods?.reverse()
             navigationItem.title = "Food"
             let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewFoodButtonPressed))
                     addButton.tintColor = UIColor.darkGray  // Set the color you want
@@ -283,7 +329,7 @@ class ViewController: UIViewController {
             helper.saveData()
             helper.fetchFavorite()
             // Reverse the array to show the most recently added items at the top
-            self.helper.favorite?.reverse()
+            //self.helper.favorite?.reverse()
             navigationItem.title = "Favorite"
             let delete = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteAllFavorited))
                     delete.tintColor = UIColor.darkGray  // Set the color you want
@@ -296,6 +342,7 @@ class ViewController: UIViewController {
         // Update the table
         tableView.reloadData()
     }
+
     @IBAction func deleteAllFavorited(_ sender: UIBarButtonItem) {
 
         let alertController = UIAlertController(
@@ -573,10 +620,16 @@ extension ViewController: UISearchControllerDelegate, UISearchBarDelegate {
             helper.fetchFavorite()
         } else {
             // If there is search text, filter the data based on the search text
-            helper.foods = helper.foods?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
-            helper.favorite = helper.favorite?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+            let filteredFoods = helper.foods?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+            let filteredFavorites = helper.favorite?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+
+            // Update the data source with the filtered data
+            helper.foods = filteredFoods
+            helper.favorite = filteredFavorites
         }
+
         // Update the table view with the filtered data
         tableView.reloadData()
     }
+
 }

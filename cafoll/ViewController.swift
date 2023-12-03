@@ -11,8 +11,7 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
-   
- 
+    //bar Label
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
     @IBOutlet weak var fatLabel: UITextField!
@@ -37,6 +36,7 @@ class ViewController: UIViewController {
         helper = Helper()
         helper.fetchFoods()
         helper.fetchFavorite()
+        
         titleLabelTextfield.layer.cornerRadius = 12
         titleLabelTextfield.layer.shadowColor = UIColor.black.cgColor
         titleLabelTextfield.layer.shadowOffset = CGSize(width: 1, height: 1)
@@ -66,16 +66,12 @@ class ViewController: UIViewController {
         // Shadow rengini güncelle
         if backgroundView.traitCollection.userInterfaceStyle == .dark {
             // Dark mode'da beyaz shadow color
-            popupView.layer.shadowColor = UIColor.white.cgColor
-            popupView.layer.shadowOffset = CGSize(width: 1, height: 1)
-            popupView.layer.shadowRadius = 3
-            popupView.layer.shadowOpacity = 1
+            popupView.layer.borderColor = UIColor.lightGray.cgColor
+            popupView.layer.borderWidth = 1
         } else {
             // Light mode'da siyah shadow color
-            popupView.layer.shadowColor = UIColor.black.cgColor
-            popupView.layer.shadowOffset = CGSize(width: 0, height: 2)
-            popupView.layer.shadowRadius = 4
-            popupView.layer.shadowOpacity = 0.5
+            popupView.layer.borderColor = UIColor.lightGray.cgColor
+            popupView.layer.borderWidth = 1
         }
 
         backgroundView.addSubview(desiredView)
@@ -118,8 +114,6 @@ class ViewController: UIViewController {
         caloriBar.progress = calories / maxCalories
     }
     
-   
-    
     @IBAction func popupButtonPressed(_ sender: UIButton) {
         animated(desiredView: blurView)
         animated(desiredView: popupView)
@@ -155,14 +149,10 @@ class ViewController: UIViewController {
                                calories: Float(calori) ?? 0.0)
         }
     }
-    // Helper method to get the indexPath for the button pressed
     private func indexPathForRow(_ button: UIButton) -> IndexPath? {
         let point = button.convert(CGPoint.zero, to: tableView)
         return tableView.indexPathForRow(at: point)
     }
-    
-    
-    
     
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
         if let indexPath = indexPathForButton(sender), let selectedFood = helper.foods?[indexPath.row] as? Foods {
@@ -183,7 +173,6 @@ class ViewController: UIViewController {
             }
         }
     }
-
     func indexPathForButton(_ button: UIButton) -> IndexPath? {
         let buttonPosition = button.convert(CGPoint.zero, to: tableView)
         if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
@@ -272,7 +261,6 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
         let currentSegmentIndex = sender.selectedSegmentIndex
 
@@ -312,7 +300,7 @@ class ViewController: UIViewController {
 
         let alertController = UIAlertController(
             title: "Delete All Favorites",
-            message: "Are you sure you want to delete all favorited items?",
+            message: "Are you sure you want to remove all favorited foods?",
             preferredStyle: .alert
         )
 
@@ -328,7 +316,6 @@ class ViewController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-
     private func performDeletion() {
         guard let favoritedItems = helper.favorite else {
             return
@@ -347,12 +334,8 @@ class ViewController: UIViewController {
         tableView.reloadData()
 
     }
-
-
-
-   
-
 }
+
 //MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -433,7 +416,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = indexPath.row
@@ -561,8 +543,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // Deselect the selected row to visually indicate the tap
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    
     // Helper method to handle food type option selection
     private func handleFoodOptionSelection(_ option: String, for selectedRow: Int) {
         // Implement your logic based on the selected option and the selected row

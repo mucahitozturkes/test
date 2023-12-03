@@ -39,29 +39,49 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="yNh-oI-3oI">
                                                     <rect key="frame" x="32" y="11" width="256" height="48"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chn-Vh-WpT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="30.5" height="48"/>
-                                                            <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.60391659768211925" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                                <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
-                                                                <backgroundConfiguration key="background">
-                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </backgroundConfiguration>
-                                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="23" scale="large"/>
-                                                            </buttonConfiguration>
-                                                            <connections>
-                                                                <action selector="favoriFoodsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PGe-RV-B5y"/>
-                                                            </connections>
-                                                        </button>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSg-uQ-tgd">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35.5" height="48"/>
+                                                            <subviews>
+                                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="fLV-RK-n1p">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="35.5" height="48"/>
+                                                                </activityIndicatorView>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chn-Vh-WpT">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="35.5" height="48"/>
+                                                                    <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.60391659768211925" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
+                                                                        <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                                                        <backgroundConfiguration key="background">
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </backgroundConfiguration>
+                                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="23" scale="large"/>
+                                                                    </buttonConfiguration>
+                                                                    <connections>
+                                                                        <action selector="favoriFoodsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PGe-RV-B5y"/>
+                                                                        <action selector="favoriteButtonPressed:" destination="f6d-10-8i7" eventType="touchUpInside" id="2l7-HM-Mdf"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="chn-Vh-WpT" firstAttribute="top" secondItem="nSg-uQ-tgd" secondAttribute="top" id="JRD-fU-D6M"/>
+                                                                <constraint firstItem="chn-Vh-WpT" firstAttribute="leading" secondItem="nSg-uQ-tgd" secondAttribute="leading" id="K7u-xp-KSj"/>
+                                                                <constraint firstAttribute="trailing" secondItem="fLV-RK-n1p" secondAttribute="trailing" id="VeG-vT-XD6"/>
+                                                                <constraint firstAttribute="trailing" secondItem="chn-Vh-WpT" secondAttribute="trailing" id="cSS-6G-2bx"/>
+                                                                <constraint firstAttribute="bottom" secondItem="chn-Vh-WpT" secondAttribute="bottom" id="ciO-9f-JuU"/>
+                                                                <constraint firstItem="fLV-RK-n1p" firstAttribute="top" secondItem="nSg-uQ-tgd" secondAttribute="top" id="dM3-y4-jxV"/>
+                                                                <constraint firstAttribute="bottom" secondItem="fLV-RK-n1p" secondAttribute="bottom" id="swJ-2D-7sG"/>
+                                                                <constraint firstItem="fLV-RK-n1p" firstAttribute="leading" secondItem="nSg-uQ-tgd" secondAttribute="leading" id="vxr-Yv-3iw"/>
+                                                            </constraints>
+                                                        </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yoğurtlu Izgara Köfte " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AU-rl-77T">
-                                                            <rect key="frame" x="30.5" y="0.0" width="187" height="48"/>
+                                                            <rect key="frame" x="35.5" y="0.0" width="183" height="48"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbV-e3-Jum">
-                                                            <rect key="frame" x="217.5" y="0.0" width="38.5" height="48"/>
+                                                            <rect key="frame" x="218.5" y="0.0" width="37.5" height="48"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="info.bubble" catalog="system">
                                                                 <backgroundConfiguration key="background"/>
@@ -84,6 +104,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="favoriteButton" destination="chn-Vh-WpT" id="4hP-4M-h6r"/>
+                                            <outlet property="favoriteIndicator" destination="fLV-RK-n1p" id="cfh-h7-L9P"/>
                                             <outlet property="foodTitleLabel" destination="7AU-rl-77T" id="xhQ-1F-9sq"/>
                                             <outlet property="moreInfoButton" destination="BbV-e3-Jum" id="cHd-9f-11B"/>
                                         </connections>

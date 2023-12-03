@@ -50,5 +50,6 @@ class Helper: UIViewController, UISearchControllerDelegate, UISearchBarDelegate 
         generator.impactOccurred()
     }
     
-   
+    
+
 }

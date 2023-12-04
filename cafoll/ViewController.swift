@@ -55,7 +55,6 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
            animatedOut(desiredView: popupView)
            animatedOut(desiredView: gestureView)
@@ -89,7 +88,6 @@ class ViewController: UIViewController {
             desiredView.alpha = 1
         })
     }
-
     func animatedOut(desiredView: UIView) {
         UIView.animate(withDuration: 0.3, animations: {
             desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
@@ -165,23 +163,24 @@ class ViewController: UIViewController {
               let cell = tableView.cellForRow(at: indexPath) as? Cell else {
             return
         }
+        
         let isFavorite = isFoodInFavorites(selectedFood, forSegment: segmentedControl.selectedSegmentIndex)
 
         // Kontrol et, eğer seçilen yemek zaten favorideyse kaldır
-            if isFavorite {
-                animateHeartButton(sender)
-               return
-            } else {
-                // Favori butonuna basıldığında
-                cell.favoriteIndicatorUI.startAnimating() // Indicator'ı başlat
-                cell.favoriteButtonUI.isHidden = true // Favori butonunu gizle
-                
-                // Belirli bir süre sonra eski haline dönmesi için DispatchQueue kullanıyoruz
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    // 1.5 saniye sonra
-                    cell.favoriteIndicatorUI.stopAnimating() // Indicator'ı durdur
-                    cell.favoriteButtonUI.isHidden = false // Favori butonunu
-                }
+        if isFavorite {
+            animateHeartButton(sender)
+            return
+        }
+            // Favori butonuna basıldığında
+            cell.favoriteIndicatorUI.startAnimating() // Indicator'ı başlat
+            cell.favoriteButtonUI.isHidden = true // Favori butonunu gizle
+            
+            // Belirli bir süre sonra eski haline dönmesi için DispatchQueue kullanıyoruz
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // 0.5 saniye sonra
+                cell.favoriteIndicatorUI.stopAnimating() // Indicator'ı durdur
+                cell.favoriteButtonUI.isHidden = false // Favori butonunu göster
+            }
                 // Yemek favoride değilse ekle
                 let favoriteItem = selectedFood.asFavorite()
                 helper.favorite?.append(favoriteItem)
@@ -211,9 +210,8 @@ class ViewController: UIViewController {
                 })
             })
            
-        }
+        
     }
-    // Helper method to animate the heart button with a right-to-left shake effect
     func animateHeartButton(_ button: UIButton) {
         let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
         shakeAnimation.values = [0, 10, -10, 10, -5, 5, -2, 2, 0]
@@ -225,23 +223,6 @@ class ViewController: UIViewController {
 
         button.layer.add(animationGroup, forKey: "shakeAnimation")
     }
-
-    private func performDeletion(for selectedFood: Foods) {
-        // Find the favorited item corresponding to the selectedFood
-        if let index = helper.favorite?.firstIndex(where: { $0.idFavorite == selectedFood.idFood }) {
-            let favoritedItem = helper.favorite![index]
-            
-            // Delete the favoritedItem from Core Data and the helper.favorite array
-            helper.context.delete(favoritedItem)
-            helper.favorite?.remove(at: index)
-            
-            // Save the changes to Core Data
-            self.helper.saveData()
-            helper.generateHapticFeedback(style: .heavy)
-            tableView.reloadData()
-        }
-    }
-
     func isFoodInFavorites(_ food: Foods, forSegment segmentIndex: Int) -> Bool {
         if segmentIndex == 0 {
             return helper.favorite?.contains(where: { $0.idFavorite == food.idFood }) ?? false
@@ -250,7 +231,6 @@ class ViewController: UIViewController {
         }
         return false
     }
-
     func indexPathForButton(_ button: UIButton) -> IndexPath? {
         let buttonPosition = button.convert(CGPoint.zero, to: tableView)
         if let indexPath = tableView.indexPathForRow(at: buttonPosition) {

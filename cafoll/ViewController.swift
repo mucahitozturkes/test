@@ -23,8 +23,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var carbonBar: UIProgressView!
     @IBOutlet weak var proteinBar: UIProgressView!
     //popup
+    @IBOutlet var gestureView: UIView!
     @IBOutlet var popupView: UIView!
-    @IBOutlet var blurView: UIVisualEffectView!
+   
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -42,20 +43,21 @@ class ViewController: UIViewController {
         titleLabelTextfield.layer.shadowOffset = CGSize(width: 1, height: 1)
         titleLabelTextfield.layer.shadowRadius = 1
         titleLabelTextfield.layer.shadowOpacity = 0.3
-        
-        blurView.frame = UIScreen.main.bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+       
+        gestureView.frame = UIScreen.main.bounds
+        gestureView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.7, height: self.view.bounds.height * 0.3)
       
         navigationItem.leftBarButtonItem = .none
         // UITapGestureRecognizer ekleyin
                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-               blurView.addGestureRecognizer(tapGesture)
+               gestureView.addGestureRecognizer(tapGesture)
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
            animatedOut(desiredView: popupView)
-           animatedOut(desiredView: blurView)
+           animatedOut(desiredView: gestureView)
+      
        }
     
     func animated(desiredView: UIView) {
@@ -115,7 +117,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func popupButtonPressed(_ sender: UIButton) {
-        animated(desiredView: blurView)
+        animated(desiredView: gestureView)
         animated(desiredView: popupView)
         
         guard let indexPath = indexPathForRow(sender) else { return }
@@ -124,6 +126,7 @@ class ViewController: UIViewController {
 
         if let selectedFood = helper.foods?[indexPath.row] {
             food = selectedFood
+           
         } else if let selectedFavorite = helper.favorite?[indexPath.row] {
             food = selectedFavorite
         }
@@ -168,45 +171,45 @@ class ViewController: UIViewController {
                 helper.generateHapticFeedback(style: .light)
                 print(selectedFood.title!, " Removed from favorites")
             }
+            // De-seçildiğinde rengi eski haline getir
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            sender.tintColor = .black
         } else {
             // Yemek favoride değilse ekle
             let favoriteItem = selectedFood.asFavorite()
             helper.favorite?.append(favoriteItem)
             helper.generateHapticFeedback(style: .light)
             print(favoriteItem.title!, " Added to favorites")
+            // Seçildiğinde kırmızı renkte fill yap
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            sender.tintColor = .red
+        
+
 
             // Animasyon
             let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
             heartImageView.tintColor = .red
+            heartImageView.alpha = 0.5
             heartImageView.contentMode = .scaleAspectFit
 
-            // Set the starting point for the animation (top-left corner of the cell)
+            // Set the starting point for the animation (middle-left corner of the cell)
             let startingPoint = cell.contentView.convert(cell.contentView.bounds.origin, to: view)
-            heartImageView.frame = CGRect(x: startingPoint.x, y: startingPoint.y, width: 0, height: 0)
-
+            heartImageView.frame = CGRect(x: startingPoint.x, y: startingPoint.y, width: 80, height: 80)
             view.addSubview(heartImageView)
-
             UIView.animate(withDuration: 0.3, animations: {
                 heartImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
                 heartImageView.tintColor = .systemRed
-                heartImageView.frame = CGRect(x: startingPoint.x + 100, y: startingPoint.y - 20, width: 80, height: 80)
+                heartImageView.frame = CGRect(x: startingPoint.x + 155, y: startingPoint.y - 0, width: 60, height: 60)
             }, completion: { _ in
                 UIView.animate(withDuration: 0.3, animations: {
                     heartImageView.transform = CGAffineTransform.identity
-                    heartImageView.center = CGPoint(x: self.view.bounds.width / 2, y: self.view.bounds.height - 100)
+                    heartImageView.center = CGPoint(x: self.view.bounds.width / 1.45, y: self.view.bounds.height - 150)
                 }, completion: { _ in
                     heartImageView.removeFromSuperview()
                 })
             })
         }
     }
-
-
-
-
-
-
-
 
     func isFoodInFavorites(_ food: Foods, forSegment segmentIndex: Int) -> Bool {
         if segmentIndex == 0{
@@ -216,8 +219,6 @@ class ViewController: UIViewController {
         }
         return false
     }
-
-
 
     func indexPathForButton(_ button: UIButton) -> IndexPath? {
         let buttonPosition = button.convert(CGPoint.zero, to: tableView)
@@ -410,6 +411,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             // Haptic feedback

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 22.11.2023.
+//  Created by Mücahit Öztürk on 22.11.2023.
 //
 
 import UIKit
@@ -11,22 +11,21 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
-    //bar Label
+    // Bar Labels
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
     @IBOutlet weak var fatLabel: UITextField!
     @IBOutlet weak var carbonLabel: UITextField!
     @IBOutlet weak var proteinLabel: UITextField!
-    //Bar
+    // Bars
     @IBOutlet weak var caloriBar: UIProgressView!
     @IBOutlet weak var fatBar: UIProgressView!
     @IBOutlet weak var carbonBar: UIProgressView!
     @IBOutlet weak var proteinBar: UIProgressView!
-    //popup
+    // Popup
     @IBOutlet var gestureView: UIView!
     @IBOutlet var popupView: UIView!
    
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -49,30 +48,29 @@ class ViewController: UIViewController {
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.7, height: self.view.bounds.height * 0.3)
       
         navigationItem.leftBarButtonItem = .none
-        // UITapGestureRecognizer ekleyin
-               let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-               gestureView.addGestureRecognizer(tapGesture)
+        // Add UITapGestureRecognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        gestureView.addGestureRecognizer(tapGesture)
         tableView.reloadData()
     }
-    
+
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-           animatedOut(desiredView: popupView)
-           animatedOut(desiredView: gestureView)
-      
-       }
-    
+        animatedOut(desiredView: popupView)
+        animatedOut(desiredView: gestureView)
+    }
+
     func animated(desiredView: UIView) {
         let backgroundView = self.view!
 
         popupView.layer.cornerRadius = 12
         
-        // Shadow rengini güncelle
+        // Update the shadow color
         if backgroundView.traitCollection.userInterfaceStyle == .dark {
-            // Dark mode'da beyaz shadow color
+            // White shadow color in Dark mode
             popupView.layer.borderColor = UIColor.lightGray.cgColor
             popupView.layer.borderWidth = 1
         } else {
-            // Light mode'da siyah shadow color
+            // Black shadow color in Light mode
             popupView.layer.borderColor = UIColor.lightGray.cgColor
             popupView.layer.borderWidth = 1
         }
@@ -88,31 +86,32 @@ class ViewController: UIViewController {
             desiredView.alpha = 1
         })
     }
+    
     func animatedOut(desiredView: UIView) {
         UIView.animate(withDuration: 0.3, animations: {
             desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
             desiredView.alpha = 0
-        },completion: { _ in
+        }, completion: { _ in
             desiredView.removeFromSuperview()
         })
     }
-    
+
     func updateProgressBars(protein: Float, carbon: Float, fat: Float, calories: Float) {
-        let maxProtein: Float = 35.0  // Protein maksimum değeri
-        let maxCarbon: Float = 25.0   // Karbonhidrat maksimum değeri
-        let maxFat: Float = 25.0      // Yağ maksimum değeri
-        let maxCalories: Float = 500.0 // Kalori maksimum değeri
+        let maxProtein: Float = 35.0  // Maximum value for Protein
+        let maxCarbon: Float = 25.0   // Maximum value for Carbohydrates
+        let maxFat: Float = 25.0      // Maximum value for Fat
+        let maxCalories: Float = 500.0 // Maximum value for Calories
 
         // Protein bar
         proteinBar.progress = protein / maxProtein
 
-        // Karbonhidrat bar
+        // Carbohydrate bar
         carbonBar.progress = carbon / maxCarbon
 
-        // Yağ bar
+        // Fat bar
         fatBar.progress = fat / maxFat
 
-        // Kalori bar
+        // Calorie bar
         caloriBar.progress = calories / maxCalories
     }
     
@@ -145,13 +144,14 @@ class ViewController: UIViewController {
             fatLabel.text = fat
             caloriLabel.text = calori
             
-            // Progress barları güncelle
+            // Update progress bars
             updateProgressBars(protein: Float(protein) ?? 0.0,
                                carbon: Float(carbon) ?? 0.0,
                                fat: Float(fat) ?? 0.0,
                                calories: Float(calori) ?? 0.0)
         }
     }
+
     private func indexPathForRow(_ button: UIButton) -> IndexPath? {
         let point = button.convert(CGPoint.zero, to: tableView)
         return tableView.indexPathForRow(at: point)
@@ -166,51 +166,52 @@ class ViewController: UIViewController {
         
         let isFavorite = isFoodInFavorites(selectedFood, forSegment: segmentedControl.selectedSegmentIndex)
 
-        // Kontrol et, eğer seçilen yemek zaten favorideyse kaldır
+        // Check if the selected food is already in favorites, if so, remove it
         if isFavorite {
             animateHeartButton(sender)
             return
         }
-            // Favori butonuna basıldığında
-            cell.favoriteIndicatorUI.startAnimating() // Indicator'ı başlat
-            cell.favoriteButtonUI.isHidden = true // Favori butonunu gizle
-            
-            // Belirli bir süre sonra eski haline dönmesi için DispatchQueue kullanıyoruz
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                // 0.5 saniye sonra
-                cell.favoriteIndicatorUI.stopAnimating() // Indicator'ı durdur
-                cell.favoriteButtonUI.isHidden = false // Favori butonunu göster
-            }
-                // Yemek favoride değilse ekle
-                let favoriteItem = selectedFood.asFavorite()
-                helper.favorite?.append(favoriteItem)
-                helper.generateHapticFeedback(style: .light)
-                print(favoriteItem.title!, " Added to favorites")
-                helper.saveData()
-            // Animasyon
-            let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
-            heartImageView.tintColor = .red
-            heartImageView.alpha = 0.5
-            heartImageView.contentMode = .scaleAspectFit
-
-            // Set the starting point for the animation (middle-left corner of the cell)
-            let startingPoint = cell.contentView.convert(cell.contentView.bounds.origin, to: view)
-            heartImageView.frame = CGRect(x: startingPoint.x, y: startingPoint.y, width: 80, height: 80)
-            view.addSubview(heartImageView)
-            UIView.animate(withDuration: 0.3, animations: {
-                heartImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-                heartImageView.tintColor = .systemRed
-                heartImageView.frame = CGRect(x: startingPoint.x + 155, y: startingPoint.y - 0, width: 60, height: 60)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.3, animations: {
-                    heartImageView.transform = CGAffineTransform.identity
-                    heartImageView.center = CGPoint(x: self.view.bounds.width / 1.45, y: self.view.bounds.height - 150)
-                }, completion: { _ in
-                    heartImageView.removeFromSuperview()
-                })
-            })
-           
         
+        // When the favorite button is pressed
+        cell.favoriteIndicatorUI.startAnimating() // Start the indicator
+        cell.favoriteButtonUI.isHidden = true // Hide the favorite button
+        
+        // Use DispatchQueue to return to the original state after a specific duration
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // After 0.5 seconds
+            cell.favoriteIndicatorUI.stopAnimating() // Stop the indicator
+            cell.favoriteButtonUI.isHidden = false // Show the favorite button
+        }
+        
+        // If the food is not in favorites, add it
+        let favoriteItem = selectedFood.asFavorite()
+        helper.favorite?.append(favoriteItem)
+        helper.generateHapticFeedback(style: .light)
+        print(favoriteItem.title!, " Added to favorites")
+        helper.saveData()
+        
+        // Animation
+        let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
+        heartImageView.tintColor = .red
+        heartImageView.alpha = 0.5
+        heartImageView.contentMode = .scaleAspectFit
+
+        // Set the starting point for the animation (middle-left corner of the cell)
+        let startingPoint = cell.contentView.convert(cell.contentView.bounds.origin, to: view)
+        heartImageView.frame = CGRect(x: startingPoint.x, y: startingPoint.y, width: 80, height: 80)
+        view.addSubview(heartImageView)
+        UIView.animate(withDuration: 0.3, animations: {
+            heartImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            heartImageView.tintColor = .systemRed
+            heartImageView.frame = CGRect(x: startingPoint.x + 155, y: startingPoint.y - 0, width: 60, height: 60)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                heartImageView.transform = CGAffineTransform.identity
+                heartImageView.center = CGPoint(x: self.view.bounds.width / 1.45, y: self.view.bounds.height - 150)
+            }, completion: { _ in
+                heartImageView.removeFromSuperview()
+            })
+        })
     }
     func animateHeartButton(_ button: UIButton) {
         let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")

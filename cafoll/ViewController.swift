@@ -52,7 +52,9 @@ class ViewController: UIViewController {
         // UITapGestureRecognizer ekleyin
                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                gestureView.addGestureRecognizer(tapGesture)
+        tableView.reloadData()
     }
+    
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
            animatedOut(desiredView: popupView)
@@ -160,32 +162,32 @@ class ViewController: UIViewController {
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
         guard let indexPath = indexPathForButton(sender),
               let selectedFood = helper.foods?[indexPath.row] as? Foods,
-              let cell = tableView.cellForRow(at: indexPath) else {
+              let cell = tableView.cellForRow(at: indexPath) as? Cell else {
             return
         }
+        let isFavorite = isFoodInFavorites(selectedFood, forSegment: segmentedControl.selectedSegmentIndex)
 
         // Kontrol et, eğer seçilen yemek zaten favorideyse kaldır
-        if isFoodInFavorites(selectedFood, forSegment: segmentedControl.selectedSegmentIndex) {
-            if let index = helper.favorite?.firstIndex(where: { $0.idFavorite == selectedFood.idFood }) {
-                helper.favorite?.remove(at: index)
+            if isFavorite {
+                animateHeartButton(sender)
+               return
+            } else {
+                // Favori butonuna basıldığında
+                cell.favoriteIndicator.startAnimating() // Indicator'ı başlat
+                cell.favoriteButton.isHidden = true // Favori butonunu gizle
+                
+                // Belirli bir süre sonra eski haline dönmesi için DispatchQueue kullanıyoruz
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    // 1.5 saniye sonra
+                    cell.favoriteIndicator.stopAnimating() // Indicator'ı durdur
+                    cell.favoriteButton.isHidden = false // Favori butonunu
+                }
+                // Yemek favoride değilse ekle
+                let favoriteItem = selectedFood.asFavorite()
+                helper.favorite?.append(favoriteItem)
                 helper.generateHapticFeedback(style: .light)
-                print(selectedFood.title!, " Removed from favorites")
-            }
-            // De-seçildiğinde rengi eski haline getir
-            sender.setImage(UIImage(systemName: "heart"), for: .normal)
-            sender.tintColor = .black
-        } else {
-            // Yemek favoride değilse ekle
-            let favoriteItem = selectedFood.asFavorite()
-            helper.favorite?.append(favoriteItem)
-            helper.generateHapticFeedback(style: .light)
-            print(favoriteItem.title!, " Added to favorites")
-            // Seçildiğinde kırmızı renkte fill yap
-            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            sender.tintColor = .red
-        
-
-
+                print(favoriteItem.title!, " Added to favorites")
+                helper.saveData()
             // Animasyon
             let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
             heartImageView.tintColor = .red
@@ -208,11 +210,40 @@ class ViewController: UIViewController {
                     heartImageView.removeFromSuperview()
                 })
             })
+           
+        }
+    }
+    // Helper method to animate the heart button with a right-to-left shake effect
+    func animateHeartButton(_ button: UIButton) {
+        let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
+        shakeAnimation.values = [0, 10, -10, 10, -5, 5, -2, 2, 0]
+        shakeAnimation.keyTimes = [0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 0.9, 1]
+
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [shakeAnimation]
+        animationGroup.duration = 0.4
+
+        button.layer.add(animationGroup, forKey: "shakeAnimation")
+    }
+
+    private func performDeletion(for selectedFood: Foods) {
+        // Find the favorited item corresponding to the selectedFood
+        if let index = helper.favorite?.firstIndex(where: { $0.idFavorite == selectedFood.idFood }) {
+            let favoritedItem = helper.favorite![index]
+            
+            // Delete the favoritedItem from Core Data and the helper.favorite array
+            helper.context.delete(favoritedItem)
+            helper.favorite?.remove(at: index)
+            
+            // Save the changes to Core Data
+            self.helper.saveData()
+            helper.generateHapticFeedback(style: .heavy)
+            tableView.reloadData()
         }
     }
 
     func isFoodInFavorites(_ food: Foods, forSegment segmentIndex: Int) -> Bool {
-        if segmentIndex == 0{
+        if segmentIndex == 0 {
             return helper.favorite?.contains(where: { $0.idFavorite == food.idFood }) ?? false
         } else if segmentIndex == 1, let favorites = helper.favorite {
             return favorites.contains(where: { $0.idFavorite == food.idFood })
@@ -227,6 +258,7 @@ class ViewController: UIViewController {
         }
         return nil
     }
+    
     
     @IBAction func addNewFoodButtonPressed(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "New Food", message: "Just write your food", preferredStyle: .alert)
@@ -313,30 +345,19 @@ class ViewController: UIViewController {
 
         switch currentSegmentIndex {
         case 0:
-            // show foods
-            helper.favorite = nil
-            helper.saveData()
             helper.fetchFoods()
-            // Reverse the array to show the most recently added items at the top
-            //self.helper.foods?.reverse()
             navigationItem.title = "Food"
             let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewFoodButtonPressed))
                     addButton.tintColor = UIColor.darkGray  // Set the color you want
                     navigationItem.rightBarButtonItem = addButton
             navigationItem.leftBarButtonItem = .none
         case 1:
-            // show favori & hide foods
-            helper.foods = nil
-            helper.saveData()
-            helper.fetchFavorite()
-            // Reverse the array to show the most recently added items at the top
-            //self.helper.favorite?.reverse()
             navigationItem.title = "Favorite"
             let delete = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteAllFavorited))
                     delete.tintColor = UIColor.darkGray  // Set the color you want
                     navigationItem.leftBarButtonItem = delete
                 navigationItem.rightBarButtonItem = .none
-            
+            helper.fetchFavorite()
         default:
             break
         }
@@ -387,11 +408,12 @@ class ViewController: UIViewController {
 //MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let addFoodCount = self.helper.foods?.count, addFoodCount > 0 {
-            return addFoodCount
-        } else if let favoriteCount = self.helper.favorite?.count, favoriteCount > 0 {
-            return favoriteCount
-        } else {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            return self.helper.foods?.count ?? 0
+        case 1:
+            return self.helper.favorite?.count ?? 0
+        default:
             return 0
         }
     }
@@ -399,18 +421,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
         let row = indexPath.row
-        
-        if let addFoodCount = self.helper.foods?.count, addFoodCount > 0 {
-            let indexFoods = helper.foods?[row]
-            cell.foodTitleLabel?.text = indexFoods?.title
-            cell.favoriteButton.isUserInteractionEnabled = true // enable interaction
-        } else if let favoriCount = self.helper.favorite?.count, favoriCount > 0 {
-            let indexFavori = helper.favorite?[row]
-            cell.foodTitleLabel.text = indexFavori?.title
-            cell.favoriteButton.isUserInteractionEnabled = false // Disable interaction
+
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            if let indexFoods = self.helper.foods?[row] {
+                cell.foodTitleLabel?.text = indexFoods.title
+                cell.favoriteButton.isUserInteractionEnabled = true // enable interaction
+                // Set the correct state based on whether it's a favorite or not
+                cell.favoriteButton.isSelected = isFoodInFavorites(indexFoods, forSegment: 0)
+            }
+        case 1:
+            if let indexFavorite = self.helper.favorite?[row] {
+                cell.foodTitleLabel.text = indexFavorite.title
+                cell.favoriteButton.isUserInteractionEnabled = false // Disable interaction
+                // Set the correct state based on whether it's a favorite or not
+                cell.favoriteButton.isSelected = true
+            }
+        default:
+            break
         }
+
         return cell
     }
+
+
+
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
@@ -602,18 +637,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - SearchBar
 extension ViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            // Dismiss the keyboard
-            searchBar.resignFirstResponder()
-            
-            // Clear the search text
-            searchBar.text = nil
-            
-            // Reload the table view with the original data
-            helper.fetchFoods()
-            helper.fetchFavorite()
-            tableView.reloadData()
-            
-        }
+        // Dismiss the keyboard
+        searchBar.resignFirstResponder()
+
+        // Clear the search text
+        searchBar.text = nil
+
+        // Reset the data source to the original data
+        helper.fetchFoods()
+        helper.fetchFavorite()
+
+        // Reload the table view with the original data
+        tableView.reloadData()
+    }
+
     //search Foods & favoriteis
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {

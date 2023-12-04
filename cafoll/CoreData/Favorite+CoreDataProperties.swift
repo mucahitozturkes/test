@@ -22,6 +22,7 @@ extension Favorite {
     @NSManaged public var protein: String?
     @NSManaged public var title: String?
     @NSManaged public var idFavorite: UUID?
+    @NSManaged public var isFavorited: Bool
 
 }
 

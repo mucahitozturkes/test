@@ -15,7 +15,7 @@ extension Foods {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Foods> {
         return NSFetchRequest<Foods>(entityName: "Foods")
     }
-    @NSManaged public var isFavorited: Bool
+    @NSManaged public var isFavorite: Bool
     @NSManaged public var calori: String?
     @NSManaged public var carbon: String?
     @NSManaged public var fat: String?
@@ -36,6 +36,7 @@ extension Foods {
         favorite.fat = self.fat
         favorite.protein = self.protein
         favorite.title = self.title
+        favorite.isFavorited = self.isFavorite
         favorite.idFavorite = self.idFood // Assuming you have an id in Favorite corresponding to the idFood in Foods
         return favorite
     }

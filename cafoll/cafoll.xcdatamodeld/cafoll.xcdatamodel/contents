@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B92" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Breakfast" representedClassName="Breakfast" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="isRight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Dinner" representedClassName="Dinner" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="isRight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="Favorite" representedClassName=".Favorite" syncable="YES">
         <attribute name="calori" optional="YES" attributeType="String"/>
         <attribute name="carbon" optional="YES" attributeType="String"/>
@@ -17,5 +37,25 @@
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="protein" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="Lunch" representedClassName="Lunch" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="isRight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Snack" representedClassName="Snack" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="isRight" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
 </model>

@@ -11,6 +11,7 @@ import CoreData
 class ViewController: UIViewController {
 
     var helper: Helper!
+    var coredata: Coredata!
     // Bar Labels
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
@@ -34,8 +35,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         //print(helper?.filePath ?? "Not Found")
         helper = Helper()
-        helper.fetchFoods()
-        helper.fetchFavorite()
+        coredata = Coredata()
+        coredata.fetchFoods()
+        coredata.fetchFavorite()
 
         titleLabelTextfield.layer.cornerRadius = 12
         titleLabelTextfield.layer.shadowColor = UIColor.black.cgColor
@@ -123,10 +125,10 @@ class ViewController: UIViewController {
 
         var food: Any?
 
-        if let selectedFood = helper.foods?[indexPath.row] {
+        if let selectedFood = coredata.foods?[indexPath.row] {
             food = selectedFood
            
-        } else if let selectedFavorite = helper.favorite?[indexPath.row] {
+        } else if let selectedFavorite = coredata.favorite?[indexPath.row] {
             food = selectedFavorite
         }
         
@@ -159,7 +161,7 @@ class ViewController: UIViewController {
     
     @IBAction func favoriFoodsButtonPressed(_ sender: UIButton) {
         guard let indexPath = indexPathForButton(sender),
-              let selectedFood = helper.foods?[indexPath.row] as? Foods,
+              let selectedFood = coredata.foods?[indexPath.row] as? Foods,
               let cell = tableView.cellForRow(at: indexPath) as? Cell else {
             return
         }
@@ -185,10 +187,10 @@ class ViewController: UIViewController {
         
         // If the food is not in favorites, add it
         let favoriteItem = selectedFood.asFavorite()
-        helper.favorite?.append(favoriteItem)
+        coredata.favorite?.append(favoriteItem)
         helper.generateHapticFeedback(style: .light)
         print(favoriteItem.title!, " Added to favorites")
-        helper.saveData()
+        coredata.saveData()
         
         // Animation
         let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
@@ -226,8 +228,8 @@ class ViewController: UIViewController {
     }
     func isFoodInFavorites(_ food: Foods, forSegment segmentIndex: Int) -> Bool {
         if segmentIndex == 0 {
-            return helper.favorite?.contains(where: { $0.idFavorite == food.idFood }) ?? false
-        } else if segmentIndex == 1, let favorites = helper.favorite {
+            return coredata.favorite?.contains(where: { $0.idFavorite == food.idFood }) ?? false
+        } else if segmentIndex == 1, let favorites = coredata.favorite {
             return favorites.contains(where: { $0.idFavorite == food.idFood })
         }
         return false
@@ -281,7 +283,7 @@ class ViewController: UIViewController {
            let foodCalori = alert.textFields?[4].text
         
             // Equal with Labels
-            let equalInfo = Foods(context: (self?.helper.context)!)
+            let equalInfo = Foods(context: (self?.coredata.context)!)
             equalInfo.title = foodTitle?.capitalized
             equalInfo.protein = foodProtein
             equalInfo.carbon = foodCarbon
@@ -290,11 +292,11 @@ class ViewController: UIViewController {
             equalInfo.idFood = UUID()
 
             // Save Data
-            self?.helper.saveData()
+            self?.coredata.saveData()
             // Fetch Data
-            self?.helper.fetchFoods()
+            self?.coredata.fetchFoods()
             // Reverse the array to show the most recently added items at the top
-            self?.helper.foods?.reverse()
+            self?.coredata.foods?.reverse()
             // Call cell
             self?.tableView.reloadData()
         }
@@ -326,7 +328,7 @@ class ViewController: UIViewController {
 
         switch currentSegmentIndex {
         case 0:
-            helper.fetchFoods()
+            coredata.fetchFoods()
             navigationItem.title = "Food"
             let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewFoodButtonPressed))
                     addButton.tintColor = UIColor.darkGray  // Set the color you want
@@ -338,7 +340,7 @@ class ViewController: UIViewController {
                     delete.tintColor = UIColor.darkGray  // Set the color you want
                     navigationItem.leftBarButtonItem = delete
                 navigationItem.rightBarButtonItem = .none
-            helper.fetchFavorite()
+            coredata.fetchFavorite()
         default:
             break
         }
@@ -367,17 +369,17 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     private func performDeletion() {
-        guard let favoritedItems = helper.favorite else {
+        guard let favoritedItems = coredata.favorite else {
             return
         }
 
         for favoritedItem in favoritedItems {
-            helper.context.delete(favoritedItem)
+            coredata.context.delete(favoritedItem)
         }
 
-        helper.favorite?.removeAll()
-        self.helper.saveData()
-        helper.fetchFavorite()
+        coredata.favorite?.removeAll()
+        self.coredata.saveData()
+        coredata.fetchFavorite()
 
         // Reload your data or update your UI as needed
         helper.generateHapticFeedback(style: .heavy)
@@ -391,9 +393,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            return self.helper.foods?.count ?? 0
+            return self.coredata.foods?.count ?? 0
         case 1:
-            return self.helper.favorite?.count ?? 0
+            return self.coredata.favorite?.count ?? 0
         default:
             return 0
         }
@@ -405,14 +407,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            if let indexFoods = self.helper.foods?[row] {
+            if let indexFoods = self.coredata.foods?[row] {
                 cell.foodTitleLabelUI?.text = indexFoods.title
                 cell.favoriteButtonUI.isUserInteractionEnabled = true // enable interaction
                 // Set the correct state based on whether it's a favorite or not
                 cell.favoriteButtonUI.isSelected = isFoodInFavorites(indexFoods, forSegment: 0)
             }
         case 1:
-            if let indexFavorite = self.helper.favorite?[row] {
+            if let indexFavorite = self.coredata.favorite?[row] {
                 cell.foodTitleLabelUI.text = indexFavorite.title
                 cell.favoriteButtonUI.isUserInteractionEnabled = false // Disable interaction
                 // Set the correct state based on whether it's a favorite or not
@@ -440,28 +442,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             switch selectedSegmentIndex {
             case 0:
                 // Delete from foods
-                if let foodToDelete = self?.helper.foods?[indexPath.row] {
+                if let foodToDelete = self?.coredata.foods?[indexPath.row] {
                     // Check if there is a corresponding favorite item
-                    if let favoriteToDelete = self?.helper.favorite?.first(where: { $0.id == foodToDelete.id }) {
+                    if let favoriteToDelete = self?.coredata.favorite?.first(where: { $0.id == foodToDelete.id }) {
                         // Delete the corresponding favorite item
-                        self?.helper.context.delete(favoriteToDelete)
-                        self?.helper.saveData()
-                        self?.helper.fetchFavorite() // Make sure to fetch favorites after deletion
+                        self?.coredata.context.delete(favoriteToDelete)
+                        self?.coredata.saveData()
+                        self?.coredata.fetchFavorite() // Make sure to fetch favorites after deletion
                     }
                     
                     // Delete the food item
-                    self?.helper.context.delete(foodToDelete)
-                    self?.helper.saveData()
-                    self?.helper.fetchFoods()
+                    self?.coredata.context.delete(foodToDelete)
+                    self?.coredata.saveData()
+                    self?.coredata.fetchFoods()
                 }
 
             case 1:
                 // Delete from favori
-                if let favoriToDelete = self?.helper.favorite?[indexPath.row] {
+                if let favoriToDelete = self?.coredata.favorite?[indexPath.row] {
                     // Delete the favorite item
-                    self?.helper.context.delete(favoriToDelete)
-                    self?.helper.saveData()
-                    self?.helper.fetchFavorite()
+                    self?.coredata.context.delete(favoriToDelete)
+                    self?.coredata.saveData()
+                    self?.coredata.fetchFavorite()
                 }
             default:
                 break
@@ -506,7 +508,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         if segmentedControl.selectedSegmentIndex != 1 {
             let editOption = UIAlertAction(title: "Edit", style: .default) { _ in
-                guard let food = self.helper.foods?[indexPath.row] else {
+                guard let food = self.coredata.foods?[indexPath.row] else {
                     return
                 }
                 
@@ -560,9 +562,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     food.calori = textfieldCalori.text
                     food.idFood = UUID()
                     
-                    self.helper.saveData()
-                    self.helper.fetchFoods()
-                    self.helper.fetchFavorite()
+                    self.coredata.saveData()
+                    self.coredata.fetchFoods()
+                    self.coredata.fetchFavorite()
                     tableView.reloadData()
                 }
                 
@@ -625,8 +627,8 @@ extension ViewController: UISearchControllerDelegate, UISearchBarDelegate {
         searchBar.text = nil
 
         // Reset the data source to the original data
-        helper.fetchFoods()
-        helper.fetchFavorite()
+        coredata.fetchFoods()
+        coredata.fetchFavorite()
 
         // Reload the table view with the original data
         tableView.reloadData()
@@ -636,16 +638,16 @@ extension ViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             // If the search text is empty, show all data
-            helper.fetchFoods()
-            helper.fetchFavorite()
+            coredata.fetchFoods()
+            coredata.fetchFavorite()
         } else {
             // If there is search text, filter the data based on the search text
-            let filteredFoods = helper.foods?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
-            let filteredFavorites = helper.favorite?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+            let filteredFoods = coredata.foods?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+            let filteredFavorites = coredata.favorite?.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
 
             // Update the data source with the filtered data
-            helper.foods = filteredFoods
-            helper.favorite = filteredFavorites
+            coredata.foods = filteredFoods
+            coredata.favorite = filteredFavorites
         }
 
         // Update the table view with the filtered data

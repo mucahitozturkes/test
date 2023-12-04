@@ -173,14 +173,14 @@ class ViewController: UIViewController {
                return
             } else {
                 // Favori butonuna basıldığında
-                cell.favoriteIndicator.startAnimating() // Indicator'ı başlat
-                cell.favoriteButton.isHidden = true // Favori butonunu gizle
+                cell.favoriteIndicatorUI.startAnimating() // Indicator'ı başlat
+                cell.favoriteButtonUI.isHidden = true // Favori butonunu gizle
                 
                 // Belirli bir süre sonra eski haline dönmesi için DispatchQueue kullanıyoruz
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     // 1.5 saniye sonra
-                    cell.favoriteIndicator.stopAnimating() // Indicator'ı durdur
-                    cell.favoriteButton.isHidden = false // Favori butonunu
+                    cell.favoriteIndicatorUI.stopAnimating() // Indicator'ı durdur
+                    cell.favoriteButtonUI.isHidden = false // Favori butonunu
                 }
                 // Yemek favoride değilse ekle
                 let favoriteItem = selectedFood.asFavorite()
@@ -425,17 +425,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             if let indexFoods = self.helper.foods?[row] {
-                cell.foodTitleLabel?.text = indexFoods.title
-                cell.favoriteButton.isUserInteractionEnabled = true // enable interaction
+                cell.foodTitleLabelUI?.text = indexFoods.title
+                cell.favoriteButtonUI.isUserInteractionEnabled = true // enable interaction
                 // Set the correct state based on whether it's a favorite or not
-                cell.favoriteButton.isSelected = isFoodInFavorites(indexFoods, forSegment: 0)
+                cell.favoriteButtonUI.isSelected = isFoodInFavorites(indexFoods, forSegment: 0)
             }
         case 1:
             if let indexFavorite = self.helper.favorite?[row] {
-                cell.foodTitleLabel.text = indexFavorite.title
-                cell.favoriteButton.isUserInteractionEnabled = false // Disable interaction
+                cell.foodTitleLabelUI.text = indexFavorite.title
+                cell.favoriteButtonUI.isUserInteractionEnabled = false // Disable interaction
                 // Set the correct state based on whether it's a favorite or not
-                cell.favoriteButton.isSelected = true
+                cell.favoriteButtonUI.isSelected = true
             }
         default:
             break

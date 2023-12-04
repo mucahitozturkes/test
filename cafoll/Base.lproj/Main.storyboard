@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pyb-Pn-8Uk">
-                                <rect key="frame" x="0.0" y="64" width="320" height="347"/>
+                                <rect key="frame" x="0.0" y="111" width="320" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="75" id="f6d-10-8i7" customClass="Cell" customModule="cafoll" customModuleProvider="target">
@@ -77,9 +77,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="favoriteButton" destination="chn-Vh-WpT" id="4hP-4M-h6r"/>
-                                            <outlet property="foodTitleLabel" destination="7AU-rl-77T" id="xhQ-1F-9sq"/>
-                                            <outlet property="moreInfoButton" destination="BbV-e3-Jum" id="cHd-9f-11B"/>
+                                            <outlet property="favoriteButtonUI" destination="chn-Vh-WpT" id="4hP-4M-h6r"/>
+                                            <outlet property="foodTitleLabelUI" destination="7AU-rl-77T" id="xhQ-1F-9sq"/>
+                                            <outlet property="moreInfoButtonUI" destination="BbV-e3-Jum" id="cHd-9f-11B"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

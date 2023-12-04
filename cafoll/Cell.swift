@@ -9,8 +9,8 @@ import UIKit
 
 class Cell: UITableViewCell {
     
-    @IBOutlet weak var favoriteIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var moreInfoButton: UIButton!
-    @IBOutlet weak var foodTitleLabel: UILabel!
+    @IBOutlet weak var favoriteIndicatorUI: UIActivityIndicatorView!
+    @IBOutlet weak var favoriteButtonUI: UIButton!
+    @IBOutlet weak var moreInfoButtonUI: UIButton!
+    @IBOutlet weak var foodTitleLabelUI: UILabel!
 }

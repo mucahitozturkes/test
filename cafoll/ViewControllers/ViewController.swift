@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         coredata = Coredata()
         coredata.fetchFoods()
         coredata.fetchFavorite()
+        
 
         titleLabelTextfield.layer.cornerRadius = 12
         titleLabelTextfield.layer.shadowColor = UIColor.black.cgColor

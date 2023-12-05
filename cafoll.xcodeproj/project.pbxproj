@@ -19,7 +19,7 @@
 		0883C0C12B0E160D00D55176 /* cafoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0BF2B0E160D00D55176 /* cafoll.xcdatamodeld */; };
 		0883C0C32B0E160F00D55176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0883C0C22B0E160F00D55176 /* Assets.xcassets */; };
 		0883C0C62B0E160F00D55176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0883C0C42B0E160F00D55176 /* LaunchScreen.storyboard */; };
-		08856CEE2B1DF8E600466AAB /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CED2B1DF8E600466AAB /* Cell.swift */; };
+		08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CED2B1DF8E600466AAB /* Cells.swift */; };
 		08856CF22B1E097C00466AAB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CF12B1E097C00466AAB /* HomeViewController.swift */; };
 		08856CFC2B1E25B400466AAB /* Breakfast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CF42B1E25B400466AAB /* Breakfast+CoreDataClass.swift */; };
 		08856CFD2B1E25B400466AAB /* Breakfast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CF52B1E25B400466AAB /* Breakfast+CoreDataProperties.swift */; };
@@ -30,6 +30,8 @@
 		08856D022B1E25B400466AAB /* Dinner+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CFA2B1E25B400466AAB /* Dinner+CoreDataClass.swift */; };
 		08856D032B1E25B400466AAB /* Dinner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856CFB2B1E25B400466AAB /* Dinner+CoreDataProperties.swift */; };
 		08856D052B1E26B500466AAB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856D042B1E26B500466AAB /* Helper.swift */; };
+		08856D072B1F391A00466AAB /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856D062B1F391A00466AAB /* UI.swift */; };
+		08856D172B1F583200466AAB /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856D162B1F583200466AAB /* Charts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +50,7 @@
 		0883C0C22B0E160F00D55176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0883C0C52B0E160F00D55176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0883C0C72B0E160F00D55176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08856CED2B1DF8E600466AAB /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		08856CED2B1DF8E600466AAB /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		08856CF12B1E097C00466AAB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08856CF42B1E25B400466AAB /* Breakfast+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breakfast+CoreDataClass.swift"; sourceTree = "<group>"; };
 		08856CF52B1E25B400466AAB /* Breakfast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breakfast+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -59,6 +61,8 @@
 		08856CFA2B1E25B400466AAB /* Dinner+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinner+CoreDataClass.swift"; sourceTree = "<group>"; };
 		08856CFB2B1E25B400466AAB /* Dinner+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinner+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08856D042B1E26B500466AAB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		08856D062B1F391A00466AAB /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		08856D162B1F583200466AAB /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,9 +148,11 @@
 		08856CF32B1E0A7800466AAB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08856D062B1F391A00466AAB /* UI.swift */,
 				0807F5982B1495500068A5DA /* Coredata.swift */,
 				08856D042B1E26B500466AAB /* Helper.swift */,
-				08856CED2B1DF8E600466AAB /* Cell.swift */,
+				08856D162B1F583200466AAB /* Charts.swift */,
+				08856CED2B1DF8E600466AAB /* Cells.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -167,6 +173,8 @@
 			dependencies = (
 			);
 			name = cafoll;
+			packageProductDependencies = (
+			);
 			productName = cafoll;
 			productReference = 0883C0B32B0E160D00D55176 /* cafoll.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +203,8 @@
 				Base,
 			);
 			mainGroup = 0883C0AA2B0E160D00D55176;
+			packageReferences = (
+			);
 			productRefGroup = 0883C0B42B0E160D00D55176 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -230,16 +240,18 @@
 				08856D012B1E25B400466AAB /* Snack+CoreDataProperties.swift in Sources */,
 				0883C0BB2B0E160D00D55176 /* ViewController.swift in Sources */,
 				08856D052B1E26B500466AAB /* Helper.swift in Sources */,
+				08856D072B1F391A00466AAB /* UI.swift in Sources */,
 				08856CFC2B1E25B400466AAB /* Breakfast+CoreDataClass.swift in Sources */,
 				0883C0B72B0E160D00D55176 /* AppDelegate.swift in Sources */,
 				08856CFF2B1E25B400466AAB /* Lunch+CoreDataProperties.swift in Sources */,
+				08856D172B1F583200466AAB /* Charts.swift in Sources */,
 				08856D002B1E25B400466AAB /* Snack+CoreDataClass.swift in Sources */,
 				0834A69B2B1880F1009DB978 /* Favorite+CoreDataClass.swift in Sources */,
 				08856D032B1E25B400466AAB /* Dinner+CoreDataProperties.swift in Sources */,
 				0807F5992B1495500068A5DA /* Coredata.swift in Sources */,
 				0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */,
 				08856CF22B1E097C00466AAB /* HomeViewController.swift in Sources */,
-				08856CEE2B1DF8E600466AAB /* Cell.swift in Sources */,
+				08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */,
 				0834A6992B1880F1009DB978 /* Foods+CoreDataClass.swift in Sources */,
 				0834A69A2B1880F1009DB978 /* Foods+CoreDataProperties.swift in Sources */,
 			);

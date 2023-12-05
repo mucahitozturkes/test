@@ -14,7 +14,11 @@ class Coredata: UIViewController{
     var filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     var foods: [Foods]?
     var favorite: [Favorite]?
-    
+    var breakfast: [Breakfast]?
+    var lunch: [Lunch]?
+    var dinner: [Dinner]?
+    var snack: [Snack]?
+
     //Fetch Foods
     func fetchFoods() {
         do {
@@ -34,6 +38,54 @@ class Coredata: UIViewController{
             self.favorite = try context.fetch(request)
         } catch {
             print("fetch Favorite: ", error)
+        }
+    }
+    //Fetch Breakfast
+    func fetchBreakfast() {
+        do {
+            let request = Breakfast.fetchRequest()
+            self.breakfast = try context.fetch(request)
+            DispatchQueue.main.async {
+                self.viewController?.tableView.reloadData()
+            }
+        } catch {
+            print("fetch Foods: ", error)
+        }
+    }
+    //Fetch Lunch
+    func fetchLunch() {
+        do {
+            let request = Lunch.fetchRequest()
+            self.lunch = try context.fetch(request)
+            DispatchQueue.main.async {
+                self.viewController?.tableView.reloadData()
+            }
+        } catch {
+            print("fetch Foods: ", error)
+        }
+    }
+    //Fetch Dinner
+    func fetchDinner() {
+        do {
+            let request = Dinner.fetchRequest()
+            self.dinner = try context.fetch(request)
+            DispatchQueue.main.async {
+                self.viewController?.tableView.reloadData()
+            }
+        } catch {
+            print("fetch Foods: ", error)
+        }
+    }
+    //Fetch Snack
+    func fetchSnack() {
+        do {
+            let request = Snack.fetchRequest()
+            self.snack = try context.fetch(request)
+            DispatchQueue.main.async {
+                self.viewController?.tableView.reloadData()
+            }
+        } catch {
+            print("fetch Foods: ", error)
         }
     }
     //Save context

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class Helper {
     
     //Haptic
@@ -14,4 +15,5 @@ class Helper {
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()
     }
+    
 }

@@ -14,3 +14,7 @@ class Cell: UITableViewCell {
     @IBOutlet weak var moreInfoButtonUI: UIButton!
     @IBOutlet weak var foodTitleLabelUI: UILabel!
 }
+
+class HomeCell: UITableViewCell {
+    
+}

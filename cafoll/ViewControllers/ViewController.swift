@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
-
+    
     var helper: Helper!
     var coredata: Coredata!
     // Bar Labels
@@ -23,40 +23,68 @@ class ViewController: UIViewController {
     @IBOutlet weak var fatBar: UIProgressView!
     @IBOutlet weak var carbonBar: UIProgressView!
     @IBOutlet weak var proteinBar: UIProgressView!
-    // Popup
+    //Views
+    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet var gestureView: UIView!
     @IBOutlet var popupView: UIView!
-   
+    //Tools
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLayers()
+        startUpSetup()
+       
+    }
+    //Start up!
+    func startUpSetup() {
+        trashButton.isHidden = true
         //print(helper?.filePath ?? "Not Found")
         helper = Helper()
         coredata = Coredata()
+        //fetch items
         coredata.fetchFoods()
         coredata.fetchFavorite()
-        
-
-        titleLabelTextfield.layer.cornerRadius = 12
-        titleLabelTextfield.layer.shadowColor = UIColor.black.cgColor
-        titleLabelTextfield.layer.shadowOffset = CGSize(width: 1, height: 1)
-        titleLabelTextfield.layer.shadowRadius = 1
-        titleLabelTextfield.layer.shadowOpacity = 0.3
-       
+        //out of popup
         gestureView.frame = UIScreen.main.bounds
         gestureView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         popupView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.7, height: self.view.bounds.height * 0.3)
       
-        navigationItem.leftBarButtonItem = .none
         // Add UITapGestureRecognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         gestureView.addGestureRecognizer(tapGesture)
+        //table View Load
         tableView.reloadData()
     }
-
+    //view Shadows
+    func setLayers() {
+        //buttonview
+        buttonView.layer.cornerRadius = 25
+        buttonView.layer.shadowColor = UIColor.lightGray.cgColor
+        buttonView.layer.shadowOffset = CGSize(width: 0, height: 6)
+        buttonView.layer.shadowRadius = 12
+        buttonView.layer.shadowOpacity = 0.2
+        buttonView.layer.masksToBounds = true
+        //mainview
+        mainView.layer.cornerRadius = 24
+        mainView.layer.shadowColor = UIColor.lightGray.cgColor
+        mainView.layer.shadowOffset = CGSize(width: 0, height: 6)
+        mainView.layer.shadowRadius = 12
+        mainView.layer.shadowOpacity = 0.2
+        //popup-textfields
+        titleLabelTextfield.layer.cornerRadius = 12
+        titleLabelTextfield.layer.shadowColor = UIColor.lightGray.cgColor
+        titleLabelTextfield.layer.shadowOffset = CGSize(width: 0, height: 6)
+        titleLabelTextfield.layer.shadowRadius = 12
+        titleLabelTextfield.layer.shadowOpacity = 0.1
+       
+        
+    }
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         animatedOut(desiredView: popupView)
         animatedOut(desiredView: gestureView)
@@ -74,8 +102,12 @@ class ViewController: UIViewController {
             popupView.layer.borderWidth = 1
         } else {
             // Black shadow color in Light mode
-            popupView.layer.borderColor = UIColor.lightGray.cgColor
-            popupView.layer.borderWidth = 1
+            //popup
+            popupView.layer.cornerRadius = 12
+            popupView.layer.shadowColor = UIColor.lightGray.cgColor
+            popupView.layer.shadowOffset = CGSize(width: 0, height: 6)
+            popupView.layer.shadowRadius = 12
+            popupView.layer.shadowOpacity = 0.2
         }
 
         backgroundView.addSubview(desiredView)
@@ -244,7 +276,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func addNewFoodButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func addNewFoodButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "New Food", message: "Just write your food", preferredStyle: .alert)
 
         alert.addTextField { textfield in
@@ -329,18 +361,12 @@ class ViewController: UIViewController {
 
         switch currentSegmentIndex {
         case 0:
+            addButton.isHidden = false
+            trashButton.isHidden = true
             coredata.fetchFoods()
-            navigationItem.title = "Food"
-            let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewFoodButtonPressed))
-                    addButton.tintColor = UIColor.darkGray  // Set the color you want
-                    navigationItem.rightBarButtonItem = addButton
-            navigationItem.leftBarButtonItem = .none
         case 1:
-            navigationItem.title = "Favorite"
-            let delete = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteAllFavorited))
-                    delete.tintColor = UIColor.darkGray  // Set the color you want
-                    navigationItem.leftBarButtonItem = delete
-                navigationItem.rightBarButtonItem = .none
+            addButton.isHidden = true
+            trashButton.isHidden = false
             coredata.fetchFavorite()
         default:
             break
@@ -349,7 +375,7 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
 
-    @IBAction func deleteAllFavorited(_ sender: UIBarButtonItem) {
+    @IBAction func deleteAllFavorited(_ sender: UIButton) {
 
         let alertController = UIAlertController(
             title: "Delete All Favorites",
@@ -394,32 +420,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            return self.coredata.foods?.count ?? 0
+            return (self.coredata.foods?.count ?? 0)
         case 1:
             return self.coredata.favorite?.count ?? 0
         default:
             return 0
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
         let row = indexPath.row
-
+        
+        
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             if let indexFoods = self.coredata.foods?[row] {
                 cell.foodTitleLabelUI?.text = indexFoods.title
-                cell.favoriteButtonUI.isUserInteractionEnabled = true // enable interaction
+                cell.favoriteButtonUI?.isUserInteractionEnabled = true // enable interaction
                 // Set the correct state based on whether it's a favorite or not
-                cell.favoriteButtonUI.isSelected = isFoodInFavorites(indexFoods, forSegment: 0)
+                cell.favoriteButtonUI?.isSelected = isFoodInFavorites(indexFoods, forSegment: 0)
             }
         case 1:
             if let indexFavorite = self.coredata.favorite?[row] {
-                cell.foodTitleLabelUI.text = indexFavorite.title
-                cell.favoriteButtonUI.isUserInteractionEnabled = false // Disable interaction
+                cell.foodTitleLabelUI?.text = indexFavorite.title
+                cell.favoriteButtonUI?.isUserInteractionEnabled = false // Disable interaction
                 // Set the correct state based on whether it's a favorite or not
-                cell.favoriteButtonUI.isSelected = true
+                cell.favoriteButtonUI?.isSelected = true
             }
         default:
             break
@@ -427,9 +455,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
-
-
-
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
@@ -616,6 +641,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // Implement your logic based on the selected option and the selected row
         print("Selected option: \(option) for row: \(selectedRow)")
         // You can perform additional actions based on the selected option and row
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
     }
 }
 //MARK: - SearchBar

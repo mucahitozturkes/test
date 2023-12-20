@@ -9,7 +9,6 @@ import UIKit
 
 
 class HomeViewController: UIViewController {
-
   
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var segmentView: UIView!
@@ -39,16 +38,8 @@ class HomeViewController: UIViewController {
         coredata.fetchSnack()
         //UI
         ui.uiTools(homeViewController: self)
-        setupView()
     }
-   
-    func setupView() {
-        
-    }
-
-    
-
-
+  
     
 }
 // MARK: - Home Table View

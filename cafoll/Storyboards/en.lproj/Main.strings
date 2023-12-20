@@ -1,0 +1,66 @@
+
+/* Class = "UITextField"; text = "Food"; ObjectID = "0MX-lJ-Leb"; */
+"0MX-lJ-Leb.text" = "Food";
+
+/* Class = "UILabel"; text = "Fat"; ObjectID = "4iY-UK-k4n"; */
+"4iY-UK-k4n.text" = "Fat";
+
+/* Class = "UILabel"; text = "Food"; ObjectID = "7AU-rl-77T"; */
+"7AU-rl-77T.text" = "Food";
+
+/* Class = "UILabel"; text = "Carbon"; ObjectID = "8rv-yF-cCU"; */
+"8rv-yF-cCU.text" = "Carbon";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "A6n-Jd-T22"; */
+"A6n-Jd-T22.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BbV-e3-Jum"; */
+"BbV-e3-Jum.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Food"; ObjectID = "Fkp-5B-m23"; */
+"Fkp-5B-m23.title" = "Food";
+
+/* Class = "UISegmentedControl"; K3F-6D-8qD.segmentTitles[0] = "Foods"; ObjectID = "K3F-6D-8qD"; */
+"K3F-6D-8qD.segmentTitles[0]" = "Foods";
+
+/* Class = "UISegmentedControl"; K3F-6D-8qD.segmentTitles[1] = "Favorite"; ObjectID = "K3F-6D-8qD"; */
+"K3F-6D-8qD.segmentTitles[1]" = "Favorite";
+
+/* Class = "UILabel"; text = "25"; ObjectID = "OvN-gQ-f9E"; */
+"OvN-gQ-f9E.text" = "25";
+
+/* Class = "UISegmentedControl"; RuE-Ce-HE7.segmentTitles[0] = "Breakfast"; ObjectID = "RuE-Ce-HE7"; */
+"RuE-Ce-HE7.segmentTitles[0]" = "Breakfast";
+
+/* Class = "UISegmentedControl"; RuE-Ce-HE7.segmentTitles[1] = "Lunch"; ObjectID = "RuE-Ce-HE7"; */
+"RuE-Ce-HE7.segmentTitles[1]" = "Lunch";
+
+/* Class = "UISegmentedControl"; RuE-Ce-HE7.segmentTitles[2] = "Dinner"; ObjectID = "RuE-Ce-HE7"; */
+"RuE-Ce-HE7.segmentTitles[2]" = "Dinner";
+
+/* Class = "UISegmentedControl"; RuE-Ce-HE7.segmentTitles[3] = "Snack"; ObjectID = "RuE-Ce-HE7"; */
+"RuE-Ce-HE7.segmentTitles[3]" = "Snack";
+
+/* Class = "UILabel"; text = "Calori"; ObjectID = "Vge-Ep-bQX"; */
+"Vge-Ep-bQX.text" = "Calori";
+
+/* Class = "UILabel"; text = "25"; ObjectID = "Yie-Ok-bBx"; */
+"Yie-Ok-bBx.text" = "25";
+
+/* Class = "UILabel"; text = "35"; ObjectID = "aCX-hM-uUD"; */
+"aCX-hM-uUD.text" = "35";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "chn-Vh-WpT"; */
+"chn-Vh-WpT.normalTitle" = "Button";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "e5L-61-qB9"; */
+"e5L-61-qB9.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "DD-MM-YYYY"; ObjectID = "pIG-Xa-zhn"; */
+"pIG-Xa-zhn.text" = "DD-MM-YYYY";
+
+/* Class = "UILabel"; text = "500"; ObjectID = "pc1-S3-hk0"; */
+"pc1-S3-hk0.text" = "500";
+
+/* Class = "UILabel"; text = "Protein"; ObjectID = "wEb-Sz-boY"; */
+"wEb-Sz-boY.text" = "Protein";

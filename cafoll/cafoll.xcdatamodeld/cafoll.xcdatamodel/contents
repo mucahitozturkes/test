@@ -49,6 +49,7 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <entity name="MaxValueCircle" representedClassName=".MaxValueCircle" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="maxValueCalori" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="maxValueCarbon" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="maxValueFat" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>

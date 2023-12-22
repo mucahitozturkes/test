@@ -586,80 +586,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-Lb-qdc">
                                 <rect key="frame" x="16" y="32" width="343" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2Y-hc-PTi">
-                                        <rect key="frame" x="0.0" y="10" width="343" height="30"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ao3-By-O0l">
-                                                <rect key="frame" x="0.0" y="0.0" width="264" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeh-ai-SRx">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="V7d-Oe-Rr1"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain">
-                                                            <imageReference key="image" image="chevron.left.2" catalog="system" renderingMode="hierarchical-single">
-                                                                <hierarchicalColors>
-                                                                    <color white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <color systemColor="secondaryLabelColor"/>
-                                                                    <color systemColor="tertiaryLabelColor"/>
-                                                                </hierarchicalColors>
-                                                            </imageReference>
-                                                        </buttonConfiguration>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DD-MM-YYYY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxa-fn-obr">
-                                                        <rect key="frame" x="40" y="0.0" width="224" height="30"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="akW-Ej-0R0">
-                                                <rect key="frame" x="264" y="0.0" width="79" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z63-rs-jrw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="xPJ-5x-awr"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain">
-                                                            <imageReference key="image" image="calendar" catalog="system" renderingMode="hierarchical-single">
-                                                                <hierarchicalColors>
-                                                                    <color red="0.39987768309999999" green="0.27903566670000002" blue="0.201939797" alpha="0.92751448680000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <color systemColor="secondaryLabelColor"/>
-                                                                    <color systemColor="tertiaryLabelColor"/>
-                                                                </hierarchicalColors>
-                                                            </imageReference>
-                                                        </buttonConfiguration>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE4-Eu-srr">
-                                                        <rect key="frame" x="40" y="0.0" width="39" height="30"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain">
-                                                            <imageReference key="image" image="chevron.right.2" catalog="system" renderingMode="hierarchical-single">
-                                                                <hierarchicalColors>
-                                                                    <color white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <color systemColor="secondaryLabelColor"/>
-                                                                    <color systemColor="tertiaryLabelColor"/>
-                                                                </hierarchicalColors>
-                                                            </imageReference>
-                                                        </buttonConfiguration>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
+                                    <datePicker alpha="0.14999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="ypl-ul-mnM">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" systemColor="systemIndigoColor"/>
+                                    </datePicker>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="b2Y-hc-PTi" secondAttribute="bottom" constant="10" id="EQl-JA-chg"/>
-                                    <constraint firstAttribute="trailing" secondItem="b2Y-hc-PTi" secondAttribute="trailing" id="Hr8-5W-YfO"/>
+                                    <constraint firstAttribute="bottom" secondItem="ypl-ul-mnM" secondAttribute="bottom" id="HGn-aQ-5wd"/>
                                     <constraint firstAttribute="height" constant="50" id="IgS-A4-xKA"/>
-                                    <constraint firstItem="b2Y-hc-PTi" firstAttribute="leading" secondItem="1fJ-Lb-qdc" secondAttribute="leading" id="Q7g-cL-fWc"/>
-                                    <constraint firstItem="b2Y-hc-PTi" firstAttribute="top" secondItem="1fJ-Lb-qdc" secondAttribute="top" constant="10" id="e52-zv-yUe"/>
+                                    <constraint firstItem="ypl-ul-mnM" firstAttribute="leading" secondItem="1fJ-Lb-qdc" secondAttribute="leading" id="V4c-4V-O2G"/>
+                                    <constraint firstAttribute="trailing" secondItem="ypl-ul-mnM" secondAttribute="trailing" constant="8" id="bnP-Qq-AS7"/>
+                                    <constraint firstItem="ypl-ul-mnM" firstAttribute="top" secondItem="1fJ-Lb-qdc" secondAttribute="top" id="cGf-zO-KbX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eew-U3-y5r">
@@ -679,18 +618,75 @@
                                                     <segment title="Dinner"/>
                                                     <segment title="Snack"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="segmentButtonPressed:" destination="kfG-fp-uhY" eventType="valueChanged" id="DXG-zp-7Mn"/>
+                                                </connections>
                                             </segmentedControl>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q8q-fz-QXL">
                                                 <rect key="frame" x="0.0" y="92" width="311" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeCell" id="ppb-Rn-fUd" customClass="HomeCell" customModule="cafoll" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="50" width="311" height="44"/>
+                                                        <rect key="frame" x="0.0" y="50" width="311" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ppb-Rn-fUd" id="jJD-Cj-aOi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="44"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="60"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Lo-7F-C2k">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="60"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYo-Wy-Emk">
+                                                                            <rect key="frame" x="8" y="22.5" width="287" height="15"/>
+                                                                            <subviews>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7A-AS-iBA">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="15" id="C63-2x-xvD"/>
+                                                                                        <constraint firstAttribute="width" constant="15" id="CCA-Fx-62g"/>
+                                                                                    </constraints>
+                                                                                </view>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-fV-mv9">
+                                                                                    <rect key="frame" x="15" y="0.0" width="247" height="15"/>
+                                                                                    <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="17"/>
+                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mID-yQ-zbN">
+                                                                                    <rect key="frame" x="262" y="0.0" width="25" height="15"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="25" id="OU6-RK-5JZ"/>
+                                                                                        <constraint firstAttribute="height" constant="25" id="dE0-4v-CsH"/>
+                                                                                    </constraints>
+                                                                                    <state key="normal" title="Button"/>
+                                                                                    <buttonConfiguration key="configuration" style="plain" image="info.windshield" catalog="system">
+                                                                                        <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    </buttonConfiguration>
+                                                                                </button>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="hYo-Wy-Emk" firstAttribute="leading" secondItem="0Lo-7F-C2k" secondAttribute="leading" constant="8" id="Dja-HB-Rma"/>
+                                                                        <constraint firstAttribute="height" constant="60" id="Vai-wF-fiM"/>
+                                                                        <constraint firstItem="hYo-Wy-Emk" firstAttribute="centerY" secondItem="0Lo-7F-C2k" secondAttribute="centerY" id="rdx-tm-1d7"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="hYo-Wy-Emk" secondAttribute="trailing" constant="16" id="vm1-fU-csG"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="0Lo-7F-C2k" firstAttribute="top" secondItem="jJD-Cj-aOi" secondAttribute="top" id="6lQ-MW-Tdp"/>
+                                                                <constraint firstItem="0Lo-7F-C2k" firstAttribute="leading" secondItem="jJD-Cj-aOi" secondAttribute="leading" id="7M0-BN-3wf"/>
+                                                                <constraint firstAttribute="bottom" secondItem="0Lo-7F-C2k" secondAttribute="bottom" id="qCm-TB-H43"/>
+                                                                <constraint firstAttribute="trailing" secondItem="0Lo-7F-C2k" secondAttribute="trailing" id="sH0-Wj-THQ"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="colorView" destination="a7A-AS-iBA" id="cZd-cQ-noC"/>
+                                                            <outlet property="titleLabel" destination="9f6-fV-mv9" id="RrR-pg-OwX"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                                 <connections>
@@ -745,8 +741,7 @@
                         </imageReference>
                     </tabBarItem>
                     <connections>
-                        <outlet property="dateLabel" destination="xxa-fn-obr" id="kFr-Eu-wtW"/>
-                        <outlet property="datePicker" destination="z63-rs-jrw" id="hiz-BF-rxx"/>
+                        <outlet property="datePicker" destination="ypl-ul-mnM" id="QRT-pH-2sI"/>
                         <outlet property="dateView" destination="1fJ-Lb-qdc" id="Zwd-9N-n4b"/>
                         <outlet property="firstLook" destination="MvZ-Oo-kmV" id="MPe-ov-rtQ"/>
                         <outlet property="gestureView" destination="d47-xq-dYJ" id="iOd-i1-FA0"/>
@@ -881,7 +876,7 @@
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhy-wB-OOE">
                                                     <rect key="frame" x="258" y="0.0" width="25" height="25"/>
-                                                    <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                                    <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="YBt-j2-B4b"/>
                                                         <constraint firstAttribute="height" constant="25" id="kNX-wh-uI4"/>
@@ -978,17 +973,15 @@
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
-        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="carrot" catalog="system" width="128" height="122"/>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
-        <image name="chevron.left.2" catalog="system" width="128" height="108"/>
-        <image name="chevron.right.2" catalog="system" width="128" height="108"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="info.bubble" catalog="system" width="128" height="110"/>
+        <image name="info.windshield" catalog="system" width="128" height="70"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="trash" catalog="system" width="117" height="128"/>
         <systemColor name="secondaryLabelColor">
@@ -996,9 +989,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1014,6 +1004,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>

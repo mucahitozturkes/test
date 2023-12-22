@@ -17,4 +17,18 @@ class Cell: UITableViewCell {
 
 class HomeCell: UITableViewCell {
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var colorView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setShadowsAndColors() // Corrected method name
+    }
+    
+    func setShadowsAndColors() {
+        colorView.layer.cornerRadius = 8
+        colorView.layer.borderWidth = 1
+        colorView.layer.borderColor = UIColor.systemIndigo.cgColor
+    }
 }
+

@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    //tableView
     @IBOutlet weak var tableView: UITableView!
    
     override func viewDidLoad() {
@@ -511,25 +512,78 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedRow = indexPath.row
+        let row = indexPath.row
+        let selectedTitle = self.coredata.foods?[row].title
+        let selectedCal = self.coredata.foods?[row].calori
+        let selectedCar = self.coredata.foods?[row].carbon
+        let selectedFat = self.coredata.foods?[row].fat
+        let selectedPro = self.coredata.foods?[row].protein
         
         let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
         
         // Options for selecting food type
         let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
-           
+          
+            if let context = self?.coredata.context {
+                   let newFood = Breakfast(context: context)
+                newFood.title = selectedTitle
+                newFood.calori = selectedCal
+                newFood.protein = selectedPro
+                newFood.fat = selectedFat
+                newFood.carbon = selectedCar
+               } else {
+                   // Handle the case when the context is nil.
+                   print("Error: NSManagedObjectContext is nil.")
+               }
+            self?.coredata.saveData()
         }
         
         let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
-           
+            
+            if let context = self?.coredata.context {
+                   let newFood = Lunch(context: context)
+                newFood.title = selectedTitle
+                newFood.calori = selectedCal
+                newFood.protein = selectedPro
+                newFood.fat = selectedFat
+                newFood.carbon = selectedCar
+               } else {
+                   // Handle the case when the context is nil.
+                   print("Error: NSManagedObjectContext is nil.")
+               }
+            self?.coredata.saveData()
         }
         
         let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
-           
+            
+            if let context = self?.coredata.context {
+                   let newFood = Dinner(context: context)
+                newFood.title = selectedTitle
+                newFood.calori = selectedCal
+                newFood.protein = selectedPro
+                newFood.fat = selectedFat
+                newFood.carbon = selectedCar
+               } else {
+                   // Handle the case when the context is nil.
+                   print("Error: NSManagedObjectContext is nil.")
+               }
+            self?.coredata.saveData()
         }
         
         let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
-        
+            
+            if let context = self?.coredata.context {
+                   let newFood = Snack(context: context)
+                newFood.title = selectedTitle
+                newFood.calori = selectedCal
+                newFood.protein = selectedPro
+                newFood.fat = selectedFat
+                newFood.carbon = selectedCar
+               } else {
+                   // Handle the case when the context is nil.
+                   print("Error: NSManagedObjectContext is nil.")
+               }
+            self?.coredata.saveData()
         }
         
         if segmentedControl.selectedSegmentIndex != 1 {

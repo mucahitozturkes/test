@@ -20,6 +20,7 @@ extension MaxValueCircle {
     @NSManaged public var maxValueProtein: Float
     @NSManaged public var maxValueFat: Float
     @NSManaged public var maxValueCarbon: Float
+    @NSManaged public var date: Date
 
 }
 

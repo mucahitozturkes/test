@@ -44,7 +44,7 @@ class Ui {
         // Dairesel ilerleme çubuklarını oluştur
         circularProgressBar1 = CircularProgressBar(frame: CGRect(x: 0, y: 0, width: 150, height: 150), color: .purple)
         circularProgressBar2 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 125, height: 125), color: .red)
-        circularProgressBar3 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 100, height: 100), color: .brown)
+        circularProgressBar3 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 100, height: 100), color: .yellow)
         circularProgressBar4 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 75, height: 75), color: .green)
         
         // Add circularProgressBar2 to circularProgressBar1
@@ -54,7 +54,7 @@ class Ui {
 
         circularProgressBar1.setBackgroundLayerColor(color: UIColor.purple.withLightness(1.2))
         circularProgressBar2.setBackgroundLayerColor(color: UIColor.red.withLightness(1.2))
-        circularProgressBar3.setBackgroundLayerColor(color: UIColor.brown.withLightness(1.2))
+        circularProgressBar3.setBackgroundLayerColor(color: UIColor.yellow.withLightness(1.2))
         circularProgressBar4.setBackgroundLayerColor(color: UIColor.green.withLightness(1.2))
         
         // Görünüme ekle

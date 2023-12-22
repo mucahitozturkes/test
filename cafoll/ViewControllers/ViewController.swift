@@ -40,7 +40,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setLayers()
         startUpSetup()
-       
     }
     //Start up!
     func startUpSetup() {

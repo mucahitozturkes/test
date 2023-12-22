@@ -8,7 +8,7 @@
 import UIKit
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController,UITabBarControllerDelegate {
     //textfields for popup
     @IBOutlet weak var textfieldCarbon: UITextField!
     @IBOutlet weak var textfieldFat: UITextField!
@@ -47,7 +47,18 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       startUpSetup()
+        
     }
+    
+    // UITabBarControllerDelegate metodunu implement et
+     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+            if viewController is HomeViewController {
+                // start up
+                coredata.fetchBreakfast()
+                fetchDataAndUpdateUI()
+                tableView.reloadData()
+            }
+        }
     //start up reactions
     func startUpSetup() {
         //print(helper?.filePath ?? "Not Found")
@@ -61,6 +72,7 @@ class HomeViewController: UIViewController {
         coredata.fetchDinner()
         coredata.fetchSnack()
         coredata.fetchMaxValueCircle()
+        fetchDataAndUpdateUI()
         //UI
         ui.uiTools(homeViewController: self)
         ui.updateButtonTapped()
@@ -73,6 +85,7 @@ class HomeViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         gestureView.addGestureRecognizer(tapGesture)
         //table View Load
+        tabBarController?.delegate = self
         tableView.reloadData()
         // Textfield'ların değişikliklerini dinle
         textfieldCarbon.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -82,6 +95,7 @@ class HomeViewController: UIViewController {
         // Butonu başlangıçta devre dışı bırak
         updateButton.isEnabled = false
     }
+  
     //view Shadows
     func setLayers() {
         [popupV1, popupV2, popupV3, popupV4].forEach { $0.layer.cornerRadius = 12 }
@@ -91,9 +105,28 @@ class HomeViewController: UIViewController {
         popupTitleV.layer.shadowOffset = CGSize(width: 0, height: 6)
         popupTitleV.layer.shadowRadius = 8
         popupTitleV.layer.shadowOpacity = 0.1
-        
-        
     }
+    func fetchDataAndUpdateUI() {
+            switch segment.selectedSegmentIndex {
+            case 0:
+                coredata.fetchBreakfast()
+                sumBreakfast()
+            case 1:
+                coredata.fetchLunch()
+                sumLunch()
+            case 2:
+                coredata.fetchDinner()
+                sumDinner()
+            case 3:
+                coredata.fetchSnack()
+                sumSnack()
+            default:
+                break
+            }
+            
+            // Update the table
+            tableView.reloadData()
+        }
 
     //popup in & out animation
     func animated(desiredView: UIView) {
@@ -317,10 +350,10 @@ class HomeViewController: UIViewController {
         
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
         // Update progress views based on the calculated sum for each nutrient
-        progressGreen.progress = min(Float(calories) / maxGreen, 1.0)
+        progressPurple.progress = min(Float(calories) / maxPurple, 1.0)
         progressYellow.progress = min(Float(fat) / maxYellow, 1.0)
         progressRed.progress = min(Float(protein) / maxRed, 1.0)
-        progressPurple.progress = min(Float(carbs) / maxPurple, 1.0)
+        progressGreen.progress = min(Float(carbs) / maxGreen, 1.0)
     }
 
 
@@ -331,14 +364,15 @@ class HomeViewController: UIViewController {
         let maxValue = max(calori, fat, protein, carbon)
 
         if maxValue == calori {
-            highestValueColor = .green
+            highestValueColor = .systemIndigo
         } else if maxValue == fat {
-            highestValueColor = .brown
+            highestValueColor = .systemYellow
         } else if maxValue == protein {
-            highestValueColor = .red
+            highestValueColor = .systemRed
         } else if maxValue == carbon {
-            highestValueColor = .purple
+            highestValueColor = .systemGreen
         }
+
 
         return highestValueColor
     }
@@ -449,21 +483,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if let breakfastItem = self.coredata.breakfast?[indexPath.row] {
                 context.delete(breakfastItem)
                 self.coredata.breakfast?.remove(at: indexPath.row)
+                sumBreakfast() // Öğün türüne özel sum fonksiyonunu çağır
             }
         case 1:
             if let lunchItem = self.coredata.lunch?[indexPath.row] {
                 context.delete(lunchItem)
                 self.coredata.lunch?.remove(at: indexPath.row)
+                sumLunch() // Öğün türüne özel sum fonksiyonunu çağır
             }
         case 2:
             if let dinnerItem = self.coredata.dinner?[indexPath.row] {
                 context.delete(dinnerItem)
                 self.coredata.dinner?.remove(at: indexPath.row)
+                sumDinner() // Öğün türüne özel sum fonksiyonunu çağır
             }
         case 3:
             if let snackItem = self.coredata.snack?[indexPath.row] {
                 context.delete(snackItem)
                 self.coredata.snack?.remove(at: indexPath.row)
+                sumSnack() // Öğün türüne özel sum fonksiyonunu çağır
             }
         default:
             break
@@ -478,3 +516,4 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+

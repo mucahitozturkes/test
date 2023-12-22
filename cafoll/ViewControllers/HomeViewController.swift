@@ -30,6 +30,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var firstLook: UIView!
     //right of circle
+    @IBOutlet weak var progressGreen: UIProgressView!
+    @IBOutlet weak var progressYellow: UIProgressView!
+    @IBOutlet weak var progressRed: UIProgressView!
+    @IBOutlet weak var progressPurple: UIProgressView!
     @IBOutlet weak var secondLook: UIView!
     //table view
     @IBOutlet weak var segmentView: UIView!
@@ -181,23 +185,166 @@ class HomeViewController: UIViewController {
     }
     //segment Button
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
-        let currentSegmentIndex = sender.selectedSegmentIndex
+            let currentSegmentIndex = sender.selectedSegmentIndex
 
-        switch currentSegmentIndex {
-        case 0:
-            coredata.fetchBreakfast()
-        case 1:
-            coredata.fetchLunch()
-        case 2:
-            coredata.fetchDinner()
-        case 3:
-            coredata.fetchSnack()
-        default:
-            break
+            switch currentSegmentIndex {
+            case 0:
+                coredata.fetchBreakfast()
+                sumBreakfast()
+            case 1:
+                coredata.fetchLunch()
+                sumLunch()
+            case 2:
+                coredata.fetchDinner()
+                sumDinner()
+            case 3:
+                coredata.fetchSnack()
+                sumSnack()
+            default:
+                break
+            }
+            // Update the table
+            tableView.reloadData()
         }
-        // Update the table
-        tableView.reloadData()
+        
+    func sumBreakfast() {
+        guard let breakfastItems = self.coredata.breakfast else {
+            return
+        }
+
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        var totalCalories = 0.0
+        var totalFat = 0.0
+        var totalProtein = 0.0
+        var totalCarbs = 0.0
+
+        for item in breakfastItems {
+            totalCalories += Double(item.calori!) ?? 0.0
+            totalFat += Double(item.fat!) ?? 0.0
+            totalProtein += Double(item.protein!) ?? 0.0
+            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+        }
+
+        // Update the progress views with specific maximum values for breakfast
+        let maxGreen: Float = 100
+        let maxYellow: Float = 200
+        let maxRed: Float = 400
+        let maxPurple: Float = 700
+
+        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
     }
+
+    func sumLunch() {
+        guard let lunchItems = self.coredata.lunch else {
+            return
+        }
+
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        var totalCalories = 0.0
+        var totalFat = 0.0
+        var totalProtein = 0.0
+        var totalCarbs = 0.0
+
+        for item in lunchItems {
+            totalCalories += Double(item.calori!) ?? 0.0
+            totalFat += Double(item.fat!) ?? 0.0
+            totalProtein += Double(item.protein!) ?? 0.0
+            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+        }
+
+        // Update the progress views with specific maximum values for lunch
+        let maxGreen: Float = 150
+        let maxYellow: Float = 250
+        let maxRed: Float = 450
+        let maxPurple: Float = 800
+
+        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+    }
+
+    func sumDinner() {
+        guard let dinnerItems = self.coredata.dinner else {
+            return
+        }
+
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        var totalCalories = 0.0
+        var totalFat = 0.0
+        var totalProtein = 0.0
+        var totalCarbs = 0.0
+
+        for item in dinnerItems {
+            totalCalories += Double(item.calori!) ?? 0.0
+            totalFat += Double(item.fat!) ?? 0.0
+            totalProtein += Double(item.protein!) ?? 0.0
+            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+        }
+
+        // Update the progress views with specific maximum values for dinner
+        let maxGreen: Float = 120
+        let maxYellow: Float = 220
+        let maxRed: Float = 380
+        let maxPurple: Float = 600
+
+        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+    }
+
+    func sumSnack() {
+        guard let snackItems = self.coredata.snack else {
+            return
+        }
+
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        var totalCalories = 0.0
+        var totalFat = 0.0
+        var totalProtein = 0.0
+        var totalCarbs = 0.0
+
+        for item in snackItems {
+            totalCalories += Double(item.calori!) ?? 0.0
+            totalFat += Double(item.fat!) ?? 0.0
+            totalProtein += Double(item.protein!) ?? 0.0
+            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+        }
+
+        // Update the progress views with specific maximum values for snack
+        let maxGreen: Float = 90
+        let maxYellow: Float = 180
+        let maxRed: Float = 300
+        let maxPurple: Float = 500
+
+        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+    }
+        
+    func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
+        // Update progress views based on the calculated sum for each nutrient
+        progressGreen.progress = min(Float(calories) / maxGreen, 1.0)
+        progressYellow.progress = min(Float(fat) / maxYellow, 1.0)
+        progressRed.progress = min(Float(protein) / maxRed, 1.0)
+        progressPurple.progress = min(Float(carbs) / maxPurple, 1.0)
+    }
+
+
+    // Helper function to determine the highest value and return the corresponding color
+    func determineHighestValueColor(calori: Double, fat: Double, protein: Double, carbon: Double) -> UIColor {
+        var highestValueColor: UIColor = .clear
+
+        let maxValue = max(calori, fat, protein, carbon)
+
+        if maxValue == calori {
+            highestValueColor = .green
+        } else if maxValue == fat {
+            highestValueColor = .brown
+        } else if maxValue == protein {
+            highestValueColor = .red
+        } else if maxValue == carbon {
+            highestValueColor = .purple
+        }
+
+        return highestValueColor
+    }
+
+
+
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -266,11 +413,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let maxValue = max(calorieValue, fatValue, proteinValue)
             
             if maxValue == calorieValue {
-                highestValueColor = .green
+                highestValueColor = .systemGreen
             } else if maxValue == fatValue {
-                highestValueColor = .yellow
+                highestValueColor = .systemYellow
             } else if maxValue == proteinValue {
-                highestValueColor = .red
+                highestValueColor = .systemRed
             }
         }
         

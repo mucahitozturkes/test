@@ -578,9 +578,40 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEJ-VL-Rey">
                                 <rect key="frame" x="182" y="98" width="177" height="150"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qB7-oX-T2m">
+                                        <rect key="frame" x="32" y="32" width="113" height="86"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-co-lTk">
+                                                <rect key="frame" x="0.0" y="0.0" width="113" height="15.5"/>
+                                                <color key="progressTintColor" systemColor="systemPurpleColor"/>
+                                                <color key="trackTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.1498344370860927" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </progressView>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-LX-ngQ">
+                                                <rect key="frame" x="0.0" y="23.5" width="113" height="15.5"/>
+                                                <color key="progressTintColor" systemColor="systemRedColor"/>
+                                                <color key="trackTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.15265418046357615" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </progressView>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q6V-Gh-B7k">
+                                                <rect key="frame" x="0.0" y="47" width="113" height="15.5"/>
+                                                <color key="progressTintColor" systemColor="systemYellowColor"/>
+                                                <color key="trackTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.14613514072847683" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </progressView>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J1F-H6-We0">
+                                                <rect key="frame" x="0.0" y="70.5" width="113" height="15.5"/>
+                                                <color key="progressTintColor" systemColor="systemGreenColor"/>
+                                                <color key="trackTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.15216266556291391" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </progressView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="qB7-oX-T2m" firstAttribute="leading" secondItem="tEJ-VL-Rey" secondAttribute="leading" constant="32" id="Aag-1e-gpZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="qB7-oX-T2m" secondAttribute="trailing" constant="32" id="L6t-N2-F3P"/>
+                                    <constraint firstItem="qB7-oX-T2m" firstAttribute="top" secondItem="tEJ-VL-Rey" secondAttribute="top" constant="32" id="bk6-Ap-wXN"/>
                                     <constraint firstAttribute="height" constant="150" id="oKW-QU-6Sr"/>
+                                    <constraint firstAttribute="bottom" secondItem="qB7-oX-T2m" secondAttribute="bottom" constant="32" id="vvc-uE-snC"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-Lb-qdc">
@@ -751,6 +782,10 @@
                         <outlet property="popupV3" destination="uhy-wB-OOE" id="hcH-U1-ZHD"/>
                         <outlet property="popupV4" destination="KMm-Pv-9d5" id="As3-Z9-2DU"/>
                         <outlet property="popupView" destination="N24-y1-lg8" id="ACO-Dw-eoO"/>
+                        <outlet property="progressGreen" destination="J1F-H6-We0" id="mS3-aX-njW"/>
+                        <outlet property="progressPurple" destination="p5B-co-lTk" id="TmO-bC-gKQ"/>
+                        <outlet property="progressRed" destination="uk4-LX-ngQ" id="NNW-JS-gHf"/>
+                        <outlet property="progressYellow" destination="q6V-Gh-B7k" id="1Xu-7N-9tg"/>
                         <outlet property="secondLook" destination="tEJ-VL-Rey" id="osN-5J-nbV"/>
                         <outlet property="segment" destination="9As-cc-4mi" id="by5-0C-831"/>
                         <outlet property="segmentView" destination="Eew-U3-y5r" id="UF0-hP-Rja"/>

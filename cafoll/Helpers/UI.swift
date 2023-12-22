@@ -42,20 +42,20 @@ class Ui {
     }
     func UiOfCircle() {
         // Dairesel ilerleme çubuklarını oluştur
-        circularProgressBar1 = CircularProgressBar(frame: CGRect(x: 0, y: 0, width: 150, height: 150), color: .purple)
-        circularProgressBar2 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 125, height: 125), color: .red)
-        circularProgressBar3 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 100, height: 100), color: .yellow)
-        circularProgressBar4 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 75, height: 75), color: .green)
+        circularProgressBar1 = CircularProgressBar(frame: CGRect(x: 0, y: 0, width: 150, height: 150), color: .systemPurple)
+        circularProgressBar2 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 125, height: 125), color: .systemRed)
+        circularProgressBar3 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 100, height: 100), color: .systemYellow)
+        circularProgressBar4 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 75, height: 75), color: .systemGreen)
         
         // Add circularProgressBar2 to circularProgressBar1
         circularProgressBar1.addSubview(circularProgressBar2)
         circularProgressBar2.addSubview(circularProgressBar3)
         circularProgressBar3.addSubview(circularProgressBar4)
 
-        circularProgressBar1.setBackgroundLayerColor(color: UIColor.purple.withLightness(1.2))
-        circularProgressBar2.setBackgroundLayerColor(color: UIColor.red.withLightness(1.2))
-        circularProgressBar3.setBackgroundLayerColor(color: UIColor.yellow.withLightness(1.2))
-        circularProgressBar4.setBackgroundLayerColor(color: UIColor.green.withLightness(1.2))
+        circularProgressBar1.setBackgroundLayerColor(color: UIColor.systemPurple.withLightness(1.2))
+        circularProgressBar2.setBackgroundLayerColor(color: UIColor.systemRed.withLightness(1.2))
+        circularProgressBar3.setBackgroundLayerColor(color: UIColor.systemYellow.withLightness(1.2))
+        circularProgressBar4.setBackgroundLayerColor(color: UIColor.systemGreen.withLightness(1.2))
         
         // Görünüme ekle
         homeviewController?.firstLook.addSubview(circularProgressBar1)

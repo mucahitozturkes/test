@@ -18,6 +18,7 @@ class Coredata: UIViewController{
     var lunch: [Lunch]?
     var dinner: [Dinner]?
     var snack: [Snack]?
+    var maxValueCircle: [MaxValueCircle]?
 
     //Fetch Foods
     func fetchFoods() {
@@ -49,7 +50,7 @@ class Coredata: UIViewController{
                 self.viewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch Foods: ", error)
+            print("fetch breakfast: ", error)
         }
     }
     //Fetch Lunch
@@ -61,7 +62,7 @@ class Coredata: UIViewController{
                 self.viewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch Foods: ", error)
+            print("fetch lunch: ", error)
         }
     }
     //Fetch Dinner
@@ -73,7 +74,7 @@ class Coredata: UIViewController{
                 self.viewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch Foods: ", error)
+            print("fetch dinner: ", error)
         }
     }
     //Fetch Snack
@@ -85,17 +86,28 @@ class Coredata: UIViewController{
                 self.viewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch Foods: ", error)
+            print("fetch snack: ", error)
+        }
+    }
+    //Fetch maxValueCalori
+    func fetchMaxValueCircle() {
+        do {
+            let request = MaxValueCircle.fetchRequest()
+            self.maxValueCircle = try context.fetch(request)
+        } catch {
+            print("fetch maxValueCircle: ", error)
         }
     }
     //Save context
     func saveData() {
         do {
-            try self.context.save()
+            try context.save()
+            print("Data saved successfully")
         } catch {
-            print("Save context: ", error)
+            print("Error saving data: \(error), \(error.localizedDescription)")
         }
     }
+
    
 
 }

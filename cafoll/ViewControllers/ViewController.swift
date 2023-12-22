@@ -517,19 +517,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         // Options for selecting food type
         let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
-            self?.handleFoodOptionSelection("Breakfast", for: selectedRow)
+           
         }
         
         let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
-            self?.handleFoodOptionSelection("Lunch", for: selectedRow)
+           
         }
         
         let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
-            self?.handleFoodOptionSelection("Dinner", for: selectedRow)
+           
         }
         
         let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
-            self?.handleFoodOptionSelection("Snack", for: selectedRow)
+        
         }
         
         if segmentedControl.selectedSegmentIndex != 1 {
@@ -636,12 +636,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // Deselect the selected row to visually indicate the tap
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    // Helper method to handle food type option selection
-    private func handleFoodOptionSelection(_ option: String, for selectedRow: Int) {
-        // Implement your logic based on the selected option and the selected row
-        print("Selected option: \(option) for row: \(selectedRow)")
-        // You can perform additional actions based on the selected option and row
-    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
     }

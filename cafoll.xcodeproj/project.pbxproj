@@ -14,6 +14,8 @@
 		0834A69C2B1880F1009DB978 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834A6982B1880F1009DB978 /* Favorite+CoreDataProperties.swift */; };
 		085F2C722B32E5DB003E246D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085F2C712B32E5DB003E246D /* API.swift */; };
 		087D27962B3322F1001385A4 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D27952B3322F1001385A4 /* CircleProgressBar.swift */; };
+		087D279D2B3441AE001385A4 /* MaxValueCircle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D279B2B3441AE001385A4 /* MaxValueCircle+CoreDataClass.swift */; };
+		087D279E2B3441AE001385A4 /* MaxValueCircle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D279C2B3441AE001385A4 /* MaxValueCircle+CoreDataProperties.swift */; };
 		0883C0B72B0E160D00D55176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0B62B0E160D00D55176 /* AppDelegate.swift */; };
 		0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0B82B0E160D00D55176 /* SceneDelegate.swift */; };
 		0883C0BB2B0E160D00D55176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0BA2B0E160D00D55176 /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 		0834A6982B1880F1009DB978 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		085F2C712B32E5DB003E246D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		087D27952B3322F1001385A4 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
+		087D279B2B3441AE001385A4 /* MaxValueCircle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaxValueCircle+CoreDataClass.swift"; sourceTree = "<group>"; };
+		087D279C2B3441AE001385A4 /* MaxValueCircle+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaxValueCircle+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0883C0B32B0E160D00D55176 /* cafoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cafoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0883C0B62B0E160D00D55176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0883C0B82B0E160D00D55176 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 		0883C0FE2B0F0E0E00D55176 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				087D279B2B3441AE001385A4 /* MaxValueCircle+CoreDataClass.swift */,
+				087D279C2B3441AE001385A4 /* MaxValueCircle+CoreDataProperties.swift */,
 				08856CF42B1E25B400466AAB /* Breakfast+CoreDataClass.swift */,
 				08856CF52B1E25B400466AAB /* Breakfast+CoreDataProperties.swift */,
 				08856CF62B1E25B400466AAB /* Lunch+CoreDataClass.swift */,
@@ -243,6 +249,7 @@
 				08856D022B1E25B400466AAB /* Dinner+CoreDataClass.swift in Sources */,
 				08856CFD2B1E25B400466AAB /* Breakfast+CoreDataProperties.swift in Sources */,
 				08856D012B1E25B400466AAB /* Snack+CoreDataProperties.swift in Sources */,
+				087D279E2B3441AE001385A4 /* MaxValueCircle+CoreDataProperties.swift in Sources */,
 				087D27962B3322F1001385A4 /* CircleProgressBar.swift in Sources */,
 				0883C0BB2B0E160D00D55176 /* ViewController.swift in Sources */,
 				08856D052B1E26B500466AAB /* Helper.swift in Sources */,
@@ -257,6 +264,7 @@
 				08856D032B1E25B400466AAB /* Dinner+CoreDataProperties.swift in Sources */,
 				0807F5992B1495500068A5DA /* Coredata.swift in Sources */,
 				0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */,
+				087D279D2B3441AE001385A4 /* MaxValueCircle+CoreDataClass.swift in Sources */,
 				08856CF22B1E097C00466AAB /* HomeViewController.swift in Sources */,
 				08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */,
 				0834A6992B1880F1009DB978 /* Foods+CoreDataClass.swift in Sources */,

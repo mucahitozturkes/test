@@ -2,7 +2,7 @@
 //  MaxValueCircle+CoreDataClass.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 21.12.2023.
+//  Created by mücahit öztürk on 24.12.2023.
 //
 //
 

@@ -90,14 +90,16 @@ class Coredata: UIViewController{
         }
     }
     //Fetch maxValueCalori
+    // Fetch maxValueCalori
     func fetchMaxValueCircle() {
         do {
-            let request = MaxValueCircle.fetchRequest()
+            let request: NSFetchRequest<MaxValueCircle> = MaxValueCircle.fetchRequest()
             self.maxValueCircle = try context.fetch(request)
         } catch {
             print("fetch maxValueCircle: ", error)
         }
     }
+
     //Save context
     func saveData() {
         do {
@@ -107,7 +109,32 @@ class Coredata: UIViewController{
             print("Error saving data: \(error), \(error.localizedDescription)")
         }
     }
+    func updateOrAddMaxValueCircle(maxValueCalori: Float, maxValueProtein: Float, maxValueFat: Float, maxValueCarbon: Float) {
+        // Check if all values are zero, and if yes, don't save the entity
+        guard maxValueCalori != 0 || maxValueProtein != 0 || maxValueFat != 0 || maxValueCarbon != 0 else {
+            return
+        }
 
-   
+        // Check if MaxValueCircle already exists in the array
+        if let existingMaxValueCircle = maxValueCircle?.first {
+            // Update existing MaxValueCircle
+            existingMaxValueCircle.maxValueCalori = maxValueCalori
+            existingMaxValueCircle.maxValueProtein = maxValueProtein
+            existingMaxValueCircle.maxValueFat = maxValueFat
+            existingMaxValueCircle.maxValueCarbon = maxValueCarbon
+        } else {
+            // Create a new MaxValueCircle and add it to the array
+            let newMaxValueCircle = MaxValueCircle(context: context)
+            newMaxValueCircle.maxValueCalori = maxValueCalori
+            newMaxValueCircle.maxValueProtein = maxValueProtein
+            newMaxValueCircle.maxValueFat = maxValueFat
+            newMaxValueCircle.maxValueCarbon = maxValueCarbon
+            maxValueCircle?.append(newMaxValueCircle)
+        }
+
+    }
+
+
+
 
 }

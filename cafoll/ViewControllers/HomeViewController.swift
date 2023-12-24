@@ -27,9 +27,21 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var gestureView: UIView!
     @IBOutlet var popupView: UIView!
     //circle
+    @IBOutlet weak var greenLabel: UILabel!
+    @IBOutlet weak var yellowLabel: UILabel!
+    @IBOutlet weak var redLabel: UILabel!
+    @IBOutlet weak var purpleLabel: UILabel!
+    @IBOutlet weak var greenV1: UIView!
+    @IBOutlet weak var yellowV1: UIView!
+    @IBOutlet weak var redV1: UIView!
+    @IBOutlet weak var purpleV1: UIView!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var firstLook: UIView!
     //right of circle
+    @IBOutlet weak var greenTotal: UILabel!
+    @IBOutlet weak var yellowTotal: UILabel!
+    @IBOutlet weak var redTotal: UILabel!
+    @IBOutlet weak var purpleTotal: UILabel!
     @IBOutlet weak var progressGreen: UIProgressView!
     @IBOutlet weak var progressYellow: UIProgressView!
     @IBOutlet weak var progressRed: UIProgressView!
@@ -46,9 +58,25 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      startUpSetup()
+        startUpSetup()
+        rotateLabel(purpleLabel, degrees: 45)
+        rotateLabel(redLabel, degrees: -45)
+        rotateLabel(yellowLabel, degrees: -45)
+        rotateLabel(greenLabel, degrees: 45)
         
+        rotateLabel(redTotal, degrees: 90)
+        rotateLabel(greenTotal, degrees: 90)
+        rotateLabel(yellowTotal, degrees: 90)
+        rotateLabel(purpleTotal, degrees: 90)
     }
+    func rotateLabel(_ label: UILabel, degrees: CGFloat) {
+        // Dereceyi radyana çevir
+        let radians = degrees * .pi / 180
+        
+        // UILabel'ı belirtilen dereceyle döndür
+        label.transform = CGAffineTransform(rotationAngle: -radians)
+    }
+    
     
     // UITabBarControllerDelegate metodunu implement et
      func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -73,9 +101,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchSnack()
         coredata.fetchMaxValueCircle()
         fetchDataAndUpdateUI()
+        updateLabel()
         //UI
         ui.uiTools(homeViewController: self)
-        ui.updateButtonTapped()
+       
         firstLook.bringSubviewToFront(settingsButton)
         //out of popup
         gestureView.frame = UIScreen.main.bounds
@@ -99,6 +128,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     //view Shadows
     func setLayers() {
         [popupV1, popupV2, popupV3, popupV4].forEach { $0.layer.cornerRadius = 12 }
+        [redV1, purpleV1, yellowV1, greenV1].forEach { $0.layer.cornerRadius = 5 }
         
         popupTitleV.layer.cornerRadius = 12
         popupTitleV.layer.shadowColor = UIColor.lightGray.cgColor
@@ -173,39 +203,59 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         animatedOut(desiredView: popupView)
         animatedOut(desiredView: gestureView)
     }
-    //circle button
+    
     @IBAction func popupButtonPressed(_ sender: UIButton) {
+        updateLabel()
+        // Animate the popupView
         animated(desiredView: gestureView)
         animated(desiredView: popupView)
-        
-        // Assuming you have a reference to your MaxValueCircle instance
-        if let maxValueCircle = self.coredata.maxValueCircle?.first {
-               // Assuming that you have outlets for your textfields
-            textfieldCalori.text = "\(maxValueCircle.maxValueCalori)"
-               textfieldProtein.text = "\(maxValueCircle.maxValueProtein)"
-               textfieldFat.text = "\(maxValueCircle.maxValueFat)"
-               textfieldCarbon.text = "\(maxValueCircle.maxValueCarbon)"
-           }
     }
 
-    @IBAction func deleteAllFetchValues(_ sender: UIButton) {
-       
-        // Delete all existing MaxValueCircle instances
-            if let existingMaxValueCircles = self.coredata.maxValueCircle {
-                print("Before deletion. Count: \(existingMaxValueCircles.count)")
-                for circle in existingMaxValueCircles {
-                    coredata.context.delete(circle)
-                    print("deleted all fetch Values")
-                }
-                print("After deletion. Count: \(existingMaxValueCircles.count)")
-                coredata.saveData()
-            }
+    func updateLabel() {
+        // MaxValueCircle nesnesini oluşturun
+        let setMaxValueCircle = MaxValueCircle(context: self.coredata.context)
+
+        // Textfield'ların değerlerini Float'a dönüştürüp MaxValueCircle özelliklerine atayın
+        setMaxValueCircle.maxValueCalori = Float(textfieldCalori.text ?? "") ?? 0.0
+        setMaxValueCircle.maxValueProtein = Float(textfieldProtein.text ?? "") ?? 0.0
+        setMaxValueCircle.maxValueFat = Float(textfieldFat.text ?? "") ?? 0.0
+        setMaxValueCircle.maxValueCarbon = Float(textfieldCarbon.text ?? "") ?? 0.0
+
+        // MaxValueCircle özelliklerini String'e dönüştürüp Label'ların text özelliklerine atayın
+        purpleLabel.text = "\(setMaxValueCircle.maxValueCalori)"
+        redLabel.text = "\(setMaxValueCircle.maxValueProtein)"
+        yellowLabel.text = "\(setMaxValueCircle.maxValueFat)"
+        greenLabel.text = "\(setMaxValueCircle.maxValueCarbon)"
         
-        coredata.fetchMaxValueCircle()
+        
+    }
+
+
+
+    @IBAction func deleteAllFetchValues(_ sender: UIButton) {
+        if let existingMaxValueCircles = self.coredata.maxValueCircle {
+            for circle in existingMaxValueCircles {
+                coredata.context.delete(circle)
+                print("deleted all fetch Values")
+            }
+            print("After deletion. Count: \(existingMaxValueCircles.count)")
+            coredata.saveData()
+        }
+
     }
     //button in external view
     @IBAction func activeButtonPressed(_ sender: UIButton) {
+
+        let coredataMaxValue = MaxValueCircle(context: self.coredata.context)
+        coredataMaxValue.maxValueCalori = Float(textfieldCalori.text ?? "") ?? 0.0
+        coredataMaxValue.maxValueProtein = Float(textfieldProtein.text ?? "") ?? 0.0
+        coredataMaxValue.maxValueFat = Float(textfieldFat.text ?? "") ?? 0.0
+        coredataMaxValue.maxValueCarbon = Float(textfieldCarbon.text ?? "") ?? 0.0
+        
+        updateLabel()
+        coredata.saveData()
         ui.updateButtonTapped()
+        print(coredataMaxValue)
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         let isAllFieldsFilled = !(textfieldCarbon.text?.isEmpty ?? true) &&
@@ -348,6 +398,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
     }
         
+    
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
         // Update progress views based on the calculated sum for each nutrient
         progressPurple.progress = min(Float(calories) / maxPurple, 1.0)
@@ -386,16 +437,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segment.selectedSegmentIndex {
         case 0:
-            print("Breakfast count: ", self.coredata.breakfast?.first ?? "0")
+           
             return self.coredata.breakfast?.count ?? 0
         case 1:
-            print("Lunch count: ", self.coredata.lunch?.first ?? "0")
+            
             return self.coredata.lunch?.count ?? 0
         case 2:
-            print("Dinner count: ", self.coredata.dinner?.first ?? "0")
+            
             return self.coredata.dinner?.count ?? 0
         case 3:
-            print("Snack count: ", self.coredata.snack?.first ?? "0")
+      
             return self.coredata.snack?.count ?? 0
         default:
             return 0

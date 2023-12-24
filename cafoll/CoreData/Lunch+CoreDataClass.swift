@@ -2,7 +2,7 @@
 //  Lunch+CoreDataClass.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 4.12.2023.
+//  Created by mücahit öztürk on 24.12.2023.
 //
 //
 

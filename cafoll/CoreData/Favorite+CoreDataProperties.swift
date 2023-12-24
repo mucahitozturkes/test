@@ -2,7 +2,7 @@
 //  Favorite+CoreDataProperties.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 30.11.2023.
+//  Created by mücahit öztürk on 24.12.2023.
 //
 //
 
@@ -19,10 +19,10 @@ extension Favorite {
     @NSManaged public var calori: String?
     @NSManaged public var carbon: String?
     @NSManaged public var fat: String?
-    @NSManaged public var protein: String?
-    @NSManaged public var title: String?
     @NSManaged public var idFavorite: UUID?
     @NSManaged public var isFavorited: Bool
+    @NSManaged public var protein: String?
+    @NSManaged public var title: String?
 
 }
 

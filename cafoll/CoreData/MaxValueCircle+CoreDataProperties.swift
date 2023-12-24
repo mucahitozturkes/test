@@ -2,7 +2,7 @@
 //  MaxValueCircle+CoreDataProperties.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 21.12.2023.
+//  Created by mücahit öztürk on 24.12.2023.
 //
 //
 
@@ -17,10 +17,10 @@ extension MaxValueCircle {
     }
 
     @NSManaged public var maxValueCalori: Float
-    @NSManaged public var maxValueProtein: Float
-    @NSManaged public var maxValueFat: Float
     @NSManaged public var maxValueCarbon: Float
-    @NSManaged public var date: Date
+    @NSManaged public var maxValueFat: Float
+    @NSManaged public var maxValueProtein: Float
+    @NSManaged public var date: Date?
 
 }
 

@@ -21,10 +21,10 @@ class Ui {
     var totalFat = Float(10)
     var totalCarbon = Float(10)
     
-    var defaultValueCalori = Float(2500)
-    var defaultValueProtein = Float(100)
-    var defaultValueCFat = Float(50)
-    var defaultValueCarbon = Float(30)
+    var caloriValue: Float?
+    var proteinValue: Float?
+    var fatValue: Float?
+    var carbonValue: Float?
     
     var coredata: Coredata!
     
@@ -38,7 +38,8 @@ class Ui {
         self.coredata = Coredata() // Initialize your Coredata object
         totalBar()
         UiOfCircle()
-        
+        updateButtonTapped()
+        coredata.fetchMaxValueCircle()
     }
     func UiOfCircle() {
         // Dairesel ilerleme çubuklarını oluştur
@@ -62,23 +63,48 @@ class Ui {
     }
     
     @objc func updateButtonTapped() {
+        let setMaxValueCircle = MaxValueCircle(context: self.coredata.context)
+
        
+        if let caloriText = homeviewController.textfieldCalori.text, let caloriValue = Float(caloriText) {
+            setMaxValueCircle.maxValueCalori = caloriValue
+            self.caloriValue = caloriValue
+        }
 
-        // The rest of your code to update progress bars, save data, and fetch updated data
-        let normalizedProgress1 = CGFloat(totalCalori / defaultValueCalori)
-        let normalizedProgress2 = CGFloat(totalProtein / defaultValueProtein)
-        let normalizedProgress3 = CGFloat(totalFat / defaultValueCFat)
-        let normalizedProgress4 = CGFloat(totalCarbon / defaultValueCarbon)
+        if let proteinText = homeviewController.textfieldProtein.text, let proteinValue = Float(proteinText) {
+            setMaxValueCircle.maxValueProtein = proteinValue
+            self.proteinValue = proteinValue
+        }
 
-        circularProgressBar1.animateProgress(to: normalizedProgress1, duration: 1.0)
-        circularProgressBar2.animateProgress(to: normalizedProgress2, duration: 1.0)
-        circularProgressBar3.animateProgress(to: normalizedProgress3, duration: 1.0)
-        circularProgressBar4.animateProgress(to: normalizedProgress4, duration: 1.0)
+        if let fatText = homeviewController.textfieldFat.text, let fatValue = Float(fatText) {
+            setMaxValueCircle.maxValueFat = fatValue
+            self.fatValue = fatValue
+        }
 
-        coredata.saveData()
-        coredata.fetchMaxValueCircle()
-      
+        if let carbonText = homeviewController.textfieldCarbon.text, let carbonValue = Float(carbonText) {
+            setMaxValueCircle.maxValueCarbon = carbonValue
+            self.carbonValue = carbonValue
+        }
+
+        // Use optional binding to safely unwrap optionals
+        if let caloriValue = caloriValue, let proteinValue = proteinValue, let fatValue = fatValue, let carbonValue = carbonValue {
+            coredata.updateOrAddMaxValueCircle(maxValueCalori: caloriValue, maxValueProtein: proteinValue, maxValueFat: fatValue, maxValueCarbon: carbonValue)
+
+            let normalizedProgress1 = CGFloat(totalCalori / caloriValue)
+            let normalizedProgress2 = CGFloat(totalProtein / proteinValue)
+            let normalizedProgress3 = CGFloat(totalFat / fatValue)
+            let normalizedProgress4 = CGFloat(totalCarbon / carbonValue)
+
+            circularProgressBar1.animateProgress(to: normalizedProgress1, duration: 1.0)
+            circularProgressBar2.animateProgress(to: normalizedProgress2, duration: 1.0)
+            circularProgressBar3.animateProgress(to: normalizedProgress3, duration: 1.0)
+            circularProgressBar4.animateProgress(to: normalizedProgress4, duration: 1.0)
+
+        }
     }
+
+
+
     
     //View shadows
     func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 12, cornerRadius: CGFloat = 24) {

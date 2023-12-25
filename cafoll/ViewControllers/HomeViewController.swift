@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class HomeViewController: UIViewController,UITabBarControllerDelegate {
     //textfields for popup
     @IBOutlet weak var textfieldCarbon: UITextField!
@@ -27,6 +26,11 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var gestureView: UIView!
     @IBOutlet var popupView: UIView!
     //circle
+    @IBOutlet weak var stackViewValues: UIStackView!
+    @IBOutlet weak var totalCarbon: UILabel!
+    @IBOutlet weak var totalFat: UILabel!
+    @IBOutlet weak var totalPRotein: UILabel!
+    @IBOutlet weak var totalCalori: UILabel!
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var yellowLabel: UILabel!
     @IBOutlet weak var redLabel: UILabel!
@@ -108,8 +112,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         updateLabel()
         //UI
         ui.uiTools(homeViewController: self)
-       
         firstLook.bringSubviewToFront(settingsButton)
+        firstLook.bringSubviewToFront(stackViewValues)
         //out of popup
         gestureView.frame = UIScreen.main.bounds
         gestureView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -225,8 +229,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         greenLabel.text = "\(setMaxValueCircle.maxValueCarbon)"
     }
 
-
-
     @IBAction func deleteAllFetchValues(_ sender: UIButton) {
         if let existingMaxValueCircles = self.coredata.maxValueCircle {
             for circle in existingMaxValueCircles {
@@ -289,33 +291,42 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
         // Calculate the sum of values for calories, fat, protein, and carbohydrates
         var totalCalories = 0.0
-        var totalFat = 0.0
+        var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in breakfastItems {
-            totalCalories += Double(item.calori!) ?? 0.0
-            totalFat += Double(item.fat!) ?? 0.0
-            totalProtein += Double(item.protein!) ?? 0.0
-            totalCarbs += Double(item.carbon!) ?? 0.0
+            totalCalories += Double(item.calori ?? "0") ?? 0.0
+            totalFats += Double(item.fat ?? "0") ?? 0.0
+            totalProtein += Double(item.protein ?? "0") ?? 0.0
+            totalCarbs += Double(item.carbon ?? "0") ?? 0.0
         }
 
         // Update the progress views with specific maximum values for breakfast
-        let maxGreen: Float = 100
-        let maxYellow: Float = 200
-        let maxRed: Float = 400
+        let maxGreen: Float = 20
+        let maxYellow: Float = 25
+        let maxRed: Float = 30
         let maxPurple: Float = 700
 
-        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
         
        purpleTotal.text = String(format: "%.0f", maxPurple)
         redTotal.text = String(format: "%.0f", maxRed)
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
+        
+        totalCalori.text = String(format: "%.0f", totalCalories)
+        totalPRotein.text = String(format: "%.0f", totalProtein)
+        totalFat.text = String(format: "%.0f", totalFats)
+        totalCarbon.text = String(format: "%.0f", totalCarbs)
+        
+        
+        
     }
 
     func sumLunch() {
@@ -325,24 +336,24 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
         // Calculate the sum of values for calories, fat, protein, and carbohydrates
         var totalCalories = 0.0
-        var totalFat = 0.0
+        var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in lunchItems {
             totalCalories += Double(item.calori!) ?? 0.0
-            totalFat += Double(item.fat!) ?? 0.0
+            totalFats += Double(item.fat!) ?? 0.0
             totalProtein += Double(item.protein!) ?? 0.0
             totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
         }
 
         // Update the progress views with specific maximum values for lunch
-        let maxGreen: Float = 150
-        let maxYellow: Float = 250
-        let maxRed: Float = 450
-        let maxPurple: Float = 800
+        let maxGreen: Float = 20
+        let maxYellow: Float = 25
+        let maxRed: Float = 30
+        let maxPurple: Float = 700
 
-        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
         
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
@@ -362,24 +373,24 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
         // Calculate the sum of values for calories, fat, protein, and carbohydrates
         var totalCalories = 0.0
-        var totalFat = 0.0
+        var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in dinnerItems {
             totalCalories += Double(item.calori!) ?? 0.0
-            totalFat += Double(item.fat!) ?? 0.0
+            totalFats += Double(item.fat!) ?? 0.0
             totalProtein += Double(item.protein!) ?? 0.0
             totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
         }
 
         // Update the progress views with specific maximum values for dinner
-        let maxGreen: Float = 120
-        let maxYellow: Float = 220
-        let maxRed: Float = 380
-        let maxPurple: Float = 600
+        let maxGreen: Float = 20
+        let maxYellow: Float = 25
+        let maxRed: Float = 30
+        let maxPurple: Float = 700
 
-        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
         
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
@@ -399,24 +410,24 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
         // Calculate the sum of values for calories, fat, protein, and carbohydrates
         var totalCalories = 0.0
-        var totalFat = 0.0
+        var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in snackItems {
             totalCalories += Double(item.calori!) ?? 0.0
-            totalFat += Double(item.fat!) ?? 0.0
+            totalFats += Double(item.fat!) ?? 0.0
             totalProtein += Double(item.protein!) ?? 0.0
             totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
         }
 
         // Update the progress views with specific maximum values for snack
-        let maxGreen: Float = 90
-        let maxYellow: Float = 180
-        let maxRed: Float = 300
-        let maxPurple: Float = 500
+        let maxGreen: Float = 20
+        let maxYellow: Float = 25
+        let maxRed: Float = 30
+        let maxPurple: Float = 700
 
-        updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
         
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
@@ -430,9 +441,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
     
     func sumAllMeals() {
-        
+
     }
-        
+
     
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
         // Update progress views based on the calculated sum for each nutrient
@@ -490,39 +501,40 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as! HomeCell
         let row = indexPath.row
-        
+
         var highestValueColor: UIColor = .clear
-        
+
         switch segment.selectedSegmentIndex {
         case 0:
             if let indexBreakfast = self.coredata.breakfast?[row] {
                 cell.titleLabel?.text = indexBreakfast.title
-                highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon!, fat: indexBreakfast.fat!, protein: indexBreakfast.protein!)
+                highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
             }
         case 1:
             if let indexLunch = self.coredata.lunch?[row] {
                 cell.titleLabel?.text = indexLunch.title
-                highestValueColor = determineHighestValueColor(carbons: indexLunch.carbon!, fat: indexLunch.fat!, protein: indexLunch.protein!)
+                highestValueColor = determineHighestValueColor(carbons: indexLunch.carbon ?? "0", fat: indexLunch.fat ?? "0", protein: indexLunch.protein ?? "0")
             }
         case 2:
             if let indexDinner = self.coredata.dinner?[row] {
                 cell.titleLabel?.text = indexDinner.title
-                highestValueColor = determineHighestValueColor(carbons: indexDinner.carbon!, fat: indexDinner.fat!, protein: indexDinner.protein!)
+                highestValueColor = determineHighestValueColor(carbons: indexDinner.carbon ?? "0", fat: indexDinner.fat ?? "0", protein: indexDinner.protein ?? "0")
             }
         case 3:
             if let indexSnack = self.coredata.snack?[row] {
                 cell.titleLabel?.text = indexSnack.title
-                highestValueColor = determineHighestValueColor(carbons: indexSnack.carbon!, fat: indexSnack.fat!, protein: indexSnack.protein!)
+                highestValueColor = determineHighestValueColor(carbons: indexSnack.carbon ?? "0", fat: indexSnack.fat ?? "0", protein: indexSnack.protein ?? "0")
             }
         default:
             break
         }
-        
+
         // Set the background color of colorView based on the highest value
         cell.colorView.backgroundColor = highestValueColor
-        
+
         return cell
     }
+
 
     // Helper function to determine the highest value and return the corresponding color
     func determineHighestValueColor(carbons: String, fat: String, protein: String) -> UIColor {
@@ -570,24 +582,28 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 context.delete(breakfastItem)
                 self.coredata.breakfast?.remove(at: indexPath.row)
                 sumBreakfast() // Öğün türüne özel sum fonksiyonunu çağır
+                ui.updateButtonTapped()
             }
         case 1:
             if let lunchItem = self.coredata.lunch?[indexPath.row] {
                 context.delete(lunchItem)
                 self.coredata.lunch?.remove(at: indexPath.row)
                 sumLunch() // Öğün türüne özel sum fonksiyonunu çağır
+                ui.updateButtonTapped()
             }
         case 2:
             if let dinnerItem = self.coredata.dinner?[indexPath.row] {
                 context.delete(dinnerItem)
                 self.coredata.dinner?.remove(at: indexPath.row)
                 sumDinner() // Öğün türüne özel sum fonksiyonunu çağır
+                ui.updateButtonTapped()
             }
         case 3:
             if let snackItem = self.coredata.snack?[indexPath.row] {
                 context.delete(snackItem)
                 self.coredata.snack?.remove(at: indexPath.row)
                 sumSnack() // Öğün türüne özel sum fonksiyonunu çağır
+                ui.updateButtonTapped()
             }
         default:
             break

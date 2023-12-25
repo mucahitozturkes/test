@@ -90,7 +90,6 @@ class Coredata: UIViewController{
         }
     }
     //Fetch maxValueCalori
-    // Fetch maxValueCalori
     func fetchMaxValueCircle() {
         do {
             let request = MaxValueCircle.fetchRequest()

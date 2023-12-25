@@ -16,10 +16,10 @@ class Ui {
     var circularProgressBar4: CircularProgressBar!
     
     var homeviewController: HomeViewController!
-    var totalCalori = Float(10)
-    var totalProtein = Float(10)
-    var totalFat = Float(10)
-    var totalCarbon = Float(10)
+    var totalCalori: Float?
+    var totalProtein: Float?
+    var totalFat: Float?
+    var totalCarbon: Float?
     
     var caloriValue: Float?
     var proteinValue: Float?
@@ -89,16 +89,23 @@ class Ui {
         // Use optional binding to safely unwrap optionals
         if let caloriValue = caloriValue, let proteinValue = proteinValue, let fatValue = fatValue, let carbonValue = carbonValue {
             coredata.updateOrAddMaxValueCircle(maxValueCalori: caloriValue, maxValueProtein: proteinValue, maxValueFat: fatValue, maxValueCarbon: carbonValue)
-
+         
+            
             homeviewController.purpleLabel.text = String(format: "%.0f", caloriValue)
             homeviewController.redLabel.text = String(format: "%.0f", proteinValue)
             homeviewController.yellowLabel.text = String(format: "%.0f", fatValue)
             homeviewController.greenLabel.text = String(format: "%.0f", carbonValue)
+     
             
-            let normalizedProgress1 = CGFloat(totalCalori / caloriValue)
-            let normalizedProgress2 = CGFloat(totalProtein / proteinValue)
-            let normalizedProgress3 = CGFloat(totalFat / fatValue)
-            let normalizedProgress4 = CGFloat(totalCarbon / carbonValue)
+            totalCalori = Float(homeviewController.totalCalori.text ?? "0")
+            totalProtein = Float(homeviewController.totalPRotein.text ?? "0")
+            totalFat = Float(homeviewController.totalFat.text ?? "0")
+            totalCarbon = Float(homeviewController.totalCarbon.text ?? "0")
+            
+            let normalizedProgress1 = CGFloat((totalCalori ?? 0) / caloriValue)
+            let normalizedProgress2 = CGFloat((totalProtein ?? 0) / proteinValue)
+            let normalizedProgress3 = CGFloat((totalFat ?? 0) / fatValue)
+            let normalizedProgress4 = CGFloat((totalCarbon ?? 0) / carbonValue)
 
             circularProgressBar1.animateProgress(to: normalizedProgress1, duration: 1.0)
             circularProgressBar2.animateProgress(to: normalizedProgress2, duration: 1.0)

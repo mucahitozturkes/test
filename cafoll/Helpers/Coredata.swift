@@ -93,7 +93,7 @@ class Coredata: UIViewController{
     // Fetch maxValueCalori
     func fetchMaxValueCircle() {
         do {
-            let request: NSFetchRequest<MaxValueCircle> = MaxValueCircle.fetchRequest()
+            let request = MaxValueCircle.fetchRequest()
             self.maxValueCircle = try context.fetch(request)
         } catch {
             print("fetch maxValueCircle: ", error)

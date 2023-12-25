@@ -969,6 +969,7 @@
                         <outlet property="dateView" destination="1fJ-Lb-qdc" id="Zwd-9N-n4b"/>
                         <outlet property="firstLook" destination="MvZ-Oo-kmV" id="MPe-ov-rtQ"/>
                         <outlet property="gestureView" destination="d47-xq-dYJ" id="iOd-i1-FA0"/>
+                        <outlet property="greenInfoLabel" destination="PcJ-uw-aez" id="6Lx-hQ-2Pu"/>
                         <outlet property="greenLabel" destination="WqM-02-3bB" id="4wS-ao-mEi"/>
                         <outlet property="greenTotal" destination="Rl0-cl-YPc" id="tGm-QF-Sr2"/>
                         <outlet property="greenV1" destination="1Gb-gn-Mqd" id="9sH-O6-15D"/>
@@ -982,9 +983,11 @@
                         <outlet property="progressPurple" destination="p5B-co-lTk" id="TmO-bC-gKQ"/>
                         <outlet property="progressRed" destination="uk4-LX-ngQ" id="NNW-JS-gHf"/>
                         <outlet property="progressYellow" destination="q6V-Gh-B7k" id="1Xu-7N-9tg"/>
+                        <outlet property="purpleInfoLabel" destination="DOS-2N-HYH" id="Gd4-Nt-CZg"/>
                         <outlet property="purpleLabel" destination="D5o-BB-c5o" id="hiG-CG-nfZ"/>
                         <outlet property="purpleTotal" destination="7TF-sj-h3F" id="jeL-3P-GhZ"/>
                         <outlet property="purpleV1" destination="rfp-qS-Rhn" id="LbZ-d3-X0p"/>
+                        <outlet property="redInfoLabel" destination="hO7-UU-de4" id="Uwo-vJ-HKT"/>
                         <outlet property="redLabel" destination="Wwg-Fn-SiA" id="zQ4-tV-Evt"/>
                         <outlet property="redTotal" destination="LMB-jc-Ns3" id="a5p-Ug-lSi"/>
                         <outlet property="redV1" destination="NXX-Jd-9OQ" id="Exg-vC-A9Z"/>
@@ -998,6 +1001,7 @@
                         <outlet property="textfieldFat" destination="9jd-t2-kg3" id="gEV-kN-vne"/>
                         <outlet property="textfieldProtein" destination="cyY-pJ-IHN" id="gsR-DB-ANO"/>
                         <outlet property="updateButton" destination="qRK-cy-bWc" id="uuD-KI-8ER"/>
+                        <outlet property="yellowInfoLabel" destination="hW3-iv-3wf" id="rvU-9f-oOR"/>
                         <outlet property="yellowLabel" destination="6n5-wS-fCh" id="oqV-5J-fLy"/>
                         <outlet property="yellowTotal" destination="5L2-S8-W3N" id="Fn6-HW-NVq"/>
                         <outlet property="yellowV1" destination="6Ro-GJ-aWn" id="cJq-S9-EWn"/>

@@ -38,6 +38,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var firstLook: UIView!
     //right of circle
+    @IBOutlet weak var greenInfoLabel: UILabel!
+    @IBOutlet weak var yellowInfoLabel: UILabel!
+    @IBOutlet weak var redInfoLabel: UILabel!
+    @IBOutlet weak var purpleInfoLabel: UILabel!
     @IBOutlet weak var greenTotal: UILabel!
     @IBOutlet weak var yellowTotal: UILabel!
     @IBOutlet weak var redTotal: UILabel!
@@ -89,7 +93,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
     //start up reactions
     func startUpSetup() {
-        //print(helper?.filePath ?? "Not Found")
+        print(coredata?.filePath ?? "Not Found")
         helper = Helper()
         coredata = Coredata()
         ui = Ui()
@@ -214,20 +218,11 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     func updateLabel() {
         // MaxValueCircle nesnesini oluşturun
         let setMaxValueCircle = MaxValueCircle(context: self.coredata.context)
-
-        // Textfield'ların değerlerini Float'a dönüştürüp MaxValueCircle özelliklerine atayın
-        setMaxValueCircle.maxValueCalori = Float(textfieldCalori.text ?? "") ?? 0.0
-        setMaxValueCircle.maxValueProtein = Float(textfieldProtein.text ?? "") ?? 0.0
-        setMaxValueCircle.maxValueFat = Float(textfieldFat.text ?? "") ?? 0.0
-        setMaxValueCircle.maxValueCarbon = Float(textfieldCarbon.text ?? "") ?? 0.0
-
-        // MaxValueCircle özelliklerini String'e dönüştürüp Label'ların text özelliklerine atayın
+      
         purpleLabel.text = "\(setMaxValueCircle.maxValueCalori)"
         redLabel.text = "\(setMaxValueCircle.maxValueProtein)"
         yellowLabel.text = "\(setMaxValueCircle.maxValueFat)"
         greenLabel.text = "\(setMaxValueCircle.maxValueCarbon)"
-        
-        
     }
 
 
@@ -245,7 +240,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
     //button in external view
     @IBAction func activeButtonPressed(_ sender: UIButton) {
-
         let coredataMaxValue = MaxValueCircle(context: self.coredata.context)
         coredataMaxValue.maxValueCalori = Float(textfieldCalori.text ?? "") ?? 0.0
         coredataMaxValue.maxValueProtein = Float(textfieldProtein.text ?? "") ?? 0.0
@@ -253,7 +247,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredataMaxValue.maxValueCarbon = Float(textfieldCarbon.text ?? "") ?? 0.0
         
         updateLabel()
-        coredata.saveData()
         ui.updateButtonTapped()
         print(coredataMaxValue)
     }
@@ -264,7 +257,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                                 !(textfieldCalori.text?.isEmpty ?? true)
 
         updateButton.isEnabled = isAllFieldsFilled
-       
     }
     //segment Button
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
@@ -305,7 +297,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             totalCalories += Double(item.calori!) ?? 0.0
             totalFat += Double(item.fat!) ?? 0.0
             totalProtein += Double(item.protein!) ?? 0.0
-            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+            totalCarbs += Double(item.carbon!) ?? 0.0
         }
 
         // Update the progress views with specific maximum values for breakfast
@@ -315,6 +307,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let maxPurple: Float = 700
 
         updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+        redInfoLabel.text = String(format: "%.0f", totalProtein)
+        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+        
+       purpleTotal.text = String(format: "%.0f", maxPurple)
+        redTotal.text = String(format: "%.0f", maxRed)
+        yellowTotal.text = String(format: "%.0f", maxYellow)
+        greenTotal.text = String(format: "%.0f", maxGreen)
     }
 
     func sumLunch() {
@@ -342,6 +343,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let maxPurple: Float = 800
 
         updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        
+        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+        redInfoLabel.text = String(format: "%.0f", totalProtein)
+        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+        
+        purpleTotal.text = String(format: "%.0f", maxPurple)
+         redTotal.text = String(format: "%.0f", maxRed)
+         yellowTotal.text = String(format: "%.0f", maxYellow)
+         greenTotal.text = String(format: "%.0f", maxGreen)
     }
 
     func sumDinner() {
@@ -369,6 +380,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let maxPurple: Float = 600
 
         updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        
+        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+        redInfoLabel.text = String(format: "%.0f", totalProtein)
+        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+        
+        purpleTotal.text = String(format: "%.0f", maxPurple)
+         redTotal.text = String(format: "%.0f", maxRed)
+         yellowTotal.text = String(format: "%.0f", maxYellow)
+         greenTotal.text = String(format: "%.0f", maxGreen)
     }
 
     func sumSnack() {
@@ -396,6 +417,20 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let maxPurple: Float = 500
 
         updateProgressViews(calories: totalCalories, fat: totalFat, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+        
+        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+        redInfoLabel.text = String(format: "%.0f", totalProtein)
+        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+        
+        purpleTotal.text = String(format: "%.0f", maxPurple)
+         redTotal.text = String(format: "%.0f", maxRed)
+         yellowTotal.text = String(format: "%.0f", maxYellow)
+         greenTotal.text = String(format: "%.0f", maxGreen)
+    }
+    
+    func sumAllMeals() {
+        
     }
         
     

@@ -90,6 +90,11 @@ class Ui {
         if let caloriValue = caloriValue, let proteinValue = proteinValue, let fatValue = fatValue, let carbonValue = carbonValue {
             coredata.updateOrAddMaxValueCircle(maxValueCalori: caloriValue, maxValueProtein: proteinValue, maxValueFat: fatValue, maxValueCarbon: carbonValue)
 
+            homeviewController.purpleLabel.text = String(format: "%.0f", caloriValue)
+            homeviewController.redLabel.text = String(format: "%.0f", proteinValue)
+            homeviewController.yellowLabel.text = String(format: "%.0f", fatValue)
+            homeviewController.greenLabel.text = String(format: "%.0f", carbonValue)
+            
             let normalizedProgress1 = CGFloat(totalCalori / caloriValue)
             let normalizedProgress2 = CGFloat(totalProtein / proteinValue)
             let normalizedProgress3 = CGFloat(totalFat / fatValue)
@@ -103,9 +108,6 @@ class Ui {
         }
     }
 
-
-
-    
     //View shadows
     func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 12, cornerRadius: CGFloat = 24) {
         view.layer.shadowColor = UIColor.lightGray.cgColor

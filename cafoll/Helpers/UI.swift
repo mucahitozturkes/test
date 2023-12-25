@@ -20,11 +20,13 @@ class Ui {
     var totalProtein: Float?
     var totalFat: Float?
     var totalCarbon: Float?
-    
-    var caloriValue: Float?
-    var proteinValue: Float?
-    var fatValue: Float?
-    var carbonValue: Float?
+
+    var caloriValue = Float(2500)
+    var proteinValue = Float(80)
+    var fatValue = Float(60)
+    var carbonValue = Float(50)
+
+    // Your code here
     
     var coredata: Coredata!
     
@@ -39,6 +41,7 @@ class Ui {
         totalBar()
         UiOfCircle()
         updateButtonTapped()
+        
         coredata.fetchMaxValueCircle()
     }
     func UiOfCircle() {
@@ -63,56 +66,44 @@ class Ui {
     }
     
     @objc func updateButtonTapped() {
-        let setMaxValueCircle = MaxValueCircle(context: self.coredata.context)
 
-       
-        if let caloriText = homeviewController.textfieldCalori.text, let caloriValue = Float(caloriText) {
-            setMaxValueCircle.maxValueCalori = caloriValue
-            self.caloriValue = caloriValue
-        }
-
-        if let proteinText = homeviewController.textfieldProtein.text, let proteinValue = Float(proteinText) {
-            setMaxValueCircle.maxValueProtein = proteinValue
-            self.proteinValue = proteinValue
-        }
-
-        if let fatText = homeviewController.textfieldFat.text, let fatValue = Float(fatText) {
-            setMaxValueCircle.maxValueFat = fatValue
-            self.fatValue = fatValue
-        }
-
-        if let carbonText = homeviewController.textfieldCarbon.text, let carbonValue = Float(carbonText) {
-            setMaxValueCircle.maxValueCarbon = carbonValue
-            self.carbonValue = carbonValue
-        }
-
-        // Use optional binding to safely unwrap optionals
-        if let caloriValue = caloriValue, let proteinValue = proteinValue, let fatValue = fatValue, let carbonValue = carbonValue {
-            coredata.updateOrAddMaxValueCircle(maxValueCalori: caloriValue, maxValueProtein: proteinValue, maxValueFat: fatValue, maxValueCarbon: carbonValue)
-         
+        if let totalCaloriText = homeviewController.totalCalori.text,
+           let totalProteinText = homeviewController.totalPRotein.text,
+           let totalFatText = homeviewController.totalFat.text,
+           let totalCarbonText = homeviewController.totalCarbon.text,
+           let totalCaloriValue = Float(totalCaloriText),
+           let totalProteinValue = Float(totalProteinText),
+           let totalFatValue = Float(totalFatText),
+           let totalCarbonValue = Float(totalCarbonText) {
             
-            homeviewController.purpleLabel.text = String(format: "%.0f", caloriValue)
-            homeviewController.redLabel.text = String(format: "%.0f", proteinValue)
-            homeviewController.yellowLabel.text = String(format: "%.0f", fatValue)
-            homeviewController.greenLabel.text = String(format: "%.0f", carbonValue)
-     
+            totalCalori = totalCaloriValue
+            totalProtein = totalProteinValue
+            totalFat = totalFatValue
+            totalCarbon = totalCarbonValue
             
-            totalCalori = Float(homeviewController.totalCalori.text ?? "0")
-            totalProtein = Float(homeviewController.totalPRotein.text ?? "0")
-            totalFat = Float(homeviewController.totalFat.text ?? "0")
-            totalCarbon = Float(homeviewController.totalCarbon.text ?? "0")
-            
-            let normalizedProgress1 = CGFloat((totalCalori ?? 0) / caloriValue)
-            let normalizedProgress2 = CGFloat((totalProtein ?? 0) / proteinValue)
-            let normalizedProgress3 = CGFloat((totalFat ?? 0) / fatValue)
-            let normalizedProgress4 = CGFloat((totalCarbon ?? 0) / carbonValue)
-
-            circularProgressBar1.animateProgress(to: normalizedProgress1, duration: 1.0)
-            circularProgressBar2.animateProgress(to: normalizedProgress2, duration: 1.0)
-            circularProgressBar3.animateProgress(to: normalizedProgress3, duration: 1.0)
-            circularProgressBar4.animateProgress(to: normalizedProgress4, duration: 1.0)
-
+        } else {
+            // Handle the case where at least one of the texts is nil or cannot be converted to Float
+            print("Error: One or more text values are nil or cannot be converted to Float.")
         }
+
+
+        
+        homeviewController.purpleLabel.text = String(format: "%.0f", caloriValue)
+        homeviewController.redLabel.text = String(format: "%.0f", proteinValue)
+        homeviewController.yellowLabel.text = String(format: "%.0f", fatValue)
+        homeviewController.greenLabel.text = String(format: "%.0f", carbonValue)
+        
+        let normalizedProgress1 = CGFloat((totalCalori ?? 0) / caloriValue)
+        let normalizedProgress2 = CGFloat((totalProtein ?? 0) / proteinValue)
+        let normalizedProgress3 = CGFloat((totalFat ?? 0) / fatValue)
+        let normalizedProgress4 = CGFloat((totalCarbon ?? 0) / carbonValue)
+
+        circularProgressBar1.animateProgress(to: normalizedProgress1, duration: 1.0)
+        circularProgressBar2.animateProgress(to: normalizedProgress2, duration: 1.0)
+        circularProgressBar3.animateProgress(to: normalizedProgress3, duration: 1.0)
+        circularProgressBar4.animateProgress(to: normalizedProgress4, duration: 1.0)
+
+        
     }
 
     //View shadows

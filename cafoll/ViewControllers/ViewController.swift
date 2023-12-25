@@ -9,9 +9,10 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
-    
+    var ui: Ui!
     var helper: Helper!
     var coredata: Coredata!
+    var homeViewController: HomeViewController!
     // Bar Labels
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
@@ -45,8 +46,11 @@ class ViewController: UIViewController {
     func startUpSetup() {
         trashButton.isHidden = true
         //print(helper?.filePath ?? "Not Found")
+        ui = Ui()
         helper = Helper()
         coredata = Coredata()
+        homeViewController = HomeViewController()
+        
         //fetch items
         coredata.fetchFoods()
         coredata.fetchFavorite()
@@ -534,7 +538,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                    // Handle the case when the context is nil.
                    print("Error: NSManagedObjectContext is nil.")
                }
+            
             self?.coredata.saveData()
+            
         }
         
         let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in

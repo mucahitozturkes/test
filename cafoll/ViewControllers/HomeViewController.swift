@@ -92,12 +92,13 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 // start up
                 coredata.fetchBreakfast()
                 fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
                 tableView.reloadData()
             }
         }
     //start up reactions
     func startUpSetup() {
-        print(coredata?.filePath ?? "Not Found")
+        ///print(coredata?.filePath ?? "Not Found")
         helper = Helper()
         coredata = Coredata()
         ui = Ui()
@@ -107,7 +108,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchLunch()
         coredata.fetchDinner()
         coredata.fetchSnack()
-        coredata.fetchMaxValueCircle()
+        ///coredata.fetchMaxValueCircle()
         fetchDataAndUpdateUI()
         updateLabel()
         //UI
@@ -148,6 +149,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             switch segment.selectedSegmentIndex {
             case 0:
                 coredata.fetchBreakfast()
+              
                 sumBreakfast()
             case 1:
                 coredata.fetchLunch()
@@ -251,6 +253,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         updateLabel()
         ui.updateButtonTapped()
         print(coredataMaxValue)
+        
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         let isAllFieldsFilled = !(textfieldCarbon.text?.isEmpty ?? true) &&
@@ -259,6 +262,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                                 !(textfieldCalori.text?.isEmpty ?? true)
 
         updateButton.isEnabled = isAllFieldsFilled
+     
     }
     //segment Button
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
@@ -266,15 +270,21 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
             switch currentSegmentIndex {
             case 0:
+                ui.updateButtonTapped()
                 coredata.fetchBreakfast()
                 sumBreakfast()
+                
+               
             case 1:
+                ui.updateButtonTapped()
                 coredata.fetchLunch()
                 sumLunch()
             case 2:
+                ui.updateButtonTapped()
                 coredata.fetchDinner()
                 sumDinner()
             case 3:
+                ui.updateButtonTapped()
                 coredata.fetchSnack()
                 sumSnack()
             default:
@@ -315,7 +325,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
         
-       purpleTotal.text = String(format: "%.0f", maxPurple)
+        purpleTotal.text = String(format: "%.0f", maxPurple)
         redTotal.text = String(format: "%.0f", maxRed)
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
@@ -357,7 +367,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
         
         purpleTotal.text = String(format: "%.0f", maxPurple)
@@ -394,7 +404,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
         
         purpleTotal.text = String(format: "%.0f", maxPurple)
@@ -431,7 +441,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFat)
+        yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
         
         purpleTotal.text = String(format: "%.0f", maxPurple)

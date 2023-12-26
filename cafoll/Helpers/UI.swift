@@ -107,8 +107,8 @@ class Ui {
     }
 
     //View shadows
-    func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 12, cornerRadius: CGFloat = 24) {
-        view.layer.shadowColor = UIColor.lightGray.cgColor
+    func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 3, cornerRadius: CGFloat = 24) {
+        view.layer.shadowColor = UIColor.darkGray.cgColor
         view.layer.shadowOpacity = opacity
         view.layer.shadowOffset = offset
         view.layer.shadowRadius = radius

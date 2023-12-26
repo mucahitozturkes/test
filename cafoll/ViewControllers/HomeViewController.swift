@@ -85,7 +85,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         label.transform = CGAffineTransform(rotationAngle: -radians)
     }
     
-    
     // UITabBarControllerDelegate metodunu implement et
      func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
             if viewController is HomeViewController {
@@ -140,10 +139,11 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         [redV1, purpleV1, yellowV1, greenV1].forEach { $0.layer.cornerRadius = 5 }
         
         popupTitleV.layer.cornerRadius = 12
-        popupTitleV.layer.shadowColor = UIColor.lightGray.cgColor
-        popupTitleV.layer.shadowOffset = CGSize(width: 0, height: 6)
-        popupTitleV.layer.shadowRadius = 8
-        popupTitleV.layer.shadowOpacity = 0.1
+        popupTitleV.layer.shadowColor = UIColor.darkGray.cgColor
+        popupTitleV.layer.shadowOffset = CGSize(width: 0, height: 3)
+        popupTitleV.layer.shadowRadius = 3
+        popupTitleV.layer.shadowOpacity = 0.2
+       
     }
     func fetchDataAndUpdateUI() {
             switch segment.selectedSegmentIndex {
@@ -173,21 +173,12 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let backgroundView = self.view!
 
         popupView.layer.cornerRadius = 12
-        
-        // Update the shadow color
-        if backgroundView.traitCollection.userInterfaceStyle == .dark {
-            // White shadow color in Dark mode
-            popupView.layer.borderColor = UIColor.lightGray.cgColor
-            popupView.layer.borderWidth = 1
-        } else {
-            // Black shadow color in Light mode
-            //popup
-            popupView.layer.cornerRadius = 12
-            popupView.layer.shadowColor = UIColor.lightGray.cgColor
-            popupView.layer.shadowOffset = CGSize(width: 0, height: 6)
-            popupView.layer.shadowRadius = 12
-            popupView.layer.shadowOpacity = 0.2
-        }
+        popupView.layer.shadowColor = UIColor.darkGray.cgColor
+        popupView.layer.shadowOffset = CGSize(width: 0, height: 6)
+        popupView.layer.shadowRadius = 6
+        popupView.layer.shadowOpacity = 0.2
+        popupView.layer.masksToBounds = false
+       
 
         backgroundView.addSubview(desiredView)
 
@@ -222,13 +213,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
 
     func updateLabel() {
-        // MaxValueCircle nesnesini oluşturun
-        let setMaxValueCircle = MaxValueCircle(context: self.coredata.context)
       
-        purpleLabel.text = "\(setMaxValueCircle.maxValueCalori)"
-        redLabel.text = "\(setMaxValueCircle.maxValueProtein)"
-        yellowLabel.text = "\(setMaxValueCircle.maxValueFat)"
-        greenLabel.text = "\(setMaxValueCircle.maxValueCarbon)"
     }
 
     @IBAction func deleteAllFetchValues(_ sender: UIButton) {
@@ -270,22 +255,28 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
             switch currentSegmentIndex {
             case 0:
-                ui.updateButtonTapped()
+                tableView.reloadData()
                 coredata.fetchBreakfast()
-                sumBreakfast()
-                
-               
-            case 1:
+                fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
+                sumBreakfast()
+            case 1:
+                tableView.reloadData()
                 coredata.fetchLunch()
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
                 sumLunch()
             case 2:
-                ui.updateButtonTapped()
+                tableView.reloadData()
                 coredata.fetchDinner()
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
                 sumDinner()
             case 3:
-                ui.updateButtonTapped()
+                tableView.reloadData()
                 coredata.fetchSnack()
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
                 sumSnack()
             default:
                 break
@@ -454,7 +445,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
     }
 
-    
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
         // Update progress views based on the calculated sum for each nutrient
         progressPurple.progress = min(Float(calories) / maxPurple, 1.0)
@@ -462,7 +452,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         progressRed.progress = min(Float(protein) / maxRed, 1.0)
         progressGreen.progress = min(Float(carbs) / maxGreen, 1.0)
     }
-
 
     // Helper function to determine the highest value and return the corresponding color
     func determineHighestValueColor(calori: Double, fat: Double, protein: Double, carbon: Double) -> UIColor {
@@ -483,9 +472,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
         return highestValueColor
     }
-
-
-
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -545,7 +531,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-
     // Helper function to determine the highest value and return the corresponding color
     func determineHighestValueColor(carbons: String, fat: String, protein: String) -> UIColor {
         var highestValueColor: UIColor = .clear
@@ -565,7 +550,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         return highestValueColor
     }
-
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in

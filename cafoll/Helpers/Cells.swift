@@ -27,8 +27,7 @@ class HomeCell: UITableViewCell {
     
     func setShadowsAndColors() {
         colorView.layer.cornerRadius = 8
-        colorView.layer.borderWidth = 1
-        colorView.layer.borderColor = UIColor.systemIndigo.cgColor
+    
     }
 }
 

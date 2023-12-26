@@ -69,22 +69,23 @@ class ViewController: UIViewController {
     func setLayers() {
         //buttonview
         buttonView.layer.cornerRadius = 25
-        buttonView.layer.shadowColor = UIColor.lightGray.cgColor
+        buttonView.layer.shadowColor = UIColor.darkGray.cgColor
         buttonView.layer.shadowOffset = CGSize(width: 0, height: 6)
-        buttonView.layer.shadowRadius = 12
+        buttonView.layer.shadowRadius = 3
         buttonView.layer.shadowOpacity = 0.2
         buttonView.layer.masksToBounds = true
         //mainview
         mainView.layer.cornerRadius = 24
-        mainView.layer.shadowColor = UIColor.lightGray.cgColor
+        mainView.layer.shadowColor = UIColor.darkGray.cgColor
         mainView.layer.shadowOffset = CGSize(width: 0, height: 6)
-        mainView.layer.shadowRadius = 12
+        mainView.layer.shadowRadius = 3
         mainView.layer.shadowOpacity = 0.2
+        
         //popup-textfields
         titleLabelTextfield.layer.cornerRadius = 12
-        titleLabelTextfield.layer.shadowColor = UIColor.lightGray.cgColor
+        titleLabelTextfield.layer.shadowColor = UIColor.darkGray.cgColor
         titleLabelTextfield.layer.shadowOffset = CGSize(width: 0, height: 6)
-        titleLabelTextfield.layer.shadowRadius = 12
+        titleLabelTextfield.layer.shadowRadius = 3
         titleLabelTextfield.layer.shadowOpacity = 0.1
        
         
@@ -98,22 +99,11 @@ class ViewController: UIViewController {
         let backgroundView = self.view!
 
         popupView.layer.cornerRadius = 12
-        
-        // Update the shadow color
-        if backgroundView.traitCollection.userInterfaceStyle == .dark {
-            // White shadow color in Dark mode
-            popupView.layer.borderColor = UIColor.lightGray.cgColor
-            popupView.layer.borderWidth = 1
-        } else {
-            // Black shadow color in Light mode
-            //popup
-            popupView.layer.cornerRadius = 12
-            popupView.layer.shadowColor = UIColor.lightGray.cgColor
-            popupView.layer.shadowOffset = CGSize(width: 0, height: 6)
-            popupView.layer.shadowRadius = 12
-            popupView.layer.shadowOpacity = 0.2
-        }
-
+        popupView.layer.shadowColor = UIColor.lightGray.cgColor
+        popupView.layer.shadowOffset = CGSize(width: 0, height: 6)
+        popupView.layer.shadowRadius = 12
+        popupView.layer.shadowOpacity = 0.2
+     
         backgroundView.addSubview(desiredView)
 
         desiredView.transform = CGAffineTransform(scaleX: 1, y: 0.1)
@@ -279,7 +269,6 @@ class ViewController: UIViewController {
         return nil
     }
     
-    
     @IBAction func addNewFoodButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "New Food", message: "Just write your food", preferredStyle: .alert)
 
@@ -418,7 +407,6 @@ class ViewController: UIViewController {
 
     }
 }
-
 //MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

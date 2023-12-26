@@ -78,7 +78,7 @@ class ViewController: UIViewController {
         mainView.layer.cornerRadius = 24
         mainView.layer.shadowColor = UIColor.darkGray.cgColor
         mainView.layer.shadowOffset = CGSize(width: 0, height: 6)
-        mainView.layer.shadowRadius = 3
+        mainView.layer.shadowRadius = 12
         mainView.layer.shadowOpacity = 0.2
         
         //popup-textfields
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
         let backgroundView = self.view!
 
         popupView.layer.cornerRadius = 12
-        popupView.layer.shadowColor = UIColor.lightGray.cgColor
+        popupView.layer.shadowColor = UIColor.darkGray.cgColor
         popupView.layer.shadowOffset = CGSize(width: 0, height: 6)
         popupView.layer.shadowRadius = 12
         popupView.layer.shadowOpacity = 0.2
@@ -126,10 +126,12 @@ class ViewController: UIViewController {
     }
 
     func updateProgressBars(protein: Float, carbon: Float, fat: Float, calories: Float) {
-        let maxProtein: Float = 35.0  // Maximum value for Protein
-        let maxCarbon: Float = 25.0   // Maximum value for Carbohydrates
-        let maxFat: Float = 25.0      // Maximum value for Fat
         let maxCalories: Float = 500.0 // Maximum value for Calories
+        let maxProtein: Float = 35.0  // Maximum value for Protein
+        let maxFat: Float = 35.0      // Maximum value for Fat
+        let maxCarbon: Float = 35.0   // Maximum value for Carbohydrates
+      
+      
 
         // Protein bar
         proteinBar.progress = protein / maxProtein
@@ -244,15 +246,16 @@ class ViewController: UIViewController {
     }
     func animateHeartButton(_ button: UIButton) {
         let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
-        shakeAnimation.values = [0, 10, -10, 10, -5, 5, -2, 2, 0]
+        shakeAnimation.values = [8, 4, -8, 8, -4, 4, -8, 8, 8]
         shakeAnimation.keyTimes = [0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 0.9, 1]
 
         let animationGroup = CAAnimationGroup()
         animationGroup.animations = [shakeAnimation]
         animationGroup.duration = 0.4
-
+        helper.generateHapticFeedback(style: .light)
         button.layer.add(animationGroup, forKey: "shakeAnimation")
     }
+
     func isFoodInFavorites(_ food: Foods, forSegment segmentIndex: Int) -> Bool {
         if segmentIndex == 0 {
             return coredata.favorite?.contains(where: { $0.idFavorite == food.idFood }) ?? false
@@ -510,73 +513,139 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let selectedFat = self.coredata.foods?[row].fat
         let selectedPro = self.coredata.foods?[row].protein
         
+        let selectedTitleF = self.coredata.favorite?[row].title
+        let selectedCalF = self.coredata.favorite?[row].calori
+        let selectedCarF = self.coredata.favorite?[row].carbon
+        let selectedFatF = self.coredata.favorite?[row].fat
+        let selectedProF = self.coredata.favorite?[row].protein
+        
         let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
         
         // Options for selecting food type
         let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
-          
-            if let context = self?.coredata.context {
-                   let newFood = Breakfast(context: context)
-                newFood.title = selectedTitle
-                newFood.calori = selectedCal
-                newFood.protein = selectedPro
-                newFood.fat = selectedFat
-                newFood.carbon = selectedCar
-               } else {
-                   // Handle the case when the context is nil.
-                   print("Error: NSManagedObjectContext is nil.")
-               }
+           
             
-            self?.coredata.saveData()
+            if let context = self?.coredata.context {
+                    let newFood: Breakfast
+                    
+                    if self?.segmentedControl.selectedSegmentIndex == 0 { // Breakfast segment
+                        newFood = Breakfast(context: context)
+                        newFood.title = selectedTitle
+                        newFood.calori = selectedCal
+                        newFood.protein = selectedPro
+                        newFood.fat = selectedFat
+                        newFood.carbon = selectedCar
+                    } else if self?.segmentedControl.selectedSegmentIndex == 1 { // Favorite segment
+                        newFood = Breakfast(context: context) // Use Favorite context for Favorite entity
+                        newFood.title = selectedTitleF
+                        newFood.calori = selectedCalF
+                        newFood.protein = selectedProF
+                        newFood.fat = selectedFatF
+                        newFood.carbon = selectedCarF
+                    } else {
+                        // Handle other segments if needed
+                        return
+                    }
+
+                    self?.coredata.saveData()
+                } else {
+                    // Handle the case when the context is nil.
+                    print("Error: NSManagedObjectContext is nil.")
+                }
             
         }
         
         let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
             
             if let context = self?.coredata.context {
-                   let newFood = Lunch(context: context)
-                newFood.title = selectedTitle
-                newFood.calori = selectedCal
-                newFood.protein = selectedPro
-                newFood.fat = selectedFat
-                newFood.carbon = selectedCar
-               } else {
-                   // Handle the case when the context is nil.
-                   print("Error: NSManagedObjectContext is nil.")
-               }
-            self?.coredata.saveData()
+                let newFood: Lunch
+                
+                if self?.segmentedControl.selectedSegmentIndex == 0 { // Breakfast segment
+                    newFood = Lunch(context: context)
+                    newFood.title = selectedTitle
+                    newFood.calori = selectedCal
+                    newFood.protein = selectedPro
+                    newFood.fat = selectedFat
+                    newFood.carbon = selectedCar
+                } else if self?.segmentedControl.selectedSegmentIndex == 1 { // Favorite segment
+                    newFood = Lunch(context: context) // Use Favorite context for Favorite entity
+                    newFood.title = selectedTitleF
+                    newFood.calori = selectedCalF
+                    newFood.protein = selectedProF
+                    newFood.fat = selectedFatF
+                    newFood.carbon = selectedCarF
+                } else {
+                    // Handle other segments if needed
+                    return
+                }
+                
+                self?.coredata.saveData()
+            } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
+            }
         }
         
         let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
             
             if let context = self?.coredata.context {
-                   let newFood = Dinner(context: context)
-                newFood.title = selectedTitle
-                newFood.calori = selectedCal
-                newFood.protein = selectedPro
-                newFood.fat = selectedFat
-                newFood.carbon = selectedCar
-               } else {
-                   // Handle the case when the context is nil.
-                   print("Error: NSManagedObjectContext is nil.")
-               }
-            self?.coredata.saveData()
+                let newFood: Dinner
+                
+                if self?.segmentedControl.selectedSegmentIndex == 0 { // Breakfast segment
+                    newFood = Dinner(context: context)
+                    newFood.title = selectedTitle
+                    newFood.calori = selectedCal
+                    newFood.protein = selectedPro
+                    newFood.fat = selectedFat
+                    newFood.carbon = selectedCar
+                } else if self?.segmentedControl.selectedSegmentIndex == 1 { // Favorite segment
+                    newFood = Dinner(context: context) // Use Favorite context for Favorite entity
+                    newFood.title = selectedTitleF
+                    newFood.calori = selectedCalF
+                    newFood.protein = selectedProF
+                    newFood.fat = selectedFatF
+                    newFood.carbon = selectedCarF
+                } else {
+                    // Handle other segments if needed
+                    return
+                }
+                
+                self?.coredata.saveData()
+            } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
+            }
         }
         
         let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
             
             if let context = self?.coredata.context {
-                   let newFood = Snack(context: context)
-                newFood.title = selectedTitle
-                newFood.calori = selectedCal
-                newFood.protein = selectedPro
-                newFood.fat = selectedFat
-                newFood.carbon = selectedCar
-               } else {
-                   // Handle the case when the context is nil.
-                   print("Error: NSManagedObjectContext is nil.")
-               }
-            self?.coredata.saveData()
+                let newFood: Snack
+                
+                if self?.segmentedControl.selectedSegmentIndex == 0 { // Breakfast segment
+                    newFood = Snack(context: context)
+                    newFood.title = selectedTitle
+                    newFood.calori = selectedCal
+                    newFood.protein = selectedPro
+                    newFood.fat = selectedFat
+                    newFood.carbon = selectedCar
+                } else if self?.segmentedControl.selectedSegmentIndex == 1 { // Favorite segment
+                    newFood = Snack(context: context) // Use Favorite context for Favorite entity
+                    newFood.title = selectedTitleF
+                    newFood.calori = selectedCalF
+                    newFood.protein = selectedProF
+                    newFood.fat = selectedFatF
+                    newFood.carbon = selectedCarF
+                } else {
+                    // Handle other segments if needed
+                    return
+                }
+                
+                self?.coredata.saveData()
+            } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
+            }
         }
         
         if segmentedControl.selectedSegmentIndex != 1 {

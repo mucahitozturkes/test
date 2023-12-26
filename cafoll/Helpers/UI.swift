@@ -22,9 +22,9 @@ class Ui {
     var totalCarbon: Float?
 
     var caloriValue = Float(2500)
-    var proteinValue = Float(80)
-    var fatValue = Float(60)
-    var carbonValue = Float(50)
+    var proteinValue = Float(100)
+    var fatValue = Float(100)
+    var carbonValue = Float(100)
 
     // Your code here
     
@@ -46,10 +46,10 @@ class Ui {
     }
     func UiOfCircle() {
         // Dairesel ilerleme çubuklarını oluştur
-        circularProgressBar1 = CircularProgressBar(frame: CGRect(x: 0, y: 0, width: 150, height: 150), color: .systemPurple)
-        circularProgressBar2 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 125, height: 125), color: .systemRed)
-        circularProgressBar3 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 100, height: 100), color: .systemYellow)
-        circularProgressBar4 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 75, height: 75), color: .systemGreen)
+        circularProgressBar1 = CircularProgressBar(frame: CGRect(x: 0, y: 0, width: 150, height: 150), color: UIColor.systemPurple.withAlphaComponent(0.60))
+        circularProgressBar2 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 125, height: 125), color: UIColor.systemRed.withAlphaComponent(0.60))
+        circularProgressBar3 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 100, height: 100), color: UIColor.systemYellow.withAlphaComponent(0.60))
+        circularProgressBar4 = CircularProgressBar(frame: CGRect(x: 12.5, y: 12.5, width: 75, height: 75), color: UIColor.systemGreen.withAlphaComponent(0.60))
         
         // Add circularProgressBar2 to circularProgressBar1
         circularProgressBar1.addSubview(circularProgressBar2)
@@ -64,6 +64,7 @@ class Ui {
         // Görünüme ekle
         homeviewController?.firstLook.addSubview(circularProgressBar1)
     }
+
     
     @objc func updateButtonTapped() {
 
@@ -107,7 +108,7 @@ class Ui {
     }
 
     //View shadows
-    func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 3, cornerRadius: CGFloat = 24) {
+    func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 0, cornerRadius: CGFloat = 24) {
         view.layer.shadowColor = UIColor.darkGray.cgColor
         view.layer.shadowOpacity = opacity
         view.layer.shadowOffset = offset

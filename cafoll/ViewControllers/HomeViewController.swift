@@ -14,6 +14,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var textfieldProtein: UITextField!
     @IBOutlet weak var textfieldCalori: UITextField!
     //Header
+   
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
     //external View
@@ -59,13 +61,14 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var segmentView: UIView!
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    
+  
     var coredata: Coredata!
     var helper: Helper!
     var ui: Ui!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         startUpSetup()
         rotateLabel(purpleLabel, degrees: 45)
         rotateLabel(redLabel, degrees: -45)
@@ -77,6 +80,22 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         rotateLabel(yellowTotal, degrees: 90)
         rotateLabel(purpleTotal, degrees: 90)
     }
+  
+    @IBAction func datePickerSelected(_ sender: UIDatePicker) {
+        // 1. Fetch foods for the selected date
+        coredata.fetchBreakfast(forDate: sender.date)
+
+        // 2. Update UI based on fetched data
+        sumBreakfast(forDate: sender.date) // Assuming this function uses the fetched data
+       
+        updateLabel()
+        ui.updateButtonTapped()
+
+        // 3. Reload table view to reflect changes
+        tableView.reloadData()
+       
+    }
+
     func rotateLabel(_ label: UILabel, degrees: CGFloat) {
         // Dereceyi radyana çevir
         let radians = degrees * .pi / 180
@@ -89,7 +108,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
      func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
             if viewController is HomeViewController {
                 // start up
-                coredata.fetchBreakfast()
+                coredata.fetchBreakfast(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 tableView.reloadData()
@@ -103,7 +122,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         ui = Ui()
         setLayers()
         //Fetch items
-        coredata.fetchBreakfast()
+        coredata = cafoll.Coredata()
+        coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch()
         coredata.fetchDinner()
         coredata.fetchSnack()
@@ -132,7 +152,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         // Butonu başlangıçta devre dışı bırak
         updateButton.isEnabled = false
     }
-  
+    func getDatePickerDate() -> Date? {
+           return datePicker?.date
+       }
     //view Shadows
     func setLayers() {
         [popupV1, popupV2, popupV3, popupV4].forEach { $0.layer.cornerRadius = 12 }
@@ -148,9 +170,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     func fetchDataAndUpdateUI() {
             switch segment.selectedSegmentIndex {
             case 0:
-                coredata.fetchBreakfast()
+                coredata.fetchBreakfast(forDate: datePicker.date)
               
-                sumBreakfast()
+                sumBreakfast(forDate: datePicker.date)
             case 1:
                 coredata.fetchLunch()
                 sumLunch()
@@ -256,10 +278,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             switch currentSegmentIndex {
             case 0:
                 tableView.reloadData()
-                coredata.fetchBreakfast()
+                coredata.fetchBreakfast(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
-                sumBreakfast()
+                sumBreakfast(forDate: datePicker.date)
             case 1:
                 tableView.reloadData()
                 coredata.fetchLunch()
@@ -285,49 +307,53 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             tableView.reloadData()
         }
         
-    func sumBreakfast() {
+    func sumBreakfast(forDate date: Date) {
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
 
-        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in breakfastItems {
-            totalCalories += Double(item.calori ?? "0") ?? 0.0
-            totalFats += Double(item.fat ?? "0") ?? 0.0
-            totalProtein += Double(item.protein ?? "0") ?? 0.0
-            totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
         }
 
-        // Update the progress views with specific maximum values for breakfast
+        // Update the progress views and labels with the calculated totals
         let maxGreen: Float = 20
         let maxYellow: Float = 25
         let maxRed: Float = 30
         let maxPurple: Float = 700
 
         updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-        
+
+        // Diğer UI elemanlarını güncelle
+        // ...
+
+        // Toplam değerleri ekrana yazdır
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
         yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-        
+
         purpleTotal.text = String(format: "%.0f", maxPurple)
         redTotal.text = String(format: "%.0f", maxRed)
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
-        
+
         totalCalori.text = String(format: "%.0f", totalCalories)
         totalPRotein.text = String(format: "%.0f", totalProtein)
         totalFat.text = String(format: "%.0f", totalFats)
         totalCarbon.text = String(format: "%.0f", totalCarbs)
-        
-        
-        
     }
 
     func sumLunch() {
@@ -575,7 +601,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if let breakfastItem = self.coredata.breakfast?[indexPath.row] {
                 context.delete(breakfastItem)
                 self.coredata.breakfast?.remove(at: indexPath.row)
-                sumBreakfast() // Öğün türüne özel sum fonksiyonunu çağır
+                sumBreakfast(forDate: datePicker.date)
                 ui.updateButtonTapped()
             }
         case 1:

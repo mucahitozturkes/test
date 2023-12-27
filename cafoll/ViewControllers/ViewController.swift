@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var coredata: Coredata!
     var homeViewController: HomeViewController!
     // Bar Labels
+  
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
     @IBOutlet weak var fatLabel: UITextField!
@@ -48,9 +49,8 @@ class ViewController: UIViewController {
         //print(helper?.filePath ?? "Not Found")
         ui = Ui()
         helper = Helper()
-        coredata = Coredata()
+        coredata = cafoll.Coredata()
         homeViewController = HomeViewController()
-        
         //fetch items
         coredata.fetchFoods()
         coredata.fetchFavorite()
@@ -130,9 +130,6 @@ class ViewController: UIViewController {
         let maxProtein: Float = 35.0  // Maximum value for Protein
         let maxFat: Float = 35.0      // Maximum value for Fat
         let maxCarbon: Float = 35.0   // Maximum value for Carbohydrates
-      
-      
-
         // Protein bar
         proteinBar.progress = protein / maxProtein
 
@@ -513,13 +510,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
            var selectedCar: String?
            var selectedFat: String?
            var selectedPro: String?
-
+       
+        
            var selectedFavoriteTitle: String?
            var selectedFavoriteCal: String?
            var selectedFavoriteCar: String?
            var selectedFavoriteFat: String?
            var selectedFavoritePro: String?
-
+   
         // Check if the foods array is not empty and row is a valid index
             if let foods = self.coredata.foods, row < foods.count {
                 selectedTitle = foods[row].title
@@ -527,6 +525,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 selectedCar = foods[row].carbon
                 selectedFat = foods[row].fat
                 selectedPro = foods[row].protein
+             
             }
 
             // Check if the favorite array is not empty and row is a valid index
@@ -536,69 +535,102 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 selectedFavoriteCar = favorites[row].carbon
                 selectedFavoriteFat = favorites[row].fat
                 selectedFavoritePro = favorites[row].protein
+               
             }
 
          let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
 
          // Options for selecting food type
-         let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
-             guard let context = self?.coredata.context else {
-                        // Handle the case when the context is nil.
-                        print("Error: NSManagedObjectContext is nil.")
-                        return
+        let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
+            guard let context = self?.coredata.context else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
+                return
+            }
+            
+            guard let segmentNumber = self?.segmentedControl.selectedSegmentIndex else {
+                // Handle the case when the selected segment index is nil.
+                print("Error: selectedSegmentIndex is nil.")
+                return
+            }
+            
+            if let tabBarController = self?.tabBarController {
+                if let homeViewController = tabBarController.viewControllers?.first(where: { $0 is HomeViewController }) as? HomeViewController {
+                    // homeViewController bulundu
+                    print("homeViewController found.")
+                    
+                    // Burada homeViewController.datePicker'a erişim sağlayabilirsiniz
+                    if homeViewController.datePicker == nil {
+                        print("Error: datePicker is nil.")
+                    } else {
+                        let datePickerDate = homeViewController.datePicker.date
+                        if segmentNumber == 0 {
+                            // Create a new instance for the regular "Breakfast" category
+                            let newFood = Breakfast(context: context)
+                            newFood.title = selectedTitle
+                            newFood.calori = selectedCal
+                            newFood.protein = selectedPro
+                            newFood.fat = selectedFat
+                            newFood.carbon = selectedCar
+                            newFood.date = datePickerDate
+                            
+                            self?.coredata.saveData()
+                        } else if segmentNumber == 1 {
+                            // Create a new instance for the "Favorite" category
+                            let newFavoriteFood = Breakfast(context: context)
+                            newFavoriteFood.title = selectedFavoriteTitle
+                            newFavoriteFood.calori = selectedFavoriteCal
+                            newFavoriteFood.protein = selectedFavoritePro
+                            newFavoriteFood.fat = selectedFavoriteFat
+                            newFavoriteFood.carbon = selectedFavoriteCar
+                            
+                            self?.coredata.saveData()
+                        }
                     }
-
-                    let segmentNumber = self?.segmentedControl.selectedSegmentIndex
-                    if segmentNumber == 0 {
-                        // Create a new instance for the regular "Breakfast" category
-                        let newFood = Breakfast(context: context)
-                        newFood.title = selectedTitle
-                        newFood.calori = selectedCal
-                        newFood.protein = selectedPro
-                        newFood.fat = selectedFat
-                        newFood.carbon = selectedCar
-                        self?.coredata.saveData()
-                    } else if segmentNumber == 1 {
-                        // Create a new instance for the "Favorite" category
-                        let newFavoriteFood = Breakfast(context: context)
-                        newFavoriteFood.title = selectedFavoriteTitle
-                        newFavoriteFood.calori = selectedFavoriteCal
-                        newFavoriteFood.protein = selectedFavoritePro
-                        newFavoriteFood.fat = selectedFavoriteFat
-                        newFavoriteFood.carbon = selectedFavoriteCar
-                        self?.coredata.saveData()
-                    }
+                } else {
+                    print("Error: datePickerDate is nil.")
                 }
-        
+            } else {
+                print("Error: homeViewController is nil.")
+            }
+        }
+
         let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
             
             guard let context = self?.coredata.context else {
-                       // Handle the case when the context is nil.
-                       print("Error: NSManagedObjectContext is nil.")
-                       return
-                   }
-
-                   let segmentNumber = self?.segmentedControl.selectedSegmentIndex
-                   if segmentNumber == 0 {
-                       // Create a new instance for the regular "Breakfast" category
-                       let newFood = Lunch(context: context)
-                       newFood.title = selectedTitle
-                       newFood.calori = selectedCal
-                       newFood.protein = selectedPro
-                       newFood.fat = selectedFat
-                       newFood.carbon = selectedCar
-                       self?.coredata.saveData()
-                   } else if segmentNumber == 1 {
-                       // Create a new instance for the "Favorite" category
-                       let newFavoriteFood = Lunch(context: context)
-                       newFavoriteFood.title = selectedFavoriteTitle
-                       newFavoriteFood.calori = selectedFavoriteCal
-                       newFavoriteFood.protein = selectedFavoritePro
-                       newFavoriteFood.fat = selectedFavoriteFat
-                       newFavoriteFood.carbon = selectedFavoriteCar
-                       self?.coredata.saveData()
-                   }
+                   // Handle the case when the context is nil.
+                   print("Error: NSManagedObjectContext is nil.")
+                   return
                }
+
+               guard let segmentNumber = self?.segmentedControl.selectedSegmentIndex else {
+                   // Handle the case when the selected segment index is nil.
+                   print("Error: selectedSegmentIndex is nil.")
+                   return
+               }
+
+               if segmentNumber == 0 {
+                   // Create a new instance for the regular "Breakfast" category
+                   let newFood = Breakfast(context: context)
+                   newFood.title = selectedTitle
+                   newFood.calori = selectedCal
+                   newFood.protein = selectedPro
+                   newFood.fat = selectedFat
+                   newFood.carbon = selectedCar
+                   newFood.date = self?.homeViewController.datePicker.date
+                   self?.coredata.saveData()
+               } else if segmentNumber == 1 {
+                   // Create a new instance for the "Favorite" category
+                   let newFavoriteFood = Breakfast(context: context)
+                   newFavoriteFood.title = selectedFavoriteTitle
+                   newFavoriteFood.calori = selectedFavoriteCal
+                   newFavoriteFood.protein = selectedFavoritePro
+                   newFavoriteFood.fat = selectedFavoriteFat
+                   newFavoriteFood.carbon = selectedFavoriteCar
+                   newFavoriteFood.date = self?.homeViewController.datePicker.date
+                   self?.coredata.saveData()
+               }
+           }
         
         let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
             

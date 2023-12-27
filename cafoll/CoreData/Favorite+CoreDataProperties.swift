@@ -19,6 +19,7 @@ extension Favorite {
     @NSManaged public var calori: String?
     @NSManaged public var carbon: String?
     @NSManaged public var fat: String?
+    @NSManaged public var date: Date?
     @NSManaged public var idFavorite: UUID?
     @NSManaged public var isFavorited: Bool
     @NSManaged public var protein: String?

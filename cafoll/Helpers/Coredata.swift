@@ -8,8 +8,9 @@
 import UIKit
 import CoreData
 
-class Coredata: UIViewController{
+class Coredata {
     var viewController: ViewController!
+    var homeViewController: HomeViewController!
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     var foods: [Foods]?
@@ -42,15 +43,25 @@ class Coredata: UIViewController{
         }
     }
     //Fetch Breakfast
-    func fetchBreakfast() {
+    func fetchBreakfast(forDate date: Date) {
         do {
+            // Create a date range for the selected day
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+
+            // Use a predicate to filter by date
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfDay as NSDate, endOfDay as NSDate)
+            
             let request = Breakfast.fetchRequest()
+            request.predicate = predicate
+
             self.breakfast = try context.fetch(request)
             DispatchQueue.main.async {
-                self.viewController?.tableView.reloadData()
+                self.homeViewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch breakfast: ", error)
+            print("fetch Foods: ", error)
         }
     }
     //Fetch Lunch

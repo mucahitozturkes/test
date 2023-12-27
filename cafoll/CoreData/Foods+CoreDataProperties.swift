@@ -20,6 +20,7 @@ extension Foods {
     @NSManaged public var carbon: String?
     @NSManaged public var fat: String?
     @NSManaged public var idFood: UUID?
+    @NSManaged public var date: Date?
     @NSManaged public var isFavorite: Bool
     @NSManaged public var protein: String?
     @NSManaged public var title: String?

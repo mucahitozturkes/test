@@ -23,6 +23,7 @@
     <entity name="Favorite" representedClassName=".Favorite" syncable="YES">
         <attribute name="calori" optional="YES" attributeType="String"/>
         <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fat" optional="YES" attributeType="String"/>
         <attribute name="idFavorite" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -32,6 +33,7 @@
     <entity name="Foods" representedClassName=".Foods" syncable="YES">
         <attribute name="calori" optional="YES" attributeType="String"/>
         <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fat" optional="YES" attributeType="String"/>
         <attribute name="idFood" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

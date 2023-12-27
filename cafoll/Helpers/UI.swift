@@ -41,7 +41,6 @@ class Ui {
         totalBar()
         UiOfCircle()
         updateButtonTapped()
-        
         coredata.fetchMaxValueCircle()
     }
     func UiOfCircle() {

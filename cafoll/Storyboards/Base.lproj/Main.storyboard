@@ -864,19 +864,22 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-Lb-qdc">
                                 <rect key="frame" x="16" y="32" width="343" height="50"/>
                                 <subviews>
-                                    <datePicker alpha="0.14999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="ypl-ul-mnM">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <datePicker alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-y8-U89">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="50"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" systemColor="systemIndigoColor"/>
+                                        <connections>
+                                            <action selector="datePickerSelected:" destination="kfG-fp-uhY" eventType="valueChanged" id="hlW-7Y-cQM"/>
+                                        </connections>
                                     </datePicker>
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ypl-ul-mnM" secondAttribute="bottom" id="HGn-aQ-5wd"/>
+                                    <constraint firstAttribute="bottom" secondItem="wU9-y8-U89" secondAttribute="bottom" id="COd-tp-YCc"/>
                                     <constraint firstAttribute="height" constant="50" id="IgS-A4-xKA"/>
-                                    <constraint firstItem="ypl-ul-mnM" firstAttribute="leading" secondItem="1fJ-Lb-qdc" secondAttribute="leading" id="V4c-4V-O2G"/>
-                                    <constraint firstAttribute="trailing" secondItem="ypl-ul-mnM" secondAttribute="trailing" constant="8" id="bnP-Qq-AS7"/>
-                                    <constraint firstItem="ypl-ul-mnM" firstAttribute="top" secondItem="1fJ-Lb-qdc" secondAttribute="top" id="cGf-zO-KbX"/>
+                                    <constraint firstItem="wU9-y8-U89" firstAttribute="top" secondItem="1fJ-Lb-qdc" secondAttribute="top" id="LPh-ks-C0g"/>
+                                    <constraint firstAttribute="trailing" secondItem="wU9-y8-U89" secondAttribute="trailing" constant="16" id="Nb2-f7-TyZ"/>
+                                    <constraint firstItem="wU9-y8-U89" firstAttribute="leading" secondItem="1fJ-Lb-qdc" secondAttribute="leading" id="ash-SY-ZNV"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eew-U3-y5r">
@@ -1016,7 +1019,7 @@
                         </imageReference>
                     </tabBarItem>
                     <connections>
-                        <outlet property="datePicker" destination="ypl-ul-mnM" id="QRT-pH-2sI"/>
+                        <outlet property="datePicker" destination="wU9-y8-U89" id="gdK-hg-COu"/>
                         <outlet property="dateView" destination="1fJ-Lb-qdc" id="Zwd-9N-n4b"/>
                         <outlet property="firstLook" destination="MvZ-Oo-kmV" id="MPe-ov-rtQ"/>
                         <outlet property="gestureView" destination="d47-xq-dYJ" id="iOd-i1-FA0"/>

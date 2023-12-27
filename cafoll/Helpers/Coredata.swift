@@ -65,39 +65,69 @@ class Coredata {
         }
     }
     //Fetch Lunch
-    func fetchLunch() {
+    func fetchLunch(forDate date: Date) {
         do {
+            // Create a date range for the selected day
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+
+            // Use a predicate to filter by date
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfDay as NSDate, endOfDay as NSDate)
+            
             let request = Lunch.fetchRequest()
+            request.predicate = predicate
+
             self.lunch = try context.fetch(request)
             DispatchQueue.main.async {
-                self.viewController?.tableView.reloadData()
+                self.homeViewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch lunch: ", error)
+            print("fetch Foods: ", error)
         }
     }
     //Fetch Dinner
-    func fetchDinner() {
+    func fetchDinner(forDate date: Date) {
         do {
+            // Create a date range for the selected day
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+
+            // Use a predicate to filter by date
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfDay as NSDate, endOfDay as NSDate)
+            
             let request = Dinner.fetchRequest()
+            request.predicate = predicate
+
             self.dinner = try context.fetch(request)
             DispatchQueue.main.async {
-                self.viewController?.tableView.reloadData()
+                self.homeViewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch dinner: ", error)
+            print("fetch Foods: ", error)
         }
     }
     //Fetch Snack
-    func fetchSnack() {
+    func fetchSnack(forDate date: Date) {
         do {
+            // Create a date range for the selected day
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+
+            // Use a predicate to filter by date
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfDay as NSDate, endOfDay as NSDate)
+            
             let request = Snack.fetchRequest()
+            request.predicate = predicate
+
             self.snack = try context.fetch(request)
             DispatchQueue.main.async {
-                self.viewController?.tableView.reloadData()
+                self.homeViewController?.tableView.reloadData()
             }
         } catch {
-            print("fetch snack: ", error)
+            print("fetch Foods: ", error)
         }
     }
     //Fetch maxValueCalori

@@ -65,7 +65,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     var coredata: Coredata!
     var helper: Helper!
     var ui: Ui!
-
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -84,16 +85,23 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBAction func datePickerSelected(_ sender: UIDatePicker) {
         // 1. Fetch foods for the selected date
         coredata.fetchBreakfast(forDate: sender.date)
+        coredata.fetchLunch(forDate: sender.date)
+        coredata.fetchDinner(forDate: sender.date)
+        coredata.fetchSnack(forDate: sender.date)
+     
+        
 
         // 2. Update UI based on fetched data
         sumBreakfast(forDate: sender.date) // Assuming this function uses the fetched data
-       
+        sumLunch(forDate: sender.date)
+        sumDinner(forDate: sender.date)
+        sumSnack(forDate: sender.date)
+        
+        // 3. set updated
         updateLabel()
         ui.updateButtonTapped()
-
-        // 3. Reload table view to reflect changes
+        // 4. Reload table view to reflect changes
         tableView.reloadData()
-       
     }
 
     func rotateLabel(_ label: UILabel, degrees: CGFloat) {
@@ -109,6 +117,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             if viewController is HomeViewController {
                 // start up
                 coredata.fetchBreakfast(forDate: datePicker.date)
+                coredata.fetchLunch(forDate: datePicker.date)
+                coredata.fetchDinner(forDate: datePicker.date)
+                coredata.fetchSnack(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 tableView.reloadData()
@@ -124,9 +135,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         //Fetch items
         coredata = cafoll.Coredata()
         coredata.fetchBreakfast(forDate: datePicker.date)
-        coredata.fetchLunch()
-        coredata.fetchDinner()
-        coredata.fetchSnack()
+        coredata.fetchLunch(forDate: datePicker.date)
+        coredata.fetchDinner(forDate: datePicker.date)
+        coredata.fetchSnack(forDate: datePicker.date)
         ///coredata.fetchMaxValueCircle()
         fetchDataAndUpdateUI()
         updateLabel()
@@ -171,17 +182,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             switch segment.selectedSegmentIndex {
             case 0:
                 coredata.fetchBreakfast(forDate: datePicker.date)
-              
                 sumBreakfast(forDate: datePicker.date)
             case 1:
-                coredata.fetchLunch()
-                sumLunch()
+                coredata.fetchLunch(forDate: datePicker.date)
+                sumLunch(forDate: datePicker.date)
             case 2:
-                coredata.fetchDinner()
-                sumDinner()
+                coredata.fetchDinner(forDate: datePicker.date)
+                sumDinner(forDate: datePicker.date)
             case 3:
-                coredata.fetchSnack()
-                sumSnack()
+                coredata.fetchSnack(forDate: datePicker.date)
+                sumSnack(forDate: datePicker.date)
             default:
                 break
             }
@@ -284,22 +294,22 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 sumBreakfast(forDate: datePicker.date)
             case 1:
                 tableView.reloadData()
-                coredata.fetchLunch()
+                coredata.fetchLunch(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
-                sumLunch()
+                sumLunch(forDate: datePicker.date)
             case 2:
                 tableView.reloadData()
-                coredata.fetchDinner()
+                coredata.fetchDinner(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
-                sumDinner()
+                sumDinner(forDate: datePicker.date)
             case 3:
                 tableView.reloadData()
-                coredata.fetchSnack()
+                coredata.fetchSnack(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
-                sumSnack()
+                sumSnack(forDate: datePicker.date)
             default:
                 break
             }
@@ -311,7 +321,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
-
+    
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
@@ -327,7 +337,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 totalCarbs += Double(item.carbon ?? "0") ?? 0.0
             }
         }
-
+     
         // Update the progress views and labels with the calculated totals
         let maxGreen: Float = 20
         let maxYellow: Float = 25
@@ -335,10 +345,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let maxPurple: Float = 700
 
         updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-
-        // Diğer UI elemanlarını güncelle
-        // ...
-
+   
         // Toplam değerleri ekrana yazdır
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
@@ -350,125 +357,134 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
 
-        totalCalori.text = String(format: "%.0f", totalCalories)
-        totalPRotein.text = String(format: "%.0f", totalProtein)
-        totalFat.text = String(format: "%.0f", totalFats)
-        totalCarbon.text = String(format: "%.0f", totalCarbs)
     }
 
-    func sumLunch() {
+    func sumLunch(forDate date: Date) {
         guard let lunchItems = self.coredata.lunch else {
             return
         }
-
-        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        
+       
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in lunchItems {
-            totalCalories += Double(item.calori!) ?? 0.0
-            totalFats += Double(item.fat!) ?? 0.0
-            totalProtein += Double(item.protein!) ?? 0.0
-            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
         }
-
-        // Update the progress views with specific maximum values for lunch
+      
+        // Update the progress views and labels with the calculated totals
         let maxGreen: Float = 20
         let maxYellow: Float = 25
         let maxRed: Float = 30
         let maxPurple: Float = 700
 
+     
         updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-        
+
+     
+        // Toplam değerleri ekrana yazdır
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
         yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-        
+
         purpleTotal.text = String(format: "%.0f", maxPurple)
-         redTotal.text = String(format: "%.0f", maxRed)
-         yellowTotal.text = String(format: "%.0f", maxYellow)
-         greenTotal.text = String(format: "%.0f", maxGreen)
+        redTotal.text = String(format: "%.0f", maxRed)
+        yellowTotal.text = String(format: "%.0f", maxYellow)
+        greenTotal.text = String(format: "%.0f", maxGreen)
     }
 
-    func sumDinner() {
+    func sumDinner(forDate date: Date) {
         guard let dinnerItems = self.coredata.dinner else {
             return
-        }
-
-        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+        } 
+    
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in dinnerItems {
-            totalCalories += Double(item.calori!) ?? 0.0
-            totalFats += Double(item.fat!) ?? 0.0
-            totalProtein += Double(item.protein!) ?? 0.0
-            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
         }
-
-        // Update the progress views with specific maximum values for dinner
+     
+        // Update the progress views and labels with the calculated totals
         let maxGreen: Float = 20
         let maxYellow: Float = 25
         let maxRed: Float = 30
         let maxPurple: Float = 700
 
+     
         updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-        
+
+        // Toplam değerleri ekrana yazdır
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
         yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-        
+
         purpleTotal.text = String(format: "%.0f", maxPurple)
-         redTotal.text = String(format: "%.0f", maxRed)
-         yellowTotal.text = String(format: "%.0f", maxYellow)
-         greenTotal.text = String(format: "%.0f", maxGreen)
+        redTotal.text = String(format: "%.0f", maxRed)
+        yellowTotal.text = String(format: "%.0f", maxYellow)
+        greenTotal.text = String(format: "%.0f", maxGreen)
     }
 
-    func sumSnack() {
+    func sumSnack(forDate date: Date) {
         guard let snackItems = self.coredata.snack else {
             return
         }
-
-        // Calculate the sum of values for calories, fat, protein, and carbohydrates
+ 
+        // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
 
         for item in snackItems {
-            totalCalories += Double(item.calori!) ?? 0.0
-            totalFats += Double(item.fat!) ?? 0.0
-            totalProtein += Double(item.protein!) ?? 0.0
-            totalCarbs += Double(item.carbon!) ?? 0.0 // Assuming "carbon" is the property representing carbohydrates
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
         }
 
-        // Update the progress views with specific maximum values for snack
+        // Update the progress views and labels with the calculated totals
         let maxGreen: Float = 20
         let maxYellow: Float = 25
         let maxRed: Float = 30
         let maxPurple: Float = 700
 
+    
         updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-        
+
+        // Toplam değerleri ekrana yazdır
         purpleInfoLabel.text = String(format: "%.0f", totalCalories)
         redInfoLabel.text = String(format: "%.0f", totalProtein)
         yellowInfoLabel.text = String(format: "%.0f", totalFats)
         greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-        
-        purpleTotal.text = String(format: "%.0f", maxPurple)
-         redTotal.text = String(format: "%.0f", maxRed)
-         yellowTotal.text = String(format: "%.0f", maxYellow)
-         greenTotal.text = String(format: "%.0f", maxGreen)
-    }
-    
-    func sumAllMeals() {
 
+        purpleTotal.text = String(format: "%.0f", maxPurple)
+        redTotal.text = String(format: "%.0f", maxRed)
+        yellowTotal.text = String(format: "%.0f", maxYellow)
+        greenTotal.text = String(format: "%.0f", maxGreen)
     }
 
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
@@ -477,6 +493,72 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         progressYellow.progress = min(Float(fat) / maxYellow, 1.0)
         progressRed.progress = min(Float(protein) / maxRed, 1.0)
         progressGreen.progress = min(Float(carbs) / maxGreen, 1.0)
+        
+        sumMeals(forDate: datePicker.date)
+    }
+    
+    func sumMeals(forDate date: Date) {
+        var totalCalories = 0.0
+        var totalFats = 0.0
+        var totalProtein = 0.0
+        var totalCarbs = 0.0
+        guard let breakfastItems = self.coredata.breakfast else {
+            return
+        }
+
+        for item in breakfastItems {
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
+        }
+        guard let lunchItems = self.coredata.lunch else {
+            return
+        }
+    
+        for item in lunchItems {
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
+        }
+        guard let dinnerItems = self.coredata.dinner else {
+            return
+        }
+
+        for item in dinnerItems {
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
+        }
+        
+        guard let snackItems = self.coredata.snack else {
+            return
+        }
+        for item in snackItems {
+            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+            if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                totalCalories += Double(item.calori ?? "0") ?? 0.0
+                totalFats += Double(item.fat ?? "0") ?? 0.0
+                totalProtein += Double(item.protein ?? "0") ?? 0.0
+                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+            }
+        }
+        
+        totalCalori.text = String(format: "%.0f", totalCalories)
+        totalPRotein.text = String(format: "%.0f", totalProtein)
+        totalFat.text = String(format: "%.0f", totalFats)
+        totalCarbon.text = String(format: "%.0f", totalCarbs)
     }
 
     // Helper function to determine the highest value and return the corresponding color
@@ -608,21 +690,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if let lunchItem = self.coredata.lunch?[indexPath.row] {
                 context.delete(lunchItem)
                 self.coredata.lunch?.remove(at: indexPath.row)
-                sumLunch() // Öğün türüne özel sum fonksiyonunu çağır
+                sumLunch(forDate: datePicker.date) // Öğün türüne özel sum fonksiyonunu çağır
                 ui.updateButtonTapped()
             }
         case 2:
             if let dinnerItem = self.coredata.dinner?[indexPath.row] {
                 context.delete(dinnerItem)
                 self.coredata.dinner?.remove(at: indexPath.row)
-                sumDinner() // Öğün türüne özel sum fonksiyonunu çağır
+                sumDinner(forDate: datePicker.date) // Öğün türüne özel sum fonksiyonunu çağır
                 ui.updateButtonTapped()
             }
         case 3:
             if let snackItem = self.coredata.snack?[indexPath.row] {
                 context.delete(snackItem)
                 self.coredata.snack?.remove(at: indexPath.row)
-                sumSnack() // Öğün türüne özel sum fonksiyonunu çağır
+                sumSnack(forDate: datePicker.date) // Öğün türüne özel sum fonksiyonunu çağır
                 ui.updateButtonTapped()
             }
         default:

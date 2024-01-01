@@ -21,7 +21,7 @@ class Ui {
     var totalFat: Float?
     var totalCarbon: Float?
 
-    var caloriValue = Float(2500)
+    var caloriValue = Float(2800)
     var proteinValue = Float(100)
     var fatValue = Float(100)
     var carbonValue = Float(100)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SFc-Lb-X6W">
-    <device id="retina4_7" orientation="portrait" appearance="dark"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -553,23 +553,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MvZ-Oo-kmV">
                                 <rect key="frame" x="16" y="98" width="150" height="150"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wds-bA-cLb">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain">
-                                            <imageReference key="image" image="gearshape" catalog="system" renderingMode="hierarchical-single">
-                                                <hierarchicalColors>
-                                                    <color white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color systemColor="secondaryLabelColor"/>
-                                                    <color systemColor="tertiaryLabelColor"/>
-                                                </hierarchicalColors>
-                                            </imageReference>
-                                            <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="popupButtonPressed:" destination="kfG-fp-uhY" eventType="touchUpInside" id="Ux3-Dm-sPX"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Goal!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czN-Wj-c2X">
+                                        <rect key="frame" x="59.5" y="60.5" width="31" height="29.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="31" id="yAS-gw-ce0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="12"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfp-qS-Rhn">
                                         <rect key="frame" x="8" y="8" width="10" height="10"/>
                                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
@@ -638,7 +630,7 @@
                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="NjZ-Jx-GMU">
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="NjZ-Jx-GMU">
                                         <rect key="frame" x="0.0" y="5" width="150" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kli-Wm-Vh4">
@@ -667,196 +659,346 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kOS-HB-Xaj">
+                                        <rect key="frame" x="62.5" y="61" width="25" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="3OP-Di-NDx"/>
+                                            <constraint firstAttribute="height" constant="25" id="vMA-Q5-Csm"/>
+                                        </constraints>
+                                        <imageReference key="image" image="checkmark.gobackward" catalog="system" renderingMode="hierarchical-single">
+                                            <hierarchicalColors>
+                                                <color systemColor="systemGreenColor"/>
+                                                <color systemColor="secondaryLabelColor"/>
+                                                <color systemColor="tertiaryLabelColor"/>
+                                            </hierarchicalColors>
+                                        </imageReference>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
-                                    <constraint firstItem="wds-bA-cLb" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" id="0gO-2f-Dp5"/>
                                     <constraint firstAttribute="trailing" secondItem="Wwg-Fn-SiA" secondAttribute="trailing" constant="12" id="1D6-3d-l2u"/>
-                                    <constraint firstItem="wds-bA-cLb" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" id="5dy-ZA-ETM"/>
                                     <constraint firstItem="rfp-qS-Rhn" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="8" id="6en-KP-u9R"/>
                                     <constraint firstAttribute="trailing" secondItem="WqM-02-3bB" secondAttribute="trailing" constant="12" id="CVI-1b-pug"/>
                                     <constraint firstItem="rfp-qS-Rhn" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" constant="8" id="FJi-Q4-qUQ"/>
                                     <constraint firstItem="D5o-BB-c5o" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" constant="13" id="G5m-Jm-BXs"/>
+                                    <constraint firstItem="kOS-HB-Xaj" firstAttribute="centerY" secondItem="MvZ-Oo-kmV" secondAttribute="centerY" id="Go5-sx-82E"/>
                                     <constraint firstItem="Wwg-Fn-SiA" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="16" id="H5T-jX-yqM"/>
                                     <constraint firstItem="6n5-wS-fCh" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" constant="12" id="I9V-hP-4Dj"/>
+                                    <constraint firstItem="kOS-HB-Xaj" firstAttribute="centerX" secondItem="MvZ-Oo-kmV" secondAttribute="centerX" id="J6R-HD-69f"/>
                                     <constraint firstItem="NXX-Jd-9OQ" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="8" id="L1k-Ya-VVd"/>
                                     <constraint firstAttribute="bottom" secondItem="6n5-wS-fCh" secondAttribute="bottom" constant="15" id="NYw-kR-TLG"/>
                                     <constraint firstAttribute="bottom" secondItem="1Gb-gn-Mqd" secondAttribute="bottom" constant="8" id="R8I-z0-c19"/>
                                     <constraint firstAttribute="trailing" secondItem="NXX-Jd-9OQ" secondAttribute="trailing" constant="8" id="TxO-qg-KnU"/>
                                     <constraint firstAttribute="bottom" secondItem="WqM-02-3bB" secondAttribute="bottom" constant="16" id="VhD-zh-tWe"/>
                                     <constraint firstItem="NjZ-Jx-GMU" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="5" id="Zwx-az-7ar"/>
+                                    <constraint firstItem="czN-Wj-c2X" firstAttribute="centerY" secondItem="MvZ-Oo-kmV" secondAttribute="centerY" id="dnP-dj-Uqf"/>
                                     <constraint firstAttribute="trailing" secondItem="1Gb-gn-Mqd" secondAttribute="trailing" constant="8" id="gOu-wh-Vab"/>
-                                    <constraint firstAttribute="bottom" secondItem="wds-bA-cLb" secondAttribute="bottom" id="ggM-Ar-OSc"/>
                                     <constraint firstItem="6Ro-GJ-aWn" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" constant="8" id="kRp-2M-v4w"/>
                                     <constraint firstAttribute="trailing" secondItem="NjZ-Jx-GMU" secondAttribute="trailing" id="nU6-Yq-2Qb"/>
                                     <constraint firstAttribute="height" constant="150" id="nbW-RR-QQ4"/>
                                     <constraint firstItem="NjZ-Jx-GMU" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" id="o5z-YB-Er8"/>
                                     <constraint firstItem="D5o-BB-c5o" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="16" id="pcO-7S-phk"/>
                                     <constraint firstAttribute="bottom" secondItem="6Ro-GJ-aWn" secondAttribute="bottom" constant="8" id="t1U-eR-CEN"/>
-                                    <constraint firstAttribute="trailing" secondItem="wds-bA-cLb" secondAttribute="trailing" id="tNZ-8J-QlA"/>
+                                    <constraint firstItem="czN-Wj-c2X" firstAttribute="centerX" secondItem="MvZ-Oo-kmV" secondAttribute="centerX" id="t4p-qr-LCL"/>
                                     <constraint firstAttribute="width" constant="150" id="tVc-oj-36r"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEJ-VL-Rey">
                                 <rect key="frame" x="182" y="98" width="177" height="150"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3KQ-RH-4wT">
-                                        <rect key="frame" x="24" y="24" width="137" height="102"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3KQ-RH-4wT">
+                                        <rect key="frame" x="16" y="24" width="145" height="102"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qB7-oX-T2m">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="102"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="z7b-FJ-ccn">
+                                                <rect key="frame" x="0.0" y="0.0" width="27" height="102"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaO-Hw-rZ8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="19.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8K-dd-Fmn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="27" height="19.5"/>
+                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
+                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protein" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OL-eA-JZh">
+                                                        <rect key="frame" x="0.0" y="27.5" width="27" height="19.5"/>
+                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
+                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJM-GZ-Hbw">
+                                                        <rect key="frame" x="0.0" y="55" width="27" height="19.5"/>
+                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
+                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSg-ed-FYk">
+                                                        <rect key="frame" x="0.0" y="82.5" width="27" height="19.5"/>
+                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
+                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qB7-oX-T2m">
+                                                <rect key="frame" x="32" y="0.0" width="113" height="102"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaO-Hw-rZ8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-co-lTk">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-co-lTk">
+                                                                <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.74930153145695366" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.1498344370860927" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOS-2N-HYH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
-                                                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="D1z-f5-4xx">
+                                                                <rect key="frame" x="3" y="2.5" width="64" height="15"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOS-2N-HYH">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fg6-aa-OfT">
+                                                                        <rect key="frame" x="30" y="0.0" width="4" height="15"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TF-sj-h3F">
+                                                                        <rect key="frame" x="37" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KJr-a1-svM">
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="12" id="2oV-0y-bvi"/>
+                                                                    <constraint firstAttribute="width" constant="12" id="gM2-UI-zgf"/>
+                                                                </constraints>
+                                                                <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                                                                    <hierarchicalColors>
+                                                                        <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color systemColor="secondaryLabelColor"/>
+                                                                        <color systemColor="tertiaryLabelColor"/>
+                                                                    </hierarchicalColors>
+                                                                </imageReference>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="p5B-co-lTk" firstAttribute="leading" secondItem="DaO-Hw-rZ8" secondAttribute="leading" id="14i-0V-noT"/>
+                                                            <constraint firstItem="KJr-a1-svM" firstAttribute="top" secondItem="DaO-Hw-rZ8" secondAttribute="top" id="77u-jx-y7M"/>
                                                             <constraint firstItem="p5B-co-lTk" firstAttribute="top" secondItem="DaO-Hw-rZ8" secondAttribute="top" id="85a-uB-8UC"/>
-                                                            <constraint firstItem="DOS-2N-HYH" firstAttribute="top" secondItem="DaO-Hw-rZ8" secondAttribute="top" id="EYy-Sc-gPq"/>
+                                                            <constraint firstItem="D1z-f5-4xx" firstAttribute="centerY" secondItem="DaO-Hw-rZ8" secondAttribute="centerY" id="8bV-4E-bWd"/>
+                                                            <constraint firstAttribute="bottom" secondItem="KJr-a1-svM" secondAttribute="bottom" id="8r0-qH-1bg"/>
                                                             <constraint firstAttribute="bottom" secondItem="p5B-co-lTk" secondAttribute="bottom" id="M6d-fR-TN2"/>
-                                                            <constraint firstAttribute="trailing" secondItem="DOS-2N-HYH" secondAttribute="trailing" id="gr1-zH-ifT"/>
-                                                            <constraint firstItem="DOS-2N-HYH" firstAttribute="leading" secondItem="DaO-Hw-rZ8" secondAttribute="leading" constant="5" id="lIi-zA-frW"/>
-                                                            <constraint firstAttribute="bottom" secondItem="DOS-2N-HYH" secondAttribute="bottom" id="tS5-WS-I9n"/>
+                                                            <constraint firstAttribute="trailing" secondItem="KJr-a1-svM" secondAttribute="trailing" constant="5" id="PEZ-1W-ii2"/>
+                                                            <constraint firstItem="D1z-f5-4xx" firstAttribute="leading" secondItem="DaO-Hw-rZ8" secondAttribute="leading" constant="3" id="PYC-kn-4dW"/>
                                                             <constraint firstAttribute="trailing" secondItem="p5B-co-lTk" secondAttribute="trailing" id="xwp-F6-0LM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-pr-mwa">
-                                                        <rect key="frame" x="0.0" y="27.5" width="50" height="19.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-pr-mwa">
+                                                        <rect key="frame" x="0.0" y="27.5" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-LX-ngQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-LX-ngQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.75072433774834435" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.15265418046357615" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO7-UU-de4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
-                                                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="FAZ-bB-Dc5">
+                                                                <rect key="frame" x="3" y="2.5" width="64" height="15"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO7-UU-de4">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8S-cy-iOa">
+                                                                        <rect key="frame" x="30" y="0.0" width="4" height="15"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMB-jc-Ns3">
+                                                                        <rect key="frame" x="37" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cmo-V0-jyI">
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="12" id="UXR-E3-zzB"/>
+                                                                    <constraint firstAttribute="height" constant="12" id="eub-gT-6Dd"/>
+                                                                </constraints>
+                                                                <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                                                                    <hierarchicalColors>
+                                                                        <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color systemColor="secondaryLabelColor"/>
+                                                                        <color systemColor="tertiaryLabelColor"/>
+                                                                    </hierarchicalColors>
+                                                                </imageReference>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="uk4-LX-ngQ" firstAttribute="top" secondItem="jcL-pr-mwa" secondAttribute="top" id="7JU-cq-aMU"/>
+                                                            <constraint firstItem="FAZ-bB-Dc5" firstAttribute="centerY" secondItem="jcL-pr-mwa" secondAttribute="centerY" id="Gq4-dO-F4e"/>
                                                             <constraint firstAttribute="bottom" secondItem="uk4-LX-ngQ" secondAttribute="bottom" id="M1b-S6-SlZ"/>
-                                                            <constraint firstItem="hO7-UU-de4" firstAttribute="top" secondItem="jcL-pr-mwa" secondAttribute="top" id="MFs-qZ-AWl"/>
+                                                            <constraint firstItem="Cmo-V0-jyI" firstAttribute="top" secondItem="jcL-pr-mwa" secondAttribute="top" id="Qpi-Ad-bWl"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Cmo-V0-jyI" secondAttribute="trailing" constant="5" id="YP2-fJ-1Hg"/>
                                                             <constraint firstAttribute="trailing" secondItem="uk4-LX-ngQ" secondAttribute="trailing" id="ZiN-kx-3ai"/>
+                                                            <constraint firstItem="FAZ-bB-Dc5" firstAttribute="leading" secondItem="jcL-pr-mwa" secondAttribute="leading" constant="3" id="bwN-mI-w6w"/>
                                                             <constraint firstItem="uk4-LX-ngQ" firstAttribute="leading" secondItem="jcL-pr-mwa" secondAttribute="leading" id="di3-dY-ERo"/>
-                                                            <constraint firstAttribute="trailing" secondItem="hO7-UU-de4" secondAttribute="trailing" id="iOv-8t-noY"/>
-                                                            <constraint firstAttribute="bottom" secondItem="hO7-UU-de4" secondAttribute="bottom" id="kZc-sO-Qb3"/>
-                                                            <constraint firstItem="hO7-UU-de4" firstAttribute="leading" secondItem="jcL-pr-mwa" secondAttribute="leading" constant="5" id="oCK-Vb-NlE"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Cmo-V0-jyI" secondAttribute="bottom" id="u5M-Kb-k5i"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VB6-9z-AqD">
-                                                        <rect key="frame" x="0.0" y="55" width="50" height="19.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VB6-9z-AqD">
+                                                        <rect key="frame" x="0.0" y="55" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q6V-Gh-B7k">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q6V-Gh-B7k">
+                                                                <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.7497930463576159" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.14613514072847683" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW3-iv-3wf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
-                                                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="wm0-Sd-ybY">
+                                                                <rect key="frame" x="3" y="2.5" width="64" height="15"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW3-iv-3wf">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6m-cz-xTS">
+                                                                        <rect key="frame" x="30" y="0.0" width="4" height="14.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5L2-S8-W3N">
+                                                                        <rect key="frame" x="37" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nd7-3j-1o0">
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="12" id="9vB-Ur-tJx"/>
+                                                                    <constraint firstAttribute="width" constant="12" id="EPR-25-vpM"/>
+                                                                </constraints>
+                                                                <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                                                                    <hierarchicalColors>
+                                                                        <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color systemColor="secondaryLabelColor"/>
+                                                                        <color systemColor="tertiaryLabelColor"/>
+                                                                    </hierarchicalColors>
+                                                                </imageReference>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="hW3-iv-3wf" secondAttribute="trailing" id="5ck-9F-qRv"/>
                                                             <constraint firstAttribute="bottom" secondItem="q6V-Gh-B7k" secondAttribute="bottom" id="7Pf-GJ-CaW"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Nd7-3j-1o0" secondAttribute="bottom" id="A6z-dn-feb"/>
                                                             <constraint firstItem="q6V-Gh-B7k" firstAttribute="top" secondItem="VB6-9z-AqD" secondAttribute="top" id="G0b-Th-VL7"/>
-                                                            <constraint firstItem="hW3-iv-3wf" firstAttribute="leading" secondItem="VB6-9z-AqD" secondAttribute="leading" constant="5" id="XIV-FW-BIP"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Nd7-3j-1o0" secondAttribute="trailing" constant="5" id="QVR-Vh-oJE"/>
                                                             <constraint firstAttribute="trailing" secondItem="q6V-Gh-B7k" secondAttribute="trailing" id="Z0z-LX-1wz"/>
-                                                            <constraint firstItem="hW3-iv-3wf" firstAttribute="top" secondItem="VB6-9z-AqD" secondAttribute="top" id="aaS-yo-4SF"/>
-                                                            <constraint firstAttribute="bottom" secondItem="hW3-iv-3wf" secondAttribute="bottom" id="dut-a8-PRo"/>
+                                                            <constraint firstItem="wm0-Sd-ybY" firstAttribute="centerY" secondItem="VB6-9z-AqD" secondAttribute="centerY" id="bh4-7f-NKt"/>
+                                                            <constraint firstItem="wm0-Sd-ybY" firstAttribute="leading" secondItem="VB6-9z-AqD" secondAttribute="leading" constant="3" id="erq-VE-p7V"/>
                                                             <constraint firstItem="q6V-Gh-B7k" firstAttribute="leading" secondItem="VB6-9z-AqD" secondAttribute="leading" id="lht-Ss-dsp"/>
+                                                            <constraint firstItem="Nd7-3j-1o0" firstAttribute="top" secondItem="VB6-9z-AqD" secondAttribute="top" id="sgO-rh-o0s"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xu9-fc-RGt">
-                                                        <rect key="frame" x="0.0" y="82.5" width="50" height="19.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xu9-fc-RGt">
+                                                        <rect key="frame" x="0.0" y="82.5" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J1F-H6-We0">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J1F-H6-We0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.74930153145695366" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.15216266556291391" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-uw-aez">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
-                                                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="8TK-LC-iFg">
+                                                                <rect key="frame" x="3" y="2.5" width="64" height="15"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-uw-aez">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlk-t5-054">
+                                                                        <rect key="frame" x="30" y="0.0" width="4" height="14.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-cl-YPc">
+                                                                        <rect key="frame" x="37" y="0.0" width="27" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="12"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RXG-4S-3N1">
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="12" id="hIU-g5-Uld"/>
+                                                                    <constraint firstAttribute="height" constant="12" id="i8d-ok-dPT"/>
+                                                                </constraints>
+                                                                <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                                                                    <hierarchicalColors>
+                                                                        <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color systemColor="secondaryLabelColor"/>
+                                                                        <color systemColor="tertiaryLabelColor"/>
+                                                                    </hierarchicalColors>
+                                                                </imageReference>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="RXG-4S-3N1" secondAttribute="bottom" id="6gm-65-D57"/>
+                                                            <constraint firstAttribute="trailing" secondItem="RXG-4S-3N1" secondAttribute="trailing" constant="5" id="Le3-Sw-w2s"/>
                                                             <constraint firstAttribute="trailing" secondItem="J1F-H6-We0" secondAttribute="trailing" id="LvT-Yi-gbb"/>
-                                                            <constraint firstItem="PcJ-uw-aez" firstAttribute="leading" secondItem="xu9-fc-RGt" secondAttribute="leading" constant="5" id="NSJ-mC-ft5"/>
                                                             <constraint firstAttribute="bottom" secondItem="J1F-H6-We0" secondAttribute="bottom" id="NwA-Wl-pEc"/>
-                                                            <constraint firstItem="PcJ-uw-aez" firstAttribute="top" secondItem="xu9-fc-RGt" secondAttribute="top" id="RFQ-qi-laq"/>
                                                             <constraint firstItem="J1F-H6-We0" firstAttribute="top" secondItem="xu9-fc-RGt" secondAttribute="top" id="SYq-NA-YY4"/>
+                                                            <constraint firstItem="8TK-LC-iFg" firstAttribute="leading" secondItem="xu9-fc-RGt" secondAttribute="leading" constant="3" id="ZsQ-lc-h7T"/>
                                                             <constraint firstItem="J1F-H6-We0" firstAttribute="leading" secondItem="xu9-fc-RGt" secondAttribute="leading" id="eTP-y0-vZA"/>
-                                                            <constraint firstAttribute="trailing" secondItem="PcJ-uw-aez" secondAttribute="trailing" id="n0A-vj-EDn"/>
-                                                            <constraint firstAttribute="bottom" secondItem="PcJ-uw-aez" secondAttribute="bottom" id="y6B-UC-6le"/>
+                                                            <constraint firstItem="8TK-LC-iFg" firstAttribute="centerY" secondItem="xu9-fc-RGt" secondAttribute="centerY" id="h0B-QL-XXc"/>
+                                                            <constraint firstItem="RXG-4S-3N1" firstAttribute="top" secondItem="xu9-fc-RGt" secondAttribute="top" id="oRI-LE-qW9"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-7o-XZp">
-                                                <rect key="frame" x="50" y="0.0" width="87" height="102"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TF-sj-h3F">
-                                                        <rect key="frame" x="0.0" y="0.0" width="87" height="19.5"/>
-                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
-                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMB-jc-Ns3">
-                                                        <rect key="frame" x="0.0" y="27.5" width="87" height="19.5"/>
-                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
-                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5L2-S8-W3N">
-                                                        <rect key="frame" x="0.0" y="55" width="87" height="19.5"/>
-                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
-                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-cl-YPc">
-                                                        <rect key="frame" x="0.0" y="82.5" width="87" height="19.5"/>
-                                                        <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="9"/>
-                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eml-Hf-tII">
+                                        <rect key="frame" x="129.5" y="8" width="31.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="11"/>
+                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="eml-Hf-tII" secondAttribute="trailing" constant="16" id="2Jv-vT-pWn"/>
                                     <constraint firstItem="3KQ-RH-4wT" firstAttribute="top" secondItem="tEJ-VL-Rey" secondAttribute="top" constant="24" id="7uH-sT-g5O"/>
                                     <constraint firstAttribute="bottom" secondItem="3KQ-RH-4wT" secondAttribute="bottom" constant="24" id="IVq-2h-Y5A"/>
-                                    <constraint firstItem="3KQ-RH-4wT" firstAttribute="leading" secondItem="tEJ-VL-Rey" secondAttribute="leading" constant="24" id="k1I-Nh-VGI"/>
+                                    <constraint firstItem="eml-Hf-tII" firstAttribute="top" secondItem="tEJ-VL-Rey" secondAttribute="top" constant="8" id="iFw-Kz-a9f"/>
+                                    <constraint firstItem="3KQ-RH-4wT" firstAttribute="leading" secondItem="tEJ-VL-Rey" secondAttribute="leading" constant="16" id="k1I-Nh-VGI"/>
                                     <constraint firstAttribute="height" constant="150" id="oKW-QU-6Sr"/>
                                     <constraint firstAttribute="trailing" secondItem="3KQ-RH-4wT" secondAttribute="trailing" constant="16" id="y9O-ni-a88"/>
                                 </constraints>
@@ -1019,20 +1161,20 @@
                         </imageReference>
                     </tabBarItem>
                     <connections>
+                        <outlet property="checkMarkMaxValue" destination="kOS-HB-Xaj" id="gar-jI-gGo"/>
                         <outlet property="datePicker" destination="wU9-y8-U89" id="gdK-hg-COu"/>
                         <outlet property="dateView" destination="1fJ-Lb-qdc" id="Zwd-9N-n4b"/>
                         <outlet property="firstLook" destination="MvZ-Oo-kmV" id="MPe-ov-rtQ"/>
-                        <outlet property="gestureView" destination="d47-xq-dYJ" id="iOd-i1-FA0"/>
+                        <outlet property="goalTextLAbel" destination="czN-Wj-c2X" id="RYq-AP-BJN"/>
                         <outlet property="greenInfoLabel" destination="PcJ-uw-aez" id="6Lx-hQ-2Pu"/>
                         <outlet property="greenLabel" destination="WqM-02-3bB" id="4wS-ao-mEi"/>
                         <outlet property="greenTotal" destination="Rl0-cl-YPc" id="tGm-QF-Sr2"/>
                         <outlet property="greenV1" destination="1Gb-gn-Mqd" id="9sH-O6-15D"/>
-                        <outlet property="popupTitleV" destination="d1G-tE-MXn" id="RgP-z2-ssa"/>
-                        <outlet property="popupV1" destination="1Pi-HC-QXT" id="RG0-dQ-rfP"/>
-                        <outlet property="popupV2" destination="vVF-Dz-Jpr" id="9HB-Sh-sI0"/>
-                        <outlet property="popupV3" destination="uhy-wB-OOE" id="hcH-U1-ZHD"/>
-                        <outlet property="popupV4" destination="KMm-Pv-9d5" id="As3-Z9-2DU"/>
-                        <outlet property="popupView" destination="N24-y1-lg8" id="ACO-Dw-eoO"/>
+                        <outlet property="markGreen" destination="RXG-4S-3N1" id="qIp-v6-hxP"/>
+                        <outlet property="markPurple" destination="KJr-a1-svM" id="SKe-5w-QzO"/>
+                        <outlet property="markRed" destination="Cmo-V0-jyI" id="Tc4-gc-HNn"/>
+                        <outlet property="markYellow" destination="Nd7-3j-1o0" id="kqa-3G-yrV"/>
+                        <outlet property="nameOfMeals" destination="eml-Hf-tII" id="fmB-5H-qqi"/>
                         <outlet property="progressGreen" destination="J1F-H6-We0" id="mS3-aX-njW"/>
                         <outlet property="progressPurple" destination="p5B-co-lTk" id="TmO-bC-gKQ"/>
                         <outlet property="progressRed" destination="uk4-LX-ngQ" id="NNW-JS-gHf"/>
@@ -1048,18 +1190,12 @@
                         <outlet property="secondLook" destination="tEJ-VL-Rey" id="osN-5J-nbV"/>
                         <outlet property="segment" destination="9As-cc-4mi" id="by5-0C-831"/>
                         <outlet property="segmentView" destination="Eew-U3-y5r" id="UF0-hP-Rja"/>
-                        <outlet property="settingsButton" destination="wds-bA-cLb" id="R68-aJ-Ij1"/>
                         <outlet property="stackViewValues" destination="NjZ-Jx-GMU" id="32D-Ub-nQ0"/>
                         <outlet property="tableView" destination="Q8q-fz-QXL" id="F5z-9f-Rm1"/>
-                        <outlet property="textfieldCalori" destination="k5R-9e-kdr" id="J71-1g-vdM"/>
-                        <outlet property="textfieldCarbon" destination="s5Q-Sx-70B" id="6gy-xW-4yZ"/>
-                        <outlet property="textfieldFat" destination="9jd-t2-kg3" id="gEV-kN-vne"/>
-                        <outlet property="textfieldProtein" destination="cyY-pJ-IHN" id="gsR-DB-ANO"/>
                         <outlet property="totalCalori" destination="Kli-Wm-Vh4" id="aTh-jG-WqF"/>
                         <outlet property="totalCarbon" destination="7EI-Cv-j6N" id="2ai-TU-WjF"/>
                         <outlet property="totalFat" destination="M0N-Gv-a0i" id="jJv-01-rTs"/>
                         <outlet property="totalPRotein" destination="Glf-IC-ZHr" id="f3E-3f-Isu"/>
-                        <outlet property="updateButton" destination="qRK-cy-bWc" id="uuD-KI-8ER"/>
                         <outlet property="yellowInfoLabel" destination="hW3-iv-3wf" id="rvU-9f-oOR"/>
                         <outlet property="yellowLabel" destination="6n5-wS-fCh" id="oqV-5J-fLy"/>
                         <outlet property="yellowTotal" destination="5L2-S8-W3N" id="Fn6-HW-NVq"/>
@@ -1067,235 +1203,22 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tvj-7p-aTd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" id="PsA-kK-Bed">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d47-xq-dYJ">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <blurEffect style="regular"/>
-                </visualEffectView>
-                <view contentMode="scaleToFill" id="N24-y1-lg8">
-                    <rect key="frame" x="0.0" y="0.0" width="374" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CFB-Ye-g4v">
-                            <rect key="frame" x="24" y="47.5" width="326" height="225"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="hze-hp-6aI">
-                                    <rect key="frame" x="0.0" y="0.0" width="326" height="172"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1G-tE-MXn">
-                                            <rect key="frame" x="0.0" y="0.0" width="326" height="45"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Circle Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hL-pj-kyg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="326" height="45"/>
-                                                    <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="20"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" name="Dark mod Background"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="2hL-pj-kyg" secondAttribute="trailing" id="8fj-EN-gtG"/>
-                                                <constraint firstAttribute="bottom" secondItem="2hL-pj-kyg" secondAttribute="bottom" id="QR1-jY-I1H"/>
-                                                <constraint firstAttribute="height" constant="45" id="WFW-HB-XnY"/>
-                                                <constraint firstItem="2hL-pj-kyg" firstAttribute="top" secondItem="d1G-tE-MXn" secondAttribute="top" id="Zml-9D-5Oc"/>
-                                                <constraint firstItem="2hL-pj-kyg" firstAttribute="leading" secondItem="d1G-tE-MXn" secondAttribute="leading" id="lgu-xg-SL5"/>
-                                            </constraints>
-                                        </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xQx-WX-Wh1">
-                                            <rect key="frame" x="0.0" y="57" width="326" height="115"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="3M5-8z-5jO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="326" height="25"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8c-8R-rTp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="70" id="uOi-K4-flX"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Calori" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5R-9e-kdr">
-                                                            <rect key="frame" x="164.5" y="0.0" width="42" height="25"/>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                        </textField>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pi-HC-QXT">
-                                                            <rect key="frame" x="301" y="0.0" width="25" height="25"/>
-                                                            <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="25" id="D2m-N5-NGr"/>
-                                                                <constraint firstAttribute="width" constant="25" id="jVa-gB-xoN"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="VZ0-vj-cOZ">
-                                                    <rect key="frame" x="0.0" y="30" width="326" height="25"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protein" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mC1-am-Btn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="70" id="G5H-Wl-PnH"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Protein" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cyY-pJ-IHN">
-                                                            <rect key="frame" x="160" y="0.0" width="51" height="25"/>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                        </textField>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVF-Dz-Jpr">
-                                                            <rect key="frame" x="301" y="0.0" width="25" height="25"/>
-                                                            <color key="backgroundColor" systemColor="systemRedColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="25" id="XwP-3q-wr5"/>
-                                                                <constraint firstAttribute="width" constant="25" id="hM4-FG-fPt"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="29U-jg-BI9">
-                                                    <rect key="frame" x="0.0" y="60" width="326" height="25"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Avd-lI-7xj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="70" id="mcw-nV-PrY"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Fat" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9jd-t2-kg3">
-                                                            <rect key="frame" x="174" y="0.0" width="23.5" height="25"/>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                        </textField>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhy-wB-OOE">
-                                                            <rect key="frame" x="301" y="0.0" width="25" height="25"/>
-                                                            <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="25" id="YBt-j2-B4b"/>
-                                                                <constraint firstAttribute="height" constant="25" id="kNX-wh-uI4"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="tuX-Nm-cbH">
-                                                    <rect key="frame" x="0.0" y="90" width="326" height="25"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carbon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JS9-rC-eCM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="70" id="dM5-gk-K09"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Carbon" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s5Q-Sx-70B">
-                                                            <rect key="frame" x="159.5" y="0.0" width="52.5" height="25"/>
-                                                            <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="16"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                        </textField>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMm-Pv-9d5">
-                                                            <rect key="frame" x="301" y="0.0" width="25" height="25"/>
-                                                            <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="25" id="VVL-4c-ffo"/>
-                                                                <constraint firstAttribute="height" constant="25" id="aji-wl-ONB"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PVE-TW-lqd">
-                                    <rect key="frame" x="60.5" y="180" width="205" height="45"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-cy-bWc">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
-                                            <color key="backgroundColor" name="Dark mod Background"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="KQa-sz-OKd"/>
-                                                <constraint firstAttribute="width" constant="150" id="rxl-Mh-jxY"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled" cornerStyle="capsule">
-                                                <imageReference key="image" image="checkmark" catalog="system" renderingMode="hierarchical-single">
-                                                    <hierarchicalColors>
-                                                        <color name="Black-White ~ Any &amp; Dark"/>
-                                                        <color systemColor="secondaryLabelColor"/>
-                                                        <color systemColor="tertiaryLabelColor"/>
-                                                    </hierarchicalColors>
-                                                </imageReference>
-                                                <backgroundConfiguration key="background">
-                                                    <color key="backgroundColor" name="Dark mod Background"/>
-                                                    <color key="strokeColor" white="0.66666666666666663" alpha="0.15224027317880795" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </backgroundConfiguration>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="29"/>
-                                                <color key="baseBackgroundColor" name="Dark mod Background"/>
-                                            </buttonConfiguration>
-                                            <connections>
-                                                <action selector="activeButtonPressed:" destination="kfG-fp-uhY" eventType="touchUpInside" id="JAJ-Wp-Hlv"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQu-SX-HN5">
-                                            <rect key="frame" x="158" y="0.0" width="47" height="45"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled" image="arrow.clockwise" catalog="system">
-                                                <backgroundConfiguration key="background">
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </backgroundConfiguration>
-                                                <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </buttonConfiguration>
-                                            <connections>
-                                                <action selector="deleteAllFetchValues:" destination="kfG-fp-uhY" eventType="touchUpInside" id="lVy-Ho-76b"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </stackView>
-                            </subviews>
-                            <color key="backgroundColor" name="Dark mod Background"/>
-                        </stackView>
-                    </subviews>
-                    <viewLayoutGuide key="safeArea" id="ZY7-K3-XrK"/>
-                    <color key="backgroundColor" name="Dark mod Background"/>
-                    <constraints>
-                        <constraint firstItem="CFB-Ye-g4v" firstAttribute="centerY" secondItem="N24-y1-lg8" secondAttribute="centerY" id="CQQ-2p-Qov"/>
-                        <constraint firstItem="CFB-Ye-g4v" firstAttribute="centerX" secondItem="N24-y1-lg8" secondAttribute="centerX" id="DK9-x6-dxx"/>
-                    </constraints>
-                </view>
             </objects>
             <point key="canvasLocation" x="725.60000000000002" y="-36.431784107946029"/>
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
         <image name="carrot" catalog="system" width="128" height="122"/>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
-        <image name="gearshape" catalog="system" width="128" height="123"/>
-        <image name="heart.fill" catalog="system" width="128" height="107"/>
-        <image name="house" catalog="system" width="128" height="104"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="info.bubble" catalog="system" width="128" height="110"/>
-        <image name="info.windshield" catalog="system" width="128" height="70"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="128"/>
+        <image name="checkmark.gobackward" catalog="system" width="115" height="128"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <image name="house" catalog="system" width="128" height="106"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="info.bubble" catalog="system" width="128" height="111"/>
+        <image name="info.windshield" catalog="system" width="128" height="71"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="trash" catalog="system" width="117" height="128"/>
+        <image name="trash" catalog="system" width="115" height="128"/>
         <namedColor name="Black-White ~ Any &amp; Dark">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

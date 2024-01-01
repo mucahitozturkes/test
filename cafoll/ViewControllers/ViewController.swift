@@ -633,7 +633,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             self?.coredata.saveData()
                         } else if segmentNumber == 1 {
                             // Create a new instance for the "Favorite" category
-                            let newFavoriteFood = Breakfast(context: context)
+                            let newFavoriteFood = Lunch(context: context)
                             newFavoriteFood.title = selectedFavoriteTitle
                             newFavoriteFood.calori = selectedFavoriteCal
                             newFavoriteFood.protein = selectedFavoritePro

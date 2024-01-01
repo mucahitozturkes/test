@@ -406,6 +406,8 @@ class ViewController: UIViewController {
         tableView.reloadData()
 
     }
+    //ChangeDate
+    
 }
 //MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -834,6 +836,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(editAlert, animated: true, completion: nil)
             }
             alert.addAction(editOption)
+            editOption.setValue(UIColor.indigoGreenAnyDark, forKey: "titleTextColor")
             // You can set the text color of the "Edit" option in the first alert here
             //editOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
         }
@@ -843,14 +846,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         alert.addAction(lunchOption)
         alert.addAction(dinnerOption)
         alert.addAction(snackOption)
+        
         // You can set the text color of the "Edit" option in the first alert here
-        breakfastOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        breakfastOption.setValue(UIColor.options, forKey: "titleTextColor")
         // You can set the text color of the "Edit" option in the first alert here
-        lunchOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        lunchOption.setValue(UIColor.options, forKey: "titleTextColor")
         // You can set the text color of the "Edit" option in the first alert here
-        dinnerOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        dinnerOption.setValue(UIColor.options, forKey: "titleTextColor")
         // You can set the text color of the "Edit" option in the first alert here
-        snackOption.setValue(UIColor.darkGray, forKey: "titleTextColor")
+        snackOption.setValue(UIColor.options, forKey: "titleTextColor")
         
         
         // Cancel Button

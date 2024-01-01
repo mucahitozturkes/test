@@ -84,6 +84,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         // 3. set updated
         updateLabel()
         ui.updateButtonTapped()
+        fetchDataAndUpdateUI()
         // 4. Reload table view to reflect changes
         tableView.reloadData()
     }
@@ -144,15 +145,19 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             case 0:
                 coredata.fetchBreakfast(forDate: datePicker.date)
                 sumBreakfast(forDate: datePicker.date)
+                nameOfMeals.text = "Breakfast"
             case 1:
                 coredata.fetchLunch(forDate: datePicker.date)
                 sumLunch(forDate: datePicker.date)
+                nameOfMeals.text = "Lunch"
             case 2:
                 coredata.fetchDinner(forDate: datePicker.date)
                 sumDinner(forDate: datePicker.date)
+                nameOfMeals.text = "Dinner"
             case 3:
                 coredata.fetchSnack(forDate: datePicker.date)
                 sumSnack(forDate: datePicker.date)
+                nameOfMeals.text = "Snack"
             default:
                 break
             }
@@ -248,10 +253,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
         
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple), colorName: "Purple")
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed), colorName: "Red")
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow), colorName: "Yellow")
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen), colorName: "Green")
+        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
+        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
+        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
+        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
     }
 
     func sumLunch(forDate date: Date) {
@@ -297,10 +302,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
         
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple), colorName: "Purple")
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed), colorName: "Red")
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow), colorName: "Yellow")
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen), colorName: "Green")
+        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
+        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
+        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
+        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
     }
 
     func sumDinner(forDate date: Date) {
@@ -344,10 +349,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
         
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple), colorName: "Purple")
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed), colorName: "Red")
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow), colorName: "Yellow")
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen), colorName: "Green")
+        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
+        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
+        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
+        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
     }
 
     func sumSnack(forDate date: Date) {
@@ -391,15 +396,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         yellowTotal.text = String(format: "%.0f", maxYellow)
         greenTotal.text = String(format: "%.0f", maxGreen)
         
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple), colorName: "Purple")
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed), colorName: "Red")
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow), colorName: "Yellow")
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen), colorName: "Green")
+        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
+        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
+        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
+        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
     }
     
-    func updateVisibility(_ mark: UIImageView, value: Double, threshold: Double, colorName: String) {
+    func updateVisibility(_ mark: UIImageView, value: Double, threshold: Double) {
         mark.isHidden = value < threshold
-        print("\(colorName): \(mark.isHidden ? "hide" : "show")")
+    
     }
 
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
@@ -487,6 +492,56 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             goalTextLAbel.isHidden = false
         }
     }
+    
+    // Sağa tıklandığında tarihi bir gün ileri al
+        @IBAction func rightDate(_ sender: UIButton) {
+            var currentDate = datePicker.date
+                // Bir gün ekleyerek tarihi güncelle
+                currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+                datePicker.setDate(currentDate, animated: true)
+            fetchDataAndUpdateUI()
+            coredata.fetchBreakfast(forDate: datePicker.date)
+            coredata.fetchLunch(forDate: datePicker.date)
+            coredata.fetchDinner(forDate: datePicker.date)
+            coredata.fetchSnack(forDate: datePicker.date)
+            // 2. Update UI based on fetched data
+            sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+            sumLunch(forDate: datePicker.date)
+            sumDinner(forDate: datePicker.date)
+            sumSnack(forDate: datePicker.date)
+            // 3. set updated
+            updateLabel()
+            ui.updateButtonTapped()
+            fetchDataAndUpdateUI()
+            // 4. Reload table view to reflect changes
+            tableView.reloadData()
+        }
+
+        // Sola tıklandığında tarihi bir gün geri al
+        @IBAction func leftDate(_ sender: UIButton) {
+            var currentDate = datePicker.date
+                // Bir gün çıkartarak tarihi güncelle
+                currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+                datePicker.setDate(currentDate, animated: true)
+            fetchDataAndUpdateUI()
+            coredata.fetchBreakfast(forDate: datePicker.date)
+            coredata.fetchLunch(forDate: datePicker.date)
+            coredata.fetchDinner(forDate: datePicker.date)
+            coredata.fetchSnack(forDate: datePicker.date)
+            // 2. Update UI based on fetched data
+            sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+            sumLunch(forDate: datePicker.date)
+            sumDinner(forDate: datePicker.date)
+            sumSnack(forDate: datePicker.date)
+            // 3. set updated
+            updateLabel()
+            ui.updateButtonTapped()
+            fetchDataAndUpdateUI()
+            // 4. Reload table view to reflect changes
+            tableView.reloadData()
+            
+        }
+    
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {

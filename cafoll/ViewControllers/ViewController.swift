@@ -221,7 +221,7 @@ class ViewController: UIViewController {
         // Animation
         let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
         heartImageView.tintColor = .red
-        heartImageView.alpha = 0.5
+        heartImageView.alpha = 1
         heartImageView.contentMode = .scaleAspectFit
 
         // Set the starting point for the animation (middle-left corner of the cell)

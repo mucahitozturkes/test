@@ -121,7 +121,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 tableView.reloadData()
             }
         }
-    //start up reactions
+    //startup reactions
     func startUpSetup() {
         ///print(coredata?.filePath ?? "Not Found")
         helper = Helper()
@@ -440,12 +440,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             self.progressRed.setProgress(targetProgressRed, animated: true)
             self.progressGreen.setProgress(targetProgressGreen, animated: true)
         }
-
-        
         sumMeals(forDate: self.datePicker.date)
-        
     }
-
     
     func sumMeals(forDate date: Date) {
         var totalCalories = 0.0
@@ -524,53 +520,53 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
     
     // Sağa tıklandığında tarihi bir gün ileri al
-        @IBAction func rightDate(_ sender: UIButton) {
-            var currentDate = datePicker.date
-                // Bir gün ekleyerek tarihi güncelle
-                currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-                datePicker.setDate(currentDate, animated: true)
-            
-            coredata.fetchBreakfast(forDate: datePicker.date)
-            coredata.fetchLunch(forDate: datePicker.date)
-            coredata.fetchDinner(forDate: datePicker.date)
-            coredata.fetchSnack(forDate: datePicker.date)
-            // 2. Update UI based on fetched data
-            sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
-            sumLunch(forDate: datePicker.date)
-            sumDinner(forDate: datePicker.date)
-            sumSnack(forDate: datePicker.date)
-            // 3. set updated
-            updateLabel()
-            ui.updateButtonTapped()
-            fetchDataAndUpdateUI()
-            // 4. Reload table view to reflect changes
-            tableView.reloadData()
-        }
+    @IBAction func rightDate(_ sender: UIButton) {
+        var currentDate = datePicker.date
+            // Bir gün ekleyerek tarihi güncelle
+            currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+            datePicker.setDate(currentDate, animated: true)
+        
+        coredata.fetchBreakfast(forDate: datePicker.date)
+        coredata.fetchLunch(forDate: datePicker.date)
+        coredata.fetchDinner(forDate: datePicker.date)
+        coredata.fetchSnack(forDate: datePicker.date)
+        // 2. Update UI based on fetched data
+        sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+        sumLunch(forDate: datePicker.date)
+        sumDinner(forDate: datePicker.date)
+        sumSnack(forDate: datePicker.date)
+        // 3. set updated
+        updateLabel()
+        ui.updateButtonTapped()
+        fetchDataAndUpdateUI()
+        // 4. Reload table view to reflect changes
+        tableView.reloadData()
+    }
 
-        // Sola tıklandığında tarihi bir gün geri al
-        @IBAction func leftDate(_ sender: UIButton) {
-            var currentDate = datePicker.date
-                // Bir gün çıkartarak tarihi güncelle
-                currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
-                datePicker.setDate(currentDate, animated: true)
-           
-            coredata.fetchBreakfast(forDate: datePicker.date)
-            coredata.fetchLunch(forDate: datePicker.date)
-            coredata.fetchDinner(forDate: datePicker.date)
-            coredata.fetchSnack(forDate: datePicker.date)
-            // 2. Update UI based on fetched data
-            sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
-            sumLunch(forDate: datePicker.date)
-            sumDinner(forDate: datePicker.date)
-            sumSnack(forDate: datePicker.date)
-            // 3. set updated
-            updateLabel()
-            ui.updateButtonTapped()
-            fetchDataAndUpdateUI()
-            // 4. Reload table view to reflect changes
-            tableView.reloadData()
-            
-        }
+    // Sola tıklandığında tarihi bir gün geri al
+    @IBAction func leftDate(_ sender: UIButton) {
+        var currentDate = datePicker.date
+            // Bir gün çıkartarak tarihi güncelle
+            currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+            datePicker.setDate(currentDate, animated: true)
+        
+        coredata.fetchBreakfast(forDate: datePicker.date)
+        coredata.fetchLunch(forDate: datePicker.date)
+        coredata.fetchDinner(forDate: datePicker.date)
+        coredata.fetchSnack(forDate: datePicker.date)
+        // 2. Update UI based on fetched data
+        sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+        sumLunch(forDate: datePicker.date)
+        sumDinner(forDate: datePicker.date)
+        sumSnack(forDate: datePicker.date)
+        // 3. set updated
+        updateLabel()
+        ui.updateButtonTapped()
+        fetchDataAndUpdateUI()
+        // 4. Reload table view to reflect changes
+        tableView.reloadData()
+        
+    }
     
     @IBAction func circleButtonShowInfo(_ sender: UIButton) {
         guard let date = datePicker?.date else {
@@ -772,6 +768,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if selectedIndexPath == indexPath {
             // If the same cell is selected again, reset the state
             selectedIndexPath = nil
@@ -1009,12 +1006,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             default:
                 break
             }
-                
-            
         }
     }
-
-
 
     // Helper function to determine the highest value and return the corresponding color
     func determineHighestValueColor(carbons: String, fat: String, protein: String) -> UIColor {

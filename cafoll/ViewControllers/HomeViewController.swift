@@ -701,9 +701,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             totalCarbon.text = String(maxCarbs)
             
             updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxCarbs), maxYellow: Float(maxFats), maxRed: Float(maxProtein), maxPurple: Float(maxCalories))
+            
+            updateVisibility(markPurple, value: totalCalories, threshold: Double(maxCalories))
+            updateVisibility(markRed, value: totalProtein, threshold: Double(maxFats))
+            updateVisibility(markYellow, value: totalFats, threshold: Double(maxProtein))
+            updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxCarbs))
         }
         // Toggle the state
           isInfoVisible.toggle()
+        
     }
 }
 // MARK: - Home Table View

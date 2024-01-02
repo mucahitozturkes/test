@@ -16,6 +16,7 @@ class Ui {
     var circularProgressBar4: CircularProgressBar!
     
     var homeviewController: HomeViewController!
+    
     var totalCalori: Float?
     var totalProtein: Float?
     var totalFat: Float?
@@ -25,15 +26,12 @@ class Ui {
     var proteinValue = Float(100)
     var fatValue = Float(100)
     var carbonValue = Float(100)
-
-    // Your code here
     
     var coredata: Coredata!
     
     func uiTools(homeViewController: HomeViewController) {
         self.homeviewController = homeViewController
         setupCoreData()
-        
     }
 
     func setupCoreData() {
@@ -62,48 +60,61 @@ class Ui {
         // Görünüme ekle
         homeviewController?.firstLook.addSubview(circularProgressBar1)
     }
-
-    
     @objc func updateButtonTapped() {
+        let fillAnimationDuration: TimeInterval = 4.0
 
-        if let totalCaloriText = homeviewController.totalCalori.text,
-           let totalProteinText = homeviewController.totalPRotein.text,
-           let totalFatText = homeviewController.totalFat.text,
-           let totalCarbonText = homeviewController.totalCarbon.text,
-           let totalCaloriValue = Float(totalCaloriText),
-           let totalProteinValue = Float(totalProteinText),
-           let totalFatValue = Float(totalFatText),
-           let totalCarbonValue = Float(totalCarbonText) {
-            
-            totalCalori = totalCaloriValue
-            totalProtein = totalProteinValue
-            totalFat = totalFatValue
-            totalCarbon = totalCarbonValue
-            
-        } else {
+        guard let totalCaloriText = homeviewController.totalCalori.text,
+              let totalProteinText = homeviewController.totalPRotein.text,
+              let totalFatText = homeviewController.totalFat.text,
+              let totalCarbonText = homeviewController.totalCarbon.text,
+              let totalCaloriValue = Float(totalCaloriText),
+              let totalProteinValue = Float(totalProteinText),
+              let totalFatValue = Float(totalFatText),
+              let totalCarbonValue = Float(totalCarbonText) else {
             // Handle the case where at least one of the texts is nil or cannot be converted to Float
             print("Error: One or more text values are nil or cannot be converted to Float.")
+            return
         }
 
-
-        
-        homeviewController.purpleLabel.text = String(format: "%.0f", caloriValue)
-        homeviewController.redLabel.text = String(format: "%.0f", proteinValue)
-        homeviewController.yellowLabel.text = String(format: "%.0f", fatValue)
-        homeviewController.greenLabel.text = String(format: "%.0f", carbonValue)
-        
-        let normalizedProgress1 = CGFloat((totalCalori ?? 0) / caloriValue)
-        let normalizedProgress2 = CGFloat((totalProtein ?? 0) / proteinValue)
-        let normalizedProgress3 = CGFloat((totalFat ?? 0) / fatValue)
-        let normalizedProgress4 = CGFloat((totalCarbon ?? 0) / carbonValue)
-
-        circularProgressBar1.animateProgress(to: normalizedProgress1, duration: 1.0)
-        circularProgressBar2.animateProgress(to: normalizedProgress2, duration: 1.0)
-        circularProgressBar3.animateProgress(to: normalizedProgress3, duration: 1.0)
-        circularProgressBar4.animateProgress(to: normalizedProgress4, duration: 1.0)
-
-        
+        updateUIWithAnimation(totalCalori: totalCaloriValue,
+                              totalProtein: totalProteinValue,
+                              totalFat: totalFatValue,
+                              totalCarbon: totalCarbonValue,
+                              duration: fillAnimationDuration)
     }
+
+    func updateUIWithAnimation(totalCalori: Float,
+                                totalProtein: Float,
+                                totalFat: Float,
+                                totalCarbon: Float,
+                                duration: TimeInterval) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            self.totalCalori = totalCalori
+            self.totalProtein = totalProtein
+            self.totalFat = totalFat
+            self.totalCarbon = totalCarbon
+
+            self.homeviewController.purpleLabel.text = String(format: "%.0f", self.caloriValue)
+            self.homeviewController.redLabel.text = String(format: "%.0f", self.proteinValue)
+            self.homeviewController.yellowLabel.text = String(format: "%.0f", self.fatValue)
+            self.homeviewController.greenLabel.text = String(format: "%.0f", self.carbonValue)
+
+            let normalizedProgress1 = CGFloat((totalCalori / self.caloriValue))
+            let normalizedProgress2 = CGFloat((totalProtein / self.proteinValue))
+            let normalizedProgress3 = CGFloat((totalFat / self.fatValue))
+            let normalizedProgress4 = CGFloat((totalCarbon / self.carbonValue))
+
+            self.circularProgressBar1.animateProgress(to: normalizedProgress1, duration: duration)
+            self.circularProgressBar2.animateProgress(to: normalizedProgress2, duration: duration)
+            self.circularProgressBar3.animateProgress(to: normalizedProgress3, duration: duration)
+            self.circularProgressBar4.animateProgress(to: normalizedProgress4, duration: duration)
+        }
+    }
+
+
+
 
     //View shadows
     func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 0, cornerRadius: CGFloat = 24) {
@@ -137,3 +148,4 @@ extension UIColor {
         return UIColor(hue: hue, saturation: saturation, brightness: adjustedBrightness, alpha: alpha)
     }
 }
+

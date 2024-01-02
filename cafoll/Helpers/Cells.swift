@@ -17,6 +17,7 @@ class Cell: UITableViewCell {
 
 class HomeCell: UITableViewCell {
     
+  
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var colorView: UIView!
     
@@ -29,5 +30,7 @@ class HomeCell: UITableViewCell {
         colorView.layer.cornerRadius = 8
     
     }
+    
+  
 }
 

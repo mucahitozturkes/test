@@ -70,17 +70,20 @@ class CircularProgressBar: UIView {
     func setBackgroundLayerColor(color: UIColor) {
             backgroundLayer.strokeColor = color.withAlphaComponent(0.1).cgColor
         }
-    func setProgress(value: CGFloat) {
-        progressLayer.strokeEnd = value
-    }
+  
 
     func animateProgress(to value: CGFloat, duration: TimeInterval) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.toValue = value
         animation.duration = duration
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
 
         progressLayer.strokeEnd = value
         progressLayer.add(animation, forKey: "animateProgress")
     }
+
+
+
 }

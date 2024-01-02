@@ -13,6 +13,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
     //circle
+    @IBOutlet weak var circileButton: UIButton!
     @IBOutlet weak var goalTextLAbel: UILabel!
     @IBOutlet weak var checkMarkMaxValue: UIImageView!
     @IBOutlet weak var stackViewValues: UIStackView!
@@ -57,6 +58,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     var helper: Helper!
     var ui: Ui!
    
+    var selectedIndexPath: IndexPath?
+    var isInfoVisible = false
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         startUpSetup()
@@ -104,8 +108,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 coredata.fetchLunch(forDate: datePicker.date)
                 coredata.fetchDinner(forDate: datePicker.date)
                 coredata.fetchSnack(forDate: datePicker.date)
-                fetchDataAndUpdateUI()
+                // 2. Update UI based on fetched data
+                sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+                sumLunch(forDate: datePicker.date)
+                sumDinner(forDate: datePicker.date)
+                sumSnack(forDate: datePicker.date)
+                // 3. set updated
+                updateLabel()
                 ui.updateButtonTapped()
+                fetchDataAndUpdateUI()
+                // 4. Reload table view to reflect changes
                 tableView.reloadData()
             }
         }
@@ -128,6 +140,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         //UI
         ui.uiTools(homeViewController: self)
         firstLook.bringSubviewToFront(stackViewValues)
+        firstLook.bringSubviewToFront(circileButton)
         //table View Load
         tabBarController?.delegate = self
         tableView.reloadData()
@@ -377,9 +390,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
 
         // Update the progress views and labels with the calculated totals
-        let maxGreen: Float = 20
+        let maxGreen: Float = 25
         let maxYellow: Float = 25
-        let maxRed: Float = 30
+        let maxRed: Float = 25
         let maxPurple: Float = 700
 
     
@@ -407,15 +420,32 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     }
 
-    func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float) {
-        // Update progress views based on the calculated sum for each nutrient
-        progressPurple.progress = min(Float(calories) / maxPurple, 1.0)
-        progressYellow.progress = min(Float(fat) / maxYellow, 1.0)
-        progressRed.progress = min(Float(protein) / maxRed, 1.0)
-        progressGreen.progress = min(Float(carbs) / maxGreen, 1.0)
+    func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float, duration: TimeInterval = 1.0) {
+        // Set initial progress to 0.0
+        progressPurple.progress = 0.0
+        progressYellow.progress = 0.0
+        progressRed.progress = 0.0
+        progressGreen.progress = 0.0
+
+        // Calculate target progress values
+        let targetProgressPurple = min(Float(calories) / maxPurple, 1.0)
+        let targetProgressYellow = min(Float(fat) / maxYellow, 1.0)
+        let targetProgressRed = min(Float(protein) / maxRed, 1.0)
+        let targetProgressGreen = min(Float(carbs) / maxGreen, 1.0)
+
+        // Animate progress to target values
+        UIView.animate(withDuration: duration) {
+            self.progressPurple.setProgress(targetProgressPurple, animated: true)
+            self.progressYellow.setProgress(targetProgressYellow, animated: true)
+            self.progressRed.setProgress(targetProgressRed, animated: true)
+            self.progressGreen.setProgress(targetProgressGreen, animated: true)
+        }
+
         
-        sumMeals(forDate: datePicker.date)
+        sumMeals(forDate: self.datePicker.date)
+        
     }
+
     
     func sumMeals(forDate date: Date) {
         var totalCalories = 0.0
@@ -499,7 +529,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 // Bir gün ekleyerek tarihi güncelle
                 currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
                 datePicker.setDate(currentDate, animated: true)
-            fetchDataAndUpdateUI()
+            
             coredata.fetchBreakfast(forDate: datePicker.date)
             coredata.fetchLunch(forDate: datePicker.date)
             coredata.fetchDinner(forDate: datePicker.date)
@@ -523,7 +553,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 // Bir gün çıkartarak tarihi güncelle
                 currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
                 datePicker.setDate(currentDate, animated: true)
-            fetchDataAndUpdateUI()
+           
             coredata.fetchBreakfast(forDate: datePicker.date)
             coredata.fetchLunch(forDate: datePicker.date)
             coredata.fetchDinner(forDate: datePicker.date)
@@ -542,6 +572,139 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         }
     
+    @IBAction func circleButtonShowInfo(_ sender: UIButton) {
+        guard let date = datePicker?.date else {
+            print("Error: Selected date is nil.")
+            return
+        }
+        if isInfoVisible {
+            let currentSegmentIndex = segment.selectedSegmentIndex
+            
+            switch currentSegmentIndex {
+            case 0:
+                tableView.reloadData()
+                coredata.fetchBreakfast(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumBreakfast(forDate: datePicker.date)
+                nameOfMeals.text = "Breakfast"
+                
+            case 1:
+                tableView.reloadData()
+                coredata.fetchLunch(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumLunch(forDate: datePicker.date)
+                nameOfMeals.text = "Lunch"
+                
+            case 2:
+                tableView.reloadData()
+                coredata.fetchDinner(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumDinner(forDate: datePicker.date)
+                nameOfMeals.text = "Dinner"
+                
+            case 3:
+                tableView.reloadData()
+                coredata.fetchSnack(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumSnack(forDate: datePicker.date)
+                nameOfMeals.text = "Snack"
+                
+            default:
+                break
+            }
+            // Update the table
+            tableView.reloadData()
+        
+    
+        } else {
+            let maxCalories = 2800
+            let maxFats = 100
+            let maxProtein = 100
+            let maxCarbs = 100
+            
+            var totalCalories = 0.0
+            var totalFats = 0.0
+            var totalProtein = 0.0
+            var totalCarbs = 0.0
+            guard let breakfastItems = self.coredata.breakfast else {
+                return
+            }
+            
+            for item in breakfastItems {
+                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+                if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                    totalCalories += Double(item.calori ?? "0") ?? 0.0
+                    totalFats += Double(item.fat ?? "0") ?? 0.0
+                    totalProtein += Double(item.protein ?? "0") ?? 0.0
+                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                }
+            }
+            guard let lunchItems = self.coredata.lunch else {
+                return
+            }
+            
+            for item in lunchItems {
+                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+                if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                    totalCalories += Double(item.calori ?? "0") ?? 0.0
+                    totalFats += Double(item.fat ?? "0") ?? 0.0
+                    totalProtein += Double(item.protein ?? "0") ?? 0.0
+                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                }
+            }
+            guard let dinnerItems = self.coredata.dinner else {
+                return
+            }
+            
+            for item in dinnerItems {
+                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+                if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                    totalCalories += Double(item.calori ?? "0") ?? 0.0
+                    totalFats += Double(item.fat ?? "0") ?? 0.0
+                    totalProtein += Double(item.protein ?? "0") ?? 0.0
+                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                }
+            }
+            
+            guard let snackItems = self.coredata.snack else {
+                return
+            }
+            for item in snackItems {
+                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
+                if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
+                    totalCalories += Double(item.calori ?? "0") ?? 0.0
+                    totalFats += Double(item.fat ?? "0") ?? 0.0
+                    totalProtein += Double(item.protein ?? "0") ?? 0.0
+                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                }
+            }
+            
+            nameOfMeals.text = "Daily Goal!"
+            
+            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+            redInfoLabel.text = String(format: "%.0f", totalProtein)
+            yellowInfoLabel.text = String(format: "%.0f", totalFats)
+            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+            
+            purpleTotal.text = String(maxCalories)
+            redTotal.text = String(maxProtein)
+            yellowTotal.text = String(maxFats)
+            greenTotal.text = String(maxCarbs)
+            
+            totalCalori.text = String(maxCalories)
+            totalFat.text = String(maxFats)
+            totalPRotein.text = String(maxProtein)
+            totalCarbon.text = String(maxCarbs)
+            
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxCarbs), maxYellow: Float(maxFats), maxRed: Float(maxProtein), maxPurple: Float(maxCalories))
+        }
+        // Toggle the state
+          isInfoVisible.toggle()
+    }
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -600,6 +763,252 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
+    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if selectedIndexPath == indexPath {
+            // If the same cell is selected again, reset the state
+            selectedIndexPath = nil
+            let currentSegmentIndex = self.segment.selectedSegmentIndex
+
+            switch currentSegmentIndex {
+            case 0:
+                tableView.reloadData()
+                coredata.fetchBreakfast(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumBreakfast(forDate: datePicker.date)
+                nameOfMeals.text = "Breakfast"
+             
+            case 1:
+                tableView.reloadData()
+                coredata.fetchLunch(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumLunch(forDate: datePicker.date)
+                nameOfMeals.text = "Lunch"
+              
+            case 2:
+                tableView.reloadData()
+                coredata.fetchDinner(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumDinner(forDate: datePicker.date)
+                nameOfMeals.text = "Dinner"
+            
+            case 3:
+                tableView.reloadData()
+                coredata.fetchSnack(forDate: datePicker.date)
+                fetchDataAndUpdateUI()
+                ui.updateButtonTapped()
+                sumSnack(forDate: datePicker.date)
+                nameOfMeals.text = "Snack"
+              
+            default:
+                break
+            }
+        } else {
+            let currentSegmentIndex = self.segment.selectedSegmentIndex
+
+            switch currentSegmentIndex {
+            case 0:
+                
+                selectedIndexPath = indexPath
+
+                        var food: Any?
+
+                if let selectedFood = coredata.breakfast?[indexPath.row] {
+                    food = selectedFood
+                }
+                let maxCal = 500
+                let maxPro = 35
+                let maxFat = 35
+                let maxCarbs = 35
+                
+                let foodName = (food as? Breakfast)?.title ?? ""
+                let protein = (food as? Breakfast)?.protein ?? ""
+                let carbon = (food as? Breakfast)?.carbon ?? ""
+                let fat = (food as? Breakfast)?.fat ?? ""
+                let calori = (food as? Breakfast)?.calori ?? ""
+                
+                nameOfMeals.text = foodName
+                purpleInfoLabel.text = calori
+                redInfoLabel.text = protein
+                yellowInfoLabel.text = fat
+                greenInfoLabel.text = carbon
+                
+                purpleTotal.text = String(maxCal)
+                redTotal.text = "\(maxPro)"
+                yellowTotal.text = "\(maxFat)"
+                greenTotal.text = "\(maxCarbs)"
+                
+               
+                // Convert String values to Double
+                if let caloriDouble = Double(calori),
+                   let proteinDouble = Double(protein),
+                   let fatDouble = Double(fat),
+                   let carbonDouble = Double(carbon) {
+
+                    updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
+                } else {
+                    // Handle the case where conversion fails
+                    print("Error: Could not convert one or more values to Double.")
+                }
+                
+                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
+                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
+                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
+                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+                           
+            case 1:
+              
+                selectedIndexPath = indexPath
+
+                        var food: Any?
+
+                if let selectedFood = coredata.lunch?[indexPath.row] {
+                    food = selectedFood
+                }
+                let maxCal = 500
+                let maxPro = 35
+                let maxFat = 35
+                let maxCarbs = 35
+                
+                let foodName = (food as? Lunch)?.title ?? ""
+                let protein = (food as? Lunch)?.protein ?? ""
+                let carbon = (food as? Lunch)?.carbon ?? ""
+                let fat = (food as? Lunch)?.fat ?? ""
+                let calori = (food as? Lunch)?.calori ?? ""
+                
+                nameOfMeals.text = foodName
+                purpleInfoLabel.text = calori
+                redInfoLabel.text = protein
+                yellowInfoLabel.text = fat
+                greenInfoLabel.text = carbon
+                
+                purpleTotal.text = "\(maxCal)"
+                redTotal.text = "\(maxPro)"
+                yellowTotal.text = "\(maxFat)"
+                greenTotal.text = "\(maxCarbs)"
+                
+               
+                // Convert String values to Double
+                if let caloriDouble = Double(calori),
+                   let proteinDouble = Double(protein),
+                   let fatDouble = Double(fat),
+                   let carbonDouble = Double(carbon) {
+
+                    updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
+                } else {
+                    // Handle the case where conversion fails
+                    print("Error: Could not convert one or more values to Double.")
+                }
+                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
+                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
+                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
+                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+            case 2:
+              
+                selectedIndexPath = indexPath
+
+                        var food: Any?
+
+                if let selectedFood = coredata.dinner?[indexPath.row] {
+                    food = selectedFood
+                }
+                let maxCal = 500
+                let maxPro = 35
+                let maxFat = 35
+                let maxCarbs = 35
+                
+                let foodName = (food as? Dinner)?.title ?? ""
+                let protein = (food as? Dinner)?.protein ?? ""
+                let carbon = (food as? Dinner)?.carbon ?? ""
+                let fat = (food as? Dinner)?.fat ?? ""
+                let calori = (food as? Dinner)?.calori ?? ""
+                
+                nameOfMeals.text = foodName
+                purpleInfoLabel.text = calori
+                redInfoLabel.text = protein
+                yellowInfoLabel.text = fat
+                greenInfoLabel.text = carbon
+                
+                purpleTotal.text = "\(maxCal)"
+                redTotal.text = "\(maxPro)"
+                yellowTotal.text = "\(maxFat)"
+                greenTotal.text = "\(maxCarbs)"
+                
+               
+                // Convert String values to Double
+                if let caloriDouble = Double(calori),
+                   let proteinDouble = Double(protein),
+                   let fatDouble = Double(fat),
+                   let carbonDouble = Double(carbon) {
+
+                    updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
+                } else {
+                    // Handle the case where conversion fails
+                    print("Error: Could not convert one or more values to Double.")
+                }
+                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
+                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
+                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
+                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+            case 3:
+                selectedIndexPath = indexPath
+
+                        var food: Any?
+
+                if let selectedFood = coredata.snack?[indexPath.row] {
+                    food = selectedFood
+                }
+                let maxCal = 500
+                let maxPro = 35
+                let maxFat = 35
+                let maxCarbs = 35
+                
+                let foodName = (food as? Snack)?.title ?? ""
+                let protein = (food as? Snack)?.protein ?? ""
+                let carbon = (food as? Snack)?.carbon ?? ""
+                let fat = (food as? Snack)?.fat ?? ""
+                let calori = (food as? Snack)?.calori ?? ""
+                
+                nameOfMeals.text = foodName
+                purpleInfoLabel.text = calori
+                redInfoLabel.text = protein
+                yellowInfoLabel.text = fat
+                greenInfoLabel.text = carbon
+                
+                purpleTotal.text = "\(maxCal)"
+                redTotal.text = "\(maxPro)"
+                yellowTotal.text = "\(maxFat)"
+                greenTotal.text = "\(maxCarbs)"
+                
+               
+                // Convert String values to Double
+                if let caloriDouble = Double(calori),
+                   let proteinDouble = Double(protein),
+                   let fatDouble = Double(fat),
+                   let carbonDouble = Double(carbon) {
+
+                    updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
+                } else {
+                    // Handle the case where conversion fails
+                    print("Error: Could not convert one or more values to Double.")
+                }
+                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
+                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
+                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
+                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+            default:
+                break
+            }
+                
+            
+        }
+    }
+
+
 
     // Helper function to determine the highest value and return the corresponding color
     func determineHighestValueColor(carbons: String, fat: String, protein: String) -> UIColor {

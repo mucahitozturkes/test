@@ -13,8 +13,10 @@ class ViewController: UIViewController {
     var helper: Helper!
     var coredata: Coredata!
     var homeViewController: HomeViewController!
+    var selectedCellFoodName: String?
+    var searchResults: [String: [String: Int]] = [:]
+    
     // Bar Labels
-  
     @IBOutlet weak var titleLabelTextfield: UITextField!
     @IBOutlet weak var caloriLabel: UITextField!
     @IBOutlet weak var fatLabel: UITextField!
@@ -197,9 +199,10 @@ class ViewController: UIViewController {
         // Check if the selected food is already in favorites, if so, remove it
         if isFavorite {
             animateHeartButton(sender)
+            
             return
         }
-        
+
         // When the favorite button is pressed
         cell.favoriteIndicatorUI.startAnimating() // Start the indicator
         cell.favoriteButtonUI.isHidden = true // Hide the favorite button
@@ -215,9 +218,11 @@ class ViewController: UIViewController {
         let favoriteItem = selectedFood.asFavorite()
         coredata.favorite?.append(favoriteItem)
         helper.generateHapticFeedback(style: .light)
+        
+
         print(favoriteItem.title!, " Added to favorites")
         coredata.saveData()
-        
+        coredata.fetchFoods()
         // Animation
         let heartImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
         heartImageView.tintColor = .red
@@ -241,6 +246,8 @@ class ViewController: UIViewController {
             })
         })
     }
+    
+    
     func animateHeartButton(_ button: UIButton) {
         let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
         shakeAnimation.values = [8, 4, -8, 8, -4, 4, -8, 8, 8]
@@ -426,7 +433,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
         let row = indexPath.row
         
-        
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             if let indexFoods = self.coredata.foods?[row] {
@@ -505,7 +511,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        
+      
            var selectedTitle: String?
            var selectedCal: String?
            var selectedCar: String?
@@ -538,6 +544,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 selectedFavoritePro = favorites[row].protein
                
             }
+            
 
          let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
 

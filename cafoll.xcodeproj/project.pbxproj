@@ -36,6 +36,7 @@
 		08C23D862B38852700E8CFCD /* Lunch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D782B38852700E8CFCD /* Lunch+CoreDataProperties.swift */; };
 		08C23D872B38852700E8CFCD /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D792B38852700E8CFCD /* Favorite+CoreDataClass.swift */; };
 		08C23D882B38852700E8CFCD /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D7A2B38852700E8CFCD /* Favorite+CoreDataProperties.swift */; };
+		08CF6F902B446DD10043D0C3 /* APIFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CF6F8F2B446DD10043D0C3 /* APIFoods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		08C23D782B38852700E8CFCD /* Lunch+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lunch+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08C23D792B38852700E8CFCD /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		08C23D7A2B38852700E8CFCD /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		08CF6F8F2B446DD10043D0C3 /* APIFoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFoods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				087D27952B3322F1001385A4 /* CircleProgressBar.swift */,
 				08856D062B1F391A00466AAB /* UI.swift */,
 				085F2C712B32E5DB003E246D /* API.swift */,
+				08CF6F8F2B446DD10043D0C3 /* APIFoods.swift */,
 				0807F5982B1495500068A5DA /* Coredata.swift */,
 				08856D042B1E26B500466AAB /* Helper.swift */,
 				08856D162B1F583200466AAB /* Charts.swift */,
@@ -265,6 +268,7 @@
 				08C23D822B38852700E8CFCD /* Breakfast+CoreDataProperties.swift in Sources */,
 				08C23D7B2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift in Sources */,
 				08C23D7C2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift in Sources */,
+				08CF6F902B446DD10043D0C3 /* APIFoods.swift in Sources */,
 				08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */,
 				08C23D852B38852700E8CFCD /* Lunch+CoreDataClass.swift in Sources */,
 				08C23D862B38852700E8CFCD /* Lunch+CoreDataProperties.swift in Sources */,

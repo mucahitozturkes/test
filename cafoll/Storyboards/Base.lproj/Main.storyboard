@@ -130,7 +130,7 @@
                                                                                     <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.69996895699999995" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <state key="normal" title="Button"/>
                                                                                     <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                                                        <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                                                                        <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
                                                                                         <backgroundConfiguration key="background">
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </backgroundConfiguration>
@@ -1008,6 +1008,7 @@
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="eml-Hf-tII" secondAttribute="trailing" constant="16" id="2Jv-vT-pWn"/>
+                                    <constraint firstItem="eml-Hf-tII" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tEJ-VL-Rey" secondAttribute="leading" constant="20" symbolic="YES" id="3Fd-G9-ByJ"/>
                                     <constraint firstItem="3KQ-RH-4wT" firstAttribute="top" secondItem="tEJ-VL-Rey" secondAttribute="top" constant="24" id="7uH-sT-g5O"/>
                                     <constraint firstAttribute="bottom" secondItem="3KQ-RH-4wT" secondAttribute="bottom" constant="24" id="IVq-2h-Y5A"/>
                                     <constraint firstItem="eml-Hf-tII" firstAttribute="top" secondItem="tEJ-VL-Rey" secondAttribute="top" constant="8" id="iFw-Kz-a9f"/>
@@ -1144,7 +1145,7 @@
                                                                                     <rect key="frame" x="235" y="0.0" width="60" height="60"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="Bgq-gB-OgC">
-                                                                                            <rect key="frame" x="0.0" y="12" width="60" height="36"/>
+                                                                                            <rect key="frame" x="0.0" y="16" width="60" height="28"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccp-Bm-fMR">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
@@ -1165,7 +1166,7 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z8Y-T3-NPe">
-                                                                                                    <rect key="frame" x="0.0" y="10.5" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="8" width="60" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pqn-Tl-xsn">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
@@ -1183,7 +1184,7 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDG-L1-H6M">
-                                                                                                    <rect key="frame" x="0.0" y="21.5" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="16" width="60" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="ygr-xd-Yer">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
@@ -1201,7 +1202,7 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzU-ke-yOd">
-                                                                                                    <rect key="frame" x="0.0" y="32" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="24" width="60" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="X0p-d3-EJg">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
@@ -1223,11 +1224,11 @@
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" name="Dark mod Background"/>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="bottom" secondItem="Bgq-gB-OgC" secondAttribute="bottom" constant="12" id="41E-ur-6xn"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="Bgq-gB-OgC" secondAttribute="bottom" constant="16" id="41E-ur-6xn"/>
                                                                                         <constraint firstAttribute="height" constant="60" id="bbw-oH-FtF"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="Bgq-gB-OgC" secondAttribute="trailing" id="cJp-aS-zGc"/>
                                                                                         <constraint firstAttribute="width" constant="60" id="eNA-2e-9BB"/>
-                                                                                        <constraint firstItem="Bgq-gB-OgC" firstAttribute="top" secondItem="aRk-m1-kcm" secondAttribute="top" constant="12" id="ikk-gg-p1b"/>
+                                                                                        <constraint firstItem="Bgq-gB-OgC" firstAttribute="top" secondItem="aRk-m1-kcm" secondAttribute="top" constant="16" id="ikk-gg-p1b"/>
                                                                                         <constraint firstItem="Bgq-gB-OgC" firstAttribute="leading" secondItem="aRk-m1-kcm" secondAttribute="leading" id="yu6-GQ-oBx"/>
                                                                                     </constraints>
                                                                                 </view>
@@ -1363,7 +1364,7 @@
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="checkmark.gobackward" catalog="system" width="119" height="128"/>
-        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="info.bubble" catalog="system" width="128" height="110"/>

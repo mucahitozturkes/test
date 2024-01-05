@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-gk-rrJ">
-                                <rect key="frame" x="16" y="36" width="343" height="478"/>
+                                <rect key="frame" x="16" y="36" width="343" height="582"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-0K-RQQ">
                                         <rect key="frame" x="12" y="12" width="319" height="56"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-an-wo1">
-                                                <rect key="frame" x="0.0" y="0.0" width="257.5" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="319" height="56"/>
                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="barTintColor" name="Dark mod Background"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -33,56 +33,10 @@
                                                     <outlet property="delegate" destination="od0-hI-xVp" id="Nsk-Pk-wx7"/>
                                                 </connections>
                                             </searchBar>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFQ-Gc-QB3">
-                                                <rect key="frame" x="269.5" y="0.0" width="49.5" height="56"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fl-rV-vBE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="49.5" height="56"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" cornerStyle="capsule">
-                                                            <backgroundConfiguration key="background">
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </backgroundConfiguration>
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                                                            <color key="baseForegroundColor" name="Darkgray-White ~ Any &amp; Dark"/>
-                                                            <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </buttonConfiguration>
-                                                        <connections>
-                                                            <action selector="addNewFoodButton:" destination="od0-hI-xVp" eventType="touchUpInside" id="Vai-1o-DKR"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vnk-cG-pGR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="49.5" height="56"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" image="trash" catalog="system" cornerStyle="capsule">
-                                                            <backgroundConfiguration key="background">
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </backgroundConfiguration>
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
-                                                            <color key="baseForegroundColor" name="Darkgray-White ~ Any &amp; Dark"/>
-                                                            <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </buttonConfiguration>
-                                                        <connections>
-                                                            <action selector="deleteAllFavorited:" destination="od0-hI-xVp" eventType="touchUpInside" id="u5F-z4-Nde"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="5Fl-rV-vBE" firstAttribute="top" secondItem="hFQ-Gc-QB3" secondAttribute="top" id="BF1-Ko-HZr"/>
-                                                    <constraint firstItem="5Fl-rV-vBE" firstAttribute="centerX" secondItem="hFQ-Gc-QB3" secondAttribute="centerX" id="ClN-kJ-noO"/>
-                                                    <constraint firstItem="Vnk-cG-pGR" firstAttribute="bottom" secondItem="5Fl-rV-vBE" secondAttribute="bottom" id="JGd-p0-iln"/>
-                                                    <constraint firstItem="5Fl-rV-vBE" firstAttribute="leading" secondItem="Vnk-cG-pGR" secondAttribute="leading" id="OP6-sS-IAR"/>
-                                                    <constraint firstItem="5Fl-rV-vBE" firstAttribute="centerY" secondItem="hFQ-Gc-QB3" secondAttribute="centerY" id="WK7-ti-xkS"/>
-                                                    <constraint firstItem="Vnk-cG-pGR" firstAttribute="leading" secondItem="hFQ-Gc-QB3" secondAttribute="leading" id="fbz-yu-hai"/>
-                                                    <constraint firstItem="Vnk-cG-pGR" firstAttribute="top" secondItem="5Fl-rV-vBE" secondAttribute="top" id="jDL-pe-dMC"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Vnk-cG-pGR" secondAttribute="trailing" id="rkI-vo-8mS"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HDS-GO-TIz">
-                                        <rect key="frame" x="0.0" y="80" width="343" height="378"/>
+                                        <rect key="frame" x="0.0" y="68" width="343" height="514"/>
                                         <color key="backgroundColor" name="Dark mod Background"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="k1h-oI-xwd" customClass="Cell" customModule="cafoll" customModuleProvider="target">
@@ -95,67 +49,15 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWZ-LC-1FS">
                                                             <rect key="frame" x="28" y="11" width="299" height="42"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oGb-g9-f0b">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oGb-g9-f0b">
                                                                     <rect key="frame" x="0.0" y="0.0" width="299" height="42"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyX-pv-0OQ">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="193" height="42"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="299" height="42"/>
                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                             <color key="textColor" name="Darkgray-White ~ Any &amp; Dark"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCP-f1-g7H">
-                                                                            <rect key="frame" x="201" y="0.0" width="40" height="42"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="40" id="fob-UD-rgI"/>
-                                                                            </constraints>
-                                                                            <state key="normal" title="Button"/>
-                                                                            <buttonConfiguration key="configuration" style="plain" image="info.bubble" catalog="system">
-                                                                                <backgroundConfiguration key="background"/>
-                                                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
-                                                                                <color key="baseForegroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            </buttonConfiguration>
-                                                                            <connections>
-                                                                                <action selector="popupButtonPressed:" destination="od0-hI-xVp" eventType="touchUpInside" id="2PK-IE-hcV"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBV-A6-pMn">
-                                                                            <rect key="frame" x="249" y="0.0" width="50" height="42"/>
-                                                                            <subviews>
-                                                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="pct-fj-1Sb">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="42"/>
-                                                                                </activityIndicatorView>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-D8-M0Q">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="42"/>
-                                                                                    <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.69996895699999995" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                    <state key="normal" title="Button"/>
-                                                                                    <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule">
-                                                                                        <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
-                                                                                        <backgroundConfiguration key="background">
-                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        </backgroundConfiguration>
-                                                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="23" scale="large"/>
-                                                                                    </buttonConfiguration>
-                                                                                    <connections>
-                                                                                        <action selector="favoriFoodsButtonPressed:" destination="od0-hI-xVp" eventType="touchUpInside" id="OIE-bE-QGb"/>
-                                                                                    </connections>
-                                                                                </button>
-                                                                            </subviews>
-                                                                            <color key="backgroundColor" name="Dark mod Background"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="trailing" secondItem="ld5-D8-M0Q" secondAttribute="trailing" id="8Ud-Hl-D85"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="pct-fj-1Sb" secondAttribute="bottom" id="8hO-fZ-Dnl"/>
-                                                                                <constraint firstItem="pct-fj-1Sb" firstAttribute="top" secondItem="JBV-A6-pMn" secondAttribute="top" id="MdO-mj-oyS"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="pct-fj-1Sb" secondAttribute="bottom" id="Soj-hm-0mh"/>
-                                                                                <constraint firstItem="ld5-D8-M0Q" firstAttribute="leading" secondItem="JBV-A6-pMn" secondAttribute="leading" id="cQH-h9-KH3"/>
-                                                                                <constraint firstItem="ld5-D8-M0Q" firstAttribute="top" secondItem="JBV-A6-pMn" secondAttribute="top" id="e7s-7c-vCx"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="pct-fj-1Sb" secondAttribute="trailing" id="eGa-3R-e9k"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="ld5-D8-M0Q" secondAttribute="bottom" id="fHc-KT-4sD"/>
-                                                                                <constraint firstItem="pct-fj-1Sb" firstAttribute="leading" secondItem="JBV-A6-pMn" secondAttribute="leading" id="kk2-Em-56g"/>
-                                                                                <constraint firstItem="pct-fj-1Sb" firstAttribute="top" secondItem="JBV-A6-pMn" secondAttribute="top" id="kwJ-hO-GGn"/>
-                                                                                <constraint firstItem="pct-fj-1Sb" firstAttribute="leading" secondItem="JBV-A6-pMn" secondAttribute="leading" id="qXx-sQ-MmF"/>
-                                                                            </constraints>
-                                                                        </view>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -177,10 +79,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="favoriteButtonUI" destination="ld5-D8-M0Q" id="O0s-gK-Zgo"/>
-                                                    <outlet property="favoriteIndicatorUI" destination="pct-fj-1Sb" id="8RW-X0-a9p"/>
                                                     <outlet property="foodTitleLabelUI" destination="QyX-pv-0OQ" id="OPD-Mp-FRX"/>
-                                                    <outlet property="moreInfoButtonUI" destination="gCP-f1-g7H" id="qhE-5R-6lO"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -192,39 +91,23 @@
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
-                                    <constraint firstItem="HDS-GO-TIz" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" id="6GD-sZ-9lJ"/>
+                                    <constraint firstItem="HDS-GO-TIz" firstAttribute="top" secondItem="V3q-0K-RQQ" secondAttribute="bottom" id="8Wp-Gp-Uap"/>
                                     <constraint firstItem="V3q-0K-RQQ" firstAttribute="top" secondItem="ffH-gk-rrJ" secondAttribute="top" constant="12" id="9mI-0l-dcA"/>
-                                    <constraint firstAttribute="trailing" secondItem="HDS-GO-TIz" secondAttribute="trailing" id="Fd0-AW-Jz2"/>
                                     <constraint firstItem="V3q-0K-RQQ" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" constant="12" id="GSU-al-p1g"/>
-                                    <constraint firstItem="HDS-GO-TIz" firstAttribute="top" secondItem="V3q-0K-RQQ" secondAttribute="bottom" constant="12" id="MpX-p3-dUs"/>
+                                    <constraint firstAttribute="bottom" secondItem="HDS-GO-TIz" secondAttribute="bottom" id="GyV-G3-gEw"/>
+                                    <constraint firstItem="HDS-GO-TIz" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" id="IoB-OE-ef7"/>
                                     <constraint firstAttribute="trailing" secondItem="V3q-0K-RQQ" secondAttribute="trailing" constant="12" id="Qsa-hO-DGZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="HDS-GO-TIz" secondAttribute="bottom" constant="20" id="gzz-OJ-OMz"/>
+                                    <constraint firstAttribute="trailing" secondItem="HDS-GO-TIz" secondAttribute="trailing" id="sAu-F5-jlu"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Td-Ux-0bF">
-                                <rect key="frame" x="16" y="538" width="343" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="k1r-v1-82u"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Foods"/>
-                                    <segment title="Favorite"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="6iU-fi-RSQ"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NeE-Yz-O1y"/>
                         <color key="backgroundColor" name="Dark mod Background"/>
                         <constraints>
-                            <constraint firstItem="7Td-Ux-0bF" firstAttribute="leading" secondItem="NeE-Yz-O1y" secondAttribute="leading" constant="16" id="9ko-FT-h0G"/>
-                            <constraint firstItem="NeE-Yz-O1y" firstAttribute="bottom" secondItem="7Td-Ux-0bF" secondAttribute="bottom" constant="30" id="EaH-rf-P9a"/>
-                            <constraint firstItem="NeE-Yz-O1y" firstAttribute="trailing" secondItem="7Td-Ux-0bF" secondAttribute="trailing" constant="16" id="Iil-uL-2pz"/>
+                            <constraint firstItem="NeE-Yz-O1y" firstAttribute="bottom" secondItem="ffH-gk-rrJ" secondAttribute="bottom" id="RMQ-nA-2fs"/>
                             <constraint firstItem="ffH-gk-rrJ" firstAttribute="leading" secondItem="M4S-Md-Nkm" secondAttribute="leading" constant="16" id="dZL-xS-cIA"/>
                             <constraint firstAttribute="trailing" secondItem="ffH-gk-rrJ" secondAttribute="trailing" constant="16" id="lyz-hL-nf1"/>
                             <constraint firstItem="ffH-gk-rrJ" firstAttribute="top" secondItem="NeE-Yz-O1y" secondAttribute="top" constant="16" id="qiO-n6-2c0"/>
-                            <constraint firstItem="7Td-Ux-0bF" firstAttribute="top" secondItem="ffH-gk-rrJ" secondAttribute="bottom" constant="24" id="ycC-wC-9dM"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="J5V-ms-ldI">
@@ -252,8 +135,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="5Fl-rV-vBE" id="99w-0S-TVB"/>
-                        <outlet property="buttonView" destination="hFQ-Gc-QB3" id="MwE-lQ-a3a"/>
                         <outlet property="caloriBar" destination="wmg-Kl-XX9" id="1np-iN-arI"/>
                         <outlet property="caloriLabel" destination="BQc-89-Ieo" id="WnP-bt-QvR"/>
                         <outlet property="carbonBar" destination="ovh-L2-u5H" id="i3P-z0-361"/>
@@ -266,10 +147,8 @@
                         <outlet property="proteinBar" destination="qGl-xh-Jpu" id="RzM-ol-0vs"/>
                         <outlet property="proteinLabel" destination="KfO-HY-lRn" id="Bbz-5X-IJO"/>
                         <outlet property="searchBar" destination="4hE-an-wo1" id="oCr-H6-6nh"/>
-                        <outlet property="segmentedControl" destination="7Td-Ux-0bF" id="WnO-gg-8vT"/>
                         <outlet property="tableView" destination="HDS-GO-TIz" id="xCe-TV-OC4"/>
                         <outlet property="titleLabelTextfield" destination="hZs-YY-cpR" id="ewM-qj-bnH"/>
-                        <outlet property="trashButton" destination="Vnk-cG-pGR" id="ZwY-ZG-doJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JMi-jv-c8Z" sceneMemberID="firstResponder"/>
@@ -1364,12 +1243,8 @@
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="checkmark.gobackward" catalog="system" width="119" height="128"/>
-        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="info.bubble" catalog="system" width="128" height="110"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="trash" catalog="system" width="117" height="128"/>
         <namedColor name="Black-White ~ Any &amp; Dark">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

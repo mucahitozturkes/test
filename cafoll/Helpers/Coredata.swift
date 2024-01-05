@@ -21,14 +21,21 @@ class Coredata {
     var snack: [Snack]?
     var maxValueCircle: [MaxValueCircle]?
 
+    init(viewController: ViewController) {
+           self.viewController = viewController
+    
+       }
+
+    init(homeViewController: HomeViewController) {
+        self.homeViewController = homeViewController
+    
+    }
+    
     //Fetch Foods
     func fetchFoods() {
         do {
             let request = Foods.fetchRequest()
             self.foods = try context.fetch(request)
-            DispatchQueue.main.async {
-                self.viewController?.tableView.reloadData()
-            }
         } catch {
             print("fetch Foods: ", error)
         }
@@ -52,18 +59,18 @@ class Coredata {
 
             // Use a predicate to filter by date
             let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfDay as NSDate, endOfDay as NSDate)
-            
+
             let request = Breakfast.fetchRequest()
             request.predicate = predicate
-
+            // Use 'context' directly without optional binding
             self.breakfast = try context.fetch(request)
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
+                }
+            } catch {
+                print("fetch Foods: ", error)
             }
-        } catch {
-            print("fetch Foods: ", error)
         }
-    }
     //Fetch Lunch
     func fetchLunch(forDate date: Date) {
         do {
@@ -148,4 +155,5 @@ class Coredata {
             print("Error saving data: \(error), \(error.localizedDescription)")
         }
     }
+    
 }

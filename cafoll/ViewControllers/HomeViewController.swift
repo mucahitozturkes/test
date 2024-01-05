@@ -61,6 +61,12 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     var selectedIndexPath: IndexPath?
     var isInfoVisible = false
        
+    var badgeCount: [Int] = [0, 0, 0, 0] {
+        didSet {
+            updateBadge()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startUpSetup()
@@ -68,6 +74,18 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         rotateLabel(redLabel, degrees: -45)
         rotateLabel(yellowLabel, degrees: -45)
         rotateLabel(greenLabel, degrees: 45)
+    }
+    
+    func updateBadge() {
+        let totalBadgeCount = badgeCount.reduce(0, +)
+
+        if totalBadgeCount > 0 {
+            // Eğer toplam badge sayısı 0'dan büyükse, tabBarItem'a badge ekleyin
+            tabBarItem.badgeValue = "\(totalBadgeCount)"
+        } else {
+            // Eğer toplam badge sayısı 0 veya daha küçükse, badge'i kaldırın
+            tabBarItem.badgeValue = nil
+        }
     }
   
     @IBAction func datePickerSelected(_ sender: UIDatePicker) {
@@ -119,17 +137,18 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 fetchDataAndUpdateUI()
                 // 4. Reload table view to reflect changes
                 tableView.reloadData()
+                badgeCount = [0, 0, 0, 0]
             }
         }
     //startup reactions
     func startUpSetup() {
         ///print(coredata?.filePath ?? "Not Found")
         helper = Helper()
-        coredata = Coredata()
+        
         ui = Ui()
         setLayers()
         //Fetch items
-        coredata = cafoll.Coredata()
+        coredata = Coredata(homeViewController: self)
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
@@ -194,7 +213,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 ui.updateButtonTapped()
                 sumBreakfast(forDate: datePicker.date)
                 nameOfMeals.text = "Breakfast"
-             
+                           
             case 1:
                 tableView.reloadData()
                 coredata.fetchLunch(forDate: datePicker.date)
@@ -218,13 +237,13 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 ui.updateButtonTapped()
                 sumSnack(forDate: datePicker.date)
                 nameOfMeals.text = "Snack"
-              
             default:
                 break
             }
             // Update the table
             tableView.reloadData()
         }
+    
    
     func sumBreakfast(forDate date: Date) {
         guard let breakfastItems = self.coredata.breakfast else {

@@ -35,7 +35,7 @@ class Ui {
     }
 
     func setupCoreData() {
-        self.coredata = Coredata() // Initialize your Coredata object
+      
         totalBar()
         UiOfCircle()
         updateButtonTapped()

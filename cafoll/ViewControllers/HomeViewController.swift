@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController,UITabBarControllerDelegate {
 
+ 
     //Header
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
@@ -57,7 +58,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     var coredata: Coredata!
     var helper: Helper!
     var ui: Ui!
-   
+    var settingsViewController: SettingsViewController!
+    
     var selectedIndexPath: IndexPath?
     var isInfoVisible = false
        
@@ -66,7 +68,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateBadge()
         }
     }
-    
+    let indexOSettingsViewController = 2
     override func viewDidLoad() {
         super.viewDidLoad()
         startUpSetup()
@@ -74,6 +76,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         rotateLabel(redLabel, degrees: -45)
         rotateLabel(yellowLabel, degrees: -45)
         rotateLabel(greenLabel, degrees: 45)
+        
+        sumBreakfast(forDate: datePicker.date)
     }
     
     func updateBadge() {
@@ -135,6 +139,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 updateLabel()
                 ui.updateButtonTapped()
                 fetchDataAndUpdateUI()
+          
                 // 4. Reload table view to reflect changes
                 tableView.reloadData()
                 badgeCount = [0, 0, 0, 0]
@@ -144,18 +149,21 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     func startUpSetup() {
         ///print(coredata?.filePath ?? "Not Found")
         helper = Helper()
-        
+        settingsViewController = SettingsViewController()
         ui = Ui()
         setLayers()
         //Fetch items
         coredata = Coredata(homeViewController: self)
+        
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
         coredata.fetchSnack(forDate: datePicker.date)
-        fetchDataAndUpdateUI()
+              fetchDataAndUpdateUI()
+        
+        ui.updateButtonTapped()
         updateLabel()
-     
+        badgeCount = [0, 0, 0, 0]
         //UI
         ui.uiTools(homeViewController: self)
         firstLook.bringSubviewToFront(stackViewValues)
@@ -211,6 +219,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 coredata.fetchBreakfast(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
+                updateLabel()
                 sumBreakfast(forDate: datePicker.date)
                 nameOfMeals.text = "Breakfast"
                            
@@ -219,6 +228,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 coredata.fetchLunch(forDate: datePicker.date)
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
+                updateLabel()
                 sumLunch(forDate: datePicker.date)
                 nameOfMeals.text = "Lunch"
               
@@ -244,12 +254,21 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             tableView.reloadData()
         }
     
-   
     func sumBreakfast(forDate date: Date) {
+       
+        
+        let indexOSettingsViewController = 2
+
+        guard let tabBarController = self.tabBarController,
+            let settingsViewController = tabBarController.viewControllers?[indexOSettingsViewController] as? SettingsViewController else {
+            print("Hata: Tab barından HomeViewController'a erişilemiyor.")
+            return
+        }
+        
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
-    
+      
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
@@ -265,30 +284,54 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 totalCarbs += Double(item.carbon ?? "0") ?? 0.0
             }
         }
-     
-        // Update the progress views and labels with the calculated totals
-        let maxGreen: Float = 25
-        let maxYellow: Float = 25
-        let maxRed: Float = 25
-        let maxPurple: Float = 700
+       
+    
+        if let circleGreenText = settingsViewController.progressGreen?.text,
+           let maxGreen = Float(circleGreenText),
+           let circleYellowText = settingsViewController.progressYellow?.text,
+           let maxYellow = Float(circleYellowText),
+           let circleRedText = settingsViewController.progressRed?.text,
+           let maxRed = Float(circleRedText),
+           let circlePurpleText = settingsViewController.progressPurple?.text,
+           let maxPurple = Float(circlePurpleText) {
+            
+            settingsViewController.updateSliderValues()
+            settingsViewController.saveSliderValues()
+            
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
+       
+            // Toplam değerleri ekrana yazdır
+            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+            redInfoLabel.text = String(format: "%.0f", totalProtein)
+            yellowInfoLabel.text = String(format: "%.0f", totalFats)
+            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
 
-        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-   
-        // Toplam değerleri ekrana yazdır
-        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-        redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFats)
-        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-
-        purpleTotal.text = String(format: "%.0f", maxPurple)
-        redTotal.text = String(format: "%.0f", maxRed)
-        yellowTotal.text = String(format: "%.0f", maxYellow)
-        greenTotal.text = String(format: "%.0f", maxGreen)
-        
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
+            purpleTotal.text = String(format: "%.0f", maxPurple)
+            redTotal.text = String(format: "%.0f", maxRed)
+            yellowTotal.text = String(format: "%.0f", maxYellow)
+            greenTotal.text = String(format: "%.0f", maxGreen)
+            
+            updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
+            updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
+            updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
+            updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
+            
+        } else {
+            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
+            print("Hata: Bir değer nil veya dönüştürülemez.")
+            if settingsViewController.progressGreen?.text == nil {
+                print("sliderValueGreen is nil")
+            }
+            if settingsViewController.progressYellow?.text == nil {
+                print("sliderValueYellow is nil")
+            }
+            if settingsViewController.progressRed?.text == nil {
+                print("sliderValueRed is nil")
+            }
+            if settingsViewController.progressPurple?.text == nil {
+                print("sliderValuePurple is nil")
+            }
+        }
     }
 
     func sumLunch(forDate date: Date) {
@@ -587,6 +630,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
     }
     
+  
     @IBAction func circleButtonShowInfo(_ sender: UIButton) {
         guard let date = datePicker?.date else {
             print("Error: Selected date is nil.")
@@ -726,6 +770,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
           isInfoVisible.toggle()
         
     }
+    
+ 
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {

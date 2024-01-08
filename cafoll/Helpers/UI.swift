@@ -16,6 +16,7 @@ class Ui {
     var circularProgressBar4: CircularProgressBar!
     
     var homeviewController: HomeViewController!
+    var settingsViewController: SettingsViewController!
     
     var totalCalori: Float?
     var totalProtein: Float?
@@ -25,7 +26,7 @@ class Ui {
     var caloriValue = Float(2800)
     var proteinValue = Float(100)
     var fatValue = Float(100)
-    var carbonValue = Float(100)
+    var carbonValue = Float(250)
     
     var coredata: Coredata!
     
@@ -63,10 +64,10 @@ class Ui {
     @objc func updateButtonTapped() {
         let fillAnimationDuration: TimeInterval = 4.0
 
-        guard let totalCaloriText = homeviewController.totalCalori.text,
-              let totalProteinText = homeviewController.totalPRotein.text,
-              let totalFatText = homeviewController.totalFat.text,
-              let totalCarbonText = homeviewController.totalCarbon.text,
+        guard let totalCaloriText = homeviewController?.totalCalori?.text,
+              let totalProteinText = homeviewController?.totalPRotein?.text,
+              let totalFatText = homeviewController?.totalFat?.text,
+              let totalCarbonText = homeviewController?.totalCarbon?.text,
               let totalCaloriValue = Float(totalCaloriText),
               let totalProteinValue = Float(totalProteinText),
               let totalFatValue = Float(totalFatText),
@@ -96,10 +97,10 @@ class Ui {
             self.totalFat = totalFat
             self.totalCarbon = totalCarbon
 
-            self.homeviewController.purpleLabel.text = String(format: "%.0f", self.caloriValue)
-            self.homeviewController.redLabel.text = String(format: "%.0f", self.proteinValue)
-            self.homeviewController.yellowLabel.text = String(format: "%.0f", self.fatValue)
-            self.homeviewController.greenLabel.text = String(format: "%.0f", self.carbonValue)
+            self.homeviewController?.purpleLabel?.text = String(format: "%.0f", self.caloriValue)
+            self.homeviewController?.redLabel?.text = String(format: "%.0f", self.proteinValue)
+            self.homeviewController?.yellowLabel?.text = String(format: "%.0f", self.fatValue)
+            self.homeviewController?.greenLabel?.text = String(format: "%.0f", self.carbonValue)
 
             let normalizedProgress1 = CGFloat((totalCalori / self.caloriValue))
             let normalizedProgress2 = CGFloat((totalProtein / self.proteinValue))
@@ -129,6 +130,7 @@ class Ui {
         applyShadow(to: homeviewController!.secondLook, offset: CGSize(width: 0, height: 6), radius: 12)
         applyShadow(to: homeviewController!.dateView, offset: CGSize(width: 0, height: 6), radius: 12)
         applyShadow(to: homeviewController!.segmentView, offset: CGSize(width: 0, height: 6), radius: 12)
+      
     }
   
 }

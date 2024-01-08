@@ -38,15 +38,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //tableView
     @IBOutlet weak var tableView: UITableView!
     
-   
-   
     override func viewDidLoad() {
         super.viewDidLoad()
        
         startUpSetup()
     }
     
-   
     //Start up!
     func startUpSetup() {
         
@@ -55,7 +52,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         helper = Helper()
         
         homeViewController = HomeViewController()
-        
+        ui.applyShadow(to: mainView, offset: CGSize(width: 0, height: 6), radius: 12)
         coredata = Coredata(viewController: self)
         searchBar.delegate = self
   
@@ -118,7 +115,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
             let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
-                
+                self?.searchBar.resignFirstResponder() // Klavyeyi kapat
                 // Get the selected index path
                  guard let indexPath = tableView.indexPathForSelectedRow else {
                      print("Selected index path is nil.")
@@ -191,7 +188,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
         
             let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
-                
+                self?.searchBar.resignFirstResponder() // Klavyeyi kapat
                 // Get the selected index path
                  guard let indexPath = tableView.indexPathForSelectedRow else {
                      print("Selected index path is nil.")
@@ -263,7 +260,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
            
         let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
-            
+            self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
              guard let indexPath = tableView.indexPathForSelectedRow else {
                  print("Selected index path is nil.")
@@ -335,7 +332,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
-            
+            self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
              guard let indexPath = tableView.indexPathForSelectedRow else {
                  print("Selected index path is nil.")

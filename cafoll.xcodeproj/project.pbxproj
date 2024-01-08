@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0807F5992B1495500068A5DA /* Coredata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807F5982B1495500068A5DA /* Coredata.swift */; };
+		0824298E2B4828B700BC4B9D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824298D2B4828B700BC4B9D /* SettingsViewController.swift */; };
 		085F2C722B32E5DB003E246D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085F2C712B32E5DB003E246D /* API.swift */; };
 		087D27962B3322F1001385A4 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D27952B3322F1001385A4 /* CircleProgressBar.swift */; };
 		0883C0B72B0E160D00D55176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0B62B0E160D00D55176 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		0807F5982B1495500068A5DA /* Coredata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coredata.swift; sourceTree = "<group>"; };
+		0824298D2B4828B700BC4B9D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		085F2C712B32E5DB003E246D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		087D27952B3322F1001385A4 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
 		0883C0B32B0E160D00D55176 /* cafoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cafoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +152,9 @@
 		08856CF02B1E093D00466AAB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0883C0BA2B0E160D00D55176 /* ViewController.swift */,
 				08856CF12B1E097C00466AAB /* HomeViewController.swift */,
+				0883C0BA2B0E160D00D55176 /* ViewController.swift */,
+				0824298D2B4828B700BC4B9D /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				08C23D7B2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift in Sources */,
 				08C23D7C2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift in Sources */,
 				08CF6F902B446DD10043D0C3 /* APIFoods.swift in Sources */,
+				0824298E2B4828B700BC4B9D /* SettingsViewController.swift in Sources */,
 				08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */,
 				08C23D852B38852700E8CFCD /* Lunch+CoreDataClass.swift in Sources */,
 				08C23D862B38852700E8CFCD /* Lunch+CoreDataProperties.swift in Sources */,

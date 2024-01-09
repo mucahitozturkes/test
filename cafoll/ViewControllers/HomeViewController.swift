@@ -159,7 +159,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
         coredata.fetchSnack(forDate: datePicker.date)
-              fetchDataAndUpdateUI()
+        fetchDataAndUpdateUI()
         
         ui.updateButtonTapped()
         updateLabel()
@@ -255,26 +255,17 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
     
     func sumBreakfast(forDate date: Date) {
-       
-        
-        let indexOSettingsViewController = 2
-
-        guard let tabBarController = self.tabBarController,
-            let settingsViewController = tabBarController.viewControllers?[indexOSettingsViewController] as? SettingsViewController else {
-            print("Hata: Tab barından HomeViewController'a erişilemiyor.")
-            return
-        }
-        
+                      
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
-      
+        
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
-
+        
         for item in breakfastItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -284,52 +275,44 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 totalCarbs += Double(item.carbon ?? "0") ?? 0.0
             }
         }
-       
-    
-        if let circleGreenText = settingsViewController.progressGreen?.text,
-           let maxGreen = Float(circleGreenText),
-           let circleYellowText = settingsViewController.progressYellow?.text,
-           let maxYellow = Float(circleYellowText),
-           let circleRedText = settingsViewController.progressRed?.text,
-           let maxRed = Float(circleRedText),
-           let circlePurpleText = settingsViewController.progressPurple?.text,
-           let maxPurple = Float(circlePurpleText) {
+        
+        if let maxGreen = UserDefaults.standard.value(forKey: "breakfastgreenSliderValue") as? Double,
+           let maxYellow = UserDefaults.standard.value(forKey: "breakfastyellowSliderValue") as? Double,
+           let maxRed = UserDefaults.standard.value(forKey: "breakfastredSliderValue") as? Double,
+           let maxPurple = UserDefaults.standard.value(forKey: "breakfastpurpleSliderValue") as? Double {
             
-            settingsViewController.updateSliderValues()
-            settingsViewController.saveSliderValues()
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-       
             // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(format: "%.0f", totalCalories)
             redInfoLabel.text = String(format: "%.0f", totalProtein)
             yellowInfoLabel.text = String(format: "%.0f", totalFats)
             greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-
+            
             purpleTotal.text = String(format: "%.0f", maxPurple)
             redTotal.text = String(format: "%.0f", maxRed)
             yellowTotal.text = String(format: "%.0f", maxYellow)
             greenTotal.text = String(format: "%.0f", maxGreen)
             
-            updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
-            updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
-            updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
-            updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
+            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
+            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
+            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
+            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
             
         } else {
             // Eğer bir değer nil veya dönüştürülemezse buraya girecek
             print("Hata: Bir değer nil veya dönüştürülemez.")
             if settingsViewController.progressGreen?.text == nil {
-                print("sliderValueGreen is nil")
+                print("Green is nil")
             }
             if settingsViewController.progressYellow?.text == nil {
-                print("sliderValueYellow is nil")
+                print("Yellow is nil")
             }
             if settingsViewController.progressRed?.text == nil {
-                print("sliderValueRed is nil")
+                print("sRed is nil")
             }
             if settingsViewController.progressPurple?.text == nil {
-                print("sliderValuePurple is nil")
+                print("Purple is nil")
             }
         }
     }
@@ -356,31 +339,45 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
         }
       
-        // Update the progress views and labels with the calculated totals
-        let maxGreen: Float = 25
-        let maxYellow: Float = 25
-        let maxRed: Float = 25
-        let maxPurple: Float = 700
-
-     
-        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-
-     
-        // Toplam değerleri ekrana yazdır
-        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-        redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFats)
-        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-
-        purpleTotal.text = String(format: "%.0f", maxPurple)
-        redTotal.text = String(format: "%.0f", maxRed)
-        yellowTotal.text = String(format: "%.0f", maxYellow)
-        greenTotal.text = String(format: "%.0f", maxGreen)
-        
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
+        if let maxGreen = UserDefaults.standard.value(forKey: "lunchgreenSliderValue") as? Double,
+           let maxYellow = UserDefaults.standard.value(forKey: "lunchyellowSliderValue") as? Double,
+           let maxRed = UserDefaults.standard.value(forKey: "lunchredSliderValue") as? Double,
+           let maxPurple = UserDefaults.standard.value(forKey: "lunchpurpleSliderValue") as? Double {
+            
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            
+            // Toplam değerleri ekrana yazdır
+            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+            redInfoLabel.text = String(format: "%.0f", totalProtein)
+            yellowInfoLabel.text = String(format: "%.0f", totalFats)
+            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+            
+            purpleTotal.text = String(format: "%.0f", maxPurple)
+            redTotal.text = String(format: "%.0f", maxRed)
+            yellowTotal.text = String(format: "%.0f", maxYellow)
+            greenTotal.text = String(format: "%.0f", maxGreen)
+            
+            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
+            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
+            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
+            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            
+        } else {
+            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
+            print("Hata: Bir değer nil veya dönüştürülemez.")
+            if settingsViewController.progressGreen?.text == nil {
+                print("sliderValueGreen is nil")
+            }
+            if settingsViewController.progressYellow?.text == nil {
+                print("sliderValueYellow is nil")
+            }
+            if settingsViewController.progressRed?.text == nil {
+                print("sliderValueRed is nil")
+            }
+            if settingsViewController.progressPurple?.text == nil {
+                print("sliderValuePurple is nil")
+            }
+        }
     }
 
     func sumDinner(forDate date: Date) {
@@ -404,32 +401,47 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
         }
      
-        // Update the progress views and labels with the calculated totals
-        let maxGreen: Float = 25
-        let maxYellow: Float = 25
-        let maxRed: Float = 25
-        let maxPurple: Float = 700
-
-     
-        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-
-        // Toplam değerleri ekrana yazdır
-        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-        redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFats)
-        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-
-        purpleTotal.text = String(format: "%.0f", maxPurple)
-        redTotal.text = String(format: "%.0f", maxRed)
-        yellowTotal.text = String(format: "%.0f", maxYellow)
-        greenTotal.text = String(format: "%.0f", maxGreen)
-        
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
+        if let maxGreen = UserDefaults.standard.value(forKey: "dinnergreenSliderValue") as? Double,
+           let maxYellow = UserDefaults.standard.value(forKey: "dinneryellowSliderValue") as? Double,
+           let maxRed = UserDefaults.standard.value(forKey: "dinnerredSliderValue") as? Double,
+           let maxPurple = UserDefaults.standard.value(forKey: "dinnerpurpleSliderValue") as? Double {
+            
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            
+            // Toplam değerleri ekrana yazdır
+            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+            redInfoLabel.text = String(format: "%.0f", totalProtein)
+            yellowInfoLabel.text = String(format: "%.0f", totalFats)
+            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+            
+            purpleTotal.text = String(format: "%.0f", maxPurple)
+            redTotal.text = String(format: "%.0f", maxRed)
+            yellowTotal.text = String(format: "%.0f", maxYellow)
+            greenTotal.text = String(format: "%.0f", maxGreen)
+            
+            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
+            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
+            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
+            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            
+        } else {
+            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
+            print("Hata: Bir değer nil veya dönüştürülemez.")
+            if settingsViewController.progressGreen?.text == nil {
+                print("sliderValueGreen is nil")
+            }
+            if settingsViewController.progressYellow?.text == nil {
+                print("sliderValueYellow is nil")
+            }
+            if settingsViewController.progressRed?.text == nil {
+                print("sliderValueRed is nil")
+            }
+            if settingsViewController.progressPurple?.text == nil {
+                print("sliderValuePurple is nil")
+            }
+        }
     }
-
+    
     func sumSnack(forDate date: Date) {
         guard let snackItems = self.coredata.snack else {
             return
@@ -451,30 +463,45 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
         }
 
-        // Update the progress views and labels with the calculated totals
-        let maxGreen: Float = 25
-        let maxYellow: Float = 25
-        let maxRed: Float = 25
-        let maxPurple: Float = 700
-
-    
-        updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: maxGreen, maxYellow: maxYellow, maxRed: maxRed, maxPurple: maxPurple)
-
-        // Toplam değerleri ekrana yazdır
-        purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-        redInfoLabel.text = String(format: "%.0f", totalProtein)
-        yellowInfoLabel.text = String(format: "%.0f", totalFats)
-        greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-
-        purpleTotal.text = String(format: "%.0f", maxPurple)
-        redTotal.text = String(format: "%.0f", maxRed)
-        yellowTotal.text = String(format: "%.0f", maxYellow)
-        greenTotal.text = String(format: "%.0f", maxGreen)
-        
-        updateVisibility(markPurple, value: totalCalories, threshold: Double(maxPurple))
-        updateVisibility(markRed, value: totalProtein, threshold: Double(maxRed))
-        updateVisibility(markYellow, value: totalFats, threshold: Double(maxYellow))
-        updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxGreen))
+        if let maxGreen = UserDefaults.standard.value(forKey: "snackgreenSliderValue") as? Double,
+           let maxYellow = UserDefaults.standard.value(forKey: "snackyellowSliderValue") as? Double,
+           let maxRed = UserDefaults.standard.value(forKey: "snackredSliderValue") as? Double,
+           let maxPurple = UserDefaults.standard.value(forKey: "snackpurpleSliderValue") as? Double {
+            
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            
+            // Toplam değerleri ekrana yazdır
+            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
+            redInfoLabel.text = String(format: "%.0f", totalProtein)
+            yellowInfoLabel.text = String(format: "%.0f", totalFats)
+            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
+            
+            purpleTotal.text = String(format: "%.0f", maxPurple)
+            redTotal.text = String(format: "%.0f", maxRed)
+            yellowTotal.text = String(format: "%.0f", maxYellow)
+            greenTotal.text = String(format: "%.0f", maxGreen)
+            
+            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
+            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
+            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
+            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            
+        } else {
+            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
+            print("Hata: Bir değer nil veya dönüştürülemez.")
+            if settingsViewController.progressGreen?.text == nil {
+                print("sliderValueGreen is nil")
+            }
+            if settingsViewController.progressYellow?.text == nil {
+                print("sliderValueYellow is nil")
+            }
+            if settingsViewController.progressRed?.text == nil {
+                print("sliderValueRed is nil")
+            }
+            if settingsViewController.progressPurple?.text == nil {
+                print("sliderValuePurple is nil")
+            }
+        }
     }
     
     func updateVisibility(_ mark: UIImageView, value: Double, threshold: Double) {
@@ -506,6 +533,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
     
     func sumMeals(forDate date: Date) {
+        
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
@@ -568,10 +596,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         totalFat.text = String(format: "%.0f", totalFats)
         totalCarbon.text = String(format: "%.0f", totalCarbs)
         
-        if totalCalories >= Double(ui.caloriValue),
-           totalProtein >= Double(ui.proteinValue),
-           totalFats >= Double(ui.fatValue),
-           totalCarbs >= Double(ui.carbonValue)
+        if totalCalories >= Double(ui.circleTotal().0),
+           totalProtein >= Double(ui.circleTotal().1),
+           totalFats >= Double(ui.circleTotal().2),
+           totalCarbs >= Double(ui.circleTotal().3)
         {
             checkMarkMaxValue.isHidden = false
             goalTextLAbel.isHidden = true
@@ -579,6 +607,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             checkMarkMaxValue.isHidden = true
             goalTextLAbel.isHidden = false
         }
+        
+        
     }
     
     // Sağa tıklandığında tarihi bir gün ileri al
@@ -771,7 +801,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
     }
     
- 
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -831,7 +860,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if selectedIndexPath == indexPath {
@@ -1073,7 +1101,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-
     // Helper function to determine the highest value and return the corresponding color
     func determineHighestValueColor(carbons: String, fat: String, protein: String) -> UIColor {
         var highestValueColor: UIColor = .clear

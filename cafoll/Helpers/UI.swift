@@ -22,11 +22,6 @@ class Ui {
     var totalProtein: Float?
     var totalFat: Float?
     var totalCarbon: Float?
-
-    var caloriValue = Float(2800)
-    var proteinValue = Float(100)
-    var fatValue = Float(100)
-    var carbonValue = Float(250)
     
     var coredata: Coredata!
     
@@ -77,10 +72,17 @@ class Ui {
             return
         }
 
+        // Call the circleTotal function to calculate the total values
+        let (greenTotal, yellowTotal, redTotal, purpleTotal) = circleTotal()
+
         updateUIWithAnimation(totalCalori: totalCaloriValue,
                               totalProtein: totalProteinValue,
                               totalFat: totalFatValue,
                               totalCarbon: totalCarbonValue,
+                              greenTotal: greenTotal,
+                              yellowTotal: yellowTotal,
+                              redTotal: redTotal,
+                              purpleTotal: purpleTotal,
                               duration: fillAnimationDuration)
     }
 
@@ -88,6 +90,10 @@ class Ui {
                                 totalProtein: Float,
                                 totalFat: Float,
                                 totalCarbon: Float,
+                                greenTotal: Double,
+                                yellowTotal: Double,
+                                redTotal: Double,
+                                purpleTotal: Double,
                                 duration: TimeInterval) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -97,15 +103,16 @@ class Ui {
             self.totalFat = totalFat
             self.totalCarbon = totalCarbon
 
-            self.homeviewController?.purpleLabel?.text = String(format: "%.0f", self.caloriValue)
-            self.homeviewController?.redLabel?.text = String(format: "%.0f", self.proteinValue)
-            self.homeviewController?.yellowLabel?.text = String(format: "%.0f", self.fatValue)
-            self.homeviewController?.greenLabel?.text = String(format: "%.0f", self.carbonValue)
+            self.homeviewController?.purpleLabel?.text = String(format: "%.0f", purpleTotal)
+            self.homeviewController?.redLabel?.text = String(format: "%.0f", redTotal)
+            self.homeviewController?.yellowLabel?.text = String(format: "%.0f", yellowTotal)
+            self.homeviewController?.greenLabel?.text = String(format: "%.0f", greenTotal)
 
-            let normalizedProgress1 = CGFloat((totalCalori / self.caloriValue))
-            let normalizedProgress2 = CGFloat((totalProtein / self.proteinValue))
-            let normalizedProgress3 = CGFloat((totalFat / self.fatValue))
-            let normalizedProgress4 = CGFloat((totalCarbon / self.carbonValue))
+            let normalizedProgress1 = CGFloat((totalCalori / Float(purpleTotal)))
+            let normalizedProgress2 = CGFloat((totalProtein / Float(redTotal)))
+            let normalizedProgress3 = CGFloat((totalFat / Float(yellowTotal)))
+            let normalizedProgress4 = CGFloat((totalCarbon / Float(greenTotal)))
+
 
             self.circularProgressBar1.animateProgress(to: normalizedProgress1, duration: duration)
             self.circularProgressBar2.animateProgress(to: normalizedProgress2, duration: duration)
@@ -114,7 +121,28 @@ class Ui {
         }
     }
 
+    func circleTotal() -> (Double, Double, Double, Double) {
+           let meals = ["breakfast", "lunch", "dinner", "snack"]
+           let colors = ["green", "yellow", "red", "purple"]
 
+           var totalValues = [Double](repeating: 0.0, count: colors.count)
+
+           for meal in meals {
+               for color in colors {
+                   if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Double {
+                       let colorIndex = colors.firstIndex(of: color)!
+                       totalValues[colorIndex] += value
+                   }
+               }
+           }
+
+           let greenTotal = totalValues[0]
+           let yellowTotal = totalValues[1]
+           let redTotal = totalValues[2]
+           let purpleTotal = totalValues[3]
+
+           return (greenTotal, yellowTotal, redTotal, purpleTotal)
+       }
 
 
     //View shadows

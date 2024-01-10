@@ -10,6 +10,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     //circle Value
     @IBOutlet weak var circleGreen: UILabel!
     @IBOutlet weak var circleRed: UILabel!
@@ -62,10 +63,40 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
-        updateSliderValues()
+        if sender == sliderGreen {
+            updateLabelWithVibration(label: sliderValueGreen, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            updateLabelWithVibration(label: progressGreen, value: sender.value, color: .white, scaleX: 1.02, scaleY: 1.02)
+            let greenUserDefaultsKey = "breakfastgreenSliderValue"
+            if let savedGreenValue = UserDefaults.standard.value(forKey: greenUserDefaultsKey) as? Float {
+                updateLabelWithVibration(label: circleGreen, value: savedGreenValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            }
+        } else if sender == sliderYellow {
+            updateLabelWithVibration(label: sliderValueYellow, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            updateLabelWithVibration(label: progressYellow, value: sender.value, color: .white, scaleX: 1.02, scaleY: 1.02)
+            let yellowUserDefaultsKey = "breakfastyellowSliderValue"
+            if let savedYellowValue = UserDefaults.standard.value(forKey: yellowUserDefaultsKey) as? Float {
+                updateLabelWithVibration(label: circleYellow, value: savedYellowValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            }
+        } else if sender == sliderRed {
+            updateLabelWithVibration(label: sliderValueRed, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            updateLabelWithVibration(label: progressRed, value: sender.value, color: .white, scaleX: 1.02, scaleY: 1.02)
+            let redUserDefaultsKey = "breakfastredSliderValue"
+            if let savedRedValue = UserDefaults.standard.value(forKey: redUserDefaultsKey) as? Float {
+                updateLabelWithVibration(label: circleRed, value: savedRedValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            }
+        } else if sender == sliderPurple {
+            updateLabelWithVibration(label: sliderValuePurple, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            updateLabelWithVibration(label: progressPurple, value: sender.value, color: .white, scaleX: 1.02, scaleY: 1.02)
+            let purpleUserDefaultsKey = "breakfastpurpleSliderValue"
+            if let savedPurpleValue = UserDefaults.standard.value(forKey: purpleUserDefaultsKey) as? Float {
+                updateLabelWithVibration(label: circlePurple, value: savedPurpleValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+            }
+        }
+        
         saveSliderValues(forSegment: segmentedControl.selectedSegmentIndex)
         circleTotal()
     }
+
 
     func saveSliderValues(forSegment segment: Int) {
         let segmentKey = segmentKeyForIndex(segment)
@@ -100,16 +131,57 @@ class SettingsViewController: UIViewController {
     }
 
     func updateSliderValues() {
-        sliderValueGreen.text = String(format: "%.0f", sliderGreen.value)
-        sliderValueYellow.text = String(format: "%.0f", sliderYellow.value)
-        sliderValueRed.text = String(format: "%.0f", sliderRed.value)
-        sliderValuePurple.text = String(format: "%.0f", sliderPurple.value)
+        updateLabelWithVibration(label: sliderValueGreen, value: sliderGreen.value, color: .white, scaleX: 1.03, scaleY: 1.03)
+        updateLabelWithVibration(label: sliderValueYellow, value: sliderYellow.value, color: .white, scaleX: 1.03, scaleY: 1.03)
+        updateLabelWithVibration(label: sliderValueRed, value: sliderRed.value, color: .white, scaleX: 1.03, scaleY: 1.03)
+        updateLabelWithVibration(label: sliderValuePurple, value: sliderPurple.value, color: .white, scaleX: 1.03, scaleY: 1.03)
 
-        progressGreen.text = sliderValueGreen.text
-        progressYellow.text = sliderValueYellow.text
-        progressRed.text = sliderValueRed.text
-        progressPurple.text = sliderValuePurple.text
+        // progressGreen için
+        if let sliderValueGreenText = sliderValueGreen.text {
+            updateLabelWithVibration(label: progressGreen, value: (sliderValueGreenText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
+        }
+
+        // progressYellow için
+        if let sliderValueYellowText = sliderValueYellow.text {
+            updateLabelWithVibration(label: progressYellow, value: (sliderValueYellowText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
+        }
+
+        // progressRed için
+        if let sliderValueRedText = sliderValueRed.text {
+            updateLabelWithVibration(label: progressRed, value: (sliderValueRedText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
+        }
+
+        // progressPurple için
+        if let sliderValuePurpleText = sliderValuePurple.text {
+            updateLabelWithVibration(label: progressPurple, value: (sliderValuePurpleText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
+        }
+
     }
+    func updateLabelWithVibration(label: UILabel, value: Float, color: UIColor, scaleX: CGFloat, scaleY: CGFloat) {
+        label.text = String(format: "%.0f", value)
+        
+        // Orijinal rengi sakla
+        let originalColor = label.textColor
+
+        // Renk belirleme
+        label.textColor = color
+
+        // Ayrı ayrı scaleX ve scaleY değerleri ile CGAffineTransform oluştur
+        let scaleTransform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+
+        // Animasyon ekle
+        UIView.animate(withDuration: 0.1, animations: {
+            label.transform = scaleTransform
+        }) { _ in
+            UIView.animate(withDuration: 1) {
+                label.transform = .identity
+                // Animasyon bittiğinde orijinal rengine geri dön
+                label.textColor = originalColor
+            }
+        }
+    }
+
+
 
     func segmentKeyForIndex(_ index: Int) -> String {
         switch index {
@@ -161,6 +233,7 @@ class SettingsViewController: UIViewController {
         circleGreen.text = String(format: "%.0f", greenTotal)
         circlePurple.text = String(format: "%.0f", purpleTotal)
         circleYellow.text = String(format: "%.0f", yellowTotal)
+
     
 
     }

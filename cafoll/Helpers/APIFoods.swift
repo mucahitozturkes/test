@@ -8,7 +8,7 @@
 import Foundation
 
 var favorites: [String: [String: Float]] = [:]
-
+var searchResults: [String: [String: Int]] = [:]
 var foodDictionary: [String: [String: Float]] = [
     "elma": [
         "protein": 1,

@@ -69,6 +69,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
     }
     let indexOSettingsViewController = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startUpSetup()
@@ -99,14 +100,11 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchDinner(forDate: sender.date)
         coredata.fetchSnack(forDate: sender.date)
         
-        
-        
         // 2. Update UI based on fetched data
         sumBreakfast(forDate: sender.date) // Assuming this function uses the fetched data
         sumLunch(forDate: sender.date)
         sumDinner(forDate: sender.date)
         sumSnack(forDate: sender.date)
-        
         // 3. set updated
         updateLabel()
         ui.updateButtonTapped()
@@ -154,7 +152,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         setLayers()
         //Fetch items
         coredata = Coredata(homeViewController: self)
-        
+        datePicker.maximumDate = Date()
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
@@ -614,10 +612,14 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     // Sağa tıklandığında tarihi bir gün ileri al
     @IBAction func rightDate(_ sender: UIButton) {
         var currentDate = datePicker.date
-        // Bir gün ekleyerek tarihi güncelle
-        currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-        datePicker.setDate(currentDate, animated: true)
-        
+            let today = Date()
+
+            // Check if the selected date is today or in the past
+            if currentDate <= today {
+                // Bir gün ekleyerek tarihi güncelle
+                currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+                datePicker.setDate(currentDate, animated: true)
+            }
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
@@ -638,9 +640,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     // Sola tıklandığında tarihi bir gün geri al
     @IBAction func leftDate(_ sender: UIButton) {
         var currentDate = datePicker.date
-        // Bir gün çıkartarak tarihi güncelle
-        currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
-        datePicker.setDate(currentDate, animated: true)
+
+            // Bir gün çıkartarak tarihi güncelle
+            currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+            datePicker.setDate(currentDate, animated: true)
         
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
@@ -823,6 +826,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as! HomeCell
         let row = indexPath.row

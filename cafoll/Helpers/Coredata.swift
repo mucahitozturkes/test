@@ -31,6 +31,21 @@ class Coredata {
     
     }
     
+    func isFavoriteAlreadyAdded(title: String) -> Bool {
+        let fetchRequest: NSFetchRequest<Favorite> = Favorite.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "title == %@", title)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let favorite = results.first {
+                return favorite.isFavorited
+            }
+            return false
+        } catch {
+            print("Error checking if favorite already exists: \(error)")
+            return false
+        }
+    }
     //Fetch Foods
     func fetchFoods() {
         do {

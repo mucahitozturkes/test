@@ -14,25 +14,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var coredata: Coredata!
     var homeViewController: HomeViewController!
     var selectedCellFoodName: String?
-    var searchResults: [String: [String: Int]] = [:]
-    
-    // Bar Labels
-    @IBOutlet weak var titleLabelTextfield: UITextField!
-    @IBOutlet weak var caloriLabel: UITextField!
-    @IBOutlet weak var fatLabel: UITextField!
-    @IBOutlet weak var carbonLabel: UITextField!
-    @IBOutlet weak var proteinLabel: UITextField!
-    // Bars
-    @IBOutlet weak var caloriBar: UIProgressView!
-    @IBOutlet weak var fatBar: UIProgressView!
-    @IBOutlet weak var carbonBar: UIProgressView!
-    @IBOutlet weak var proteinBar: UIProgressView!
+  
     //Views
     @IBOutlet weak var mainView: UIView!
-    @IBOutlet var gestureView: UIView!
-    @IBOutlet var popupView: UIView!
     //Tools
-    
     @IBOutlet weak var searchBar: UISearchBar!
     //tableView
     @IBOutlet weak var tableView: UITableView!
@@ -42,7 +27,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         startUpSetup()
     }
-    
     //Start up!
     func startUpSetup() {
         
@@ -78,7 +62,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         coredata.saveData()
     }
-    
+ 
 }
 //MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -104,25 +88,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        let favoriteOption = UIAlertAction(title: "★", style: .default) { [weak self] _ in
-            self?.searchBar.resignFirstResponder() // Klavyeyi kapat
-            // Get the selected index path
-            guard let indexPath = tableView.indexPathForSelectedRow else {
-                print("Selected index path is nil.")
-                return
-            }
-            
-            // Get the selected cell
-            guard let cell = tableView.cellForRow(at: indexPath) as? Cell else {
-                print("Cell at selected index path is not of type YourCellType.")
-                return
-            }
-            
-            // Add your logic to handle the favorite button press for the selected cell
-            // For example, toggle the favorite state or perform any other action.
-        }
 
-        
         let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
             self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
@@ -160,7 +126,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
                 // Check if selectedCellFoodName is not nil
                 if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = self.searchResults[selectedCellFoodName] {
+                   var nutrientValues = searchResults[selectedCellFoodName] {
                     nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
                     nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
                     nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
@@ -176,9 +142,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case when selectedCellFoodName is nil
                     print("selectedCellFoodName is nil")
                 }
-                searchBar.text = "" // Search bar'ın içeriğini temizle
-                searchBar.resignFirstResponder() // Klavyeyi kapat
-                searchResults = [:] // Search sonuçlarını temizle
+             
                 tableView.reloadData()
                 homeViewController.badgeCount[0] += 1
             }
@@ -229,7 +193,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
                 // Check if selectedCellFoodName is not nil
                 if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = self.searchResults[selectedCellFoodName] {
+                   var nutrientValues = searchResults[selectedCellFoodName] {
                     nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
                     nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
                     nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
@@ -245,10 +209,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case when selectedCellFoodName is nil
                     print("selectedCellFoodName is nil")
                 }
-                
-                searchBar.text = "" // Search bar'ın içeriğini temizle
-                searchBar.resignFirstResponder() // Klavyeyi kapat
-                searchResults = [:] // Search sonuçlarını temizle
+             
                 tableView.reloadData()
                 homeViewController.badgeCount[0] += 1
                 
@@ -301,7 +262,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
                 // Check if selectedCellFoodName is not nil
                 if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = self.searchResults[selectedCellFoodName] {
+                   var nutrientValues = searchResults[selectedCellFoodName] {
                     nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
                     nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
                     nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
@@ -317,10 +278,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case when selectedCellFoodName is nil
                     print("selectedCellFoodName is nil")
                 }
-                
-                searchBar.text = "" // Search bar'ın içeriğini temizle
-                searchBar.resignFirstResponder() // Klavyeyi kapat
-                searchResults = [:] // Search sonuçlarını temizle
+          
                 tableView.reloadData()
                 homeViewController.badgeCount[0] += 1
                 
@@ -373,7 +331,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
                 // Check if selectedCellFoodName is not nil
                 if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = self.searchResults[selectedCellFoodName] {
+                   var nutrientValues = searchResults[selectedCellFoodName] {
                     nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
                     nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
                     nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
@@ -389,10 +347,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case when selectedCellFoodName is nil
                     print("selectedCellFoodName is nil")
                 }
-                
-                searchBar.text = "" // Search bar'ın içeriğini temizle
-                searchBar.resignFirstResponder() // Klavyeyi kapat
-                searchResults = [:] // Search sonuçlarını temizle
+              
                 tableView.reloadData()
                 homeViewController.badgeCount[0] += 1
                 
@@ -408,7 +363,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         // Add actions to the alert
-        alert.addAction(favoriteOption)
         alert.addAction(breakfastOption)
         alert.addAction(lunchOption)
         alert.addAction(dinnerOption)
@@ -416,7 +370,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         // You can set the text color of the "Edit" option in the first alert here
-        favoriteOption.setValue(UIColor.systemYellow, forKey: "titleTextColor")
         breakfastOption.setValue(UIColor.options, forKey: "titleTextColor")
         lunchOption.setValue(UIColor.options, forKey: "titleTextColor")
         dinnerOption.setValue(UIColor.options, forKey: "titleTextColor")
@@ -441,7 +394,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return 55
     }
 }
-
+//Search Bar
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {

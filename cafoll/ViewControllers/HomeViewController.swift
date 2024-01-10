@@ -8,8 +8,8 @@
 import UIKit
 
 class HomeViewController: UIViewController,UITabBarControllerDelegate {
-
- 
+    
+    
     //Header
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var segmentView: UIView!
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-  
+    
     var coredata: Coredata!
     var helper: Helper!
     var ui: Ui!
@@ -62,7 +62,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     var selectedIndexPath: IndexPath?
     var isInfoVisible = false
-       
+    
     var badgeCount: [Int] = [0, 0, 0, 0] {
         didSet {
             updateBadge()
@@ -82,7 +82,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     func updateBadge() {
         let totalBadgeCount = badgeCount.reduce(0, +)
-
+        
         if totalBadgeCount > 0 {
             // Eğer toplam badge sayısı 0'dan büyükse, tabBarItem'a badge ekleyin
             tabBarItem.badgeValue = "\(totalBadgeCount)"
@@ -91,16 +91,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             tabBarItem.badgeValue = nil
         }
     }
-  
+    
     @IBAction func datePickerSelected(_ sender: UIDatePicker) {
         // 1. Fetch foods for the selected date
         coredata.fetchBreakfast(forDate: sender.date)
         coredata.fetchLunch(forDate: sender.date)
         coredata.fetchDinner(forDate: sender.date)
         coredata.fetchSnack(forDate: sender.date)
-     
         
-
+        
+        
         // 2. Update UI based on fetched data
         sumBreakfast(forDate: sender.date) // Assuming this function uses the fetched data
         sumLunch(forDate: sender.date)
@@ -114,7 +114,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         // 4. Reload table view to reflect changes
         tableView.reloadData()
     }
-
+    
     func rotateLabel(_ label: UILabel, degrees: CGFloat) {
         // Dereceyi radyana çevir
         let radians = degrees * .pi / 180
@@ -123,28 +123,28 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         label.transform = CGAffineTransform(rotationAngle: -radians)
     }
     // UITabBarControllerDelegate metodunu implement et
-     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-            if viewController is HomeViewController {
-                // start up
-                coredata.fetchBreakfast(forDate: datePicker.date)
-                coredata.fetchLunch(forDate: datePicker.date)
-                coredata.fetchDinner(forDate: datePicker.date)
-                coredata.fetchSnack(forDate: datePicker.date)
-                // 2. Update UI based on fetched data
-                sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
-                sumLunch(forDate: datePicker.date)
-                sumDinner(forDate: datePicker.date)
-                sumSnack(forDate: datePicker.date)
-                // 3. set updated
-                updateLabel()
-                ui.updateButtonTapped()
-                fetchDataAndUpdateUI()
-          
-                // 4. Reload table view to reflect changes
-                tableView.reloadData()
-                badgeCount = [0, 0, 0, 0]
-            }
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController is HomeViewController {
+            // start up
+            coredata.fetchBreakfast(forDate: datePicker.date)
+            coredata.fetchLunch(forDate: datePicker.date)
+            coredata.fetchDinner(forDate: datePicker.date)
+            coredata.fetchSnack(forDate: datePicker.date)
+            // 2. Update UI based on fetched data
+            sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+            sumLunch(forDate: datePicker.date)
+            sumDinner(forDate: datePicker.date)
+            sumSnack(forDate: datePicker.date)
+            // 3. set updated
+            updateLabel()
+            ui.updateButtonTapped()
+            fetchDataAndUpdateUI()
+            
+            // 4. Reload table view to reflect changes
+            tableView.reloadData()
+            badgeCount = [0, 0, 0, 0]
         }
+    }
     //startup reactions
     func startUpSetup() {
         ///print(coredata?.filePath ?? "Not Found")
@@ -171,91 +171,91 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         //table View Load
         tabBarController?.delegate = self
         tableView.reloadData()
-      
+        
     }
     func getDatePickerDate() -> Date? {
-           return datePicker?.date
-       }
+        return datePicker?.date
+    }
     //view Shadows
     func setLayers() {
         [redV1, purpleV1, yellowV1, greenV1].forEach { $0.layer.cornerRadius = 5 }
     }
     func fetchDataAndUpdateUI() {
-            switch segment.selectedSegmentIndex {
-            case 0:
-                coredata.fetchBreakfast(forDate: datePicker.date)
-                sumBreakfast(forDate: datePicker.date)
-                nameOfMeals.text = "Breakfast"
-            case 1:
-                coredata.fetchLunch(forDate: datePicker.date)
-                sumLunch(forDate: datePicker.date)
-                nameOfMeals.text = "Lunch"
-            case 2:
-                coredata.fetchDinner(forDate: datePicker.date)
-                sumDinner(forDate: datePicker.date)
-                nameOfMeals.text = "Dinner"
-            case 3:
-                coredata.fetchSnack(forDate: datePicker.date)
-                sumSnack(forDate: datePicker.date)
-                nameOfMeals.text = "Snack"
-            default:
-                break
-            }
-            
-            // Update the table
-            tableView.reloadData()
+        switch segment.selectedSegmentIndex {
+        case 0:
+            coredata.fetchBreakfast(forDate: datePicker.date)
+            sumBreakfast(forDate: datePicker.date)
+            nameOfMeals.text = "Breakfast"
+        case 1:
+            coredata.fetchLunch(forDate: datePicker.date)
+            sumLunch(forDate: datePicker.date)
+            nameOfMeals.text = "Lunch"
+        case 2:
+            coredata.fetchDinner(forDate: datePicker.date)
+            sumDinner(forDate: datePicker.date)
+            nameOfMeals.text = "Dinner"
+        case 3:
+            coredata.fetchSnack(forDate: datePicker.date)
+            sumSnack(forDate: datePicker.date)
+            nameOfMeals.text = "Snack"
+        default:
+            break
         }
-   
+        
+        // Update the table
+        tableView.reloadData()
+    }
+    
     func updateLabel() {
         nameOfMeals.text = "Breakfast"
     }
     //segment Button
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
-            let currentSegmentIndex = sender.selectedSegmentIndex
-
-            switch currentSegmentIndex {
-            case 0:
-                tableView.reloadData()
-                coredata.fetchBreakfast(forDate: datePicker.date)
-                fetchDataAndUpdateUI()
-                ui.updateButtonTapped()
-                updateLabel()
-                sumBreakfast(forDate: datePicker.date)
-                nameOfMeals.text = "Breakfast"
-                           
-            case 1:
-                tableView.reloadData()
-                coredata.fetchLunch(forDate: datePicker.date)
-                fetchDataAndUpdateUI()
-                ui.updateButtonTapped()
-                updateLabel()
-                sumLunch(forDate: datePicker.date)
-                nameOfMeals.text = "Lunch"
-              
-            case 2:
-                tableView.reloadData()
-                coredata.fetchDinner(forDate: datePicker.date)
-                fetchDataAndUpdateUI()
-                ui.updateButtonTapped()
-                sumDinner(forDate: datePicker.date)
-                nameOfMeals.text = "Dinner"
-            
-            case 3:
-                tableView.reloadData()
-                coredata.fetchSnack(forDate: datePicker.date)
-                fetchDataAndUpdateUI()
-                ui.updateButtonTapped()
-                sumSnack(forDate: datePicker.date)
-                nameOfMeals.text = "Snack"
-            default:
-                break
-            }
-            // Update the table
+        let currentSegmentIndex = sender.selectedSegmentIndex
+        
+        switch currentSegmentIndex {
+        case 0:
             tableView.reloadData()
+            coredata.fetchBreakfast(forDate: datePicker.date)
+            fetchDataAndUpdateUI()
+            ui.updateButtonTapped()
+            updateLabel()
+            sumBreakfast(forDate: datePicker.date)
+            nameOfMeals.text = "Breakfast"
+            
+        case 1:
+            tableView.reloadData()
+            coredata.fetchLunch(forDate: datePicker.date)
+            fetchDataAndUpdateUI()
+            ui.updateButtonTapped()
+            updateLabel()
+            sumLunch(forDate: datePicker.date)
+            nameOfMeals.text = "Lunch"
+            
+        case 2:
+            tableView.reloadData()
+            coredata.fetchDinner(forDate: datePicker.date)
+            fetchDataAndUpdateUI()
+            ui.updateButtonTapped()
+            sumDinner(forDate: datePicker.date)
+            nameOfMeals.text = "Dinner"
+            
+        case 3:
+            tableView.reloadData()
+            coredata.fetchSnack(forDate: datePicker.date)
+            fetchDataAndUpdateUI()
+            ui.updateButtonTapped()
+            sumSnack(forDate: datePicker.date)
+            nameOfMeals.text = "Snack"
+        default:
+            break
         }
+        // Update the table
+        tableView.reloadData()
+    }
     
     func sumBreakfast(forDate date: Date) {
-                      
+        
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
@@ -316,19 +316,19 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
         }
     }
-
+    
     func sumLunch(forDate date: Date) {
         guard let lunchItems = self.coredata.lunch else {
             return
         }
         
-       
+        
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
-
+        
         for item in lunchItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -338,7 +338,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 totalCarbs += Double(item.carbon ?? "0") ?? 0.0
             }
         }
-      
+        
         if let maxGreen = UserDefaults.standard.value(forKey: "lunchgreenSliderValue") as? Double,
            let maxYellow = UserDefaults.standard.value(forKey: "lunchyellowSliderValue") as? Double,
            let maxRed = UserDefaults.standard.value(forKey: "lunchredSliderValue") as? Double,
@@ -379,18 +379,18 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
         }
     }
-
+    
     func sumDinner(forDate date: Date) {
         guard let dinnerItems = self.coredata.dinner else {
             return
-        } 
-    
+        }
+        
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
-
+        
         for item in dinnerItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -400,7 +400,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 totalCarbs += Double(item.carbon ?? "0") ?? 0.0
             }
         }
-     
+        
         if let maxGreen = UserDefaults.standard.value(forKey: "dinnergreenSliderValue") as? Double,
            let maxYellow = UserDefaults.standard.value(forKey: "dinneryellowSliderValue") as? Double,
            let maxRed = UserDefaults.standard.value(forKey: "dinnerredSliderValue") as? Double,
@@ -446,13 +446,13 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         guard let snackItems = self.coredata.snack else {
             return
         }
- 
+        
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories = 0.0
         var totalFats = 0.0
         var totalProtein = 0.0
         var totalCarbs = 0.0
-
+        
         for item in snackItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -462,7 +462,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 totalCarbs += Double(item.carbon ?? "0") ?? 0.0
             }
         }
-
+        
         if let maxGreen = UserDefaults.standard.value(forKey: "snackgreenSliderValue") as? Double,
            let maxYellow = UserDefaults.standard.value(forKey: "snackyellowSliderValue") as? Double,
            let maxRed = UserDefaults.standard.value(forKey: "snackredSliderValue") as? Double,
@@ -506,22 +506,22 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     func updateVisibility(_ mark: UIImageView, value: Double, threshold: Double) {
         mark.isHidden = value < threshold
-    
+        
     }
-
+    
     func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float, duration: TimeInterval = 1.0) {
         // Set initial progress to 0.0
         progressPurple.progress = 0.0
         progressYellow.progress = 0.0
         progressRed.progress = 0.0
         progressGreen.progress = 0.0
-
+        
         // Calculate target progress values
         let targetProgressPurple = min(Float(calories) / maxPurple, 1.0)
         let targetProgressYellow = min(Float(fat) / maxYellow, 1.0)
         let targetProgressRed = min(Float(protein) / maxRed, 1.0)
         let targetProgressGreen = min(Float(carbs) / maxGreen, 1.0)
-
+        
         // Animate progress to target values
         UIView.animate(withDuration: duration) {
             self.progressPurple.setProgress(targetProgressPurple, animated: true)
@@ -541,7 +541,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
-
+        
         for item in breakfastItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -554,7 +554,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         guard let lunchItems = self.coredata.lunch else {
             return
         }
-    
+        
         for item in lunchItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -567,7 +567,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         guard let dinnerItems = self.coredata.dinner else {
             return
         }
-
+        
         for item in dinnerItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
@@ -614,9 +614,9 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     // Sağa tıklandığında tarihi bir gün ileri al
     @IBAction func rightDate(_ sender: UIButton) {
         var currentDate = datePicker.date
-            // Bir gün ekleyerek tarihi güncelle
-            currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-            datePicker.setDate(currentDate, animated: true)
+        // Bir gün ekleyerek tarihi güncelle
+        currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+        datePicker.setDate(currentDate, animated: true)
         
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
@@ -634,13 +634,13 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         // 4. Reload table view to reflect changes
         tableView.reloadData()
     }
-
+    
     // Sola tıklandığında tarihi bir gün geri al
     @IBAction func leftDate(_ sender: UIButton) {
         var currentDate = datePicker.date
-            // Bir gün çıkartarak tarihi güncelle
-            currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
-            datePicker.setDate(currentDate, animated: true)
+        // Bir gün çıkartarak tarihi güncelle
+        currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+        datePicker.setDate(currentDate, animated: true)
         
         coredata.fetchBreakfast(forDate: datePicker.date)
         coredata.fetchLunch(forDate: datePicker.date)
@@ -660,7 +660,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
     }
     
-  
     @IBAction func circleButtonShowInfo(_ sender: UIButton) {
         guard let date = datePicker?.date else {
             print("Error: Selected date is nil.")
@@ -707,15 +706,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
             // Update the table
             tableView.reloadData()
-        
-    
+            
+            
         } else {
             let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
             
-//            let maxCalories = 2800
-//            let maxFats = 100
-//            let maxProtein = 100
-//            let maxCarbs = 100
+            //            let maxCalories = 2800
+            //            let maxFats = 100
+            //            let maxProtein = 100
+            //            let maxCarbs = 100
             
             var totalCalories = 0.0
             var totalFats = 0.0
@@ -799,19 +798,17 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateVisibility(markGreen, value: totalCarbs, threshold: Double(greenTotal0))
         }
         // Toggle the state
-          isInfoVisible.toggle()
+        isInfoVisible.toggle()
         
     }
-    
-    
 }
 // MARK: - Home Table View
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segment.selectedSegmentIndex {
         case 0:
-           
+            
             return self.coredata.breakfast?.count ?? 0
         case 1:
             
@@ -820,7 +817,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             
             return self.coredata.dinner?.count ?? 0
         case 3:
-      
+            
             return self.coredata.snack?.count ?? 0
         default:
             return 0
@@ -829,9 +826,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as! HomeCell
         let row = indexPath.row
-
+        
         var highestValueColor: UIColor = .clear
-
+        
         switch segment.selectedSegmentIndex {
         case 0:
             if let indexBreakfast = self.coredata.breakfast?[row] {
@@ -856,10 +853,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-
+        
         // Set the background color of colorView based on the highest value
         cell.colorView.backgroundColor = highestValueColor
-
+        
         return cell
     }
     
@@ -869,7 +866,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             // If the same cell is selected again, reset the state
             selectedIndexPath = nil
             let currentSegmentIndex = self.segment.selectedSegmentIndex
-
+            
             switch currentSegmentIndex {
             case 0:
                 tableView.reloadData()
@@ -878,7 +875,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 ui.updateButtonTapped()
                 sumBreakfast(forDate: datePicker.date)
                 nameOfMeals.text = "Breakfast"
-             
+                
             case 1:
                 tableView.reloadData()
                 coredata.fetchLunch(forDate: datePicker.date)
@@ -886,7 +883,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 ui.updateButtonTapped()
                 sumLunch(forDate: datePicker.date)
                 nameOfMeals.text = "Lunch"
-              
+                
             case 2:
                 tableView.reloadData()
                 coredata.fetchDinner(forDate: datePicker.date)
@@ -894,7 +891,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 ui.updateButtonTapped()
                 sumDinner(forDate: datePicker.date)
                 nameOfMeals.text = "Dinner"
-            
+                
             case 3:
                 tableView.reloadData()
                 coredata.fetchSnack(forDate: datePicker.date)
@@ -902,20 +899,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 ui.updateButtonTapped()
                 sumSnack(forDate: datePicker.date)
                 nameOfMeals.text = "Snack"
-              
+                
             default:
                 break
             }
         } else {
             let currentSegmentIndex = self.segment.selectedSegmentIndex
-
+            
             switch currentSegmentIndex {
             case 0:
                 
                 selectedIndexPath = indexPath
-
-                        var food: Any?
-
+                
+                var food: Any?
+                
                 if let selectedFood = coredata.breakfast?[indexPath.row] {
                     food = selectedFood
                 }
@@ -941,13 +938,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-               
+                
                 // Convert String values to Double
                 if let caloriDouble = Double(calori),
                    let proteinDouble = Double(protein),
                    let fatDouble = Double(fat),
                    let carbonDouble = Double(carbon) {
-
+                    
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
@@ -958,13 +955,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
                 updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
                 updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
-                           
+                
             case 1:
-              
+                
                 selectedIndexPath = indexPath
-
-                        var food: Any?
-
+                
+                var food: Any?
+                
                 if let selectedFood = coredata.lunch?[indexPath.row] {
                     food = selectedFood
                 }
@@ -990,13 +987,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-               
+                
                 // Convert String values to Double
                 if let caloriDouble = Double(calori),
                    let proteinDouble = Double(protein),
                    let fatDouble = Double(fat),
                    let carbonDouble = Double(carbon) {
-
+                    
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
@@ -1007,11 +1004,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
                 updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
             case 2:
-              
+                
                 selectedIndexPath = indexPath
-
-                        var food: Any?
-
+                
+                var food: Any?
+                
                 if let selectedFood = coredata.dinner?[indexPath.row] {
                     food = selectedFood
                 }
@@ -1037,13 +1034,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-               
+                
                 // Convert String values to Double
                 if let caloriDouble = Double(calori),
                    let proteinDouble = Double(protein),
                    let fatDouble = Double(fat),
                    let carbonDouble = Double(carbon) {
-
+                    
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
@@ -1055,9 +1052,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
             case 3:
                 selectedIndexPath = indexPath
-
-                        var food: Any?
-
+                
+                var food: Any?
+                
                 if let selectedFood = coredata.snack?[indexPath.row] {
                     food = selectedFood
                 }
@@ -1083,13 +1080,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-               
+                
                 // Convert String values to Double
                 if let caloriDouble = Double(calori),
                    let proteinDouble = Double(protein),
                    let fatDouble = Double(fat),
                    let carbonDouble = Double(carbon) {
-
+                    
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
@@ -1123,7 +1120,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         return highestValueColor
     }
-
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             // Handle deletion logic here
@@ -1142,7 +1139,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     //helper for deleting
     func deleteItem(at indexPath: IndexPath) {
         let context = coredata.context
-
+        
         switch segment.selectedSegmentIndex {
         case 0:
             if let breakfastItem = self.coredata.breakfast?[indexPath.row] {
@@ -1175,7 +1172,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-
+        
         do {
             try context.save()
             tableView.deleteRows(at: [indexPath], with: .fade)

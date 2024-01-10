@@ -11,6 +11,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var infoLabel: UILabel!
     //circle Value
     @IBOutlet weak var circleGreen: UILabel!
     @IBOutlet weak var circleRed: UILabel!
@@ -201,12 +202,16 @@ class SettingsViewController: UIViewController {
     func segmentName(forIndex index: Int) -> String {
         switch index {
         case 0:
+            infoLabel.text = "How many nutritive value do you need for Breakfast!"
             return "Breakfast"
         case 1:
+            infoLabel.text = "How many nutritive value do you need for Lunch!"
             return "Lunch"
         case 2:
+            infoLabel.text = "How many nutritive value do you need for Dinner!"
             return "Dinner"
         case 3:
+            infoLabel.text = "How many nutritive value do you need for Snack!"
             return "Snack"
         default:
             return ""

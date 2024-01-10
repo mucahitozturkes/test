@@ -713,12 +713,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         } else {
             let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
-            
-            //            let maxCalories = 2800
-            //            let maxFats = 100
-            //            let maxProtein = 100
-            //            let maxCarbs = 100
-            
+                    
             var totalCalories = 0.0
             var totalFats = 0.0
             var totalProtein = 0.0
@@ -799,6 +794,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateVisibility(markRed, value: totalProtein, threshold: Double(yellowTotal1))
             updateVisibility(markYellow, value: totalFats, threshold: Double(redTotal2))
             updateVisibility(markGreen, value: totalCarbs, threshold: Double(greenTotal0))
+           
         }
         // Toggle the state
         isInfoVisible.toggle()

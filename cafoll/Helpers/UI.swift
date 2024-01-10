@@ -73,16 +73,16 @@ class Ui {
         }
 
         // Call the circleTotal function to calculate the total values
-        let (greenTotal, yellowTotal, redTotal, purpleTotal) = circleTotal()
+        let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = circleTotal()
 
         updateUIWithAnimation(totalCalori: totalCaloriValue,
                               totalProtein: totalProteinValue,
                               totalFat: totalFatValue,
                               totalCarbon: totalCarbonValue,
-                              greenTotal: greenTotal,
-                              yellowTotal: yellowTotal,
-                              redTotal: redTotal,
-                              purpleTotal: purpleTotal,
+                              greenTotal: greenTotal0,
+                              yellowTotal: yellowTotal1,
+                              redTotal: redTotal2,
+                              purpleTotal: purpleTotal3,
                               duration: fillAnimationDuration)
     }
 
@@ -136,12 +136,12 @@ class Ui {
                }
            }
 
-           let greenTotal = totalValues[0]
-           let yellowTotal = totalValues[1]
-           let redTotal = totalValues[2]
-           let purpleTotal = totalValues[3]
+           let greenTotal0 = totalValues[0]
+           let yellowTotal1 = totalValues[1]
+           let redTotal2 = totalValues[2]
+           let purpleTotal3 = totalValues[3]
 
-           return (greenTotal, yellowTotal, redTotal, purpleTotal)
+           return (greenTotal0, yellowTotal1, redTotal2, purpleTotal3)
        }
 
 

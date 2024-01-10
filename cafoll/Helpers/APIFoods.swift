@@ -7,7 +7,9 @@
 
 import Foundation
 
-var foodDictionary: [String: [String: Int]] = [
+var favorites: [String: [String: Float]] = [:]
+
+var foodDictionary: [String: [String: Float]] = [
     "elma": [
         "protein": 1,
         "carbs": 1,

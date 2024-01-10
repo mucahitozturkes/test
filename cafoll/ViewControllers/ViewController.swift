@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var selectedCellFoodName: String?
     var searchResults: [String: [String: Int]] = [:]
     
+    
    
     // Bar Labels
     @IBOutlet weak var titleLabelTextfield: UITextField!
@@ -50,13 +51,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //print(helper?.filePath ?? "Not Found")
         ui = Ui()
         helper = Helper()
-        
         homeViewController = HomeViewController()
         ui.applyShadow(to: mainView, offset: CGSize(width: 0, height: 6), radius: 12)
         coredata = Coredata(viewController: self)
         searchBar.delegate = self
-  
-        //table View Load
+
         tableView.reloadData()
     }
   
@@ -86,8 +85,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //MARK: - Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return searchResults.count
+                return searchResults.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? Cell else {
@@ -95,13 +95,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let foodTitle = Array(searchResults.keys)[indexPath.row]
             cell.foodTitleLabelUI?.text = foodTitle
-//        if let nutrientValues = searchResults[foodTitle] {
-//            cell.Ptext.text = "\(nutrientValues["protein"] ?? 0)"
-//            cell.CarText.text = "\(nutrientValues["carbs"] ?? 0)"
-//            cell.FText.text = "\(nutrientValues["fat"] ?? 0)"
-//            cell.CText.text = "\(nutrientValues["calories"] ?? 0)"
-//        }
-        
         return cell
     }
     
@@ -159,7 +152,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
-
+           
                         // Create a new Breakfast entity in Core Data
                         self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Breakfast")
                         print("saveFoodToCoreData called successfully")
@@ -167,6 +160,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                         // Handle the case when selectedCellFoodName is nil
                         print("selectedCellFoodName is nil")
                     }
+                    
 
                     searchBar.text = "" // Search bar'ın içeriğini temizle
                     searchBar.resignFirstResponder() // Klavyeyi kapat
@@ -441,6 +435,12 @@ extension ViewController: UISearchBarDelegate {
         if !searchText.isEmpty {
             // Update searchResults based on the search text
             searchResults = foodDictionary.filter { $0.key.lowercased().contains(searchText.lowercased()) }
+                .mapValues { nutrientValues in
+                    nutrientValues.mapValues { value in
+                        // Convert values to String for comparison with searchText
+                        Int(value)
+                    }
+                }
         } else {
             // If the search bar is empty, show an empty result
             searchResults = [:]

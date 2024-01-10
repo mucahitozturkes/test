@@ -710,10 +710,12 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
     
         } else {
-            let maxCalories = 2800
-            let maxFats = 100
-            let maxProtein = 100
-            let maxCarbs = 100
+            let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
+            
+//            let maxCalories = 2800
+//            let maxFats = 100
+//            let maxProtein = 100
+//            let maxCarbs = 100
             
             var totalCalories = 0.0
             var totalFats = 0.0
@@ -779,27 +781,28 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             yellowInfoLabel.text = String(format: "%.0f", totalFats)
             greenInfoLabel.text = String(format: "%.0f", totalCarbs)
             
-            purpleTotal.text = String(maxCalories)
-            redTotal.text = String(maxProtein)
-            yellowTotal.text = String(maxFats)
-            greenTotal.text = String(maxCarbs)
+            purpleTotal.text = String(format: "%.0f", purpleTotal3)
+            redTotal.text = String(format: "%.0f", redTotal2)
+            yellowTotal.text = String(format: "%.0f", yellowTotal1)
+            greenTotal.text = String(format: "%.0f", greenTotal0)
             
-            totalCalori.text = String(maxCalories)
-            totalFat.text = String(maxFats)
-            totalPRotein.text = String(maxProtein)
-            totalCarbon.text = String(maxCarbs)
+            totalCalori.text = String(purpleTotal3)
+            totalFat.text = String(yellowTotal1)
+            totalPRotein.text = String(redTotal2)
+            totalCarbon.text = String(greenTotal0)
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxCarbs), maxYellow: Float(maxFats), maxRed: Float(maxProtein), maxPurple: Float(maxCalories))
+            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(greenTotal0), maxYellow: Float(yellowTotal1), maxRed: Float(redTotal2), maxPurple: Float(purpleTotal3))
             
-            updateVisibility(markPurple, value: totalCalories, threshold: Double(maxCalories))
-            updateVisibility(markRed, value: totalProtein, threshold: Double(maxFats))
-            updateVisibility(markYellow, value: totalFats, threshold: Double(maxProtein))
-            updateVisibility(markGreen, value: totalCarbs, threshold: Double(maxCarbs))
+            updateVisibility(markPurple, value: totalCalories, threshold: Double(purpleTotal3))
+            updateVisibility(markRed, value: totalProtein, threshold: Double(yellowTotal1))
+            updateVisibility(markYellow, value: totalFats, threshold: Double(redTotal2))
+            updateVisibility(markGreen, value: totalCarbs, threshold: Double(greenTotal0))
         }
         // Toggle the state
           isInfoVisible.toggle()
         
     }
+    
     
 }
 // MARK: - Home Table View

@@ -8,7 +8,6 @@
 import UIKit
 
 class Cell: UITableViewCell {
-
     @IBOutlet weak var foodTitleLabelUI: UILabel!
     
 }

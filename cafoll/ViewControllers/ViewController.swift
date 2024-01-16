@@ -276,15 +276,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                     print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                     
-                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
-                       let context = self?.coredata.context {
+                    if let context = self?.coredata.context {
                         let newFood = Breakfast(context: context)
                         newFood.title   = self?.coredata.foods?[indexPath.row].title
                         newFood.calori  = self?.coredata.foods?[indexPath.row].calori
                         newFood.protein = self?.coredata.foods?[indexPath.row].protein
                         newFood.fat     = self?.coredata.foods?[indexPath.row].fat
                         newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                        newFood.date    = Date()
+                        newFood.date    = datePickerDate
                         
                         print("added", "\(newFood.title ?? "0")")
                     } else {
@@ -366,15 +365,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                     print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                     
-                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
-                       let context = self?.coredata.context {
+                    if let context = self?.coredata.context {
                         let newFood = Lunch(context: context)
                         newFood.title   = self?.coredata.foods?[indexPath.row].title
                         newFood.calori  = self?.coredata.foods?[indexPath.row].calori
                         newFood.protein = self?.coredata.foods?[indexPath.row].protein
                         newFood.fat     = self?.coredata.foods?[indexPath.row].fat
                         newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                        newFood.date    = Date()
+                        newFood.date    = datePickerDate
                         
                         print("added", "\(newFood.title ?? "0")")
                     } else {
@@ -457,15 +455,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                     print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                     
-                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
-                       let context = self?.coredata.context {
+                    if let context = self?.coredata.context {
                         let newFood = Dinner(context: context)
                         newFood.title   = self?.coredata.foods?[indexPath.row].title
                         newFood.calori  = self?.coredata.foods?[indexPath.row].calori
                         newFood.protein = self?.coredata.foods?[indexPath.row].protein
                         newFood.fat     = self?.coredata.foods?[indexPath.row].fat
                         newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                        newFood.date    = Date()
+                        newFood.date    = datePickerDate
                         
                         print("added", "\(newFood.title ?? "0")")
                     } else {
@@ -546,15 +543,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                     print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                     
-                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
-                       let context = self?.coredata.context {
+                    if let context = self?.coredata.context {
                         let newFood = Snack(context: context)
                         newFood.title   = self?.coredata.foods?[indexPath.row].title
                         newFood.calori  = self?.coredata.foods?[indexPath.row].calori
                         newFood.protein = self?.coredata.foods?[indexPath.row].protein
                         newFood.fat     = self?.coredata.foods?[indexPath.row].fat
                         newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                        newFood.date    = Date()
+                        newFood.date    = datePickerDate
                         
                         print("added", "\(newFood.title ?? "0")")
                     } else {

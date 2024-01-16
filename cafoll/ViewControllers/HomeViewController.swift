@@ -928,10 +928,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Breakfast)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = calori
-                redInfoLabel.text = protein
-                yellowInfoLabel.text = fat
-                greenInfoLabel.text = carbon
+                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
+
                 
                 purpleTotal.text = String(maxCal)
                 redTotal.text = "\(maxPro)"
@@ -977,10 +978,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Lunch)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = calori
-                redInfoLabel.text = protein
-                yellowInfoLabel.text = fat
-                greenInfoLabel.text = carbon
+                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
                 
                 purpleTotal.text = "\(maxCal)"
                 redTotal.text = "\(maxPro)"
@@ -1024,10 +1025,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Dinner)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = calori
-                redInfoLabel.text = protein
-                yellowInfoLabel.text = fat
-                greenInfoLabel.text = carbon
+                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
                 
                 purpleTotal.text = "\(maxCal)"
                 redTotal.text = "\(maxPro)"
@@ -1070,10 +1071,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Snack)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = calori
-                redInfoLabel.text = protein
-                yellowInfoLabel.text = fat
-                greenInfoLabel.text = carbon
+                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
                 
                 purpleTotal.text = "\(maxCal)"
                 redTotal.text = "\(maxPro)"

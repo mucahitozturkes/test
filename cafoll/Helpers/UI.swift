@@ -57,8 +57,7 @@ class Ui {
         homeviewController?.firstLook.addSubview(circularProgressBar1)
     }
     @objc func updateButtonTapped() {
-        let fillAnimationDuration: TimeInterval = 4.0
-
+      
         guard let totalCaloriText = homeviewController?.totalCalori?.text,
               let totalProteinText = homeviewController?.totalPRotein?.text,
               let totalFatText = homeviewController?.totalFat?.text,
@@ -83,7 +82,7 @@ class Ui {
                               yellowTotal: yellowTotal1,
                               redTotal: redTotal2,
                               purpleTotal: purpleTotal3,
-                              duration: fillAnimationDuration)
+                              duration: 2)
     }
 
     func updateUIWithAnimation(totalCalori: Float,

@@ -45,7 +45,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         addButton.isHidden = true
     }
     
-    func saveFoodToCoreData(title: String, nutrientValues: [String: Int], mealEntityName: String) {
+    func saveFoodToCoreData(title: String, nutrientValues: [String: Double], mealEntityName: String) {
         let indexOfHomeViewController = 0
         
         guard let tabBarController = self.tabBarController,
@@ -246,10 +246,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     // Check if selectedCellFoodName is not nil
                     if let selectedCellFoodName = self.selectedCellFoodName,
                        var nutrientValues = searchResults[selectedCellFoodName] {
-                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
-                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
-                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
-                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * grams
+                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
@@ -312,59 +312,81 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Cell at selected index path is not of type YourCellType.")
                 return
             }
-            
-            let alertLunch = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
-            
-            alertLunch.addTextField { textField in
-                textField.placeholder = "Gram"
-                textField.keyboardType = .numberPad
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                // Handle cancel action if needed
-            }
-            
-            let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-                guard let self = self else { return }
+            if self?.segmentedControl.selectedSegmentIndex == 0 {
+                let alertLunch = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
                 
-                // Get grams from UITextField
-                guard let gramText = alertLunch.textFields?.first?.text,
-                      let grams = Int(gramText) else {
-                    return
+                alertLunch.addTextField { textField in
+                    textField.placeholder = "Gram"
+                    textField.keyboardType = .numberPad
                 }
-                selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
-                // Check if selectedCellFoodName is not nil
-                if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = searchResults[selectedCellFoodName] {
-                    nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
-                    nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
-                    nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
-                    nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * grams
-                    
-                    // Print updated nutritional values
-                    print("Updated Nutrient Values: \(nutrientValues)")
-                    
-                    // Create a new Breakfast entity in Core Data
-                    self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Lunch")
-                    print("saveFoodToCoreData called successfully")
-                } else {
-                    // Handle the case when selectedCellFoodName is nil
-                    print("selectedCellFoodName is nil")
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                    // Handle cancel action if needed
                 }
-             
-                tableView.reloadData()
-                homeViewController.badgeCount[0] += 1
+                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                    guard let self = self else { return }
+                    
+                    // Get grams from UITextField
+                    guard let gramText = alertLunch.textFields?.first?.text,
+                          let grams = Int(gramText) else {
+                        return
+                    }
+                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
+                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    // Check if selectedCellFoodName is not nil
+                    if let selectedCellFoodName = self.selectedCellFoodName,
+                       var nutrientValues = searchResults[selectedCellFoodName] {
+                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                        
+                        // Print updated nutritional values
+                        print("Updated Nutrient Values: \(nutrientValues)")
+                        
+                        // Create a new Breakfast entity in Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Lunch")
+                        print("saveFoodToCoreData called successfully")
+                    } else {
+                        // Handle the case when selectedCellFoodName is nil
+                        print("selectedCellFoodName is nil")
+                    }
+                    tableView.reloadData()
+                    homeViewController.badgeCount[0] += 1
+                    print("Segment 0 selected")
+                }
+                alertLunch.addAction(cancelAction)
+                alertLunch.addAction(addAction)
                 
-                
+                self?.present(alertLunch, animated: true, completion: nil)
             }
             
-            alertLunch.addAction(cancelAction)
-            alertLunch.addAction(addAction)
-            
-            print("Presenting alertBreakfast")
-            self?.present(alertLunch, animated: true, completion: nil)
-            print("Alert presented")
+            if self?.segmentedControl.selectedSegmentIndex == 1 {
+                    let datePickerDate = homeViewController.datePicker.date
+                    self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
+                    print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
+                    
+                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
+                       let context = self?.coredata.context {
+                        let newFood = Lunch(context: context)
+                        newFood.title   = self?.coredata.foods?[indexPath.row].title
+                        newFood.calori  = self?.coredata.foods?[indexPath.row].calori
+                        newFood.protein = self?.coredata.foods?[indexPath.row].protein
+                        newFood.fat     = self?.coredata.foods?[indexPath.row].fat
+                        newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
+                        newFood.date    = Date()
+                        
+                        print("added", "\(newFood.title ?? "0")")
+                    } else {
+                        // Handle the case when the context is nil.
+                        print("Error: NSManagedObjectContext is nil.")
+                    }
+                    self?.coredata.saveData()
+                    print("Segment 1 selected")
+                    homeViewController.badgeCount[0] += 1
+                }
+          
+         
             
         }
         
@@ -381,59 +403,79 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Cell at selected index path is not of type YourCellType.")
                 return
             }
-            
-            let alertDinner = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
-            
-            alertDinner.addTextField { textField in
-                textField.placeholder = "Gram"
-                textField.keyboardType = .numberPad
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                // Handle cancel action if needed
-            }
-            
-            let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-                guard let self = self else { return }
+            if self?.segmentedControl.selectedSegmentIndex == 0 {
+                let alertDinner = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
                 
-                // Get grams from UITextField
-                guard let gramText = alertDinner.textFields?.first?.text,
-                      let grams = Int(gramText) else {
-                    return
+                alertDinner.addTextField { textField in
+                    textField.placeholder = "Gram"
+                    textField.keyboardType = .numberPad
                 }
-                selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
-                // Check if selectedCellFoodName is not nil
-                if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = searchResults[selectedCellFoodName] {
-                    nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
-                    nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
-                    nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
-                    nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * grams
-                    
-                    // Print updated nutritional values
-                    print("Updated Nutrient Values: \(nutrientValues)")
-                    
-                    // Create a new Breakfast entity in Core Data
-                    self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Dinner")
-                    print("saveFoodToCoreData called successfully")
-                } else {
-                    // Handle the case when selectedCellFoodName is nil
-                    print("selectedCellFoodName is nil")
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                    // Handle cancel action if needed
                 }
-          
-                tableView.reloadData()
-                homeViewController.badgeCount[0] += 1
+                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                    guard let self = self else { return }
+                    
+                    // Get grams from UITextField
+                    guard let gramText = alertDinner.textFields?.first?.text,
+                          let grams = Int(gramText) else {
+                        return
+                    }
+                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
+                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    // Check if selectedCellFoodName is not nil
+                    if let selectedCellFoodName = self.selectedCellFoodName,
+                       var nutrientValues = searchResults[selectedCellFoodName] {
+                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                        
+                        // Print updated nutritional values
+                        print("Updated Nutrient Values: \(nutrientValues)")
+                        
+                        // Create a new Breakfast entity in Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Dinner")
+                        print("saveFoodToCoreData called successfully")
+                    } else {
+                        // Handle the case when selectedCellFoodName is nil
+                        print("selectedCellFoodName is nil")
+                    }
+                    tableView.reloadData()
+                    homeViewController.badgeCount[0] += 1
+                    print("Segment 0 selected")
+                }
+                alertDinner.addAction(cancelAction)
+                alertDinner.addAction(addAction)
                 
-                
+                self?.present(alertDinner, animated: true, completion: nil)
             }
             
-            alertDinner.addAction(cancelAction)
-            alertDinner.addAction(addAction)
-            
-            print("Presenting alertBreakfast")
-            self?.present(alertDinner, animated: true, completion: nil)
-            print("Alert presented")
+            if self?.segmentedControl.selectedSegmentIndex == 1 {
+                    let datePickerDate = homeViewController.datePicker.date
+                    self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
+                    print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
+                    
+                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
+                       let context = self?.coredata.context {
+                        let newFood = Dinner(context: context)
+                        newFood.title   = self?.coredata.foods?[indexPath.row].title
+                        newFood.calori  = self?.coredata.foods?[indexPath.row].calori
+                        newFood.protein = self?.coredata.foods?[indexPath.row].protein
+                        newFood.fat     = self?.coredata.foods?[indexPath.row].fat
+                        newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
+                        newFood.date    = Date()
+                        
+                        print("added", "\(newFood.title ?? "0")")
+                    } else {
+                        // Handle the case when the context is nil.
+                        print("Error: NSManagedObjectContext is nil.")
+                    }
+                    self?.coredata.saveData()
+                    print("Segment 1 selected")
+                    homeViewController.badgeCount[0] += 1
+                }
             
         }
         
@@ -450,59 +492,79 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 print("Cell at selected index path is not of type YourCellType.")
                 return
             }
-            
-            let alertSnack = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
-            
-            alertSnack.addTextField { textField in
-                textField.placeholder = "Gram"
-                textField.keyboardType = .numberPad
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                // Handle cancel action if needed
-            }
-            
-            let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-                guard let self = self else { return }
+            if self?.segmentedControl.selectedSegmentIndex == 0 {
+                let alertSnack = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
                 
-                // Get grams from UITextField
-                guard let gramText = alertSnack.textFields?.first?.text,
-                      let grams = Int(gramText) else {
-                    return
+                alertSnack.addTextField { textField in
+                    textField.placeholder = "Gram"
+                    textField.keyboardType = .numberPad
                 }
-                selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
-                // Check if selectedCellFoodName is not nil
-                if let selectedCellFoodName = self.selectedCellFoodName,
-                   var nutrientValues = searchResults[selectedCellFoodName] {
-                    nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * grams
-                    nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * grams
-                    nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * grams
-                    nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * grams
-                    
-                    // Print updated nutritional values
-                    print("Updated Nutrient Values: \(nutrientValues)")
-                    
-                    // Create a new Breakfast entity in Core Data
-                    self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Snack")
-                    print("saveFoodToCoreData called successfully")
-                } else {
-                    // Handle the case when selectedCellFoodName is nil
-                    print("selectedCellFoodName is nil")
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                    // Handle cancel action if needed
                 }
-              
-                tableView.reloadData()
-                homeViewController.badgeCount[0] += 1
+                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                    guard let self = self else { return }
+                    
+                    // Get grams from UITextField
+                    guard let gramText = alertSnack.textFields?.first?.text,
+                          let grams = Int(gramText) else {
+                        return
+                    }
+                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
+                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    // Check if selectedCellFoodName is not nil
+                    if let selectedCellFoodName = self.selectedCellFoodName,
+                       var nutrientValues = searchResults[selectedCellFoodName] {
+                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                        
+                        // Print updated nutritional values
+                        print("Updated Nutrient Values: \(nutrientValues)")
+                        
+                        // Create a new Breakfast entity in Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Snack")
+                        print("saveFoodToCoreData called successfully")
+                    } else {
+                        // Handle the case when selectedCellFoodName is nil
+                        print("selectedCellFoodName is nil")
+                    }
+                    tableView.reloadData()
+                    homeViewController.badgeCount[0] += 1
+                    print("Segment 0 selected")
+                }
+                alertSnack.addAction(cancelAction)
+                alertSnack.addAction(addAction)
                 
-                
+                self?.present(alertSnack, animated: true, completion: nil)
             }
             
-            alertSnack.addAction(cancelAction)
-            alertSnack.addAction(addAction)
-            
-            print("Presenting alertBreakfast")
-            self?.present(alertSnack, animated: true, completion: nil)
-            print("Alert presented")
+            if self?.segmentedControl.selectedSegmentIndex == 1 {
+                    let datePickerDate = homeViewController.datePicker.date
+                    self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
+                    print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
+                    
+                    if let selectedCellFoodNameManuel = self?.selectedCellFoodNameManuel,
+                       let context = self?.coredata.context {
+                        let newFood = Snack(context: context)
+                        newFood.title   = self?.coredata.foods?[indexPath.row].title
+                        newFood.calori  = self?.coredata.foods?[indexPath.row].calori
+                        newFood.protein = self?.coredata.foods?[indexPath.row].protein
+                        newFood.fat     = self?.coredata.foods?[indexPath.row].fat
+                        newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
+                        newFood.date    = Date()
+                        
+                        print("added", "\(newFood.title ?? "0")")
+                    } else {
+                        // Handle the case when the context is nil.
+                        print("Error: NSManagedObjectContext is nil.")
+                    }
+                    self?.coredata.saveData()
+                    print("Segment 1 selected")
+                    homeViewController.badgeCount[0] += 1
+                }
             
         }
         
@@ -658,7 +720,7 @@ extension ViewController: UISearchBarDelegate {
                 .mapValues { nutrientValues in
                     nutrientValues.mapValues { value in
                         // Convert values to String for comparison with searchText
-                        Int(value)
+                        Double(value)
                     }
                 }
         } else {

@@ -52,7 +52,6 @@ class Coredata {
             print("fetch LastSearch: ", error)
         }
     }
-
     //Fetch Breakfast
     func fetchBreakfast(forDate date: Date) {
         do {
@@ -163,7 +162,7 @@ class Coredata {
             print("Error saving data: \(error), \(error.localizedDescription)")
         }
     }
-    
+    //reverse list items
     func fetchMeals<T: NSManagedObject>(forDate date: Date, entityName: String, array: inout [T]?) {
         do {
             // Create a date range for the selected day
@@ -188,11 +187,4 @@ class Coredata {
             print("fetch Foods: ", error)
         }
     }
-
-    // Example usage
-   
-   
-    
-   
-
 }

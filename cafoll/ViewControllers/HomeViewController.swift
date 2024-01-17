@@ -1124,6 +1124,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+            // Haptic feedback
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+            feedbackGenerator.impactOccurred()
             // Handle deletion logic here
             self?.deleteItem(at: indexPath)
             completionHandler(true)

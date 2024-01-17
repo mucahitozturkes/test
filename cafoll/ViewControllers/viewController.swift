@@ -1191,25 +1191,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
             feedbackGenerator.impactOccurred()
             
-            switch selectedSegmentIndex {
-            case 0:
-                if let lastSearchToDelete = self?.coredata.lastSearch?[indexPath.row] {
-                    self?.coredata.context.delete(lastSearchToDelete)
-                    self?.coredata.saveData()
-                    self?.coredata.fetchLastSearch()
+            if self?.isSearching == false {
+                // Eğer searching modu aktif değilse, silme işlemini gerçekleştirin.
+                switch selectedSegmentIndex {
+                case 0:
+                    if let lastSearchToDelete = self?.coredata.lastSearch?[indexPath.row] {
+                        self?.coredata.context.delete(lastSearchToDelete)
+                        self?.coredata.saveData()
+                        self?.coredata.fetchLastSearch()
+                    }
+
+                case 1:
+                    if let foodToDelete = selectedSegmentIndex == 1 ? self?.coredata.foods?[indexPath.row] : nil {
+                        self?.coredata.context.delete(foodToDelete)
+                        self?.coredata.saveData()
+                        self?.coredata.fetchFoods()
+                    }
+                default:
+                    break
                 }
-            case 1:
-                if let foodToDelete = selectedSegmentIndex == 1 ? self?.coredata.foods?[indexPath.row] : nil {
-                    self?.coredata.context.delete(foodToDelete)
-                    self?.coredata.saveData()
-                    self?.coredata.fetchFoods()
-                }
-            default:
-                break
+                
+                // Update the table view
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } else {
+                // Eğer searching modu aktifse, burada herhangi bir silme işlemi gerçekleştirmeyebilirsiniz.
+                // İsterseniz bir uyarı mesajı veya başka bir işlem ekleyebilirsiniz.
+                print("Searching mode is active. Deletion is not allowed.")
             }
-            
-            // Update the table view
-            tableView.deleteRows(at: [indexPath], with: .fade)
+
             completionHandler(true)
         }
         
@@ -1221,7 +1230,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return !isSearching
+    }
 }
 // Search Bar
 extension ViewController: UISearchBarDelegate {

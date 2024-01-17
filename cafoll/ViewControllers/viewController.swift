@@ -538,11 +538,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                        let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
                        let nutrientValues = searchResults[selectedCellFoodName] {
                         
-                        // If a record with the same title exists, update its nutrient values
-                        existingLastFood.calori = String(Float(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Float(grams))
-                        existingLastFood.carbon = String(Float(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Float(grams))
-                        existingLastFood.fat = String(Float(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Float(grams))
-                        existingLastFood.protein = String(Float(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Float(grams))
+                        let divisor: Float = 100.0
+
+                        // Besin öğelerini al
+                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
+                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
+                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
+                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
+
+                        // Grams ile çarpma işlemini gerçekleştir
+                        let multipliedExistingCalories = (existingCalories + nutrientValues["calories"]! / divisor) * Float(grams)
+                        let multipliedExistingCarbs = (existingCarbs + nutrientValues["carbs"]! / divisor) * Float(grams)
+                        let multipliedExistingFat = (existingFat + nutrientValues["fat"]! / divisor) * Float(grams)
+                        let multipliedExistingProtein = (existingProtein + nutrientValues["protein"]! / divisor) * Float(grams)
+
+                        // Sonuçları String olarak kaydet
+                        existingLastFood.calori = String(multipliedExistingCalories)
+                        existingLastFood.carbon = String(multipliedExistingCarbs)
+                        existingLastFood.fat = String(multipliedExistingFat)
+                        existingLastFood.protein = String(multipliedExistingProtein)
+
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
@@ -558,10 +573,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // instead of updating the existing LastSearch entity
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(Float(nutrientValues["calories"] ?? 0.0) * Float(grams))
-                            newLastSearch.carbon = String(Float(nutrientValues["carbs"] ?? 0.0) * Float(grams))
-                            newLastSearch.fat = String(Float(nutrientValues["fat"] ?? 0.0) * Float(grams))
-                            newLastSearch.protein = String(Float(nutrientValues["protein"] ?? 0.0) * Float(grams))
+                            newLastSearch.calori = String(Float(nutrientValues["calories"] ?? 0.0))
+                            newLastSearch.carbon = String(Float(nutrientValues["carbs"] ?? 0.0))
+                            newLastSearch.fat = String(Float(nutrientValues["fat"] ?? 0.0))
+                            newLastSearch.protein = String(Float(nutrientValues["protein"] ?? 0.0))
                             
                             // Print updated nutritional values
                             print("Updated Nutrient Values: \(nutrientValues)")
@@ -591,10 +606,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                                 let context = self.coredata.context
                                 let newFood = Lunch(context: context)
                                 newFood.title = selectedCellFoodNameLast
-                                newFood.calori = String(Float(selectedFood.calori ?? "0.0") ?? 0.0 * grams)
-                                newFood.carbon = String(Float(selectedFood.carbon ?? "0.0") ?? 0.0 * grams)
-                                newFood.fat = String(Float(selectedFood.fat ?? "0.0") ?? 0.0 * grams)
-                                newFood.protein = String(Float(selectedFood.protein ?? "0.0") ?? 0.0 * grams)
+                                let divisor: Float = 100.0
+
+                                // Seçili yemek için bilgileri al
+                                let selectedCalories = Float(selectedFood.calori ?? "0.0") ?? 0.0
+                                let selectedCarbs = Float(selectedFood.carbon ?? "0.0") ?? 0.0
+                                let selectedFat = Float(selectedFood.fat ?? "0.0") ?? 0.0
+                                let selectedProtein = Float(selectedFood.protein ?? "0.0") ?? 0.0
+
+                                // Grams ile çarpma işlemini gerçekleştir
+                                let multipliedCalories = selectedCalories / divisor * Float(grams)
+                                let multipliedCarbs = selectedCarbs / divisor * Float(grams)
+                                let multipliedFat = selectedFat / divisor * Float(grams)
+                                let multipliedProtein = selectedProtein / divisor * Float(grams)
+
+                                // Sonuçları String olarak kaydet
+                                newFood.calori = String(multipliedCalories)
+                                newFood.carbon = String(multipliedCarbs)
+                                newFood.fat = String(multipliedFat)
+                                newFood.protein = String(multipliedProtein)
+
                                 newFood.date = datePickerDate
                                 
                                 // Save the new Breakfast entity to Core Data
@@ -708,11 +739,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                        let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
                        let nutrientValues = searchResults[selectedCellFoodName] {
                         
-                        // If a record with the same title exists, update its nutrient values
-                        existingLastFood.calori = String(Float(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Float(grams))
-                        existingLastFood.carbon = String(Float(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Float(grams))
-                        existingLastFood.fat = String(Float(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Float(grams))
-                        existingLastFood.protein = String(Float(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Float(grams))
+                        let divisor: Float = 100.0
+
+                        // Besin öğelerini al
+                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
+                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
+                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
+                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
+
+                        // Grams ile çarpma işlemini gerçekleştir
+                        let multipliedExistingCalories = (existingCalories + nutrientValues["calories"]! / divisor) * Float(grams)
+                        let multipliedExistingCarbs = (existingCarbs + nutrientValues["carbs"]! / divisor) * Float(grams)
+                        let multipliedExistingFat = (existingFat + nutrientValues["fat"]! / divisor) * Float(grams)
+                        let multipliedExistingProtein = (existingProtein + nutrientValues["protein"]! / divisor) * Float(grams)
+
+                        // Sonuçları String olarak kaydet
+                        existingLastFood.calori = String(multipliedExistingCalories)
+                        existingLastFood.carbon = String(multipliedExistingCarbs)
+                        existingLastFood.fat = String(multipliedExistingFat)
+                        existingLastFood.protein = String(multipliedExistingProtein)
+
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
@@ -728,11 +774,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // instead of updating the existing LastSearch entity
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(Float(nutrientValues["calories"] ?? 0.0) * Float(grams))
-                            newLastSearch.carbon = String(Float(nutrientValues["carbs"] ?? 0.0) * Float(grams))
-                            newLastSearch.fat = String(Float(nutrientValues["fat"] ?? 0.0) * Float(grams))
-                            newLastSearch.protein = String(Float(nutrientValues["protein"] ?? 0.0) * Float(grams))
-                            
+                            newLastSearch.calori = String(Float(nutrientValues["calories"] ?? 0.0))
+                            newLastSearch.carbon = String(Float(nutrientValues["carbs"] ?? 0.0))
+                            newLastSearch.fat = String(Float(nutrientValues["fat"] ?? 0.0))
+                            newLastSearch.protein = String(Float(nutrientValues["protein"] ?? 0.0))
                             // Print updated nutritional values
                             print("Updated Nutrient Values: \(nutrientValues)")
                             
@@ -761,10 +806,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                                 let context = self.coredata.context
                                 let newFood = Dinner(context: context)
                                 newFood.title = selectedCellFoodNameLast
-                                newFood.calori = String(Float(selectedFood.calori ?? "0.0") ?? 0.0 * grams)
-                                newFood.carbon = String(Float(selectedFood.carbon ?? "0.0") ?? 0.0 * grams)
-                                newFood.fat = String(Float(selectedFood.fat ?? "0.0") ?? 0.0 * grams)
-                                newFood.protein = String(Float(selectedFood.protein ?? "0.0") ?? 0.0 * grams)
+                                let divisor: Float = 100.0
+
+                                // Seçili yemek için bilgileri al
+                                let selectedCalories = Float(selectedFood.calori ?? "0.0") ?? 0.0
+                                let selectedCarbs = Float(selectedFood.carbon ?? "0.0") ?? 0.0
+                                let selectedFat = Float(selectedFood.fat ?? "0.0") ?? 0.0
+                                let selectedProtein = Float(selectedFood.protein ?? "0.0") ?? 0.0
+
+                                // Grams ile çarpma işlemini gerçekleştir
+                                let multipliedCalories = selectedCalories / divisor * Float(grams)
+                                let multipliedCarbs = selectedCarbs / divisor * Float(grams)
+                                let multipliedFat = selectedFat / divisor * Float(grams)
+                                let multipliedProtein = selectedProtein / divisor * Float(grams)
+
+                                // Sonuçları String olarak kaydet
+                                newFood.calori = String(multipliedCalories)
+                                newFood.carbon = String(multipliedCarbs)
+                                newFood.fat = String(multipliedFat)
+                                newFood.protein = String(multipliedProtein)
+
                                 newFood.date = datePickerDate
                                 
                                 // Save the new Breakfast entity to Core Data
@@ -876,11 +937,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                        let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
                        let nutrientValues = searchResults[selectedCellFoodName] {
                         
-                        // If a record with the same title exists, update its nutrient values
-                        existingLastFood.calori = String(Float(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Float(grams))
-                        existingLastFood.carbon = String(Float(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Float(grams))
-                        existingLastFood.fat = String(Float(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Float(grams))
-                        existingLastFood.protein = String(Float(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Float(grams))
+                        let divisor: Float = 100.0
+
+                        // Besin öğelerini al
+                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
+                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
+                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
+                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
+
+                        // Grams ile çarpma işlemini gerçekleştir
+                        let multipliedExistingCalories = (existingCalories + nutrientValues["calories"]! / divisor) * Float(grams)
+                        let multipliedExistingCarbs = (existingCarbs + nutrientValues["carbs"]! / divisor) * Float(grams)
+                        let multipliedExistingFat = (existingFat + nutrientValues["fat"]! / divisor) * Float(grams)
+                        let multipliedExistingProtein = (existingProtein + nutrientValues["protein"]! / divisor) * Float(grams)
+
+                        // Sonuçları String olarak kaydet
+                        existingLastFood.calori = String(multipliedExistingCalories)
+                        existingLastFood.carbon = String(multipliedExistingCarbs)
+                        existingLastFood.fat = String(multipliedExistingFat)
+                        existingLastFood.protein = String(multipliedExistingProtein)
+
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
@@ -896,10 +972,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // instead of updating the existing LastSearch entity
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(Float(nutrientValues["calories"] ?? 0.0) * Float(grams))
-                            newLastSearch.carbon = String(Float(nutrientValues["carbs"] ?? 0.0) * Float(grams))
-                            newLastSearch.fat = String(Float(nutrientValues["fat"] ?? 0.0) * Float(grams))
-                            newLastSearch.protein = String(Float(nutrientValues["protein"] ?? 0.0) * Float(grams))
+                            newLastSearch.calori = String(Float(nutrientValues["calories"] ?? 0.0))
+                            newLastSearch.carbon = String(Float(nutrientValues["carbs"] ?? 0.0))
+                            newLastSearch.fat = String(Float(nutrientValues["fat"] ?? 0.0))
+                            newLastSearch.protein = String(Float(nutrientValues["protein"] ?? 0.0))
                             // Print updated nutritional values
                             print("Updated Nutrient Values: \(nutrientValues)")
                             
@@ -929,10 +1005,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                                 let context = self.coredata.context
                                 let newFood = Snack(context: context)
                                 newFood.title = selectedCellFoodNameLast
-                                newFood.calori = String(Float(selectedFood.calori ?? "0.0") ?? 0.0 * grams)
-                                newFood.carbon = String(Float(selectedFood.carbon ?? "0.0") ?? 0.0 * grams)
-                                newFood.fat = String(Float(selectedFood.fat ?? "0.0") ?? 0.0 * grams)
-                                newFood.protein = String(Float(selectedFood.protein ?? "0.0") ?? 0.0 * grams)
+                                let divisor: Float = 100.0
+
+                                // Seçili yemek için bilgileri al
+                                let selectedCalories = Float(selectedFood.calori ?? "0.0") ?? 0.0
+                                let selectedCarbs = Float(selectedFood.carbon ?? "0.0") ?? 0.0
+                                let selectedFat = Float(selectedFood.fat ?? "0.0") ?? 0.0
+                                let selectedProtein = Float(selectedFood.protein ?? "0.0") ?? 0.0
+
+                                // Grams ile çarpma işlemini gerçekleştir
+                                let multipliedCalories = selectedCalories / divisor * Float(grams)
+                                let multipliedCarbs = selectedCarbs / divisor * Float(grams)
+                                let multipliedFat = selectedFat / divisor * Float(grams)
+                                let multipliedProtein = selectedProtein / divisor * Float(grams)
+
+                                // Sonuçları String olarak kaydet
+                                newFood.calori = String(multipliedCalories)
+                                newFood.carbon = String(multipliedCarbs)
+                                newFood.fat = String(multipliedFat)
+                                newFood.protein = String(multipliedProtein)
+
                                 newFood.date = datePickerDate
                                 
                                 // Save the new Breakfast entity to Core Data

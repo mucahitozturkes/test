@@ -8,6 +8,7 @@
 import UIKit
 
 class Cell: UITableViewCell {
+    @IBOutlet weak var lastSearchImage: UIImageView!
     @IBOutlet weak var foodTitleLabelUI: UILabel!
     
 }

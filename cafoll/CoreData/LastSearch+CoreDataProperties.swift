@@ -1,8 +1,8 @@
 //
-//  Favorite+CoreDataProperties.swift
+//  LastSearch+CoreDataProperties.swift
 //  cafoll
 //
-//  Created by mücahit öztürk on 24.12.2023.
+//  Created by mücahit öztürk on 16.01.2024.
 //
 //
 
@@ -10,16 +10,16 @@ import Foundation
 import CoreData
 
 
-extension Favorite {
+extension LastSearch {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Favorite> {
-        return NSFetchRequest<Favorite>(entityName: "Favorite")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<LastSearch> {
+        return NSFetchRequest<LastSearch>(entityName: "LastSearch")
     }
 
     @NSManaged public var calori: String?
     @NSManaged public var carbon: String?
-    @NSManaged public var fat: String?
     @NSManaged public var date: Date?
+    @NSManaged public var fat: String?
     @NSManaged public var idFavorite: UUID?
     @NSManaged public var isFavorited: Bool
     @NSManaged public var protein: String?
@@ -27,6 +27,6 @@ extension Favorite {
 
 }
 
-extension Favorite : Identifiable {
+extension LastSearch : Identifiable {
 
 }

@@ -20,16 +20,6 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
-    <entity name="Favorite" representedClassName=".Favorite" syncable="YES">
-        <attribute name="calori" optional="YES" attributeType="String"/>
-        <attribute name="carbon" optional="YES" attributeType="String"/>
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="fat" optional="YES" attributeType="String"/>
-        <attribute name="idFavorite" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="protein" optional="YES" attributeType="String"/>
-        <attribute name="title" attributeType="String"/>
-    </entity>
     <entity name="Foods" representedClassName=".Foods" syncable="YES">
         <attribute name="calori" optional="YES" attributeType="String"/>
         <attribute name="carbon" optional="YES" attributeType="String"/>
@@ -37,6 +27,16 @@
         <attribute name="fat" optional="YES" attributeType="String"/>
         <attribute name="idFood" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="LastSearch" representedClassName=".LastSearch" syncable="YES">
+        <attribute name="calori" optional="YES" attributeType="String"/>
+        <attribute name="carbon" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fat" optional="YES" attributeType="String"/>
+        <attribute name="idFavorite" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="protein" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
     </entity>

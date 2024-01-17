@@ -14,7 +14,7 @@ class Coredata {
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     var foods: [Foods]?
-    var favorite: [Favorite]?
+    var lastSearch: [LastSearch]?
     var breakfast: [Breakfast]?
     var lunch: [Lunch]?
     var dinner: [Dinner]?
@@ -31,21 +31,6 @@ class Coredata {
     
     }
     
-    func isFavoriteAlreadyAdded(title: String) -> Bool {
-        let fetchRequest: NSFetchRequest<Favorite> = Favorite.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "title == %@", title)
-
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let favorite = results.first {
-                return favorite.isFavorited
-            }
-            return false
-        } catch {
-            print("Error checking if favorite already exists: \(error)")
-            return false
-        }
-    }
     //Fetch Foods
     func fetchFoods() {
         do {
@@ -56,14 +41,18 @@ class Coredata {
         }
     }
     //Fetch Favorite
-    func fetchFavorite() {
+    func fetchLastSearch() {
         do {
-            let request = Favorite.fetchRequest()
-            self.favorite = try context.fetch(request)
+            let request = LastSearch.fetchRequest()
+            self.lastSearch = try context.fetch(request)
+
+            // Reverse the order of lastSearch array
+            self.lastSearch = self.lastSearch?.reversed()
         } catch {
-            print("fetch Favorite: ", error)
+            print("fetch LastSearch: ", error)
         }
     }
+
     //Fetch Breakfast
     func fetchBreakfast(forDate date: Date) {
         do {
@@ -79,6 +68,7 @@ class Coredata {
             request.predicate = predicate
             // Use 'context' directly without optional binding
             self.breakfast = try context.fetch(request)
+            fetchMeals(forDate: date, entityName: "Breakfast", array: &breakfast)
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
                 }
@@ -101,6 +91,7 @@ class Coredata {
             request.predicate = predicate
 
             self.lunch = try context.fetch(request)
+            fetchMeals(forDate: date, entityName: "Lunch", array: &lunch)
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
             }
@@ -123,6 +114,7 @@ class Coredata {
             request.predicate = predicate
 
             self.dinner = try context.fetch(request)
+            fetchMeals(forDate: date, entityName: "Dinner", array: &dinner)
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
             }
@@ -145,6 +137,7 @@ class Coredata {
             request.predicate = predicate
 
             self.snack = try context.fetch(request)
+            fetchMeals(forDate: date, entityName: "Snack", array: &snack)
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
             }
@@ -171,4 +164,35 @@ class Coredata {
         }
     }
     
+    func fetchMeals<T: NSManagedObject>(forDate date: Date, entityName: String, array: inout [T]?) {
+        do {
+            // Create a date range for the selected day
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+
+            // Use a predicate to filter by date
+            let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfDay as NSDate, endOfDay as NSDate)
+
+            let request = NSFetchRequest<T>(entityName: entityName)
+            request.predicate = predicate
+
+            // Use 'context' directly without optional binding
+            array = try context.fetch(request)
+            array?.reverse()
+
+            DispatchQueue.main.async {
+                self.homeViewController?.tableView.reloadData()
+            }
+        } catch {
+            print("fetch Foods: ", error)
+        }
+    }
+
+    // Example usage
+   
+   
+    
+   
+
 }

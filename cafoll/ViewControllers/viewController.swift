@@ -15,8 +15,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var homeViewController: HomeViewController!
     var selectedCellFoodName: String?
     var selectedCellFoodNameManuel: String?
-  
+    var selectedCellFoodNameLast: String?
+    var isSearching: Bool = false
     @IBOutlet weak var addButton: UIButton!
+ 
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     //Views
     @IBOutlet weak var mainView: UIView!
@@ -41,6 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         coredata = Coredata(viewController: self)
         searchBar.delegate = self
         coredata.fetchFoods()
+        coredata.fetchLastSearch()
         tableView.reloadData()
         addButton.isHidden = true
     }
@@ -74,10 +78,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case 0:
             addButton.isHidden = true
             searchBar.isHidden = false
+          
             tableView.reloadData()
         case 1:
             addButton.isHidden = false
             searchBar.isHidden = true
+         
             coredata.fetchFoods()
             tableView.reloadData()
         default:
@@ -85,6 +91,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func deleteSearchAndManuel(_ sender: UIButton) {
+        let currentSegmentIndex = segmentedControl.selectedSegmentIndex
+
+        switch currentSegmentIndex {
+        case 0:
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+            feedbackGenerator.impactOccurred()
+            // Delete all records from LastSearch
+            if let lastSearch = coredata.lastSearch {
+                for item in lastSearch {
+                    coredata.context.delete(item)
+                }
+                coredata.saveData()
+                coredata.fetchLastSearch()
+            }
+        case 1:
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+            feedbackGenerator.impactOccurred()
+            // Delete all records from Foods
+            if let foods = coredata.foods {
+                for item in foods {
+                    coredata.context.delete(item)
+                }
+                coredata.saveData()
+                coredata.fetchFoods()
+            }
+        default:
+            break
+        }
+
+        // Reload the table view
+        tableView.reloadData()
+    }
+
     @IBAction func addNewFoodButtonPressed(_ sender: UIButton) {
         let alert = UIAlertController(title: "New Food", message: "Just write your food", preferredStyle: .alert)
 
@@ -170,10 +210,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            return searchResults.count
+            if isSearching {
+                return searchResults.count
+            } else {
+                return self.coredata.lastSearch?.count ?? 0
+            }
         case 1:
             coredata.fetchFoods()
-            return  self.coredata.foods?.count ?? 0
+            return self.coredata.foods?.count ?? 0
         default:
             return 0
         }
@@ -183,21 +227,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? Cell else {
             return UITableViewCell()
         }
-        let row = indexPath.row
+        
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            let foodTitle = Array(searchResults.keys)[indexPath.row]
-            cell.foodTitleLabelUI?.text = foodTitle
+            if isSearching {
+                let foodTitle = Array(searchResults.keys)[indexPath.row]
+                cell.foodTitleLabelUI?.text = foodTitle
+                cell.lastSearchImage.isHidden = true
+            } else {
+                let lastFood = coredata.lastSearch?[indexPath.row]
+                cell.foodTitleLabelUI?.text = lastFood?.title
+                cell.lastSearchImage.isHidden = false
+            }
         case 1:
-            let indexFavorite = self.coredata.foods?[row]
+            let indexFavorite = self.coredata.foods?[indexPath.row]
             cell.foodTitleLabelUI.text = indexFavorite?.title
-        
+            cell.lastSearchImage.isHidden = true
+            
         default:
             break
         }
+        
         return cell
     }
-    
+
+      
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
         let indexOfHomeViewController = 0
@@ -241,60 +295,110 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                           let grams = Int(gramText) else {
                         return
                     }
-                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    
+                
+                    
+                    let keysArray = Array(searchResults.keys)
+
+                    if keysArray.isEmpty {
+                        print("Search results are empty.")
+                        // Handle the case when there are no search results, e.g., show a message to the user.
+                    } else {
+                        if indexPath.row < keysArray.count {
+                            selectedCellFoodName = keysArray[indexPath.row]
+                            print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                            // ... rest of your code related to selectedCellFoodName
+                        } else {
+                            print("Index out of range: \(indexPath.row) for keysArray with count \(keysArray.count)")
+                            // Handle the case when indexPath.row is out of range.
+                        }
+                    }
+
+                    
                     // Check if selectedCellFoodName is not nil
                     if let selectedCellFoodName = self.selectedCellFoodName,
-                       var nutrientValues = searchResults[selectedCellFoodName] {
-                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
-                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
-                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
-                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+                        
+                        // If a record with the same title exists, update its nutrient values
+                        existingLastFood.calori = String(Double(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Double(grams))
+                        existingLastFood.carbon = String(Double(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Double(grams))
+                        existingLastFood.fat = String(Double(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Double(grams))
+                        existingLastFood.protein = String(Double(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Double(grams))
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
                         
-                        // Create a new Breakfast entity in Core Data
-                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Breakfast")
-                        print("saveFoodToCoreData called successfully")
+                        // Print updated LastSearch entity
+                        print("Updated LastSearch Entity: \(existingLastFood)")
                     } else {
-                        // Handle the case when selectedCellFoodName is nil
-                        print("selectedCellFoodName is nil")
+                        // If no record with the same title exists, add a new LastSearch entity
+                        if let selectedCellFoodName = self.selectedCellFoodName,
+                           var nutrientValues = searchResults[selectedCellFoodName] {
+                            
+                            nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                            nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                            nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                            nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                            
+                            let addLastFood = LastSearch(context: self.coredata.context)
+                            addLastFood.title = selectedCellFoodName
+                            addLastFood.calori = String(nutrientValues["calories"] ?? 0.0)
+                            addLastFood.carbon = String(nutrientValues["carbs"] ?? 0.0)
+                            addLastFood.fat = String(nutrientValues["fat"] ?? 0.0)
+                            addLastFood.protein = String(nutrientValues["protein"] ?? 0.0)
+                            
+                            // Print updated nutritional values
+                            print("Updated Nutrient Values: \(nutrientValues)")
+                            
+                            // Create a new Breakfast entity in Core Data
+                            self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Breakfast")
+                            print("saveFoodToCoreData called successfully")
+                            
+                            // Print added LastSearch entity
+                            print("Added LastSearch Entity: \(addLastFood)")
+                        } else {
+                            // Handle the case when selectedCellFoodName is nil
+                            print("selectedCellFoodName is nil")
+                        }
                     }
+           
+                   
                     tableView.reloadData()
                     homeViewController.badgeCount[0] += 1
                     print("Segment 0 selected")
                 }
+
                 alertBreakfast.addAction(cancelAction)
                 alertBreakfast.addAction(addAction)
-                
+
                 self?.present(alertBreakfast, animated: true, completion: nil)
+
             }
             
             if self?.segmentedControl.selectedSegmentIndex == 1 {
-                    let datePickerDate = homeViewController.datePicker.date
-                    self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
-                    print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
-                    
-                    if let context = self?.coredata.context {
-                        let newFood = Breakfast(context: context)
-                        newFood.title   = self?.coredata.foods?[indexPath.row].title
-                        newFood.calori  = self?.coredata.foods?[indexPath.row].calori
-                        newFood.protein = self?.coredata.foods?[indexPath.row].protein
-                        newFood.fat     = self?.coredata.foods?[indexPath.row].fat
-                        newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                        newFood.date    = datePickerDate
-                        
-                        print("added", "\(newFood.title ?? "0")")
-                    } else {
-                        // Handle the case when the context is nil.
-                        print("Error: NSManagedObjectContext is nil.")
-                    }
-                    self?.coredata.saveData()
-                    print("Segment 1 selected")
-                    homeViewController.badgeCount[0] += 1
-                }
-            
+                              let datePickerDate = homeViewController.datePicker.date
+                              self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
+                              print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
+                              
+                              if let context = self?.coredata.context {
+                                  let newFood = Breakfast(context: context)
+                                  newFood.title   = self?.coredata.foods?[indexPath.row].title
+                                  newFood.calori  = self?.coredata.foods?[indexPath.row].calori
+                                  newFood.protein = self?.coredata.foods?[indexPath.row].protein
+                                  newFood.fat     = self?.coredata.foods?[indexPath.row].fat
+                                  newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
+                                  newFood.date    = datePickerDate
+                                  
+                                  print("added", "\(newFood.title ?? "0")")
+                              } else {
+                                  // Handle the case when the context is nil.
+                                  print("Error: NSManagedObjectContext is nil.")
+                              }
+                              self?.coredata.saveData()
+                              print("Segment 1 selected")
+                              homeViewController.badgeCount[0] += 1
+                          }
         }
 
         
@@ -622,7 +726,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     self.coredata.saveData()
                     self.coredata.fetchFoods()
-                    self.coredata.fetchFavorite()
                     tableView.reloadData()
                 }
                 
@@ -672,22 +775,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         
-        if selectedSegmentIndex == 0 {
-            return nil
-        }
-        
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             // Haptic feedback
             let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
             feedbackGenerator.impactOccurred()
             
-            // Diğer durumları işle...
             switch selectedSegmentIndex {
+            case 0:
+                if let lastSearchToDelete = self?.coredata.lastSearch?[indexPath.row] {
+                    self?.coredata.context.delete(lastSearchToDelete)
+                    self?.coredata.saveData()
+                    self?.coredata.fetchLastSearch()
+                }
             case 1:
-                let foodToDelete = self?.coredata.foods?[indexPath.row]
-                self?.coredata.context.delete(foodToDelete!)
-                self?.coredata.saveData()
-                self?.coredata.fetchFoods()
+                if let foodToDelete = selectedSegmentIndex == 1 ? self?.coredata.foods?[indexPath.row] : nil {
+                    self?.coredata.context.delete(foodToDelete)
+                    self?.coredata.saveData()
+                    self?.coredata.fetchFoods()
+                }
             default:
                 break
             }
@@ -707,8 +812,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
-//Search Bar
+// Search Bar
 extension ViewController: UISearchBarDelegate {
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             // Update searchResults based on the search text
@@ -719,18 +825,23 @@ extension ViewController: UISearchBarDelegate {
                         Double(value)
                     }
                 }
+            isSearching = true
         } else {
             // If the search bar is empty, show an empty result
             searchResults = [:]
+            coredata.fetchLastSearch()
+            isSearching = false
         }
-            tableView.reloadData()
-        
+        tableView.reloadData()
     }
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // Bu fonksiyon, Cancel butonuna tıklandığında çağrılır
-        searchBar.text = "" // Search bar'ın içeriğini temizle
-        searchBar.resignFirstResponder() // Klavyeyi kapat
-        searchResults = [:] // Search sonuçlarını temizle
+        // This function is called when the Cancel button is clicked
+        searchBar.text = "" // Clear the content of the search bar
+        searchBar.resignFirstResponder() // Close the keyboard
+        searchResults = [:] // Clear search results
+        isSearching = false
+        coredata.fetchLastSearch()
         tableView.reloadData()
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-var lastSearch: [String: [String: Double]] = [:]
+
 var searchResults: [String: [String: Double]] = [:]
 var foodDictionary: [String: [String: Double]] = [
     "elma": [

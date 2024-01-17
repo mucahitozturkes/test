@@ -21,11 +21,22 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffH-gk-rrJ">
                                 <rect key="frame" x="16" y="36" width="343" height="552"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-0K-RQQ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V3q-0K-RQQ">
                                         <rect key="frame" x="12" y="16" width="319" height="56"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIe-EH-4hE">
+                                                <rect key="frame" x="0.0" y="0.0" width="52" height="56"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="trash.square.fill" catalog="system" cornerStyle="capsule">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="32"/>
+                                                    <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="deleteSearchAndManuel:" destination="od0-hI-xVp" eventType="touchUpInside" id="yia-5g-lMs"/>
+                                                </connections>
+                                            </button>
                                             <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-an-wo1">
-                                                <rect key="frame" x="0.0" y="0.0" width="255" height="56"/>
+                                                <rect key="frame" x="52" y="0.0" width="267" height="56"/>
                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="barTintColor" name="Dark mod Background"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -33,8 +44,8 @@
                                                     <outlet property="delegate" destination="od0-hI-xVp" id="Nsk-Pk-wx7"/>
                                                 </connections>
                                             </searchBar>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rej-pl-am7">
-                                                <rect key="frame" x="267" y="0.0" width="52" height="56"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rej-pl-am7">
+                                                <rect key="frame" x="319" y="0.0" width="0.0" height="56"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="plus.app.fill" catalog="system" cornerStyle="capsule">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="32"/>
@@ -63,6 +74,19 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oGb-g9-f0b">
                                                                     <rect key="frame" x="0.0" y="0.0" width="299" height="42"/>
                                                                     <subviews>
+                                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-52-3Ku">
+                                                                            <rect key="frame" x="0.0" y="11.5" width="42" height="18.5"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="42" id="lhU-Cj-Cok"/>
+                                                                            </constraints>
+                                                                            <imageReference key="image" image="magnifyingglass" catalog="system" renderingMode="hierarchical-single">
+                                                                                <hierarchicalColors>
+                                                                                    <color systemColor="underPageBackgroundColor"/>
+                                                                                    <color systemColor="secondaryLabelColor"/>
+                                                                                    <color systemColor="tertiaryLabelColor"/>
+                                                                                </hierarchicalColors>
+                                                                            </imageReference>
+                                                                        </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyX-pv-0OQ">
                                                                             <rect key="frame" x="0.0" y="10" width="299" height="22.5"/>
                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -91,6 +115,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="foodTitleLabelUI" destination="QyX-pv-0OQ" id="OPD-Mp-FRX"/>
+                                                    <outlet property="lastSearchImage" destination="gdM-52-3Ku" id="c5b-NL-9MM"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -99,32 +124,37 @@
                                             <outlet property="delegate" destination="od0-hI-xVp" id="76M-1P-cna"/>
                                         </connections>
                                     </tableView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="css-N3-ES4">
-                                        <rect key="frame" x="16" y="486" width="311" height="51"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="lNL-hV-MvF"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="Food"/>
-                                            <segment title="Manuel"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="rwY-oQ-APZ"/>
-                                        </connections>
-                                    </segmentedControl>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W3X-jA-ZwR">
+                                        <rect key="frame" x="16" y="486" width="311" height="50"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="css-N3-ES4">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="lNL-hV-MvF"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Food"/>
+                                                    <segment title="Manuel"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="rwY-oQ-APZ"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
                                     <constraint firstItem="HDS-GO-TIz" firstAttribute="top" secondItem="V3q-0K-RQQ" secondAttribute="bottom" id="8Wp-Gp-Uap"/>
+                                    <constraint firstAttribute="trailing" secondItem="W3X-jA-ZwR" secondAttribute="trailing" constant="16" id="Aei-lM-Ipy"/>
                                     <constraint firstItem="V3q-0K-RQQ" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" constant="12" id="GSU-al-p1g"/>
-                                    <constraint firstAttribute="bottom" secondItem="css-N3-ES4" secondAttribute="bottom" constant="16" id="HCf-YC-6Pk"/>
                                     <constraint firstItem="HDS-GO-TIz" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" id="IoB-OE-ef7"/>
+                                    <constraint firstItem="W3X-jA-ZwR" firstAttribute="top" secondItem="HDS-GO-TIz" secondAttribute="bottom" constant="16" id="Oz2-h6-7e4"/>
                                     <constraint firstAttribute="trailing" secondItem="V3q-0K-RQQ" secondAttribute="trailing" constant="12" id="Qsa-hO-DGZ"/>
                                     <constraint firstItem="V3q-0K-RQQ" firstAttribute="top" secondItem="ffH-gk-rrJ" secondAttribute="top" constant="16" id="Sbh-Nk-Wii"/>
-                                    <constraint firstAttribute="trailing" secondItem="css-N3-ES4" secondAttribute="trailing" constant="16" id="gSm-hz-DpH"/>
-                                    <constraint firstItem="css-N3-ES4" firstAttribute="top" secondItem="HDS-GO-TIz" secondAttribute="bottom" constant="16" id="rYt-YC-i5S"/>
+                                    <constraint firstItem="W3X-jA-ZwR" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" constant="16" id="pMR-QW-Qg1"/>
                                     <constraint firstAttribute="trailing" secondItem="HDS-GO-TIz" secondAttribute="trailing" id="sAu-F5-jlu"/>
-                                    <constraint firstItem="css-N3-ES4" firstAttribute="leading" secondItem="ffH-gk-rrJ" secondAttribute="leading" constant="16" id="tGW-he-LQu"/>
+                                    <constraint firstAttribute="bottom" secondItem="W3X-jA-ZwR" secondAttribute="bottom" constant="16" id="wIs-aE-1ED"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -163,6 +193,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="rej-pl-am7" id="Av9-fP-6kZ"/>
+                        <outlet property="deleteButton" destination="cIe-EH-4hE" id="m6b-wk-LHQ"/>
                         <outlet property="mainView" destination="ffH-gk-rrJ" id="YaO-RH-6xb"/>
                         <outlet property="searchBar" destination="4hE-an-wo1" id="oCr-H6-6nh"/>
                         <outlet property="segmentedControl" destination="css-N3-ES4" id="b0f-r4-Vo9"/>
@@ -1698,7 +1729,9 @@
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <image name="trash.square.fill" catalog="system" width="128" height="114"/>
         <namedColor name="Black-White ~ Any &amp; Dark">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1721,31 +1754,34 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -30,16 +30,3 @@ extension Foods {
 extension Foods : Identifiable {
 
 }
-extension Foods {
-    func asFavorite() -> Favorite {
-        let favorite = Favorite(context: managedObjectContext!) // Assuming you are using a managedObjectContext
-        favorite.calori = self.calori
-        favorite.carbon = self.carbon
-        favorite.fat = self.fat
-        favorite.protein = self.protein
-        favorite.title = self.title
-        favorite.isFavorited = self.isFavorite
-        favorite.idFavorite = self.idFood // Assuming you have an id in Favorite corresponding to the idFood in Foods
-        return favorite
-    }
-}

@@ -10,10 +10,12 @@
 		0807F5992B1495500068A5DA /* Coredata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807F5982B1495500068A5DA /* Coredata.swift */; };
 		0824298E2B4828B700BC4B9D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824298D2B4828B700BC4B9D /* SettingsViewController.swift */; };
 		085F2C722B32E5DB003E246D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085F2C712B32E5DB003E246D /* API.swift */; };
+		0863C4042B56823C0031DC52 /* LastSearch+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863C4022B56823C0031DC52 /* LastSearch+CoreDataClass.swift */; };
+		0863C4052B56823C0031DC52 /* LastSearch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863C4032B56823C0031DC52 /* LastSearch+CoreDataProperties.swift */; };
 		087D27962B3322F1001385A4 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D27952B3322F1001385A4 /* CircleProgressBar.swift */; };
 		0883C0B72B0E160D00D55176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0B62B0E160D00D55176 /* AppDelegate.swift */; };
 		0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0B82B0E160D00D55176 /* SceneDelegate.swift */; };
-		0883C0BB2B0E160D00D55176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0BA2B0E160D00D55176 /* ViewController.swift */; };
+		0883C0BB2B0E160D00D55176 /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0BA2B0E160D00D55176 /* viewController.swift */; };
 		0883C0BE2B0E160D00D55176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0883C0BC2B0E160D00D55176 /* Main.storyboard */; };
 		0883C0C12B0E160D00D55176 /* cafoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0883C0BF2B0E160D00D55176 /* cafoll.xcdatamodeld */; };
 		0883C0C32B0E160F00D55176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0883C0C22B0E160F00D55176 /* Assets.xcassets */; };
@@ -35,8 +37,6 @@
 		08C23D842B38852700E8CFCD /* Snack+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D762B38852700E8CFCD /* Snack+CoreDataProperties.swift */; };
 		08C23D852B38852700E8CFCD /* Lunch+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D772B38852700E8CFCD /* Lunch+CoreDataClass.swift */; };
 		08C23D862B38852700E8CFCD /* Lunch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D782B38852700E8CFCD /* Lunch+CoreDataProperties.swift */; };
-		08C23D872B38852700E8CFCD /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D792B38852700E8CFCD /* Favorite+CoreDataClass.swift */; };
-		08C23D882B38852700E8CFCD /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D7A2B38852700E8CFCD /* Favorite+CoreDataProperties.swift */; };
 		08CF6F902B446DD10043D0C3 /* APIFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CF6F8F2B446DD10043D0C3 /* APIFoods.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,11 +44,13 @@
 		0807F5982B1495500068A5DA /* Coredata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coredata.swift; sourceTree = "<group>"; };
 		0824298D2B4828B700BC4B9D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		085F2C712B32E5DB003E246D /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0863C4022B56823C0031DC52 /* LastSearch+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LastSearch+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0863C4032B56823C0031DC52 /* LastSearch+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LastSearch+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		087D27952B3322F1001385A4 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
 		0883C0B32B0E160D00D55176 /* cafoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cafoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0883C0B62B0E160D00D55176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0883C0B82B0E160D00D55176 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0883C0BA2B0E160D00D55176 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0883C0BA2B0E160D00D55176 /* viewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
 		0883C0BD2B0E160D00D55176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0883C0C02B0E160D00D55176 /* cafoll.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cafoll.xcdatamodel; sourceTree = "<group>"; };
 		0883C0C22B0E160F00D55176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,8 +73,6 @@
 		08C23D762B38852700E8CFCD /* Snack+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snack+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08C23D772B38852700E8CFCD /* Lunch+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lunch+CoreDataClass.swift"; sourceTree = "<group>"; };
 		08C23D782B38852700E8CFCD /* Lunch+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lunch+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		08C23D792B38852700E8CFCD /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
-		08C23D7A2B38852700E8CFCD /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08CF6F8F2B446DD10043D0C3 /* APIFoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFoods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +122,8 @@
 		0883C0FE2B0F0E0E00D55176 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				0863C4022B56823C0031DC52 /* LastSearch+CoreDataClass.swift */,
+				0863C4032B56823C0031DC52 /* LastSearch+CoreDataProperties.swift */,
 				08C23D6D2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift */,
 				08C23D6E2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift */,
 				08C23D6F2B38852700E8CFCD /* Dinner+CoreDataClass.swift */,
@@ -134,8 +136,6 @@
 				08C23D762B38852700E8CFCD /* Snack+CoreDataProperties.swift */,
 				08C23D772B38852700E8CFCD /* Lunch+CoreDataClass.swift */,
 				08C23D782B38852700E8CFCD /* Lunch+CoreDataProperties.swift */,
-				08C23D792B38852700E8CFCD /* Favorite+CoreDataClass.swift */,
-				08C23D7A2B38852700E8CFCD /* Favorite+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -153,7 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				08856CF12B1E097C00466AAB /* HomeViewController.swift */,
-				0883C0BA2B0E160D00D55176 /* ViewController.swift */,
+				0883C0BA2B0E160D00D55176 /* viewController.swift */,
 				0824298D2B4828B700BC4B9D /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
@@ -251,12 +251,12 @@
 			files = (
 				0883C0C12B0E160D00D55176 /* cafoll.xcdatamodeld in Sources */,
 				087D27962B3322F1001385A4 /* CircleProgressBar.swift in Sources */,
-				0883C0BB2B0E160D00D55176 /* ViewController.swift in Sources */,
+				0883C0BB2B0E160D00D55176 /* viewController.swift in Sources */,
 				08C23D7F2B38852700E8CFCD /* Foods+CoreDataClass.swift in Sources */,
 				08C23D832B38852700E8CFCD /* Snack+CoreDataClass.swift in Sources */,
-				08C23D882B38852700E8CFCD /* Favorite+CoreDataProperties.swift in Sources */,
 				08856D052B1E26B500466AAB /* Helper.swift in Sources */,
 				08856D072B1F391A00466AAB /* UI.swift in Sources */,
+				0863C4052B56823C0031DC52 /* LastSearch+CoreDataProperties.swift in Sources */,
 				08C23D7E2B38852700E8CFCD /* Dinner+CoreDataProperties.swift in Sources */,
 				08C23D842B38852700E8CFCD /* Snack+CoreDataProperties.swift in Sources */,
 				0883C0B72B0E160D00D55176 /* AppDelegate.swift in Sources */,
@@ -267,7 +267,6 @@
 				08C23D812B38852700E8CFCD /* Breakfast+CoreDataClass.swift in Sources */,
 				0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */,
 				08856CF22B1E097C00466AAB /* HomeViewController.swift in Sources */,
-				08C23D872B38852700E8CFCD /* Favorite+CoreDataClass.swift in Sources */,
 				08C23D822B38852700E8CFCD /* Breakfast+CoreDataProperties.swift in Sources */,
 				08C23D7B2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift in Sources */,
 				08C23D7C2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift in Sources */,
@@ -276,6 +275,7 @@
 				08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */,
 				08C23D852B38852700E8CFCD /* Lunch+CoreDataClass.swift in Sources */,
 				08C23D862B38852700E8CFCD /* Lunch+CoreDataProperties.swift in Sources */,
+				0863C4042B56823C0031DC52 /* LastSearch+CoreDataClass.swift in Sources */,
 				08C23D802B38852700E8CFCD /* Foods+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

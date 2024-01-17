@@ -82,7 +82,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case 1:
             addButton.isHidden = false
             searchBar.isHidden = true
-            
             coredata.fetchFoods()
             tableView.reloadData()
         default:

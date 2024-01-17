@@ -469,25 +469,110 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                           let grams = Int(gramText) else {
                         return
                     }
-                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    
+                    
+                    //check if list is empty?
+                    let keysArray = Array(searchResults.keys)
+                    
+                    if keysArray.isEmpty {
+                        print("Search results are empty.")
+                        // Handle the case when there are no search results, e.g., show a message to the user.
+                    } else {
+                        if indexPath.row < keysArray.count {
+                            selectedCellFoodName = keysArray[indexPath.row]
+                            print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                            // ... rest of your code related to selectedCellFoodName
+                        } else {
+                            print("Index out of range: \(indexPath.row) for keysArray with count \(keysArray.count)")
+                            // Handle the case when indexPath.row is out of range.
+                        }
+                    }
+                    
+                    
                     // Check if selectedCellFoodName is not nil
                     if let selectedCellFoodName = self.selectedCellFoodName,
-                       var nutrientValues = searchResults[selectedCellFoodName] {
-                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
-                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
-                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
-                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+                        
+                        // If a record with the same title exists, update its nutrient values
+                        existingLastFood.calori = String(Double(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Double(grams))
+                        existingLastFood.carbon = String(Double(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Double(grams))
+                        existingLastFood.fat = String(Double(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Double(grams))
+                        existingLastFood.protein = String(Double(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Double(grams))
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
                         
-                        // Create a new Breakfast entity in Core Data
-                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Lunch")
-                        print("saveFoodToCoreData called successfully")
+                        // Print updated LastSearch entity
+                        print("Updated LastSearch Entity: \(existingLastFood)")
                     } else {
-                        // Handle the case when selectedCellFoodName is nil
-                        print("selectedCellFoodName is nil")
+                        // If no record with the same title exists, add a new LastSearch entity
+                        if let selectedCellFoodName = self.selectedCellFoodName,
+                           var nutrientValues = searchResults[selectedCellFoodName] {
+                            
+                            nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                            nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                            nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                            nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                            
+                            let addLastFood = LastSearch(context: self.coredata.context)
+                            addLastFood.title = selectedCellFoodName
+                            addLastFood.calori = String(nutrientValues["calories"] ?? 0.0)
+                            addLastFood.carbon = String(nutrientValues["carbs"] ?? 0.0)
+                            addLastFood.fat = String(nutrientValues["fat"] ?? 0.0)
+                            addLastFood.protein = String(nutrientValues["protein"] ?? 0.0)
+                            
+                            // Print updated nutritional values
+                            print("Updated Nutrient Values: \(nutrientValues)")
+                            
+                            // Create a new Breakfast entity in Core Data
+                            self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Lunch")
+                            print("saveFoodToCoreData called successfully")
+                            
+                            // Print added LastSearch entity
+                            print("Added LastSearch Entity: \(addLastFood)")
+                        } else {
+                            // Handle the case when selectedCellFoodName is nil
+                            print("selectedCellFoodName is nil")
+                        }
+                    }
+                    if isSearching == false {
+                        let datePickerDate = homeViewController.datePicker.date
+                        if let selectedFood = self.coredata.lastSearch?[indexPath.row] {
+                            let selectedCellFoodNameLast = selectedFood.title
+                            print("Selected Cell Food Name: \(selectedCellFoodNameLast ?? "nil")")
+                            
+                            // ... rest of your code related to selectedCellFoodName
+                            
+                            // Check if selectedCellFoodName is not nil
+                            if let gramsText = alertLunch.textFields?.first?.text,
+                               let grams = Double(gramsText) {
+                                
+                                // Create a new Breakfast entity in Core Data
+                                let context = self.coredata.context
+                                let newFood = Lunch(context: context)
+                                newFood.title = selectedCellFoodNameLast
+                                newFood.calori = String(Double(selectedFood.calori ?? "0.0") ?? 0.0 * grams)
+                                newFood.carbon = String(Double(selectedFood.carbon ?? "0.0") ?? 0.0 * grams)
+                                newFood.fat = String(Double(selectedFood.fat ?? "0.0") ?? 0.0 * grams)
+                                newFood.protein = String(Double(selectedFood.protein ?? "0.0") ?? 0.0 * grams)
+                                newFood.date = datePickerDate
+                                
+                                // Save the new Breakfast entity to Core Data
+                                self.coredata.saveData()
+                                
+                                // Print added Breakfast entity
+                                print("Added Breakfast Entity: \(newFood)")
+                                
+                                // ... rest of your code
+                            } else {
+                                // Handle the case when some of the values are nil or conversion fails
+                                print("Some values are nil or conversion fails.")
+                            }
+                        } else {
+                            print("Selected food is nil.")
+                        }
+                        
                     }
                     tableView.reloadData()
                     homeViewController.badgeCount[0] += 1
@@ -559,25 +644,110 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                           let grams = Int(gramText) else {
                         return
                     }
-                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    
+                    
+                    //check if list is empty?
+                    let keysArray = Array(searchResults.keys)
+                    
+                    if keysArray.isEmpty {
+                        print("Search results are empty.")
+                        // Handle the case when there are no search results, e.g., show a message to the user.
+                    } else {
+                        if indexPath.row < keysArray.count {
+                            selectedCellFoodName = keysArray[indexPath.row]
+                            print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                            // ... rest of your code related to selectedCellFoodName
+                        } else {
+                            print("Index out of range: \(indexPath.row) for keysArray with count \(keysArray.count)")
+                            // Handle the case when indexPath.row is out of range.
+                        }
+                    }
+                    
+                    
                     // Check if selectedCellFoodName is not nil
                     if let selectedCellFoodName = self.selectedCellFoodName,
-                       var nutrientValues = searchResults[selectedCellFoodName] {
-                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
-                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
-                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
-                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+                        
+                        // If a record with the same title exists, update its nutrient values
+                        existingLastFood.calori = String(Double(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Double(grams))
+                        existingLastFood.carbon = String(Double(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Double(grams))
+                        existingLastFood.fat = String(Double(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Double(grams))
+                        existingLastFood.protein = String(Double(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Double(grams))
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
                         
-                        // Create a new Breakfast entity in Core Data
-                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Dinner")
-                        print("saveFoodToCoreData called successfully")
+                        // Print updated LastSearch entity
+                        print("Updated LastSearch Entity: \(existingLastFood)")
                     } else {
-                        // Handle the case when selectedCellFoodName is nil
-                        print("selectedCellFoodName is nil")
+                        // If no record with the same title exists, add a new LastSearch entity
+                        if let selectedCellFoodName = self.selectedCellFoodName,
+                           var nutrientValues = searchResults[selectedCellFoodName] {
+                            
+                            nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                            nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                            nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                            nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                            
+                            let addLastFood = Dinner(context: self.coredata.context)
+                            addLastFood.title = selectedCellFoodName
+                            addLastFood.calori = String(nutrientValues["calories"] ?? 0.0)
+                            addLastFood.carbon = String(nutrientValues["carbs"] ?? 0.0)
+                            addLastFood.fat = String(nutrientValues["fat"] ?? 0.0)
+                            addLastFood.protein = String(nutrientValues["protein"] ?? 0.0)
+                            
+                            // Print updated nutritional values
+                            print("Updated Nutrient Values: \(nutrientValues)")
+                            
+                            // Create a new Breakfast entity in Core Data
+                            self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Dinner")
+                            print("saveFoodToCoreData called successfully")
+                            
+                            // Print added LastSearch entity
+                            print("Added LastSearch Entity: \(addLastFood)")
+                        } else {
+                            // Handle the case when selectedCellFoodName is nil
+                            print("selectedCellFoodName is nil")
+                        }
+                    }
+                    if isSearching == false {
+                        let datePickerDate = homeViewController.datePicker.date
+                        if let selectedFood = self.coredata.lastSearch?[indexPath.row] {
+                            let selectedCellFoodNameLast = selectedFood.title
+                            print("Selected Cell Food Name: \(selectedCellFoodNameLast ?? "nil")")
+                            
+                            // ... rest of your code related to selectedCellFoodName
+                            
+                            // Check if selectedCellFoodName is not nil
+                            if let gramsText = alertDinner.textFields?.first?.text,
+                               let grams = Double(gramsText) {
+                                
+                                // Create a new Breakfast entity in Core Data
+                                let context = self.coredata.context
+                                let newFood = Dinner(context: context)
+                                newFood.title = selectedCellFoodNameLast
+                                newFood.calori = String(Double(selectedFood.calori ?? "0.0") ?? 0.0 * grams)
+                                newFood.carbon = String(Double(selectedFood.carbon ?? "0.0") ?? 0.0 * grams)
+                                newFood.fat = String(Double(selectedFood.fat ?? "0.0") ?? 0.0 * grams)
+                                newFood.protein = String(Double(selectedFood.protein ?? "0.0") ?? 0.0 * grams)
+                                newFood.date = datePickerDate
+                                
+                                // Save the new Breakfast entity to Core Data
+                                self.coredata.saveData()
+                                
+                                // Print added Breakfast entity
+                                print("Added Breakfast Entity: \(newFood)")
+                                
+                                // ... rest of your code
+                            } else {
+                                // Handle the case when some of the values are nil or conversion fails
+                                print("Some values are nil or conversion fails.")
+                            }
+                        } else {
+                            print("Selected food is nil.")
+                        }
+                        
                     }
                     tableView.reloadData()
                     homeViewController.badgeCount[0] += 1
@@ -647,25 +817,110 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                           let grams = Int(gramText) else {
                         return
                     }
-                    selectedCellFoodName = Array(searchResults.keys)[indexPath.row]
-                    print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                    
+                    
+                    //check if list is empty?
+                    let keysArray = Array(searchResults.keys)
+                    
+                    if keysArray.isEmpty {
+                        print("Search results are empty.")
+                        // Handle the case when there are no search results, e.g., show a message to the user.
+                    } else {
+                        if indexPath.row < keysArray.count {
+                            selectedCellFoodName = keysArray[indexPath.row]
+                            print("Selected Cell Food Name: \(selectedCellFoodName ?? "nil")")
+                            // ... rest of your code related to selectedCellFoodName
+                        } else {
+                            print("Index out of range: \(indexPath.row) for keysArray with count \(keysArray.count)")
+                            // Handle the case when indexPath.row is out of range.
+                        }
+                    }
+                    
+                    
                     // Check if selectedCellFoodName is not nil
                     if let selectedCellFoodName = self.selectedCellFoodName,
-                       var nutrientValues = searchResults[selectedCellFoodName] {
-                        nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
-                        nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
-                        nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
-                        nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+                        
+                        // If a record with the same title exists, update its nutrient values
+                        existingLastFood.calori = String(Double(existingLastFood.calori ?? "0.0") ?? 0.0 + nutrientValues["calories"]! * Double(grams))
+                        existingLastFood.carbon = String(Double(existingLastFood.carbon ?? "0.0") ?? 0.0 + nutrientValues["carbs"]! * Double(grams))
+                        existingLastFood.fat = String(Double(existingLastFood.fat ?? "0.0") ?? 0.0 + nutrientValues["fat"]! * Double(grams))
+                        existingLastFood.protein = String(Double(existingLastFood.protein ?? "0.0") ?? 0.0 + nutrientValues["protein"]! * Double(grams))
                         
                         // Print updated nutritional values
                         print("Updated Nutrient Values: \(nutrientValues)")
                         
-                        // Create a new Breakfast entity in Core Data
-                        self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Snack")
-                        print("saveFoodToCoreData called successfully")
+                        // Print updated LastSearch entity
+                        print("Updated LastSearch Entity: \(existingLastFood)")
                     } else {
-                        // Handle the case when selectedCellFoodName is nil
-                        print("selectedCellFoodName is nil")
+                        // If no record with the same title exists, add a new LastSearch entity
+                        if let selectedCellFoodName = self.selectedCellFoodName,
+                           var nutrientValues = searchResults[selectedCellFoodName] {
+                            
+                            nutrientValues["protein"] = (nutrientValues["protein"] ?? 0) * Double(grams)
+                            nutrientValues["carbs"] = (nutrientValues["carbs"] ?? 0) * Double(grams)
+                            nutrientValues["fat"] = (nutrientValues["fat"] ?? 0) * Double(grams)
+                            nutrientValues["calories"] = (nutrientValues["calories"] ?? 0) * Double(grams)
+                            
+                            let addLastFood = Snack(context: self.coredata.context)
+                            addLastFood.title = selectedCellFoodName
+                            addLastFood.calori = String(nutrientValues["calories"] ?? 0.0)
+                            addLastFood.carbon = String(nutrientValues["carbs"] ?? 0.0)
+                            addLastFood.fat = String(nutrientValues["fat"] ?? 0.0)
+                            addLastFood.protein = String(nutrientValues["protein"] ?? 0.0)
+                            
+                            // Print updated nutritional values
+                            print("Updated Nutrient Values: \(nutrientValues)")
+                            
+                            // Create a new Breakfast entity in Core Data
+                            self.saveFoodToCoreData(title: selectedCellFoodName, nutrientValues: nutrientValues, mealEntityName: "Snack")
+                            print("saveFoodToCoreData called successfully")
+                            
+                            // Print added LastSearch entity
+                            print("Added LastSearch Entity: \(addLastFood)")
+                        } else {
+                            // Handle the case when selectedCellFoodName is nil
+                            print("selectedCellFoodName is nil")
+                        }
+                    }
+                    if isSearching == false {
+                        let datePickerDate = homeViewController.datePicker.date
+                        if let selectedFood = self.coredata.lastSearch?[indexPath.row] {
+                            let selectedCellFoodNameLast = selectedFood.title
+                            print("Selected Cell Food Name: \(selectedCellFoodNameLast ?? "nil")")
+                            
+                            // ... rest of your code related to selectedCellFoodName
+                            
+                            // Check if selectedCellFoodName is not nil
+                            if let gramsText = alertSnack.textFields?.first?.text,
+                               let grams = Double(gramsText) {
+                                
+                                // Create a new Breakfast entity in Core Data
+                                let context = self.coredata.context
+                                let newFood = Snack(context: context)
+                                newFood.title = selectedCellFoodNameLast
+                                newFood.calori = String(Double(selectedFood.calori ?? "0.0") ?? 0.0 * grams)
+                                newFood.carbon = String(Double(selectedFood.carbon ?? "0.0") ?? 0.0 * grams)
+                                newFood.fat = String(Double(selectedFood.fat ?? "0.0") ?? 0.0 * grams)
+                                newFood.protein = String(Double(selectedFood.protein ?? "0.0") ?? 0.0 * grams)
+                                newFood.date = datePickerDate
+                                
+                                // Save the new Breakfast entity to Core Data
+                                self.coredata.saveData()
+                                
+                                // Print added Breakfast entity
+                                print("Added Breakfast Entity: \(newFood)")
+                                
+                                // ... rest of your code
+                            } else {
+                                // Handle the case when some of the values are nil or conversion fails
+                                print("Some values are nil or conversion fails.")
+                            }
+                        } else {
+                            print("Selected food is nil.")
+                        }
+                        
                     }
                     tableView.reloadData()
                     homeViewController.badgeCount[0] += 1

@@ -8,13 +8,13 @@
 import Foundation
 
 
-var searchResults: [String: [String: Double]] = [:]
-var foodDictionary: [String: [String: Double]] = [
+var searchResults: [String: [String: Float]] = [:]
+var foodDictionary: [String: [String: Float]] = [
     "elma": [
-        "protein": 0.01,
-        "carbs": 0.12,
-        "calories": 0.52,
-        "fat": 0
+        "protein": 0.26,
+        "carbs": 13.81,
+        "calories": 52.00,
+        "fat": 0.17
     ],
     "muz": [
         "protein": 0.02,
@@ -155,7 +155,7 @@ var foodDictionary: [String: [String: Double]] = [
         "fat": 0.09
     ],
     "yulaf ezmesi": [
-        "protein": 0.025,
+        "protein": 0.02,
         "carbs": 0.003,
         "calories": 0.696,
         "fat": 0.015
@@ -329,10 +329,10 @@ var foodDictionary: [String: [String: Double]] = [
         "fat": 0.004
     ],
     "kuzu şiş": [
-        "protein": 0.244,
+        "protein": 0.24,
         "carbs": 0,
-        "calories": 0.126,
-        "fat": 0.086
+        "calories": 0.12,
+        "fat": 0.08
     ],
     "fırın patates": [
         "protein": 0.025,

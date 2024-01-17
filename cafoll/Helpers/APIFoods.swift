@@ -17,352 +17,340 @@ var foodDictionary: [String: [String: Float]] = [
         "fat": 0.17
     ],
     "muz": [
-        "protein": 0.02,
-        "carbs": 0.12,
-        "calories": 0.89,
-        "fat": 0
-    ],
-    "çilek": [
-        "protein": 0.01,
-        "carbs": 0.07,
-        "calories": 0.32,
-        "fat": 0
-    ],
-    "portakal": [
-        "protein": 0,
-        "carbs": 0.08,
-        "calories": 0.43,
-        "fat": 0
-    ],
-    "karpuz": [
-        "protein": 0,
-        "carbs": 0.06,
-        "calories": 0.30,
-        "fat": 0
-    ],
-    "ananas": [
-        "protein": 0.01,
-        "carbs": 0.13,
-        "calories": 0.50,
-        "fat": 0
-    ],
-    "armut": [
-        "protein": 0,
-        "carbs": 0.15,
-        "calories": 0.57,
-        "fat": 0
-    ],
-    "şeftali": [
-        "protein": 0,
-        "carbs": 0.09,
-        "calories": 0.39,
-        "fat": 0
-    ],
-    "kiraz": [
-        "protein": 0.01,
-        "carbs": 0.13,
-        "calories": 0.50,
-        "fat": 0
-    ],
-    "mandalina": [
-        "protein": 0.01,
-        "carbs": 0.13,
-        "calories": 0.53,
-        "fat": 0
-    ],
-    "nar": [
-        "protein": 0.02,
-        "carbs": 0.18,
-        "calories": 0.83,
-        "fat": 0
-    ],
-    "mango": [
-        "protein": 0.01,
-        "carbs": 0.14,
-        "calories": 0.60,
-        "fat": 0
-    ],
-    "erik": [
-        "protein": 0.01,
-        "carbs": 0.09,
-        "calories": 0.38,
-        "fat": 0
-    ],
-    "ahududu": [
-        "protein": 0.01,
-        "carbs": 0.05,
-        "calories": 0.52,
-        "fat": 0.01
-    ],
-    "dut": [
-        "protein": 0.01,
-        "carbs": 0.09,
-        "calories": 0.48,
-        "fat": 0
-    ],
-    "ekşi kiraz": [
-        "protein": 0.01,
-        "carbs": 0.09,
-        "calories": 0.48,
-        "fat": 0.01
-    ],
-    "kavun": [
-        "protein": 0.01,
-        "carbs": 0.07,
-        "calories": 0.34,
-        "fat": 0
-    ],
-    "ayva": [
-        "protein": 0.01,
-        "carbs": 0.11,
-        "calories": 0.42,
-        "fat": 0
-    ],
-    "limon": [
-        "protein": 0.01,
-        "carbs": 0.09,
-        "calories": 0.29,
-        "fat": 0
-    ],
-    "üzüm": [
-        "protein": 0.01,
-        "carbs": 0.18,
-        "calories": 0.68,
-        "fat": 0
-    ],
-    "kivi": [
-        "protein": 0.01,
-        "carbs": 0.09,
-        "calories": 0.49,
-        "fat": 0.01
-    ],
-    "avakado": [
-        "protein": 0.02,
-        "carbs": 0.09,
-        "calories": 1.57,
-        "fat": 0.15
-    ],
-    "ceviz": [
-        "protein": 0.15,
-        "carbs": 0.01,
-        "calories": 6.36,
-        "fat": 0.13
-    ],
-    "antep fıstığı": [
-        "protein": 0.22,
-        "carbs": 0.03,
-        "calories": 5.58,
-        "fat": 0.09
-    ],
-    "yulaf ezmesi": [
-        "protein": 0.02,
-        "carbs": 0.003,
-        "calories": 0.696,
-        "fat": 0.015
-    ],
-    "peynir": [
-        "protein": 0.227,
-        "carbs": 0.005,
-        "calories": 3.939,
+        "protein": 1.09,
+        "carbs": 22.84,
+        "calories": 89.00,
         "fat": 0.33
     ],
+    "çilek": [
+        "protein": 0.67,
+        "carbs": 7.68,
+        "calories": 32.00,
+        "fat": 0.30
+    ],
+    "portakal": [
+        "protein": 0.70,
+        "carbs": 11.54,
+        "calories": 46.00,
+        "fat": 0.21
+    ],
+    "karpuz": [
+        "protein": 0.61,
+        "carbs": 7.55,
+        "calories": 30.00,
+        "fat": 0.15
+    ],
+    "ananas": [
+        "protein": 0.54,
+        "carbs": 13.12,
+        "calories": 50.00,
+        "fat": 0.12
+    ],
+    "armut": [
+        "protein": 0.36,
+        "carbs": 15.23,
+        "calories": 57.00,
+        "fat": 0.14
+    ],
+    "şeftali": [
+        "protein": 0.91,
+        "carbs": 9.54,
+        "calories": 39.00,
+        "fat": 0.25
+    ],
+    "kiraz": [
+        "protein": 1.06,
+        "carbs": 16.01,
+        "calories": 63.00,
+        "fat": 0.20
+    ],
+    "mandalina": [
+        "protein": 0.81,
+        "carbs": 13.34,
+        "calories": 53.00,
+        "fat": 0.31
+    ],
+    "nar": [
+        "protein": 1.67,
+        "carbs": 18.70,
+        "calories": 83.00,
+        "fat": 0.17
+    ],
+    "mango": [
+        "protein": 0.82,
+        "carbs": 14.98,
+        "calories": 60.00,
+        "fat": 0.38
+    ],
+    "erik": [
+        "protein": 0.70,
+        "carbs": 11.42,
+        "calories": 46.00,
+        "fat": 0.28
+    ],
+    "ahududu": [
+        "protein": 1.20,
+        "carbs": 11.94,
+        "calories": 52.00,
+        "fat": 0.65
+    ],
+    "dut": [
+        "protein": 1.30,
+        "carbs": 8.10,
+        "calories": 44.00,
+        "fat": 0.00
+    ],
+    "kavun": [
+        "protein": 1.11,
+        "carbs": 6.58,
+        "calories": 28.00,
+        "fat": 0.10
+    ],
+    "ayva": [
+        "protein": 0.35,
+        "carbs": 13.92,
+        "calories": 60.00,
+        "fat": 0.14
+    ],
+    "limon": [
+        "protein": 0.44,
+        "carbs": 8.73,
+        "calories": 46.00,
+        "fat": 0.36
+    ],
+    "üzüm": [
+        "protein": 0.72,
+        "carbs": 18.10,
+        "calories": 69.00,
+        "fat": 0.16
+    ],
+    "kivi": [
+        "protein": 0.14,
+        "carbs": 14.66,
+        "calories": 61.00,
+        "fat": 0.52
+    ],
+    "avakado": [
+        "protein": 2.00,
+        "carbs": 8.53,
+        "calories": 160.00,
+        "fat": 14.66
+    ],
+    "ceviz": [
+        "protein": 15.20,
+        "carbs": 13.71,
+        "calories": 654.00,
+        "fat": 65.20
+    ],
+    "antep fıstığı": [
+        "protein": 17.64,
+        "carbs": 11.55,
+        "calories": 575.00,
+        "fat": 51.60
+    ],
+    "yulaf ezmesi": [
+        "protein": 16.89,
+        "carbs": 66.27,
+        "calories": 389.00,
+        "fat": 6.90
+    ],
+    "beyaz peynir": [
+        "protein": 20.38,
+        "carbs": 2.53,
+        "calories": 310.00,
+        "fat": 24.31
+    ],
     "yumurta": [
-        "protein": 0.125,
-        "carbs": 0.004,
-        "calories": 1.47,
-        "fat": 0.097
+        "protein": 12.56,
+        "carbs": 0.72,
+        "calories": 143.00,
+        "fat": 9.51
     ],
     "zeytin": [
-        "protein": 0.008,
-        "carbs": 0,
-        "calories": 1.134,
-        "fat": 0.108
+        "protein": 1.80,
+        "carbs": 1.10,
+        "calories": 207.00,
+        "fat": 21.00
     ],
     "domates": [
-        "protein": 0.009,
-        "carbs": 0.026,
-        "calories": 0.182,
-        "fat": 0.002
+        "protein": 0.88,
+        "carbs": 3.89,
+        "calories": 18.00,
+        "fat": 0.20
     ],
     "salatalık": [
-        "protein": 0.006,
-        "carbs": 0.017,
-        "calories": 0.153,
-        "fat": 0.001
-    ],
-    "reçel": [
-        "protein": 0.003,
-        "carbs": 0.826,
-        "calories": 3.029,
-        "fat": 0
+        "protein": 0.62,
+        "carbs": 1.81,
+        "calories": 12.00,
+        "fat": 0.20
     ],
     "bal": [
-        "protein": 0.003,
-        "carbs": 0.048,
-        "calories": 0.602,
-        "fat": 0.032
+        "protein": 0.38,
+        "carbs": 82.40,
+        "calories": 304.00,
+        "fat": 0.00
     ],
     "yoğurt": [
-        "protein": 0.053,
-        "carbs": 0.071,
-        "calories": 0.642,
-        "fat": 0.016
+        "protein": 3.47,
+        "carbs": 4.66,
+        "calories": 61.00,
+        "fat": 3.25
     ],
     "süt": [
-        "protein": 0.032,
-        "carbs": 0.048,
-        "calories": 0.602,
-        "fat": 0.032
+        "protein": 3.30,
+        "carbs": 4.70,
+        "calories": 61.00,
+        "fat": 3.30
     ],
     "tam buğday ekmek": [
-        "protein": 0.124,
-        "carbs": 0.06,
-        "calories": 2.463,
-        "fat": 0.034
+        "protein": 12.45,
+        "carbs": 42.71,
+        "calories": 252.00,
+        "fat": 3.50
     ],
     "fındık": [
-        "protein": 0.149,
-        "carbs": 0.094,
-        "calories": 6.562,
-        "fat": 0.615
+        "protein": 14.95,
+        "carbs": 16.70,
+        "calories": 628.00,
+        "fat": 60.75
     ],
     "badem": [
-        "protein": 0.207,
-        "carbs": 0.108,
-        "calories": 6.068,
-        "fat": 0.517
+        "protein": 18.60,
+        "carbs": 19.50,
+        "calories": 598.00,
+        "fat": 54.20
     ],
     "kayısı": [
-        "protein": 0.014,
-        "carbs": 0.02,
-        "calories": 0.483,
-        "fat": 0.004
+        "protein": 1.40,
+        "carbs": 11.12,
+        "calories": 48.00,
+        "fat": 0.39
     ],
     "ayran": [
-        "protein": 0.033,
-        "carbs": 0,
-        "calories": 0.402,
-        "fat": 0.009
+        "protein": 1.98,
+        "carbs": 2.71,
+        "calories": 37.00,
+        "fat": 2.00
     ],
     "portakal suyu": [
-        "protein": 0.007,
-        "carbs": 0.003,
-        "calories": 0.464,
-        "fat": 0.001
+        "protein": 0.40,
+        "carbs": 14.64,
+        "calories": 60.00,
+        "fat": 0.17
     ],
     "fıstık ezmesi": [
-        "protein": 0.221,
-        "carbs": 0.056,
-        "calories": 5.797,
-        "fat": 0.496
+        "protein": 24.06,
+        "carbs": 21.57,
+        "calories": 589.00,
+        "fat": 49.94
     ],
     "pastırma": [
-        "protein": 0.218,
-        "carbs": 0.001,
-        "calories": 1.466,
-        "fat": 0.058
+        "protein": 29.5,
+        "carbs": 0.00,
+        "calories": 250.00,
+        "fat": 13.90
     ],
-    "ızgara tavuk": [
-        "protein": 0.295,
-        "carbs": 0,
-        "calories": 1.524,
-        "fat": 0.035
+    "ızgara antrikot": [
+        "protein": 18.90,
+        "carbs": 0.58,
+        "calories": 182.00,
+        "fat": 11.04
     ],
     "balık": [
-        "protein": 0.26,
-        "carbs": 0,
-        "calories": 1.292,
-        "fat": 0.027
+        "protein": 18.30,
+        "carbs": 0.00,
+        "calories": 82.00,
+        "fat": 0.90
     ],
     "mercimek çorbası": [
-        "protein": 0.113,
-        "carbs": 0.081,
-        "calories": 0.564,
-        "fat": 0.011
+        "protein": 1.11,
+        "carbs": 3.99,
+        "calories": 23.00,
+        "fat": 0.11
     ],
-    "hindi": [
-        "protein": 0.286,
-        "carbs": 0.001,
-        "calories": 0.193,
-        "fat": 0.074
+    "hindi but": [
+        "protein": 27.87,
+        "carbs": 0.00,
+        "calories": 208.00,
+        "fat": 9.82
     ],
-    "karnabahar püresi": [
-        "protein": 0.029,
-        "carbs": 0.021,
-        "calories": 0.09,
-        "fat": 0.074
+    "karnabahar": [
+        "protein": 1.84,
+        "carbs": 4.11,
+        "calories": 23.00,
+        "fat": 0.45
     ],
-    "fasulye": [
-        "protein": 0.087,
-        "carbs": 0.019,
-        "calories": 0.129,
-        "fat": 0.005
+    "kuru fasulye": [
+        "protein": 6.57,
+        "carbs": 9.91,
+        "calories": 97.00,
+        "fat": 1.35
     ],
-    "ratatuy": [
-        "protein": 0.01,
-        "carbs": 0.021,
-        "calories": 0.058,
-        "fat": 0.033
+    "patlıcan ezme": [
+        "protein": 1.28,
+        "carbs": 3.25,
+        "calories": 29.00,
+        "fat": 1.20
     ],
     "kabak": [
-        "protein": 0.011,
-        "carbs": 0.017,
-        "calories": 0.014,
-        "fat": 0.004
+        "protein": 1.60,
+        "carbs": 2.05,
+        "calories": 19.00,
+        "fat": 0.40
     ],
     "tabule": [
-        "protein": 0.02,
-        "carbs": 0.009,
-        "calories": 0.086,
-        "fat": 0.045
+        "protein": 7.14,
+        "carbs": 50.81,
+        "calories": 261.00,
+        "fat": 4.34
     ],
     "yaprak sarma": [
-        "protein": 0.11,
-        "carbs": 0.022,
-        "calories": 0.193,
-        "fat": 0.116
+        "protein": 3.37,
+        "carbs": 17.82,
+        "calories": 96.00,
+        "fat": 1.32
     ],
     "brokoli salatası": [
-        "protein": 0.09,
-        "carbs": 0.078,
-        "calories": 0.113,
-        "fat": 0.004
+        "protein": 1.46,
+        "carbs": 7.67,
+        "calories": 54.00,
+        "fat": 1.63
     ],
     "kuzu şiş": [
-        "protein": 0.24,
-        "carbs": 0,
-        "calories": 0.12,
-        "fat": 0.08
+        "protein": 16.52,
+        "carbs": 3.82,
+        "calories": 167.00,
+        "fat": 9.72
     ],
     "fırın patates": [
-        "protein": 0.025,
-        "carbs": 0.005,
-        "calories": 0.038,
-        "fat": 0.001
+        "protein": 1.55,
+        "carbs": 14.36,
+        "calories": 107.00,
+        "fat": 4.79
     ],
     "enginar": [
-        "protein": 0.029,
-        "carbs": 0.057,
-        "calories": 0.022,
-        "fat": 0.003
+        "protein": 3.27,
+        "carbs": 10.51,
+        "calories": 47.00,
+        "fat": 0.15
     ],
-    "ıspanak": [
-        "protein": 0.029,
-        "carbs": 0.004,
-        "calories": 0.01,
-        "fat": 0.003
+    "ıspanak yemeği": [
+        "protein": 2.55,
+        "carbs": 5.71,
+        "calories": 76.00,
+        "fat": 4.64
     ],
-    "bulgur": [
-        "protein": 0.031,
-        "carbs": 0.001,
-        "calories": 0.042,
-        "fat": 0
+    "bulgur pilavı": [
+        "protein": 2.78,
+        "carbs": 18.19,
+        "calories": 114.00,
+        "fat": 3.39
     ],
-    "kuzu tandır": [
-        "protein": 0.244,
-        "carbs": 0,
-        "calories": 2,
-        "fat": 0.086
+    "kuzu kıyma": [
+        "protein": 16.56,
+        "carbs": 0.00,
+        "calories": 282.00,
+        "fat": 23.41
     ],
     "FOOOOOD": [
         "protein": 0,

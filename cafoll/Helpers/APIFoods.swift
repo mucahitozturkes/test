@@ -416,7 +416,70 @@ var foodDictionary: [String: Food] = [
         fat: 81.11,
         info: "Bir çorba kaşığı Tereyağı 14 gr. "
     ),
-    "FOOOOOD": Food(
+    "tahin pekmez": Food(
+        protein: 10.10,
+        carbs: 43.00,
+        calories: 437.0,
+        fat: 23.20,
+         info: "Bir yemek Kaşığı Tahinli Pekmez 15 gr."
+     ),
+    "ekmek": Food(
+        protein: 8.09,
+        carbs: 52.80,
+        calories: 256.0,
+        fat: 0.89,
+         info: "Bir ince dilim Ekmek 25 gr."
+     ),
+    "pirinç pilavı": Food(
+        protein: 2.07,
+        carbs: 24.79,
+        calories: 162.0,
+        fat: 5.80,
+         info: "Bir porsiyon Pirinç Pilavı 160 gr."
+     ),
+    "yeşil mercimek": Food(
+        protein: 3.00,
+        carbs: 8.03,
+        calories: 80.00,
+        fat: 4.02,
+         info: "Bir kase Yeşil Mercimek 200 gr."
+     ),
+    "makarna": Food(
+         protein: 5.80,
+         carbs: 30.86,
+         calories: 158.0,
+         fat: 0.93,
+         info: "Bir porsiyon Makarna 50 gr."
+     ),
+    "köfte": Food(
+        protein: 13.05,
+        carbs: 4.92,
+        calories: 168.0,
+        fat: 10.47,
+         info: "Bir adet köfte 40 gr."
+     ),
+    "et döner dürüm": Food(
+        protein: 12.62,
+        carbs: 8.38,
+        calories: 128.0,
+        fat: 19.82,
+         info: "Bir adet Et Döner Dürüm 235 gr."
+     ),
+    "havuç": Food(
+        protein: 0.93,
+        carbs: 9.58,
+        calories: 41.00,
+        fat: 0.24,
+         info: "Bir adet Havuç 85 gr"
+     ),
+    "tavuk döner dürüm": Food(
+        protein: 17.24,
+        carbs: 6.05,
+        calories: 124.0,
+        fat: 14.55,
+         info: "Bir Tavuk Döner Dürüm 250 gr."
+     ),
+    "XXXXXXXXX": Food(
          protein: 0,
          carbs: 0,
          calories: 0,

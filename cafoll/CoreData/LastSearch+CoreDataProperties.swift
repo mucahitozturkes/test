@@ -24,6 +24,7 @@ extension LastSearch {
     @NSManaged public var isFavorited: Bool
     @NSManaged public var protein: String?
     @NSManaged public var title: String?
+    @NSManaged public var info: String?
 
 }
 

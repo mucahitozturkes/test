@@ -105,13 +105,27 @@
                                                                                 </hierarchicalColors>
                                                                             </imageReference>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyX-pv-0OQ">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oHV-0f-3ic">
                                                                             <rect key="frame" x="0.0" y="10" width="299" height="22.5"/>
-                                                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                                                            <color key="textColor" name="Darkgray-White ~ Any &amp; Dark"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyX-pv-0OQ">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="299" height="22.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                                                    <color key="textColor" name="Darkgray-White ~ Any &amp; Dark"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1J-bg-6xo">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="22.5"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <color key="textColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.7670219371" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="oHV-0f-3ic" firstAttribute="centerY" secondItem="oGb-g9-f0b" secondAttribute="centerY" id="oTT-ud-Cm4"/>
+                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                             <color key="backgroundColor" name="Dark mod Background"/>
@@ -133,6 +147,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="foodTitleLabelUI" destination="QyX-pv-0OQ" id="OPD-Mp-FRX"/>
+                                                    <outlet property="infoLabel" destination="S1J-bg-6xo" id="F4Q-LF-8pp"/>
                                                     <outlet property="lastSearchImage" destination="gdM-52-3Ku" id="c5b-NL-9MM"/>
                                                 </connections>
                                             </tableViewCell>

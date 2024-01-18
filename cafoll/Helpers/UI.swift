@@ -89,10 +89,10 @@ class Ui {
                                 totalProtein: Float,
                                 totalFat: Float,
                                 totalCarbon: Float,
-                                greenTotal: Double,
-                                yellowTotal: Double,
-                                redTotal: Double,
-                                purpleTotal: Double,
+                                greenTotal: Float,
+                                yellowTotal: Float,
+                                redTotal: Float,
+                                purpleTotal: Float,
                                 duration: TimeInterval) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -102,10 +102,10 @@ class Ui {
             self.totalFat = totalFat
             self.totalCarbon = totalCarbon
 
-            self.homeviewController?.purpleLabel?.text = String(format: "%.0f", purpleTotal - Double(totalCalori))
-            self.homeviewController?.redLabel?.text = String(format: "%.0f", redTotal - Double(totalProtein))
-            self.homeviewController?.yellowLabel?.text = String(format: "%.0f", yellowTotal - Double(totalFat))
-            self.homeviewController?.greenLabel?.text = String(format: "%.0f", greenTotal - Double(totalCarbon))
+            self.homeviewController?.purpleLabel?.text = String(format: "%.0f", purpleTotal - Float(totalCalori))
+            self.homeviewController?.redLabel?.text = String(format: "%.0f", redTotal - Float(totalProtein))
+            self.homeviewController?.yellowLabel?.text = String(format: "%.0f", yellowTotal - Float(totalFat))
+            self.homeviewController?.greenLabel?.text = String(format: "%.0f", greenTotal - Float(totalCarbon))
 
 
 
@@ -122,15 +122,15 @@ class Ui {
         }
     }
 
-    func circleTotal() -> (Double, Double, Double, Double) {
+    func circleTotal() -> (Float, Float, Float, Float) {
            let meals = ["breakfast", "lunch", "dinner", "snack"]
            let colors = ["green", "yellow", "red", "purple"]
 
-           var totalValues = [Double](repeating: 0.0, count: colors.count)
+           var totalValues = [Float](repeating: 0.0, count: colors.count)
 
            for meal in meals {
                for color in colors {
-                   if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Double {
+                   if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Float {
                        let colorIndex = colors.firstIndex(of: color)!
                        totalValues[colorIndex] += value
                    }

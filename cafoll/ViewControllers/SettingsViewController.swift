@@ -221,11 +221,11 @@ class SettingsViewController: UIViewController {
         let meals = ["breakfast", "lunch", "dinner", "snack"]
         let colors = ["green", "yellow", "red", "purple"]
 
-        var totalValues = [Double](repeating: 0.0, count: colors.count)
+        var totalValues = [Float](repeating: 0.0, count: colors.count)
 
         for meal in meals {
             for color in colors {
-                if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Double {
+                if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Float {
                     let colorIndex = colors.firstIndex(of: color)!
                     totalValues[colorIndex] += value
                 }

@@ -259,27 +259,27 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
         
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
-        var totalCalories = 0.0
-        var totalFats = 0.0
-        var totalProtein = 0.0
-        var totalCarbs = 0.0
+        var totalCalories: Float = 0.00
+        var totalFats: Float = 0.00
+        var totalProtein: Float = 0.00
+        var totalCarbs: Float = 0.00
         
         for item in breakfastItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         
-        if let maxGreen = UserDefaults.standard.value(forKey: "breakfastgreenSliderValue") as? Double,
-           let maxYellow = UserDefaults.standard.value(forKey: "breakfastyellowSliderValue") as? Double,
-           let maxRed = UserDefaults.standard.value(forKey: "breakfastredSliderValue") as? Double,
-           let maxPurple = UserDefaults.standard.value(forKey: "breakfastpurpleSliderValue") as? Double {
+        if let maxGreen = UserDefaults.standard.value(forKey: "breakfastgreenSliderValue") as? Float,
+           let maxYellow = UserDefaults.standard.value(forKey: "breakfastyellowSliderValue") as? Float,
+           let maxRed = UserDefaults.standard.value(forKey: "breakfastredSliderValue") as? Float,
+           let maxPurple = UserDefaults.standard.value(forKey: "breakfastpurpleSliderValue") as? Float {
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(format: "%.0f", totalCalories)
@@ -292,10 +292,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             yellowTotal.text = String(format: "%.0f", maxYellow)
             greenTotal.text = String(format: "%.0f", maxGreen)
             
-            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
-            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
-            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
-            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
+            updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
+            updateVisibility(markYellow, value: Float(totalFats), threshold: maxYellow)
+            updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
             // Eğer bir değer nil veya dönüştürülemezse buraya girecek
@@ -322,27 +322,27 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         
         
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
-        var totalCalories = 0.0
-        var totalFats = 0.0
-        var totalProtein = 0.0
-        var totalCarbs = 0.0
+        var totalCalories: Float = 0.00
+        var totalFats: Float = 0.00
+        var totalProtein: Float = 0.00
+        var totalCarbs: Float = 0.00
         
         for item in lunchItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         
-        if let maxGreen = UserDefaults.standard.value(forKey: "lunchgreenSliderValue") as? Double,
-           let maxYellow = UserDefaults.standard.value(forKey: "lunchyellowSliderValue") as? Double,
-           let maxRed = UserDefaults.standard.value(forKey: "lunchredSliderValue") as? Double,
-           let maxPurple = UserDefaults.standard.value(forKey: "lunchpurpleSliderValue") as? Double {
+        if let maxGreen = UserDefaults.standard.value(forKey: "lunchgreenSliderValue") as? Float,
+           let maxYellow = UserDefaults.standard.value(forKey: "lunchyellowSliderValue") as? Float,
+           let maxRed = UserDefaults.standard.value(forKey: "lunchredSliderValue") as? Float,
+           let maxPurple = UserDefaults.standard.value(forKey: "lunchpurpleSliderValue") as? Float {
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(format: "%.0f", totalCalories)
@@ -355,10 +355,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             yellowTotal.text = String(format: "%.0f", maxYellow)
             greenTotal.text = String(format: "%.0f", maxGreen)
             
-            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
-            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
-            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
-            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
+            updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
+            updateVisibility(markYellow, value: Float(totalFats), threshold: maxYellow)
+            updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
             // Eğer bir değer nil veya dönüştürülemezse buraya girecek
@@ -384,27 +384,27 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
         
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
-        var totalCalories = 0.0
-        var totalFats = 0.0
-        var totalProtein = 0.0
-        var totalCarbs = 0.0
+        var totalCalories: Float = 0.00
+        var totalFats: Float = 0.00
+        var totalProtein: Float = 0.00
+        var totalCarbs: Float = 0.00
         
         for item in dinnerItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         
-        if let maxGreen = UserDefaults.standard.value(forKey: "dinnergreenSliderValue") as? Double,
-           let maxYellow = UserDefaults.standard.value(forKey: "dinneryellowSliderValue") as? Double,
-           let maxRed = UserDefaults.standard.value(forKey: "dinnerredSliderValue") as? Double,
-           let maxPurple = UserDefaults.standard.value(forKey: "dinnerpurpleSliderValue") as? Double {
+        if let maxGreen = UserDefaults.standard.value(forKey: "dinnergreenSliderValue") as? Float,
+           let maxYellow = UserDefaults.standard.value(forKey: "dinneryellowSliderValue") as? Float,
+           let maxRed = UserDefaults.standard.value(forKey: "dinnerredSliderValue") as? Float,
+           let maxPurple = UserDefaults.standard.value(forKey: "dinnerpurpleSliderValue") as? Float {
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(format: "%.0f", totalCalories)
@@ -417,10 +417,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             yellowTotal.text = String(format: "%.0f", maxYellow)
             greenTotal.text = String(format: "%.0f", maxGreen)
             
-            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
-            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
-            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
-            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
+            updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
+            updateVisibility(markYellow, value: Float(totalFats), threshold: maxYellow)
+            updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
             // Eğer bir değer nil veya dönüştürülemezse buraya girecek
@@ -446,27 +446,27 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
         
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
-        var totalCalories = 0.0
-        var totalFats = 0.0
-        var totalProtein = 0.0
-        var totalCarbs = 0.0
+        var totalCalories: Float = 0.00
+        var totalFats: Float = 0.00
+        var totalProtein: Float = 0.00
+        var totalCarbs: Float = 0.00
         
         for item in snackItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         
-        if let maxGreen = UserDefaults.standard.value(forKey: "snackgreenSliderValue") as? Double,
-           let maxYellow = UserDefaults.standard.value(forKey: "snackyellowSliderValue") as? Double,
-           let maxRed = UserDefaults.standard.value(forKey: "snackredSliderValue") as? Double,
-           let maxPurple = UserDefaults.standard.value(forKey: "snackpurpleSliderValue") as? Double {
+        if let maxGreen = UserDefaults.standard.value(forKey: "snackgreenSliderValue") as? Float,
+           let maxYellow = UserDefaults.standard.value(forKey: "snackyellowSliderValue") as? Float,
+           let maxRed = UserDefaults.standard.value(forKey: "snackredSliderValue") as? Float,
+           let maxPurple = UserDefaults.standard.value(forKey: "snackpurpleSliderValue") as? Float {
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
+            updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(format: "%.0f", totalCalories)
@@ -479,10 +479,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             yellowTotal.text = String(format: "%.0f", maxYellow)
             greenTotal.text = String(format: "%.0f", maxGreen)
             
-            updateVisibility(markPurple, value: totalCalories, threshold: maxPurple)
-            updateVisibility(markRed, value: totalProtein, threshold: maxRed)
-            updateVisibility(markYellow, value: totalFats, threshold: maxYellow)
-            updateVisibility(markGreen, value: totalCarbs, threshold: maxGreen)
+            updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
+            updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
+            updateVisibility(markYellow, value: Float(totalFats), threshold: maxYellow)
+            updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
             // Eğer bir değer nil veya dönüştürülemezse buraya girecek
@@ -502,17 +502,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
     }
     
-    func updateVisibility(_ mark: UIImageView, value: Double, threshold: Double) {
+    func updateVisibility(_ mark: UIImageView, value: Float, threshold: Float) {
         mark.isHidden = value < threshold
-        
     }
     
-    func updateProgressViews(calories: Double, fat: Double, protein: Double, carbs: Double, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float, duration: TimeInterval = 1.0) {
+    func updateProgressViews(calories: Float, fat: Float, protein: Float, carbs: Float, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float, duration: TimeInterval = 1.0) {
         // Set initial progress to 0.0
-        progressPurple.progress = 0.0
-        progressYellow.progress = 0.0
-        progressRed.progress = 0.0
-        progressGreen.progress = 0.0
+        progressPurple.progress = 0.00
+        progressYellow.progress = 0.00
+        progressRed.progress = 0.00
+        progressGreen.progress = 0.00
         
         // Calculate target progress values
         let targetProgressPurple = min(Float(calories) / maxPurple, 1.0)
@@ -532,10 +531,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     func sumMeals(forDate date: Date) {
         
-        var totalCalories = 0.0
-        var totalFats = 0.0
-        var totalProtein = 0.0
-        var totalCarbs = 0.0
+        var totalCalories: Float = 0.00
+        var totalFats: Float = 0.00
+        var totalProtein: Float = 0.00
+        var totalCarbs: Float = 0.00
         guard let breakfastItems = self.coredata.breakfast else {
             return
         }
@@ -543,10 +542,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         for item in breakfastItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         guard let lunchItems = self.coredata.lunch else {
@@ -556,10 +555,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         for item in lunchItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         guard let dinnerItems = self.coredata.dinner else {
@@ -569,10 +568,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         for item in dinnerItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         
@@ -582,10 +581,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         for item in snackItems {
             // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                totalCalories += Double(item.calori ?? "0") ?? 0.0
-                totalFats += Double(item.fat ?? "0") ?? 0.0
-                totalProtein += Double(item.protein ?? "0") ?? 0.0
-                totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                totalCalories += Float(item.calori ?? "0") ?? 0.00
+                totalFats += Float(item.fat ?? "0") ?? 0.00
+                totalProtein += Float(item.protein ?? "0") ?? 0.00
+                totalCarbs += Float(item.carbon ?? "0") ?? 0.00
             }
         }
         
@@ -594,10 +593,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         totalFat.text = String(format: "%.0f", totalFats)
         totalCarbon.text = String(format: "%.0f", totalCarbs)
         
-        if totalCalories >= Double(ui.circleTotal().0),
-           totalProtein >= Double(ui.circleTotal().1),
-           totalFats >= Double(ui.circleTotal().2),
-           totalCarbs >= Double(ui.circleTotal().3)
+        if totalCalories >= ui.circleTotal().0,
+           totalProtein >= ui.circleTotal().1,
+           totalFats >= ui.circleTotal().2,
+           totalCarbs >= ui.circleTotal().3
         {
             checkMarkMaxValue.isHidden = false
             goalTextLAbel.isHidden = true
@@ -714,10 +713,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         } else {
             let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
                     
-            var totalCalories = 0.0
-            var totalFats = 0.0
-            var totalProtein = 0.0
-            var totalCarbs = 0.0
+            var totalCalories: Float = 0.00
+            var totalFats: Float = 0.00
+            var totalProtein: Float = 0.00
+            var totalCarbs: Float = 0.00
             guard let breakfastItems = self.coredata.breakfast else {
                 return
             }
@@ -725,10 +724,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             for item in breakfastItems {
                 // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                    totalCalories += Double(item.calori ?? "0") ?? 0.0
-                    totalFats += Double(item.fat ?? "0") ?? 0.0
-                    totalProtein += Double(item.protein ?? "0") ?? 0.0
-                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                    totalCalories += Float(item.calori ?? "0") ?? 0.00
+                    totalFats += Float(item.fat ?? "0") ?? 0.00
+                    totalProtein += Float(item.protein ?? "0") ?? 0.00
+                    totalCarbs += Float(item.carbon ?? "0") ?? 0.00
                 }
             }
             guard let lunchItems = self.coredata.lunch else {
@@ -738,10 +737,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             for item in lunchItems {
                 // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                    totalCalories += Double(item.calori ?? "0") ?? 0.0
-                    totalFats += Double(item.fat ?? "0") ?? 0.0
-                    totalProtein += Double(item.protein ?? "0") ?? 0.0
-                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                    totalCalories += Float(item.calori ?? "0") ?? 0.00
+                    totalFats += Float(item.fat ?? "0") ?? 0.00
+                    totalProtein += Float(item.protein ?? "0") ?? 0.00
+                    totalCarbs += Float(item.carbon ?? "0") ?? 0.00
                 }
             }
             guard let dinnerItems = self.coredata.dinner else {
@@ -751,10 +750,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             for item in dinnerItems {
                 // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                    totalCalories += Double(item.calori ?? "0") ?? 0.0
-                    totalFats += Double(item.fat ?? "0") ?? 0.0
-                    totalProtein += Double(item.protein ?? "0") ?? 0.0
-                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                    totalCalories += Float(item.calori ?? "0") ?? 0.00
+                    totalFats += Float(item.fat ?? "0") ?? 0.00
+                    totalProtein += Float(item.protein ?? "0") ?? 0.00
+                    totalCarbs += Float(item.carbon ?? "0") ?? 0.00
                 }
             }
             
@@ -764,10 +763,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             for item in snackItems {
                 // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
-                    totalCalories += Double(item.calori ?? "0") ?? 0.0
-                    totalFats += Double(item.fat ?? "0") ?? 0.0
-                    totalProtein += Double(item.protein ?? "0") ?? 0.0
-                    totalCarbs += Double(item.carbon ?? "0") ?? 0.0
+                    totalCalories += Float(item.calori ?? "0") ?? 0.00
+                    totalFats += Float(item.fat ?? "0") ?? 0.00
+                    totalProtein += Float(item.protein ?? "0") ?? 0.00
+                    totalCarbs += Float(item.carbon ?? "0") ?? 0.00
                 }
             }
             
@@ -788,12 +787,12 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             totalPRotein.text = String(redTotal2)
             totalCarbon.text = String(greenTotal0)
             
-            updateProgressViews(calories: totalCalories, fat: totalFats, protein: totalProtein, carbs: totalCarbs, maxGreen: Float(greenTotal0), maxYellow: Float(yellowTotal1), maxRed: Float(redTotal2), maxPurple: Float(purpleTotal3))
+            updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(greenTotal0), maxYellow: Float(yellowTotal1), maxRed: Float(redTotal2), maxPurple: Float(purpleTotal3))
             
-            updateVisibility(markPurple, value: totalCalories, threshold: Double(purpleTotal3))
-            updateVisibility(markRed, value: totalProtein, threshold: Double(yellowTotal1))
-            updateVisibility(markYellow, value: totalFats, threshold: Double(redTotal2))
-            updateVisibility(markGreen, value: totalCarbs, threshold: Double(greenTotal0))
+            updateVisibility(markPurple, value: Float(totalCalories), threshold: Float(purpleTotal3))
+            updateVisibility(markRed, value: Float(totalProtein), threshold: Float(yellowTotal1))
+            updateVisibility(markYellow, value: Float(totalFats), threshold: Float(redTotal2))
+            updateVisibility(markGreen, value: Float(totalCarbs), threshold: Float(greenTotal0))
            
         }
         // Toggle the state
@@ -941,10 +940,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 // Convert String values to Double
-                if let caloriDouble = Double(calori),
-                   let proteinDouble = Double(protein),
-                   let fatDouble = Double(fat),
-                   let carbonDouble = Double(carbon) {
+                if let caloriDouble = Float(calori),
+                   let proteinDouble = Float(protein),
+                   let fatDouble = Float(fat),
+                   let carbonDouble = Float(carbon) {
                     
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
@@ -952,10 +951,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     print("Error: Could not convert one or more values to Double.")
                 }
                 
-                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
-                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
-                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
-                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+                updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
+                updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
+                updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
+                updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
                 
             case 1:
                 
@@ -990,20 +989,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 // Convert String values to Double
-                if let caloriDouble = Double(calori),
-                   let proteinDouble = Double(protein),
-                   let fatDouble = Double(fat),
-                   let carbonDouble = Double(carbon) {
+                if let caloriDouble = Float(calori),
+                   let proteinDouble = Float(protein),
+                   let fatDouble = Float(fat),
+                   let carbonDouble = Float(carbon) {
                     
-                    updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
+                    updateProgressViews(calories: Float(caloriDouble), fat: Float(fatDouble), protein: Float(proteinDouble), carbs: Float(carbonDouble), maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
                     print("Error: Could not convert one or more values to Double.")
                 }
-                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
-                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
-                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
-                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+                updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
+                updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
+                updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
+                updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
             case 2:
                 
                 selectedIndexPath = indexPath
@@ -1037,20 +1036,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 // Convert String values to Double
-                if let caloriDouble = Double(calori),
-                   let proteinDouble = Double(protein),
-                   let fatDouble = Double(fat),
-                   let carbonDouble = Double(carbon) {
+                if let caloriDouble = Float(calori),
+                   let proteinDouble = Float(protein),
+                   let fatDouble = Float(fat),
+                   let carbonDouble = Float(carbon) {
                     
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
                     print("Error: Could not convert one or more values to Double.")
                 }
-                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
-                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
-                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
-                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+                updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
+                updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
+                updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
+                updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
             case 3:
                 selectedIndexPath = indexPath
                 
@@ -1083,20 +1082,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 // Convert String values to Double
-                if let caloriDouble = Double(calori),
-                   let proteinDouble = Double(protein),
-                   let fatDouble = Double(fat),
-                   let carbonDouble = Double(carbon) {
+                if let caloriDouble = Float(calori),
+                   let proteinDouble = Float(protein),
+                   let fatDouble = Float(fat),
+                   let carbonDouble = Float(carbon) {
                     
                     updateProgressViews(calories: caloriDouble, fat: fatDouble, protein: proteinDouble, carbs: carbonDouble, maxGreen: Float(maxCarbs), maxYellow: Float(maxFat), maxRed: Float(maxPro), maxPurple: Float(maxCal))
                 } else {
                     // Handle the case where conversion fails
                     print("Error: Could not convert one or more values to Double.")
                 }
-                updateVisibility(markPurple, value: Double(calori)!, threshold: Double(maxCal))
-                updateVisibility(markRed, value: Double(protein)!, threshold: Double(maxPro))
-                updateVisibility(markYellow, value: Double(fat)!, threshold: Double(maxFat))
-                updateVisibility(markGreen, value: Double(carbon)!, threshold: Double(maxCarbs))
+                updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
+                updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
+                updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
+                updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
             default:
                 break
             }
@@ -1107,7 +1106,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         var highestValueColor: UIColor = .clear
         
         // Convert string representations to doubles
-        if let carbsValue = Double(carbons), let fatValue = Double(fat), let proteinValue = Double(protein) {
+        if let carbsValue = Float(carbons), let fatValue = Float(fat), let proteinValue = Float(protein) {
             let maxValue = max(carbsValue, fatValue, proteinValue)
             
             if maxValue == carbsValue {

@@ -25,8 +25,6 @@
 		08856D052B1E26B500466AAB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856D042B1E26B500466AAB /* Helper.swift */; };
 		08856D072B1F391A00466AAB /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856D062B1F391A00466AAB /* UI.swift */; };
 		08856D172B1F583200466AAB /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08856D162B1F583200466AAB /* Charts.swift */; };
-		08C23D7B2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D6D2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift */; };
-		08C23D7C2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D6E2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift */; };
 		08C23D7D2B38852700E8CFCD /* Dinner+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D6F2B38852700E8CFCD /* Dinner+CoreDataClass.swift */; };
 		08C23D7E2B38852700E8CFCD /* Dinner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D702B38852700E8CFCD /* Dinner+CoreDataProperties.swift */; };
 		08C23D7F2B38852700E8CFCD /* Foods+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23D712B38852700E8CFCD /* Foods+CoreDataClass.swift */; };
@@ -61,8 +59,6 @@
 		08856D042B1E26B500466AAB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		08856D062B1F391A00466AAB /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		08856D162B1F583200466AAB /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
-		08C23D6D2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaxValueCircle+CoreDataClass.swift"; sourceTree = "<group>"; };
-		08C23D6E2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaxValueCircle+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08C23D6F2B38852700E8CFCD /* Dinner+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinner+CoreDataClass.swift"; sourceTree = "<group>"; };
 		08C23D702B38852700E8CFCD /* Dinner+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dinner+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08C23D712B38852700E8CFCD /* Foods+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foods+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -124,8 +120,6 @@
 			children = (
 				0863C4022B56823C0031DC52 /* LastSearch+CoreDataClass.swift */,
 				0863C4032B56823C0031DC52 /* LastSearch+CoreDataProperties.swift */,
-				08C23D6D2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift */,
-				08C23D6E2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift */,
 				08C23D6F2B38852700E8CFCD /* Dinner+CoreDataClass.swift */,
 				08C23D702B38852700E8CFCD /* Dinner+CoreDataProperties.swift */,
 				08C23D712B38852700E8CFCD /* Foods+CoreDataClass.swift */,
@@ -268,8 +262,6 @@
 				0883C0B92B0E160D00D55176 /* SceneDelegate.swift in Sources */,
 				08856CF22B1E097C00466AAB /* HomeViewController.swift in Sources */,
 				08C23D822B38852700E8CFCD /* Breakfast+CoreDataProperties.swift in Sources */,
-				08C23D7B2B38852700E8CFCD /* MaxValueCircle+CoreDataClass.swift in Sources */,
-				08C23D7C2B38852700E8CFCD /* MaxValueCircle+CoreDataProperties.swift in Sources */,
 				08CF6F902B446DD10043D0C3 /* APIFoods.swift in Sources */,
 				0824298E2B4828B700BC4B9D /* SettingsViewController.swift in Sources */,
 				08856CEE2B1DF8E600466AAB /* Cells.swift in Sources */,

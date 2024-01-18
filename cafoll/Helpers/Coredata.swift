@@ -19,7 +19,6 @@ class Coredata {
     var lunch: [Lunch]?
     var dinner: [Dinner]?
     var snack: [Snack]?
-    var maxValueCircle: [MaxValueCircle]?
 
     init(viewController: ViewController) {
            self.viewController = viewController
@@ -142,15 +141,6 @@ class Coredata {
             }
         } catch {
             print("fetch Foods: ", error)
-        }
-    }
-    //Fetch maxValueCalori
-    func fetchMaxValueCircle() {
-        do {
-            let request = MaxValueCircle.fetchRequest()
-            self.maxValueCircle = try context.fetch(request)
-        } catch {
-            print("fetch maxValueCircle: ", error)
         }
     }
     //Save context

@@ -139,37 +139,37 @@ var foodDictionary: [String: [String: Float]] = [
     "ceviz": [
         "protein": 15.20,
         "carbs": 13.71,
-        "calories": 654.00,
+        "calories": 654.0,
         "fat": 65.20
     ],
     "antep fıstığı": [
         "protein": 17.64,
         "carbs": 11.55,
-        "calories": 575.00,
+        "calories": 575.0,
         "fat": 51.60
     ],
     "yulaf ezmesi": [
         "protein": 16.89,
         "carbs": 66.27,
-        "calories": 389.00,
+        "calories": 389.0,
         "fat": 6.90
     ],
     "beyaz peynir": [
         "protein": 20.38,
         "carbs": 2.53,
-        "calories": 310.00,
+        "calories": 310.0,
         "fat": 24.31
     ],
     "yumurta": [
         "protein": 12.56,
         "carbs": 0.72,
-        "calories": 143.00,
+        "calories": 143.0,
         "fat": 9.51
     ],
     "zeytin": [
         "protein": 1.80,
         "carbs": 1.10,
-        "calories": 207.00,
+        "calories": 207.0,
         "fat": 21.00
     ],
     "domates": [
@@ -187,7 +187,7 @@ var foodDictionary: [String: [String: Float]] = [
     "bal": [
         "protein": 0.38,
         "carbs": 82.40,
-        "calories": 304.00,
+        "calories": 304.0,
         "fat": 0.00
     ],
     "yoğurt": [
@@ -205,19 +205,19 @@ var foodDictionary: [String: [String: Float]] = [
     "tam buğday ekmek": [
         "protein": 12.45,
         "carbs": 42.71,
-        "calories": 252.00,
+        "calories": 252.0,
         "fat": 3.50
     ],
     "fındık": [
         "protein": 14.95,
         "carbs": 16.70,
-        "calories": 628.00,
+        "calories": 628.0,
         "fat": 60.75
     ],
     "badem": [
         "protein": 18.60,
         "carbs": 19.50,
-        "calories": 598.00,
+        "calories": 598.0,
         "fat": 54.20
     ],
     "kayısı": [
@@ -241,19 +241,19 @@ var foodDictionary: [String: [String: Float]] = [
     "fıstık ezmesi": [
         "protein": 24.06,
         "carbs": 21.57,
-        "calories": 589.00,
+        "calories": 589.0,
         "fat": 49.94
     ],
     "pastırma": [
         "protein": 29.5,
         "carbs": 0.00,
-        "calories": 250.00,
+        "calories": 250.0,
         "fat": 13.90
     ],
     "ızgara antrikot": [
         "protein": 18.90,
         "carbs": 0.58,
-        "calories": 182.00,
+        "calories": 182.0,
         "fat": 11.04
     ],
     "balık": [
@@ -271,7 +271,7 @@ var foodDictionary: [String: [String: Float]] = [
     "hindi but": [
         "protein": 27.87,
         "carbs": 0.00,
-        "calories": 208.00,
+        "calories": 208.0,
         "fat": 9.82
     ],
     "karnabahar": [
@@ -301,7 +301,7 @@ var foodDictionary: [String: [String: Float]] = [
     "tabule": [
         "protein": 7.14,
         "carbs": 50.81,
-        "calories": 261.00,
+        "calories": 261.0,
         "fat": 4.34
     ],
     "yaprak sarma": [
@@ -319,13 +319,13 @@ var foodDictionary: [String: [String: Float]] = [
     "kuzu şiş": [
         "protein": 16.52,
         "carbs": 3.82,
-        "calories": 167.00,
+        "calories": 167.0,
         "fat": 9.72
     ],
     "fırın patates": [
         "protein": 1.55,
         "carbs": 14.36,
-        "calories": 107.00,
+        "calories": 107.0,
         "fat": 4.79
     ],
     "enginar": [
@@ -343,13 +343,13 @@ var foodDictionary: [String: [String: Float]] = [
     "bulgur pilavı": [
         "protein": 2.78,
         "carbs": 18.19,
-        "calories": 114.00,
+        "calories": 114.0,
         "fat": 3.39
     ],
     "kuzu kıyma": [
         "protein": 16.56,
         "carbs": 0.00,
-        "calories": 282.00,
+        "calories": 282.0,
         "fat": 23.41
     ],
     "FOOOOOD": [

@@ -513,7 +513,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             if self?.segmentedControl.selectedSegmentIndex == 0 {
-                let alertLunch = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
+                let alertLunch = UIAlertController(title: cell.foodTitleLabelUI.text, message: cell.infoLabel.text, preferredStyle: .alert)
                 
                 alertLunch.addTextField { textField in
                     textField.placeholder = "Gram"
@@ -717,7 +717,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             if self?.segmentedControl.selectedSegmentIndex == 0 {
-                let alertDinner = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
+                let alertDinner = UIAlertController(title: cell.foodTitleLabelUI.text, message: cell.infoLabel.text, preferredStyle: .alert)
                 
                 alertDinner.addTextField { textField in
                     textField.placeholder = "Gram"
@@ -919,7 +919,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             if self?.segmentedControl.selectedSegmentIndex == 0 {
-                let alertSnack = UIAlertController(title: cell.foodTitleLabelUI.text, message: "How much gram you eat?", preferredStyle: .alert)
+                let alertSnack = UIAlertController(title: cell.foodTitleLabelUI.text, message: cell.infoLabel.text, preferredStyle: .alert)
                 
                 alertSnack.addTextField { textField in
                     textField.placeholder = "Gram"

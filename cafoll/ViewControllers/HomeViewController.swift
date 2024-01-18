@@ -593,17 +593,22 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         totalFat.text = String(format: "%.0f", totalFats)
         totalCarbon.text = String(format: "%.0f", totalCarbs)
         
-        if totalCalories >= ui.circleTotal().0,
-           totalProtein >= ui.circleTotal().1,
-           totalFats >= ui.circleTotal().2,
-           totalCarbs >= ui.circleTotal().3
+        let circleTotalValues = ui.circleTotal()
+      
+        if Float(totalCalories) >= Float(circleTotalValues.3),
+           Float(totalProtein) >= circleTotalValues.2,
+           Float(totalFats) >= circleTotalValues.1,
+           Float(totalCarbs) >= circleTotalValues.0
         {
+            print("Goal Achieved!")
             checkMarkMaxValue.isHidden = false
             goalTextLAbel.isHidden = true
         } else {
+            print("Goal Not Achieved!")
             checkMarkMaxValue.isHidden = true
             goalTextLAbel.isHidden = false
         }
+
         
         
     }
@@ -713,10 +718,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         } else {
             let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
                     
-            var totalCalories: Float = 0.00
-            var totalFats: Float = 0.00
-            var totalProtein: Float = 0.00
-            var totalCarbs: Float = 0.00
+            var totalCalories: Float = 0.0
+            var totalFats: Float = 0.0
+            var totalProtein: Float = 0.0
+            var totalCarbs: Float = 0.0
             guard let breakfastItems = self.coredata.breakfast else {
                 return
             }
@@ -790,8 +795,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(greenTotal0), maxYellow: Float(yellowTotal1), maxRed: Float(redTotal2), maxPurple: Float(purpleTotal3))
             
             updateVisibility(markPurple, value: Float(totalCalories), threshold: Float(purpleTotal3))
-            updateVisibility(markRed, value: Float(totalProtein), threshold: Float(yellowTotal1))
-            updateVisibility(markYellow, value: Float(totalFats), threshold: Float(redTotal2))
+            updateVisibility(markRed, value: Float(totalProtein), threshold: Float(redTotal2))
+            updateVisibility(markYellow, value: Float(totalFats), threshold: Float(yellowTotal1))
             updateVisibility(markGreen, value: Float(totalCarbs), threshold: Float(greenTotal0))
            
         }
@@ -1105,7 +1110,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func determineHighestValueColor(carbons: String, fat: String, protein: String) -> UIColor {
         var highestValueColor: UIColor = .clear
         
-        // Convert string representations to doubles
+        // Convert string representations to float
         if let carbsValue = Float(carbons), let fatValue = Float(fat), let proteinValue = Float(protein) {
             let maxValue = max(carbsValue, fatValue, proteinValue)
             

@@ -112,22 +112,22 @@ class SettingsViewController: UIViewController {
 
         if let savedGreenValue = userDefaults.value(forKey: "\(segmentKey)greenSliderValue") as? Float {
             sliderGreen.value = savedGreenValue
-            sliderValueGreen.text = String(format: "%.2f", savedGreenValue)
+            sliderValueGreen.text = String(format: "%.0f", savedGreenValue)
         }
 
         if let savedYellowValue = userDefaults.value(forKey: "\(segmentKey)yellowSliderValue") as? Float {
             sliderYellow.value = savedYellowValue
-            sliderValueYellow.text = String(format: "%.2f", savedYellowValue)
+            sliderValueYellow.text = String(format: "%.0f", savedYellowValue)
         }
 
         if let savedRedValue = userDefaults.value(forKey: "\(segmentKey)redSliderValue") as? Float {
             sliderRed.value = savedRedValue
-            sliderValueRed.text = String(format: "%.2f", savedRedValue)
+            sliderValueRed.text = String(format: "%.0f", savedRedValue)
         }
 
         if let savedPurpleValue = userDefaults.value(forKey: "\(segmentKey)purpleSliderValue") as? Float {
             sliderPurple.value = savedPurpleValue
-            sliderValuePurple.text = String(format: "%.2f", savedPurpleValue)
+            sliderValuePurple.text = String(format: "%.0f", savedPurpleValue)
         }
     }
 

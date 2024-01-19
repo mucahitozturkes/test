@@ -15,7 +15,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     @IBOutlet weak var dateView: UIView!
     //circle
     @IBOutlet weak var circileButton: UIButton!
-    @IBOutlet weak var goalTextLAbel: UILabel!
+    @IBOutlet weak var goalTextLAbel: UIStackView!
     @IBOutlet weak var checkMarkMaxValue: UIImageView!
     @IBOutlet weak var stackViewValues: UIStackView!
     @IBOutlet weak var totalCarbon: UILabel!

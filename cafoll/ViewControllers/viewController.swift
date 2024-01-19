@@ -65,10 +65,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let divisor: Float = 100.0
         
         // Grams ile çarpma işlemini gerçekleştir
-        let multipliedProtein = (food.protein / divisor) * grams
-        let multipliedCarbs = (food.carbs / divisor) * grams
-        let multipliedFat = (food.fat / divisor) * grams
-        let multipliedCalories = (food.calories / divisor) * grams
+        let multipliedProtein = (food.proteinDict / divisor) * grams
+        let multipliedCarbs = (food.carbsDict / divisor) * grams
+        let multipliedFat = (food.fatDict / divisor) * grams
+        let multipliedCalories = (food.caloriesDict / divisor) * grams
 
         // Sonuçları kaydet
         newFood.setValue(title, forKey: "title")
@@ -343,56 +343,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // Handle the case when indexPath.row is out of range.
                         }
                     }
-                    
-                    
-                    // Check if selectedCellFoodName is not nil
+                
                     if let selectedCellFoodName = self.selectedCellFoodName,
-                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
-                       let nutrientValues = searchResults[selectedCellFoodName] {
-                        
-                        // If a record with the same title exists, update its nutrient values
-                        // Önce 100'e bölme işlemini gerçekleştir
-                        let divisor: Float = 100.0
-
-                        // Besin öğelerini al
-                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
-                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
-                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
-                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
-
-                        // Grams ile çarpma işlemini gerçekleştir
-                        let multipliedExistingCalories = (existingCalories + (nutrientValues.calories / divisor)) * Float(grams)
-                        let multipliedExistingCarbs = (existingCarbs + (nutrientValues.carbs / divisor)) * Float(grams)
-                        let multipliedExistingFat = (existingFat + (nutrientValues.fat / divisor)) * Float(grams)
-                        let multipliedExistingProtein = (existingProtein + (nutrientValues.protein / divisor)) * Float(grams)
-
-
-                        // Sonuçları String olarak kaydet
-                        existingLastFood.calori = String(multipliedExistingCalories)
-                        existingLastFood.carbon = String(multipliedExistingCarbs)
-                        existingLastFood.fat = String(multipliedExistingFat)
-                        existingLastFood.protein = String(multipliedExistingProtein)
-
-
-                  
-                        // Print updated nutritional values
-                        print("Updated Nutrient Values: \(nutrientValues)")
-                        
-                        // Print updated LastSearch entity
-                        print("Updated LastSearch Entity: \(existingLastFood)")
-                    } else {
-                        // Check if selectedCellFoodName is not nil
-                        if let selectedCellFoodName = self.selectedCellFoodName,
                            let nutrientValues = searchResults[selectedCellFoodName] {
 
                             // If a record with the same title exists, create a new LastSearch entity
-                            // instead of updating the existing LastSearch entity
+                          
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.calories)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbs)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fat)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.protein)
+                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
                             newLastSearch.info = nutrientValues.info
 
                             // Save the new LastSearch entity to Core Data
@@ -400,10 +362,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             
                             // Print added LastSearch entity
                             print("Added LastSearch Entity: \(newLastSearch)")
-                        } else {
-                            // Handle the case when selectedCellFoodName is nil
-                            print("selectedCellFoodName is nil")
-                        }
+                       
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
@@ -550,39 +509,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     
-                    // Check if selectedCellFoodName is not nil
-                    if let selectedCellFoodName = self.selectedCellFoodName,
-                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
-                       let nutrientValues = searchResults[selectedCellFoodName] {
-                        
-                        let divisor: Float = 100.0
-
-                        // Besin öğelerini al
-                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
-                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
-                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
-                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
-
-                        // Grams ile çarpma işlemini gerçekleştir
-                        let multipliedExistingCalories = (existingCalories + (nutrientValues.calories / divisor)) * Float(grams)
-                            let multipliedExistingCarbs = (existingCarbs + (nutrientValues.carbs / divisor)) * Float(grams)
-                            let multipliedExistingFat = (existingFat + (nutrientValues.fat / divisor)) * Float(grams)
-                            let multipliedExistingProtein = (existingProtein + (nutrientValues.protein / divisor)) * Float(grams)
-
-                        // Sonuçları String olarak kaydet
-                        existingLastFood.calori = String(multipliedExistingCalories)
-                        existingLastFood.carbon = String(multipliedExistingCarbs)
-                        existingLastFood.fat = String(multipliedExistingFat)
-                        existingLastFood.protein = String(multipliedExistingProtein)
-
-                        
-                        // Print updated nutritional values
-                        print("Updated Nutrient Values: \(nutrientValues)")
-                        
-                        // Print updated LastSearch entity
-                        print("Updated LastSearch Entity: \(existingLastFood)")
-                    } else {
-                        // Check if selectedCellFoodName is not nil
+                  
                         if let selectedCellFoodName = self.selectedCellFoodName,
                            let nutrientValues = searchResults[selectedCellFoodName] {
 
@@ -590,10 +517,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // instead of updating the existing LastSearch entity
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.calories)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbs)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fat)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.protein)
+                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
                             newLastSearch.info = nutrientValues.info
 
 
@@ -605,10 +532,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Lunch", grams: grams)
                             print("saveFoodToCoreData called successfully")
                     
-                        } else {
-                            // Handle the case when selectedCellFoodName is nil
-                            print("selectedCellFoodName is nil")
-                        }
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
@@ -754,40 +677,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     
-                    // Check if selectedCellFoodName is not nil
-                    if let selectedCellFoodName = self.selectedCellFoodName,
-                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
-                       let nutrientValues = searchResults[selectedCellFoodName] {
-                        
-                        let divisor: Float = 100.0
-
-                        // Besin öğelerini al
-                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
-                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
-                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
-                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
-
-                        // Grams ile çarpma işlemini gerçekleştir
-                        let multipliedExistingCalories = (existingCalories + (nutrientValues.calories / divisor)) * Float(grams)
-                            let multipliedExistingCarbs = (existingCarbs + (nutrientValues.carbs / divisor)) * Float(grams)
-                            let multipliedExistingFat = (existingFat + (nutrientValues.fat / divisor)) * Float(grams)
-                            let multipliedExistingProtein = (existingProtein + (nutrientValues.protein / divisor)) * Float(grams)
-
-
-                        // Sonuçları String olarak kaydet
-                        existingLastFood.calori = String(multipliedExistingCalories)
-                        existingLastFood.carbon = String(multipliedExistingCarbs)
-                        existingLastFood.fat = String(multipliedExistingFat)
-                        existingLastFood.protein = String(multipliedExistingProtein)
-
-                        
-                        // Print updated nutritional values
-                        print("Updated Nutrient Values: \(nutrientValues)")
-                        
-                        // Print updated LastSearch entity
-                        print("Updated LastSearch Entity: \(existingLastFood)")
-                    } else {
-                        // Check if selectedCellFoodName is not nil
+                   
                         if let selectedCellFoodName = self.selectedCellFoodName,
                            let nutrientValues = searchResults[selectedCellFoodName] {
 
@@ -795,10 +685,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // instead of updating the existing LastSearch entity
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.calories)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbs)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fat)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.protein)
+                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
                             newLastSearch.info = nutrientValues.info
 
 
@@ -808,11 +698,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // Create a new Breakfast entity in Core Data
                             self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Dinner", grams: grams)
                             print("saveFoodToCoreData called successfully")
-                        
-                        } else {
-                            // Handle the case when selectedCellFoodName is nil
-                            print("selectedCellFoodName is nil")
-                        }
+                      
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
@@ -956,39 +842,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     
-                    // Check if selectedCellFoodName is not nil
-                    if let selectedCellFoodName = self.selectedCellFoodName,
-                       let existingLastFood = self.coredata.lastSearch?.first(where: { $0.title == selectedCellFoodName }),
-                       let nutrientValues = searchResults[selectedCellFoodName] {
-                        
-                        let divisor: Float = 100.0
-
-                        // Besin öğelerini al
-                        let existingCalories = Float(existingLastFood.calori ?? "0.0") ?? 0.0
-                        let existingCarbs = Float(existingLastFood.carbon ?? "0.0") ?? 0.0
-                        let existingFat = Float(existingLastFood.fat ?? "0.0") ?? 0.0
-                        let existingProtein = Float(existingLastFood.protein ?? "0.0") ?? 0.0
-
-                        // Grams ile çarpma işlemini gerçekleştir
-                        let multipliedExistingCalories = (existingCalories + (nutrientValues.calories / divisor)) * Float(grams)
-                            let multipliedExistingCarbs = (existingCarbs + (nutrientValues.carbs / divisor)) * Float(grams)
-                            let multipliedExistingFat = (existingFat + (nutrientValues.fat / divisor)) * Float(grams)
-                            let multipliedExistingProtein = (existingProtein + (nutrientValues.protein / divisor)) * Float(grams)
-
-                        // Sonuçları String olarak kaydet
-                        existingLastFood.calori = String(multipliedExistingCalories)
-                        existingLastFood.carbon = String(multipliedExistingCarbs)
-                        existingLastFood.fat = String(multipliedExistingFat)
-                        existingLastFood.protein = String(multipliedExistingProtein)
-
-                        
-                        // Print updated nutritional values
-                        print("Updated Nutrient Values: \(nutrientValues)")
-                        
-                        // Print updated LastSearch entity
-                        print("Updated LastSearch Entity: \(existingLastFood)")
-                    } else {
-                        // Check if selectedCellFoodName is not nil
+                   
                         if let selectedCellFoodName = self.selectedCellFoodName,
                            let nutrientValues = searchResults[selectedCellFoodName] {
 
@@ -996,10 +850,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // instead of updating the existing LastSearch entity
                             let newLastSearch = LastSearch(context: self.coredata.context)
                             newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.calories)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbs)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fat)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.protein)
+                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
                             newLastSearch.info = nutrientValues.info
 
                             // Print updated nutritional values
@@ -1009,11 +863,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Snack", grams: grams)
                             print("saveFoodToCoreData called successfully")
                  
-                     
-                        } else {
-                            // Handle the case when selectedCellFoodName is nil
-                            print("selectedCellFoodName is nil")
-                        }
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date

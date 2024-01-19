@@ -43,14 +43,27 @@ class Coredata {
     func fetchLastSearch() {
         do {
             let request = LastSearch.fetchRequest()
-            self.lastSearch = try context.fetch(request)
+            var lastSearchArray = try context.fetch(request)
 
-            // Reverse the order of lastSearch array
-            self.lastSearch = self.lastSearch?.reversed()
+            // Remove duplicates based on the "title" attribute
+            var uniqueLastSearch = [LastSearch]()
+            var uniqueTitles = Set<String>()
+
+            for lastSearchItem in lastSearchArray.reversed() {
+                if let title = lastSearchItem.title, !uniqueTitles.contains(title) {
+                    uniqueTitles.insert(title)
+                    uniqueLastSearch.append(lastSearchItem) // Eklenen öğeyi en alta ekler
+                }
+            }
+
+            // Assign the unique lastSearch array
+            self.lastSearch = uniqueLastSearch
         } catch {
             print("fetch LastSearch: ", error)
         }
     }
+
+
     //Fetch Breakfast
     func fetchBreakfast(forDate date: Date) {
         do {

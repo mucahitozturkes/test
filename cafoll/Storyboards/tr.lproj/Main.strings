@@ -1,0 +1,237 @@
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "08b-Q6-16b"; */
+"08b-Q6-16b.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "23W-Wn-hIM"; */
+"23W-Wn-hIM.text" = "9999";
+
+/* Class = "UILabel"; text = "Protein"; ObjectID = "3OL-eA-JZh"; */
+"3OL-eA-JZh.text" = "Protein";
+
+/* Class = "UISearchBar"; placeholder = "Ara"; ObjectID = "4hE-an-wo1"; */
+"4hE-an-wo1.placeholder" = "Ara";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "5L2-S8-W3N"; */
+"5L2-S8-W3N.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "Karbonh."; ObjectID = "6Zd-ig-X47"; */
+"6Zd-ig-X47.text" = "Karbonh.";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "6n5-wS-fCh"; */
+"6n5-wS-fCh.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "7EI-Cv-j6N"; */
+"7EI-Cv-j6N.text" = "9999";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "7TF-sj-h3F"; */
+"7TF-sj-h3F.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "Kalori"; ObjectID = "87E-CW-x54"; */
+"87E-CW-x54.text" = "Kalori";
+
+/* Class = "UISegmentedControl"; 9As-cc-4mi.segmentTitles[0] = "Kahvaltı"; ObjectID = "9As-cc-4mi"; */
+"9As-cc-4mi.segmentTitles[0]" = "Kahvaltı";
+
+/* Class = "UISegmentedControl"; 9As-cc-4mi.segmentTitles[1] = "Öğle Y."; ObjectID = "9As-cc-4mi"; */
+"9As-cc-4mi.segmentTitles[1]" = "Öğle Y.";
+
+/* Class = "UISegmentedControl"; 9As-cc-4mi.segmentTitles[2] = "Akşam Y."; ObjectID = "9As-cc-4mi"; */
+"9As-cc-4mi.segmentTitles[2]" = "Akşam Y.";
+
+/* Class = "UISegmentedControl"; 9As-cc-4mi.segmentTitles[3] = "Atıştırma"; ObjectID = "9As-cc-4mi"; */
+"9As-cc-4mi.segmentTitles[3]" = "Atıştırma";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9f6-fV-mv9"; */
+"9f6-fV-mv9.text" = "Label";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "9zL-jT-3k7"; */
+"9zL-jT-3k7.text" = "0";
+
+/* Class = "UILabel"; text = "Protein"; ObjectID = "AeD-V9-Tur"; */
+"AeD-V9-Tur.text" = "Protein";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ApC-Du-Uk8"; */
+"ApC-Du-Uk8.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BVL-eC-Sox"; */
+"BVL-eC-Sox.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "Bfi-T8-KZ5"; */
+"Bfi-T8-KZ5.text" = "9999";
+
+/* Class = "UILabel"; text = "Protein"; ObjectID = "CO8-1f-SFh"; */
+"CO8-1f-SFh.text" = "Protein";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "D5o-BB-c5o"; */
+"D5o-BB-c5o.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "DOS-2N-HYH"; */
+"DOS-2N-HYH.text" = "9999";
+
+/* Class = "UINavigationItem"; title = "Food"; ObjectID = "EQE-cg-nVT"; */
+"EQE-cg-nVT.title" = "Food";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "Fg6-aa-OfT"; */
+"Fg6-aa-OfT.text" = "/";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "Glf-IC-ZHr"; */
+"Glf-IC-ZHr.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "HYT-wR-ZXz"; */
+"HYT-wR-ZXz.text" = "9999";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "JvJ-bV-1Kk"; */
+"JvJ-bV-1Kk.text" = "/";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "Kli-Wm-Vh4"; */
+"Kli-Wm-Vh4.text" = "9999";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "LMB-jc-Ns3"; */
+"LMB-jc-Ns3.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Lzs-oP-6IA"; */
+"Lzs-oP-6IA.text" = "0";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "M0N-Gv-a0i"; */
+"M0N-Gv-a0i.text" = "9999";
+
+/* Class = "UILabel"; text = "Yağ"; ObjectID = "MJM-GZ-Hbw"; */
+"MJM-GZ-Hbw.text" = "Yağ";
+
+/* Class = "UILabel"; text = "Yağ"; ObjectID = "NQf-7Z-2Cp"; */
+"NQf-7Z-2Cp.text" = "Yağ";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "O75-xv-6VK"; */
+"O75-xv-6VK.text" = "0";
+
+/* Class = "UILabel"; text = "Karbonh."; ObjectID = "Omb-s1-C2Y"; */
+"Omb-s1-C2Y.text" = "Karbonh.";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "PKe-Yt-CfC"; */
+"PKe-Yt-CfC.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "PYp-JI-QFJ"; */
+"PYp-JI-QFJ.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "PcJ-uw-aez"; */
+"PcJ-uw-aez.text" = "9999";
+
+/* Class = "UILabel"; text = "Food"; ObjectID = "QyX-pv-0OQ"; */
+"QyX-pv-0OQ.text" = "Food";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "Rl0-cl-YPc"; */
+"Rl0-cl-YPc.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "S1J-bg-6xo"; */
+"S1J-bg-6xo.text" = "Label";
+
+/* Class = "UILabel"; text = "Karbonh."; ObjectID = "TSg-ed-FYk"; */
+"TSg-ed-FYk.text" = "Karbonh.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Uis-LM-zjQ"; */
+"Uis-LM-zjQ.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Voz-vz-rdA"; */
+"Voz-vz-rdA.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "WqM-02-3bB"; */
+"WqM-02-3bB.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "Ayarlanmadı"; ObjectID = "Wwg-Fn-SiA"; */
+"Wwg-Fn-SiA.text" = "Ayarlanmadı";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "ZV3-B5-VRH"; */
+"ZV3-B5-VRH.text" = "9999";
+
+/* Class = "UILabel"; text = "Meals"; ObjectID = "a03-ql-a0l"; */
+"a03-ql-a0l.text" = "Meals";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "a6m-cz-xTS"; */
+"a6m-cz-xTS.text" = "/";
+
+/* Class = "UILabel"; text = "Kahvaltı için ihtiyaç duyduğun değerleri ayarla"; ObjectID = "b4Y-t1-O1b"; */
+"b4Y-t1-O1b.text" = "Kahvaltı için ihtiyaç duyduğun değerleri ayarla";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "cIe-EH-4hE"; */
+"cIe-EH-4hE.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "cda-x4-2Uo"; */
+"cda-x4-2Uo.text" = "9999";
+
+/* Class = "UISegmentedControl"; css-N3-ES4.segmentTitles[0] = "Yemekler"; ObjectID = "css-N3-ES4"; */
+"css-N3-ES4.segmentTitles[0]" = "Yemekler";
+
+/* Class = "UISegmentedControl"; css-N3-ES4.segmentTitles[1] = "Özel Yemek"; ObjectID = "css-N3-ES4"; */
+"css-N3-ES4.segmentTitles[1]" = "Özel Yemek";
+
+/* Class = "UILabel"; text = "Hedef"; ObjectID = "czN-Wj-c2X"; */
+"czN-Wj-c2X.text" = "Hedef";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "eFb-2o-qYw"; */
+"eFb-2o-qYw.text" = "/";
+
+/* Class = "UILabel"; text = "Kalori"; ObjectID = "eml-Hf-tII"; */
+"eml-Hf-tII.text" = "Kalori";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "f8S-cy-iOa"; */
+"f8S-cy-iOa.text" = "/";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "hO7-UU-de4"; */
+"hO7-UU-de4.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "hW3-iv-3wf"; */
+"hW3-iv-3wf.text" = "9999";
+
+/* Class = "UILabel"; text = "Kalori"; ObjectID = "j8K-dd-Fmn"; */
+"j8K-dd-Fmn.text" = "Kalori";
+
+/* Class = "UILabel"; text = "Kalori"; ObjectID = "kF6-MS-45Z"; */
+"kF6-MS-45Z.text" = "Kalori";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "kMN-f9-7ne"; */
+"kMN-f9-7ne.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "kSP-oW-gEG"; */
+"kSP-oW-gEG.text" = "9999";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "mcn-ix-fPx"; */
+"mcn-ix-fPx.text" = "9999";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "nlk-t5-054"; */
+"nlk-t5-054.text" = "/";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ovE-V7-LTe"; */
+"ovE-V7-LTe.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "9999"; ObjectID = "pnc-tm-63h"; */
+"pnc-tm-63h.text" = "9999";
+
+/* Class = "UILabel"; text = "Yağ"; ObjectID = "qxt-Lc-3rJ"; */
+"qxt-Lc-3rJ.text" = "Yağ";
+
+/* Class = "UILabel"; text = "Günlük"; ObjectID = "rOO-Sx-Rwc"; */
+"rOO-Sx-Rwc.text" = "Günlük";
+
+/* Class = "UISegmentedControl"; rde-uR-645.segmentTitles[0] = "Kahvaltı"; ObjectID = "rde-uR-645"; */
+"rde-uR-645.segmentTitles[0]" = "Kahvaltı";
+
+/* Class = "UISegmentedControl"; rde-uR-645.segmentTitles[1] = "Öğle Y."; ObjectID = "rde-uR-645"; */
+"rde-uR-645.segmentTitles[1]" = "Öğle Y.";
+
+/* Class = "UISegmentedControl"; rde-uR-645.segmentTitles[2] = "Akşam Y."; ObjectID = "rde-uR-645"; */
+"rde-uR-645.segmentTitles[2]" = "Akşam Y.";
+
+/* Class = "UISegmentedControl"; rde-uR-645.segmentTitles[3] = "Atıştırma"; ObjectID = "rde-uR-645"; */
+"rde-uR-645.segmentTitles[3]" = "Atıştırma";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "rej-pl-am7"; */
+"rej-pl-am7.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Günlük Hedef"; ObjectID = "wLO-hM-Ths"; */
+"wLO-hM-Ths.text" = "Günlük Hedef";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "wlu-4w-DLc"; */
+"wlu-4w-DLc.text" = "/";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "zPw-oP-KeV"; */
+"zPw-oP-KeV.text" = "/";

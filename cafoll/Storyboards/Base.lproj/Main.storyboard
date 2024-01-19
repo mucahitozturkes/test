@@ -944,9 +944,9 @@
                                 <rect key="frame" x="16" y="98" width="150" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Goal!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czN-Wj-c2X">
-                                        <rect key="frame" x="59" y="59.5" width="32" height="31.5"/>
+                                        <rect key="frame" x="43" y="67" width="64" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="yAS-gw-ce0"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="yAS-gw-ce0"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -963,7 +963,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5o-BB-c5o">
                                         <rect key="frame" x="5" y="15" width="31" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="31" id="9We-fS-kXI"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="9We-fS-kXI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -980,7 +980,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n5-wS-fCh">
                                         <rect key="frame" x="5" y="124" width="31" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="31" id="Hgs-Ym-7Va"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="Hgs-Ym-7Va"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -997,7 +997,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwg-Fn-SiA">
                                         <rect key="frame" x="112" y="15" width="31" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="31" id="jub-iz-vFU"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="jub-iz-vFU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -1014,7 +1014,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqM-02-3bB">
                                         <rect key="frame" x="112" y="123" width="31" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="31" id="xJy-5D-yoH"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="xJy-5D-yoH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -1078,6 +1078,7 @@
                                     <constraint firstItem="Voz-vz-rdA" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" id="4MB-Bt-Mgy"/>
                                     <constraint firstItem="rfp-qS-Rhn" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="8" id="6en-KP-u9R"/>
                                     <constraint firstAttribute="trailing" secondItem="WqM-02-3bB" secondAttribute="trailing" constant="7" id="CVI-1b-pug"/>
+                                    <constraint firstItem="Wwg-Fn-SiA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D5o-BB-c5o" secondAttribute="trailing" constant="8" symbolic="YES" id="D97-Wo-I8L"/>
                                     <constraint firstItem="rfp-qS-Rhn" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" constant="8" id="FJi-Q4-qUQ"/>
                                     <constraint firstItem="D5o-BB-c5o" firstAttribute="leading" secondItem="MvZ-Oo-kmV" secondAttribute="leading" constant="5" id="G5m-Jm-BXs"/>
                                     <constraint firstItem="kOS-HB-Xaj" firstAttribute="centerY" secondItem="MvZ-Oo-kmV" secondAttribute="centerY" id="Go5-sx-82E"/>
@@ -1089,6 +1090,7 @@
                                     <constraint firstAttribute="bottom" secondItem="6n5-wS-fCh" secondAttribute="bottom" constant="14" id="NYw-kR-TLG"/>
                                     <constraint firstAttribute="bottom" secondItem="1Gb-gn-Mqd" secondAttribute="bottom" constant="8" id="R8I-z0-c19"/>
                                     <constraint firstAttribute="trailing" secondItem="NXX-Jd-9OQ" secondAttribute="trailing" constant="8" id="TxO-qg-KnU"/>
+                                    <constraint firstItem="WqM-02-3bB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6n5-wS-fCh" secondAttribute="trailing" constant="8" symbolic="YES" id="VEa-bk-QXF"/>
                                     <constraint firstAttribute="bottom" secondItem="WqM-02-3bB" secondAttribute="bottom" constant="15" id="VhD-zh-tWe"/>
                                     <constraint firstItem="NjZ-Jx-GMU" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="5" id="Zwx-az-7ar"/>
                                     <constraint firstAttribute="trailing" secondItem="Voz-vz-rdA" secondAttribute="trailing" id="dAZ-Qj-c9m"/>
@@ -1176,9 +1178,8 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KJr-a1-svM">
-                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="18.5"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="12" id="2oV-0y-bvi"/>
                                                                     <constraint firstAttribute="width" constant="12" id="gM2-UI-zgf"/>
                                                                 </constraints>
                                                                 <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
@@ -1236,10 +1237,9 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cmo-V0-jyI">
-                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="18.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="12" id="UXR-E3-zzB"/>
-                                                                    <constraint firstAttribute="height" constant="12" id="eub-gT-6Dd"/>
                                                                 </constraints>
                                                                 <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
                                                                     <hierarchicalColors>
@@ -1296,9 +1296,8 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nd7-3j-1o0">
-                                                                <rect key="frame" x="96" y="0.5" width="12" height="11"/>
+                                                                <rect key="frame" x="96" y="0.5" width="12" height="18.5"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="12" id="9vB-Ur-tJx"/>
                                                                     <constraint firstAttribute="width" constant="12" id="EPR-25-vpM"/>
                                                                 </constraints>
                                                                 <imageReference key="image" image="checkmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
@@ -1372,7 +1371,6 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="RXG-4S-3N1" secondAttribute="bottom" id="6gm-65-D57"/>
                                                             <constraint firstAttribute="trailing" secondItem="RXG-4S-3N1" secondAttribute="trailing" constant="5" id="Le3-Sw-w2s"/>
                                                             <constraint firstAttribute="trailing" secondItem="J1F-H6-We0" secondAttribute="trailing" id="LvT-Yi-gbb"/>
                                                             <constraint firstAttribute="bottom" secondItem="J1F-H6-We0" secondAttribute="bottom" id="NwA-Wl-pEc"/>
@@ -1414,13 +1412,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fJ-Lb-qdc">
                                 <rect key="frame" x="16" y="32" width="343" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="efU-o3-ntO">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="efU-o3-ntO">
                                         <rect key="frame" x="0.0" y="-1" width="343" height="52"/>
                                         <subviews>
                                             <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovE-V7-LTe">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="52"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="52"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="utO-k3-Sug"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="utO-k3-Sug"/>
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                                                 <state key="normal" title="Button">
@@ -1450,18 +1448,17 @@
                                                     <action selector="leftDate:" destination="kfG-fp-uhY" eventType="touchUpInside" id="sGa-lL-kuJ"/>
                                                 </connections>
                                             </button>
-                                            <datePicker alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-y8-U89">
-                                                <rect key="frame" x="120" y="0.0" width="103" height="52"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <datePicker alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="wU9-y8-U89">
+                                                <rect key="frame" x="114.5" y="0.0" width="114" height="52"/>
                                                 <color key="tintColor" systemColor="systemIndigoColor"/>
                                                 <connections>
                                                     <action selector="datePickerSelected:" destination="kfG-fp-uhY" eventType="valueChanged" id="hlW-7Y-cQM"/>
                                                 </connections>
                                             </datePicker>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVL-eC-Sox">
-                                                <rect key="frame" x="223" y="0.0" width="120" height="52"/>
+                                                <rect key="frame" x="228.5" y="0.0" width="114.5" height="52"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="lr3-S3-TzU"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="lr3-S3-TzU"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" imagePadding="8">
@@ -1787,34 +1784,34 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

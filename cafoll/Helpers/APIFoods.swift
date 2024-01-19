@@ -479,6 +479,13 @@ var foodDictionary: [String: Food] = [
         fat: 14.55,
          info: "Bir Tavuk Döner Dürüm 250 gr."
      ),
+    "tarhana çorbası": Food(
+        protein: 2.30,
+        carbs: 4.99,
+        calories: 60.00,
+        fat: 3.29,
+         info: "Bir kase Tarhana Çorbası 200 gr."
+     ),
     "XXXXXXXXX": Food(
          protein: 0,
          carbs: 0,

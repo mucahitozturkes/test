@@ -250,7 +250,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.lastSearchImage.isHidden = true
             } else {
                 if let lastFood = coredata.lastSearch?[indexPath.row] {
-                    print("Last Food Info: \(lastFood.info ?? "nil")")
+                  
                     cell.foodTitleLabelUI?.text = lastFood.title
 
                     if let lastFoodInfo = lastFood.info, !lastFoodInfo.isEmpty {
@@ -261,7 +261,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
                     cell.lastSearchImage.isHidden = false
                 } else {
-                    print("lastFood is nil at indexPath \(indexPath.row)")
+                    
                     cell.foodTitleLabelUI?.text = "Title not available"
                     cell.infoLabel.text = "Info not available"
                     cell.lastSearchImage.isHidden = true
@@ -272,9 +272,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             let indexFavorite = self.coredata.foods?[indexPath.row]
             cell.foodTitleLabelUI.text = indexFavorite?.title
-            // Burada favori olan gıdanın info değerine nasıl eriştiğinizi belirlemelisiniz.
-            // Eğer "info" değeri varsa, aşağıdaki gibi kullanabilirsiniz:
-            // cell.infoLabel.text = indexFavorite?.info ?? "Info not available"
+           
             cell.lastSearchImage.isHidden = true
         default:
             break

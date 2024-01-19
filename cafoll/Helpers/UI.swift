@@ -66,8 +66,7 @@ class Ui {
               let totalProteinValue = Float(totalProteinText),
               let totalFatValue = Float(totalFatText),
               let totalCarbonValue = Float(totalCarbonText) else {
-            // Handle the case where at least one of the texts is nil or cannot be converted to Float
-            print("Error: One or more text values are nil or cannot be converted to Float.")
+    
             return
         }
 

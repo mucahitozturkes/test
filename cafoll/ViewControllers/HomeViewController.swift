@@ -600,11 +600,11 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
            Float(totalFats) >= circleTotalValues.1,
            Float(totalCarbs) >= circleTotalValues.0
         {
-            print("Goal Achieved!")
+         
             checkMarkMaxValue.isHidden = false
             goalTextLAbel.isHidden = true
         } else {
-            print("Goal Not Achieved!")
+           
             checkMarkMaxValue.isHidden = true
             goalTextLAbel.isHidden = false
         }

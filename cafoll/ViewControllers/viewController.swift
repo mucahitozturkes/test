@@ -134,37 +134,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addNewFoodButtonPressed(_ sender: UIButton) {
-        let alert = UIAlertController(title: "New Food", message: "Just write your food", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Yeni Yemek", message: "özel değerlere sahip yemekler ekliyebilirisin", preferredStyle: .alert)
         
         alert.addTextField { textfield in
-            textfield.placeholder = " + Food"
+            textfield.placeholder = " + İsim"
             textfield.textAlignment = .center
             textfield.borderStyle = .none
-            
         }
+        alert.addTextField { textfield in
+            textfield.placeholder = " + Kalori"
+            textfield.keyboardType = .decimalPad
+            textfield.borderStyle = .none
+        }
+        
         alert.addTextField { textfield in
             textfield.placeholder = " + Protein"
             textfield.keyboardType = .decimalPad
             textfield.borderStyle = .none
         }
         alert.addTextField { textfield in
-            textfield.placeholder = " + Carbon"
+            textfield.placeholder = " + Yağ"
             textfield.keyboardType = .decimalPad
             textfield.borderStyle = .none
         }
         alert.addTextField { textfield in
-            textfield.placeholder = " + Fat"
+            textfield.placeholder = " + Karbonhidrat"
             textfield.keyboardType = .decimalPad
             textfield.borderStyle = .none
         }
-        alert.addTextField { textfield in
-            textfield.placeholder = " + Calori"
-            textfield.keyboardType = .decimalPad
-            textfield.borderStyle = .none
-        }
-        
+     
+       
         // Add Button Way
-        let addButton = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+        let addButton = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
             // Check if all textfields are filled
             let foodTitle = alert.textFields?[0].text
             let foodProtein = alert.textFields?[1].text
@@ -192,7 +193,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Cancel Button
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelButton = UIAlertAction(title: "İptal", style: .cancel) { _ in
             // Handle cancel action if needed
         }
         cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red
@@ -282,7 +283,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Food Options", message: "Select an option", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Öğünler", message: "Hangi öğüne eklemek istersin?", preferredStyle: .actionSheet)
         let indexOfHomeViewController = 0
         guard let tabBarController = self.tabBarController,
               let homeViewController = tabBarController.viewControllers?[indexOfHomeViewController] as? HomeViewController else {
@@ -291,7 +292,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        let breakfastOption = UIAlertAction(title: "Breakfast", style: .default) { [weak self] _ in
+        let breakfastOption = UIAlertAction(title: "Kahvaltı", style: .default) { [weak self] _ in
             
             self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
@@ -313,10 +314,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     textField.keyboardType = .numberPad
                 }
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                let cancelAction = UIAlertAction(title: "İptal", style: .cancel) { _ in
                     // Handle cancel action if needed
                 }
-                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                let addAction = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
                     guard let self = self else { return }
                     
                     // Get grams from UITextField
@@ -497,7 +498,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        let lunchOption = UIAlertAction(title: "Lunch", style: .default) { [weak self] _ in
+        let lunchOption = UIAlertAction(title: "Öğle Yemeği", style: .default) { [weak self] _ in
             self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
@@ -518,10 +519,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     textField.keyboardType = .numberPad
                 }
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                let cancelAction = UIAlertAction(title: "İptal", style: .cancel) { _ in
                     // Handle cancel action if needed
                 }
-                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                let addAction = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
                     guard let self = self else { return }
                     
                     // Get grams from UITextField
@@ -701,7 +702,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        let dinnerOption = UIAlertAction(title: "Dinner", style: .default) { [weak self] _ in
+        let dinnerOption = UIAlertAction(title: "Akşam Yemeği", style: .default) { [weak self] _ in
             self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
@@ -722,10 +723,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     textField.keyboardType = .numberPad
                 }
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                let cancelAction = UIAlertAction(title: "İptal", style: .cancel) { _ in
                     // Handle cancel action if needed
                 }
-                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                let addAction = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
                     guard let self = self else { return }
                     
                     // Get grams from UITextField
@@ -903,7 +904,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        let snackOption = UIAlertAction(title: "Snack", style: .default) { [weak self] _ in
+        let snackOption = UIAlertAction(title: "Atıştırma", style: .default) { [weak self] _ in
             self?.searchBar.resignFirstResponder() // Klavyeyi kapat
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
@@ -924,10 +925,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     textField.keyboardType = .numberPad
                 }
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                let cancelAction = UIAlertAction(title: "İptal", style: .cancel) { _ in
                     // Handle cancel action if needed
                 }
-                let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+                let addAction = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
                     guard let self = self else { return }
                     
                     // Get grams from UITextField
@@ -1105,17 +1106,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if segmentedControl.selectedSegmentIndex == 1 {
-            let editOption = UIAlertAction(title: "Edit", style: .default) { _ in
+            let editOption = UIAlertAction(title: "Düzenle", style: .default) { _ in
                 guard let food = self.coredata.foods?[indexPath.row] else {
                     return
                 }
                 
                 // Edit Row
-                let editAlert = UIAlertController(title: "Editor", message: "You can change!", preferredStyle: .alert)
+                let editAlert = UIAlertController(title: "Düzenle", message: "Yeni değer ekleyebilirsin", preferredStyle: .alert)
                 editAlert.addTextField { textField in
-                    textField.placeholder = "Title"
+                    textField.placeholder = "İsim"
                     textField.text = food.title
+                    textField.textAlignment = .center
                     
+                }
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Kalori"
+                    textField.text = food.calori
+                    textField.keyboardType = .decimalPad
                 }
                 editAlert.addTextField { textField in
                     textField.placeholder = "Protein"
@@ -1123,23 +1130,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     textField.keyboardType = .decimalPad
                 }
                 editAlert.addTextField { textField in
-                    textField.placeholder = "Carbon"
-                    textField.text = food.carbon
-                    textField.keyboardType = .decimalPad
-                }
-                editAlert.addTextField { textField in
-                    textField.placeholder = "Fat"
+                    textField.placeholder = "Yağ"
                     textField.text = food.fat
                     textField.keyboardType = .decimalPad
                 }
                 editAlert.addTextField { textField in
-                    textField.placeholder = "Calories"
-                    textField.text = food.calori
+                    textField.placeholder = "Karbonhidrat"
+                    textField.text = food.carbon
                     textField.keyboardType = .decimalPad
                 }
+              
+               
                 
                 // Save button
-                let saveButton = UIAlertAction(title: "Edit", style: .default) { (action) in
+                let saveButton = UIAlertAction(title: "Düzenle", style: .default) { (action) in
                     guard let textfieldTitle = editAlert.textFields?[0],
                           let textfieldProtein = editAlert.textFields?[1],
                           let textfieldCarbon = editAlert.textFields?[2],
@@ -1158,15 +1162,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     food.carbon = textfieldCarbon.text
                     food.fat = textfieldFat.text
                     food.calori = textfieldCalori.text
-                    food.idFood = UUID()
+                
                     
                     self.coredata.saveData()
                     self.coredata.fetchFoods()
                     tableView.reloadData()
                 }
-                
+                // Add observers to all textfields to enable/disable the Add button based on their content
+                for textField in editAlert.textFields! {
+                    NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { _ in
+                        saveButton.isEnabled = editAlert.textFields?.allSatisfy { !$0.text!.isEmpty } ?? false
+                    }
+                }
+
                 // Cancel button
-                let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+                let cancelButton = UIAlertAction(title: "İptal", style: .destructive)
                 
                 // Show buttons
                 editAlert.addAction(cancelButton)
@@ -1194,7 +1204,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         // Cancel Button
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelButton = UIAlertAction(title: "İptal", style: .cancel) { _ in
             // Handle cancel action if needed
         }
         cancelButton.setValue(UIColor.red, forKey: "titleTextColor") // Set text color to red

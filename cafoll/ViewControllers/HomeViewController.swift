@@ -183,19 +183,19 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         case 0:
             coredata.fetchBreakfast(forDate: datePicker.date)
             sumBreakfast(forDate: datePicker.date)
-            nameOfMeals.text = "Breakfast"
+            nameOfMeals.text = "Kahvaltı"
         case 1:
             coredata.fetchLunch(forDate: datePicker.date)
             sumLunch(forDate: datePicker.date)
-            nameOfMeals.text = "Lunch"
+            nameOfMeals.text = "Öğle Y."
         case 2:
             coredata.fetchDinner(forDate: datePicker.date)
             sumDinner(forDate: datePicker.date)
-            nameOfMeals.text = "Dinner"
+            nameOfMeals.text = "Akşam Y."
         case 3:
             coredata.fetchSnack(forDate: datePicker.date)
             sumSnack(forDate: datePicker.date)
-            nameOfMeals.text = "Snack"
+            nameOfMeals.text = "Atıştırma"
         default:
             break
         }
@@ -205,7 +205,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
     
     func updateLabel() {
-        nameOfMeals.text = "Breakfast"
+        nameOfMeals.text = "Kahvaltı"
     }
     //segment Button
     @IBAction func segmentButtonPressed(_ sender: UISegmentedControl) {
@@ -219,7 +219,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             ui.updateButtonTapped()
             updateLabel()
             sumBreakfast(forDate: datePicker.date)
-            nameOfMeals.text = "Breakfast"
+            nameOfMeals.text = "Kahvaltı"
             
         case 1:
             tableView.reloadData()
@@ -228,7 +228,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             ui.updateButtonTapped()
             updateLabel()
             sumLunch(forDate: datePicker.date)
-            nameOfMeals.text = "Lunch"
+            nameOfMeals.text = "Öğle Y."
             
         case 2:
             tableView.reloadData()
@@ -236,7 +236,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             sumDinner(forDate: datePicker.date)
-            nameOfMeals.text = "Dinner"
+            nameOfMeals.text = "Akşam Y."
             
         case 3:
             tableView.reloadData()
@@ -244,7 +244,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             sumSnack(forDate: datePicker.date)
-            nameOfMeals.text = "Snack"
+            nameOfMeals.text = "Atıştırma"
         default:
             break
         }
@@ -682,7 +682,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumBreakfast(forDate: datePicker.date)
-                nameOfMeals.text = "Breakfast"
+                nameOfMeals.text = "Kahvaltı"
                 
             case 1:
                 tableView.reloadData()
@@ -690,7 +690,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumLunch(forDate: datePicker.date)
-                nameOfMeals.text = "Lunch"
+                nameOfMeals.text = "Öğle Y."
                 
             case 2:
                 tableView.reloadData()
@@ -698,7 +698,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumDinner(forDate: datePicker.date)
-                nameOfMeals.text = "Dinner"
+                nameOfMeals.text = "Akşam Y."
                 
             case 3:
                 tableView.reloadData()
@@ -706,7 +706,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumSnack(forDate: datePicker.date)
-                nameOfMeals.text = "Snack"
+                nameOfMeals.text = "Atıştırma"
                 
             default:
                 break
@@ -775,7 +775,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 }
             }
             
-            nameOfMeals.text = "Daily Goal!"
+            nameOfMeals.text = "Günlük Hedef"
             
             purpleInfoLabel.text = String(format: "%.0f", totalCalories)
             redInfoLabel.text = String(format: "%.0f", totalProtein)
@@ -878,7 +878,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumBreakfast(forDate: datePicker.date)
-                nameOfMeals.text = "Breakfast"
+                nameOfMeals.text = "Kahvaltı"
                 
             case 1:
                 tableView.reloadData()
@@ -886,7 +886,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumLunch(forDate: datePicker.date)
-                nameOfMeals.text = "Lunch"
+                nameOfMeals.text = "Öğle Y."
                 
             case 2:
                 tableView.reloadData()
@@ -894,7 +894,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumDinner(forDate: datePicker.date)
-                nameOfMeals.text = "Dinner"
+                nameOfMeals.text = "Akşam Y."
                 
             case 3:
                 tableView.reloadData()
@@ -902,7 +902,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumSnack(forDate: datePicker.date)
-                nameOfMeals.text = "Snack"
+                nameOfMeals.text = "Atıştırma"
                 
             default:
                 break

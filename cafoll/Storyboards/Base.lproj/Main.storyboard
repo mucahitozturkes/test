@@ -49,7 +49,7 @@
                                                                     <action selector="deleteSearchAndManuel:" destination="od0-hI-xVp" eventType="touchUpInside" id="yia-5g-lMs"/>
                                                                 </connections>
                                                             </button>
-                                                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-an-wo1">
+                                                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Ara" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-an-wo1">
                                                                 <rect key="frame" x="71" y="0.0" width="248" height="56"/>
                                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="barTintColor" name="Dark mod Background"/>
@@ -173,8 +173,8 @@
                                                     <constraint firstAttribute="height" constant="50" id="lNL-hV-MvF"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Food"/>
-                                                    <segment title="Manuel"/>
+                                                    <segment title="Yemekler"/>
+                                                    <segment title="Özel Yemek"/>
                                                 </segments>
                                                 <connections>
                                                     <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="rwY-oQ-APZ"/>
@@ -256,7 +256,7 @@
                                 <rect key="frame" x="16" y="202" width="343" height="386"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JkZ-aq-0Qx">
-                                        <rect key="frame" x="16" y="16" width="311" height="357.5"/>
+                                        <rect key="frame" x="16" y="16" width="311" height="339.5"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rde-uR-645">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="46"/>
@@ -264,23 +264,23 @@
                                                     <constraint firstAttribute="height" constant="45" id="LZv-MO-8Ib"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Breakfast"/>
-                                                    <segment title="Lunch"/>
-                                                    <segment title="Dinner"/>
-                                                    <segment title="Snack"/>
+                                                    <segment title="Kahvaltı"/>
+                                                    <segment title="Öğle Y."/>
+                                                    <segment title="Akşam Y."/>
+                                                    <segment title="Atıştırma"/>
                                                 </segments>
                                                 <connections>
                                                     <action selector="segmentedControlPanel:" destination="A7F-m5-KCR" eventType="valueChanged" id="Egk-6D-uCw"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many nutritive value do you need for Meals!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4Y-t1-O1b">
-                                                <rect key="frame" x="0.0" y="65" width="311" height="36.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kahvaltı için ihtiyaç duyduğun değerleri ayarla" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4Y-t1-O1b">
+                                                <rect key="frame" x="0.0" y="65" width="311" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                 <color key="textColor" systemColor="underPageBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gLU-et-mAr">
-                                                <rect key="frame" x="0.0" y="121.5" width="311" height="236"/>
+                                                <rect key="frame" x="0.0" y="103.5" width="311" height="236"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MAZ-k2-SfC">
                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="47"/>
@@ -288,8 +288,8 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="sPy-ad-Jaf">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF6-MS-45Z">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="25.5" height="12"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kalori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF6-MS-45Z">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="24.5" height="12"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
@@ -352,8 +352,8 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="nDS-zs-pMG">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxt-Lc-3rJ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="12.5" height="12"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yağ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxt-Lc-3rJ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="12"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
@@ -384,8 +384,8 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="1eH-0t-SMr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carbs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zd-ig-X47">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="24.5" height="12"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karbonh." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zd-ig-X47">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="12"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
@@ -425,8 +425,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IqX-eL-s0a">
                                 <rect key="frame" x="16" y="36" width="150" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Goal!  Total of meals" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-hM-Ths">
-                                        <rect key="frame" x="1.5" y="67" width="147" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Günlük Hedef" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-hM-Ths">
+                                        <rect key="frame" x="37.5" y="67" width="75.5" height="16"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -523,7 +523,7 @@
                                     <constraint firstAttribute="trailing" secondItem="kSP-oW-gEG" secondAttribute="trailing" constant="20" id="r4m-W8-g12"/>
                                     <constraint firstItem="PYp-JI-QFJ" firstAttribute="top" secondItem="IqX-eL-s0a" secondAttribute="top" constant="20" id="vpE-oh-9J2"/>
                                     <constraint firstItem="wLO-hM-Ths" firstAttribute="centerY" secondItem="IqX-eL-s0a" secondAttribute="centerY" id="y3j-jv-zSc"/>
-                                    <constraint firstItem="pnc-tm-63h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IqX-eL-s0a" secondAttribute="leading" symbolic="YES" id="z5p-O3-jAc"/>
+                                    <constraint firstItem="pnc-tm-63h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IqX-eL-s0a" secondAttribute="leading" constant="20" symbolic="YES" id="z5p-O3-jAc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGu-Cn-Jxa">
@@ -535,7 +535,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-xc-2DD">
                                                 <rect key="frame" x="0.0" y="0.0" width="27" height="102"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87E-CW-x54">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kalori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87E-CW-x54">
                                                         <rect key="frame" x="0.0" y="0.0" width="27" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -547,13 +547,13 @@
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQf-7Z-2Cp">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yağ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQf-7Z-2Cp">
                                                         <rect key="frame" x="0.0" y="55" width="27" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omb-s1-C2Y">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karbonh." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omb-s1-C2Y">
                                                         <rect key="frame" x="0.0" y="82.5" width="27" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -932,12 +932,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MvZ-Oo-kmV">
                                 <rect key="frame" x="16" y="98" width="150" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Goal!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czN-Wj-c2X">
-                                        <rect key="frame" x="43" y="67" width="64" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Günlük Hedef" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czN-Wj-c2X">
+                                        <rect key="frame" x="58" y="62" width="34" height="26"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="yAS-gw-ce0"/>
+                                            <constraint firstAttribute="width" constant="34" id="yAS-gw-ce0"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="10"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1105,7 +1105,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="z7b-FJ-ccn">
                                                 <rect key="frame" x="0.0" y="0.0" width="27" height="102"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8K-dd-Fmn">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kalori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8K-dd-Fmn">
                                                         <rect key="frame" x="0.0" y="0.0" width="27" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -1117,13 +1117,13 @@
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJM-GZ-Hbw">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yağ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJM-GZ-Hbw">
                                                         <rect key="frame" x="0.0" y="55" width="27" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSg-ed-FYk">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karbonh." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSg-ed-FYk">
                                                         <rect key="frame" x="0.0" y="82.5" width="27" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
                                                         <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -1377,7 +1377,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOu-2H-cYL">
                                         <rect key="frame" x="7" y="5" width="154" height="14.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calori" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eml-Hf-tII">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kalori" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eml-Hf-tII">
                                                 <rect key="frame" x="0.0" y="0.0" width="154" height="14.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="11"/>
                                                 <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
@@ -1481,10 +1481,10 @@
                                                     <constraint firstAttribute="height" constant="50" id="tmj-EG-x5h"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Breakfast"/>
-                                                    <segment title="Lunch"/>
-                                                    <segment title="Dinner"/>
-                                                    <segment title="Snack"/>
+                                                    <segment title="Kahvaltı"/>
+                                                    <segment title="Öğle Y."/>
+                                                    <segment title="Akşam Y."/>
+                                                    <segment title="Atıştırma"/>
                                                 </segments>
                                                 <connections>
                                                     <action selector="segmentButtonPressed:" destination="kfG-fp-uhY" eventType="valueChanged" id="DXG-zp-7Mn"/>

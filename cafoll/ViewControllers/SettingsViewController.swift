@@ -202,17 +202,17 @@ class SettingsViewController: UIViewController {
     func segmentName(forIndex index: Int) -> String {
         switch index {
         case 0:
-            infoLabel.text = "How many nutritive value do you need for Breakfast!"
-            return "Breakfast"
+            infoLabel.text = "Kahvaltı için ihtiyaç duyduğun değerleri ayarla"
+            return "Kahvaltı"
         case 1:
-            infoLabel.text = "How many nutritive value do you need for Lunch!"
-            return "Lunch"
+            infoLabel.text = "Öğle Y. için ihtiyaç duyduğun değerleri ayarla"
+            return "Öğle Y."
         case 2:
-            infoLabel.text = "How many nutritive value do you need for Dinner!"
-            return "Dinner"
+            infoLabel.text = "Akşam Y. için ihtiyaç duyduğun değerleri ayarla"
+            return "Akşam Y"
         case 3:
-            infoLabel.text = "How many nutritive value do you need for Snack!"
-            return "Snack"
+            infoLabel.text = "Atıştırma için ihtiyaç duyduğun değerleri ayarla"
+            return "Atıştırma"
         default:
             return ""
         }

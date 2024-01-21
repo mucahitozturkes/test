@@ -262,7 +262,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if isSearching {
                 let foodTitle = Array(searchResults.keys)[indexPath.row]
-                cell.foodTitleLabelUI?.text = foodTitle
+                cell.foodTitleLabelUI?.text = foodTitle.prefix(1).capitalized + foodTitle.dropFirst()
                 
                 if let selectedFood = searchResults[foodTitle] {
                     cell.infoLabel.text = selectedFood.info
@@ -272,8 +272,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.lastSearchImage.isHidden = true
             } else {
                 if let lastFood = coredata.lastSearch?[indexPath.row] {
-                    
-                    cell.foodTitleLabelUI?.text = lastFood.title
+                    cell.foodTitleLabelUI?.text = (lastFood.title?.prefix(1).capitalized ?? "0") + (lastFood.title?.dropFirst() ?? "0")
                     
                     if let lastFoodInfo = lastFood.info, !lastFoodInfo.isEmpty {
                         cell.infoLabel.text = lastFoodInfo
@@ -283,17 +282,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.lastSearchImage.isHidden = false
                 } else {
-                    
                     cell.foodTitleLabelUI?.text = "Title not available"
                     cell.infoLabel.text = "Info not available"
                     cell.lastSearchImage.isHidden = true
                 }
-                
             }
             
         case 1:
             let indexFavorite = self.coredata.foods?[indexPath.row]
-            cell.foodTitleLabelUI.text = indexFavorite?.title
+            cell.foodTitleLabelUI.text = (indexFavorite?.title?.prefix(1).capitalized ?? "0") + (indexFavorite?.title?.dropFirst() ?? "")
             
             cell.lastSearchImage.isHidden = true
         default:
@@ -302,6 +299,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Öğünler", message: "Hangi öğüne eklemek istersin?", preferredStyle: .actionSheet)
@@ -331,7 +329,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             if self?.segmentedControl.selectedSegmentIndex == 0 {
-                let alertBreakfast = UIAlertController(title: cell.foodTitleLabelUI.text, message: cell.infoLabel.text, preferredStyle: .alert)
+                let alertBreakfast = UIAlertController(title: cell.foodTitleLabelUI.text?.capitalized, message: cell.infoLabel.text, preferredStyle: .alert)
                 
                 alertBreakfast.addTextField { textField in
                     textField.placeholder = "Gram"

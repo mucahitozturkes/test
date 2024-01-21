@@ -838,22 +838,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch segment.selectedSegmentIndex {
         case 0:
             if let indexBreakfast = self.coredata.breakfast?[row] {
-                cell.titleLabel?.text = indexBreakfast.title
+                // Baş harfi büyük yap
+                cell.titleLabel?.text = indexBreakfast.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
             }
         case 1:
             if let indexLunch = self.coredata.lunch?[row] {
-                cell.titleLabel?.text = indexLunch.title
+                // Baş harfi büyük yap
+                cell.titleLabel?.text = indexLunch.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexLunch.carbon ?? "0", fat: indexLunch.fat ?? "0", protein: indexLunch.protein ?? "0")
             }
         case 2:
             if let indexDinner = self.coredata.dinner?[row] {
-                cell.titleLabel?.text = indexDinner.title
+                // Baş harfi büyük yap
+                cell.titleLabel?.text = indexDinner.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexDinner.carbon ?? "0", fat: indexDinner.fat ?? "0", protein: indexDinner.protein ?? "0")
             }
         case 3:
             if let indexSnack = self.coredata.snack?[row] {
-                cell.titleLabel?.text = indexSnack.title
+                // Baş harfi büyük yap
+                cell.titleLabel?.text = indexSnack.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexSnack.carbon ?? "0", fat: indexSnack.fat ?? "0", protein: indexSnack.protein ?? "0")
             }
         default:
@@ -865,7 +869,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if selectedIndexPath == indexPath {

@@ -963,8 +963,8 @@
                                             <constraint firstAttribute="width" constant="10" id="dBP-cv-9a0"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5o-BB-c5o">
-                                        <rect key="frame" x="5" y="15" width="53" height="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5o-BB-c5o">
+                                        <rect key="frame" x="5" y="15" width="31" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="9We-fS-kXI"/>
                                         </constraints>
@@ -980,8 +980,8 @@
                                             <constraint firstAttribute="height" constant="10" id="xtH-mB-go4"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n5-wS-fCh">
-                                        <rect key="frame" x="5" y="124" width="53" height="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n5-wS-fCh">
+                                        <rect key="frame" x="5" y="124" width="31" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="Hgs-Ym-7Va"/>
                                         </constraints>
@@ -997,8 +997,8 @@
                                             <constraint firstAttribute="height" constant="10" id="NCj-1o-Awd"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwg-Fn-SiA">
-                                        <rect key="frame" x="90" y="15" width="53" height="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwg-Fn-SiA">
+                                        <rect key="frame" x="112" y="15" width="31" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="jub-iz-vFU"/>
                                         </constraints>
@@ -1014,8 +1014,8 @@
                                             <constraint firstAttribute="width" constant="10" id="Zms-Q8-qdq"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqM-02-3bB">
-                                        <rect key="frame" x="90" y="123" width="53" height="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqM-02-3bB">
+                                        <rect key="frame" x="112" y="123" width="31" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="xJy-5D-yoH"/>
                                         </constraints>
@@ -1151,29 +1151,29 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaO-Hw-rZ8">
                                                         <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-co-lTk">
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-co-lTk">
                                                                 <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.74930153145695366" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.1498344370860927" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="D1z-f5-4xx">
-                                                                <rect key="frame" x="3" y="2" width="113" height="16"/>
+                                                                <rect key="frame" x="3" y="2" width="27.5" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOS-2N-HYH">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOS-2N-HYH">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="7.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fg6-aa-OfT">
-                                                                        <rect key="frame" x="33" y="0.0" width="6.5" height="16"/>
+                                                                        <rect key="frame" x="10.5" y="0.0" width="6.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TF-sj-h3F">
-                                                                        <rect key="frame" x="42.5" y="0.0" width="70.5" height="16"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TF-sj-h3F">
+                                                                        <rect key="frame" x="20" y="0.0" width="7.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
@@ -1210,29 +1210,29 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-pr-mwa">
                                                         <rect key="frame" x="0.0" y="27.5" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-LX-ngQ">
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-LX-ngQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.75072433774834435" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.15265418046357615" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="FAZ-bB-Dc5">
-                                                                <rect key="frame" x="3" y="1.5" width="116" height="17"/>
+                                                                <rect key="frame" x="3" y="1.5" width="29" height="17"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO7-UU-de4">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="32.5" height="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO7-UU-de4">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="8.5" height="17"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8S-cy-iOa">
-                                                                        <rect key="frame" x="35.5" y="0.0" width="7" height="17"/>
+                                                                        <rect key="frame" x="11.5" y="0.0" width="7" height="17"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMB-jc-Ns3">
-                                                                        <rect key="frame" x="45.5" y="0.0" width="70.5" height="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMB-jc-Ns3">
+                                                                        <rect key="frame" x="21.5" y="0.0" width="7.5" height="17"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
@@ -1269,29 +1269,29 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VB6-9z-AqD">
                                                         <rect key="frame" x="0.0" y="55" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q6V-Gh-B7k">
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q6V-Gh-B7k">
                                                                 <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.7497930463576159" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.14613514072847683" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="wm0-Sd-ybY">
-                                                                <rect key="frame" x="3" y="2" width="113" height="16"/>
+                                                                <rect key="frame" x="3" y="2" width="27.5" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW3-iv-3wf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW3-iv-3wf">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="7.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6m-cz-xTS">
-                                                                        <rect key="frame" x="33" y="0.0" width="6.5" height="16"/>
+                                                                        <rect key="frame" x="10.5" y="0.0" width="6.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5L2-S8-W3N">
-                                                                        <rect key="frame" x="42.5" y="0.0" width="70.5" height="16"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5L2-S8-W3N">
+                                                                        <rect key="frame" x="20" y="0.0" width="7.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
@@ -1328,29 +1328,29 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xu9-fc-RGt">
                                                         <rect key="frame" x="0.0" y="82.5" width="113" height="19.5"/>
                                                         <subviews>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J1F-H6-We0">
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J1F-H6-We0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="113" height="19.5"/>
                                                                 <color key="backgroundColor" name="Dark mod Background"/>
                                                                 <color key="progressTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.74930153145695366" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.15216266556291391" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="8TK-LC-iFg">
-                                                                <rect key="frame" x="3" y="2" width="113" height="16"/>
+                                                                <rect key="frame" x="3" y="2" width="27.5" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-uw-aez">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-uw-aez">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="7.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlk-t5-054">
-                                                                        <rect key="frame" x="33" y="0.0" width="6.5" height="16"/>
+                                                                        <rect key="frame" x="10.5" y="0.0" width="6.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayarlanmadı" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-cl-YPc">
-                                                                        <rect key="frame" x="42.5" y="0.0" width="70.5" height="16"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-cl-YPc">
+                                                                        <rect key="frame" x="20" y="0.0" width="7.5" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                                         <color key="textColor" name="white-LightWhite ~ Andy &amp; Dark"/>
                                                                         <nil key="highlightedColor"/>

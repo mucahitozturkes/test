@@ -58,8 +58,31 @@ class Ui {
         homeviewController?.firstLook.addSubview(circularProgressBar1)
     }
     
+    func circleTotal() -> (Float, Float, Float, Float) {
+        let meals = ["breakfast", "lunch", "dinner", "snack"]
+        let colors = ["green", "yellow", "red", "purple"]
+
+        var totalValues = [Float](repeating: 0.0, count: colors.count)
+
+        for meal in meals {
+            for color in colors {
+                if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Float {
+                    let colorIndex = colors.firstIndex(of: color)!
+                    totalValues[colorIndex] += value
+                }
+            }
+        }
+
+        let greenTotal0 = totalValues[0]
+        let yellowTotal1 = totalValues[1]
+        let redTotal2 = totalValues[2]
+        let purpleTotal3 = totalValues[3]
+
+        return (greenTotal0, yellowTotal1, redTotal2, purpleTotal3)
+    }
+
     @objc func updateButtonTapped() {
-      
+          
         guard let totalCaloriText = homeviewController?.totalCalori?.text,
               let totalProteinText = homeviewController?.totalPRotein?.text,
               let totalFatText = homeviewController?.totalFat?.text,
@@ -68,7 +91,7 @@ class Ui {
               let totalProteinValue = Float(totalProteinText),
               let totalFatValue = Float(totalFatText),
               let totalCarbonValue = Float(totalCarbonText) else {
-    
+        
             return
         }
 
@@ -103,16 +126,23 @@ class Ui {
             self.totalFat = totalFat
             self.totalCarbon = totalCarbon
 
-            self.homeviewController?.purpleLabel?.text = String(Int(purpleTotal - Float(totalCalori)))
-            self.homeviewController?.redLabel?.text = String(Int(redTotal - Float(totalProtein)))
-            self.homeviewController?.yellowLabel?.text = String(Int(yellowTotal - Float(totalFat)))
-            self.homeviewController?.greenLabel?.text = String(Int(greenTotal - Float(totalCarbon)))
+            let labelValues: [(label: UILabel?, total: Float, current: Float)] = [
+                (self.homeviewController?.purpleLabel, purpleTotal, totalCalori),
+                (self.homeviewController?.redLabel, redTotal, totalProtein),
+                (self.homeviewController?.yellowLabel, yellowTotal, totalFat),
+                (self.homeviewController?.greenLabel, greenTotal, totalCarbon)
+            ]
 
-            let normalizedProgress1 = CGFloat((totalCalori / Float(purpleTotal)))
-            let normalizedProgress2 = CGFloat((totalProtein / Float(redTotal)))
-            let normalizedProgress3 = CGFloat((totalFat / Float(yellowTotal)))
-            let normalizedProgress4 = CGFloat((totalCarbon / Float(greenTotal)))
+            for (label, total, current) in labelValues {
+                label?.text = String(Int(total - current))
+                label?.isHidden = (total - current < 0)
+            }
 
+
+            let normalizedProgress1 = CGFloat((totalCalori / purpleTotal))
+            let normalizedProgress2 = CGFloat((totalProtein / redTotal))
+            let normalizedProgress3 = CGFloat((totalFat / yellowTotal))
+            let normalizedProgress4 = CGFloat((totalCarbon / greenTotal))
 
             self.circularProgressBar1.animateProgress(to: normalizedProgress1, duration: duration)
             self.circularProgressBar2.animateProgress(to: normalizedProgress2, duration: duration)
@@ -121,28 +151,6 @@ class Ui {
         }
     }
 
-    func circleTotal() -> (Float, Float, Float, Float) {
-           let meals = ["breakfast", "lunch", "dinner", "snack"]
-           let colors = ["green", "yellow", "red", "purple"]
-
-           var totalValues = [Float](repeating: 0.0, count: colors.count)
-
-           for meal in meals {
-               for color in colors {
-                   if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Float {
-                       let colorIndex = colors.firstIndex(of: color)!
-                       totalValues[colorIndex] += value
-                   }
-               }
-           }
-
-           let greenTotal0 = totalValues[0]
-           let yellowTotal1 = totalValues[1]
-           let redTotal2 = totalValues[2]
-           let purpleTotal3 = totalValues[3]
-
-           return (greenTotal0, yellowTotal1, redTotal2, purpleTotal3)
-       }
 
     //View shadows
     func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 0, cornerRadius: CGFloat = 24) {

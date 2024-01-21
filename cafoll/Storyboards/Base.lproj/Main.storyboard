@@ -1421,7 +1421,7 @@
                                             <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovE-V7-LTe">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="52"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="utO-k3-Sug"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="44" id="utO-k3-Sug"/>
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                                                 <state key="normal" title="Button">
@@ -1461,7 +1461,7 @@
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVL-eC-Sox">
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="52"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="lr3-S3-TzU"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="44" id="lr3-S3-TzU"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" imagePadding="8">
@@ -1530,22 +1530,22 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-fV-mv9">
-                                                                                    <rect key="frame" x="27" y="19" width="196" height="22.5"/>
+                                                                                    <rect key="frame" x="27" y="19" width="166" height="22.5"/>
                                                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                                                     <color key="textColor" name="Darkgray-White ~ Any &amp; Dark"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRk-m1-kcm">
-                                                                                    <rect key="frame" x="235" y="0.0" width="60" height="60"/>
+                                                                                    <rect key="frame" x="205" y="0.0" width="90" height="60"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="Bgq-gB-OgC">
-                                                                                            <rect key="frame" x="0.0" y="16" width="60" height="28"/>
+                                                                                            <rect key="frame" x="0.0" y="16" width="90" height="28"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccp-Bm-fMR">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="OBq-j2-YPa">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="4"/>
                                                                                                             <color key="backgroundColor" name="Dark mod Background"/>
                                                                                                             <color key="progressTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.74930153150000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                             <color key="trackTintColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.1498344371" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1560,10 +1560,10 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z8Y-T3-NPe">
-                                                                                                    <rect key="frame" x="0.0" y="8" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="8" width="90" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pqn-Tl-xsn">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="4"/>
                                                                                                             <color key="backgroundColor" name="Dark mod Background"/>
                                                                                                             <color key="progressTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.75072433770000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                             <color key="trackTintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.15265418049999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1578,10 +1578,10 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDG-L1-H6M">
-                                                                                                    <rect key="frame" x="0.0" y="16" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="16" width="90" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="ygr-xd-Yer">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="4"/>
                                                                                                             <color key="backgroundColor" name="Dark mod Background"/>
                                                                                                             <color key="progressTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.7497930464" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                             <color key="trackTintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="0.1461351407" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1596,10 +1596,10 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzU-ke-yOd">
-                                                                                                    <rect key="frame" x="0.0" y="24" width="60" height="4"/>
+                                                                                                    <rect key="frame" x="0.0" y="24" width="90" height="4"/>
                                                                                                     <subviews>
                                                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="X0p-d3-EJg">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="4"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="4"/>
                                                                                                             <color key="backgroundColor" name="Dark mod Background"/>
                                                                                                             <color key="progressTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.74930153150000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                             <color key="trackTintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.1521626656" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1621,7 +1621,7 @@
                                                                                         <constraint firstAttribute="bottom" secondItem="Bgq-gB-OgC" secondAttribute="bottom" constant="16" id="41E-ur-6xn"/>
                                                                                         <constraint firstAttribute="height" constant="60" id="bbw-oH-FtF"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="Bgq-gB-OgC" secondAttribute="trailing" id="cJp-aS-zGc"/>
-                                                                                        <constraint firstAttribute="width" constant="60" id="eNA-2e-9BB"/>
+                                                                                        <constraint firstAttribute="width" constant="90" id="eNA-2e-9BB"/>
                                                                                         <constraint firstItem="Bgq-gB-OgC" firstAttribute="top" secondItem="aRk-m1-kcm" secondAttribute="top" constant="16" id="ikk-gg-p1b"/>
                                                                                         <constraint firstItem="Bgq-gB-OgC" firstAttribute="leading" secondItem="aRk-m1-kcm" secondAttribute="leading" id="yu6-GQ-oBx"/>
                                                                                     </constraints>
@@ -1648,7 +1648,11 @@
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="colorView" destination="a7A-AS-iBA" id="cZd-cQ-noC"/>
+                                                            <outlet property="greenProgressInfo" destination="X0p-d3-EJg" id="3ce-sS-V7D"/>
+                                                            <outlet property="purpleProgressInfo" destination="OBq-j2-YPa" id="QAA-5t-bqg"/>
+                                                            <outlet property="redProgressInfo" destination="pqn-Tl-xsn" id="73i-Ny-aJF"/>
                                                             <outlet property="titleLabel" destination="9f6-fV-mv9" id="RrR-pg-OwX"/>
+                                                            <outlet property="yellowProgressInfo" destination="ygr-xd-Yer" id="7LZ-hi-fV9"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>

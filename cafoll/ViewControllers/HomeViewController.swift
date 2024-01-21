@@ -62,6 +62,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     var selectedIndexPath: IndexPath?
     var isInfoVisible = false
+    let maxPurple = 350
+    let maxRed = 30
+    let maxYellow = 30
+    let maxGreen = 30
     
     var badgeCount: [Int] = [0, 0, 0, 0] {
         didSet {
@@ -79,6 +83,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         rotateLabel(greenLabel, degrees: 45)
         
         sumBreakfast(forDate: datePicker.date)
+        
+        
     }
     
     func updateBadge() {
@@ -841,24 +847,65 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 // Baş harfi büyük yap
                 cell.titleLabel?.text = indexBreakfast.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
+                cell.homeVC = self
+                // Düzeltme: Değerleri Float'a dönüştür
+                if let calories = Float(indexBreakfast.calori ?? "0"),
+                   let fat = Float(indexBreakfast.fat ?? "0"),
+                   let protein = Float(indexBreakfast.protein ?? "0"),
+                   let carbs = Float(indexBreakfast.carbon ?? "0") {
+                   
+                   // Update progress views in HomeCell
+                    cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
+                }
             }
+
         case 1:
-            if let indexLunch = self.coredata.lunch?[row] {
+            if let indexBreakfast = self.coredata.lunch?[row] {
                 // Baş harfi büyük yap
-                cell.titleLabel?.text = indexLunch.title?.capitalized
-                highestValueColor = determineHighestValueColor(carbons: indexLunch.carbon ?? "0", fat: indexLunch.fat ?? "0", protein: indexLunch.protein ?? "0")
+                cell.titleLabel?.text = indexBreakfast.title?.capitalized
+                highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
+                cell.homeVC = self
+                // Düzeltme: Değerleri Float'a dönüştür
+                if let calories = Float(indexBreakfast.calori ?? "0"),
+                   let fat = Float(indexBreakfast.fat ?? "0"),
+                   let protein = Float(indexBreakfast.protein ?? "0"),
+                   let carbs = Float(indexBreakfast.carbon ?? "0") {
+                   
+                   // Update progress views in HomeCell
+                    cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
+                }
             }
         case 2:
-            if let indexDinner = self.coredata.dinner?[row] {
+            if let indexBreakfast = self.coredata.dinner?[row] {
                 // Baş harfi büyük yap
-                cell.titleLabel?.text = indexDinner.title?.capitalized
-                highestValueColor = determineHighestValueColor(carbons: indexDinner.carbon ?? "0", fat: indexDinner.fat ?? "0", protein: indexDinner.protein ?? "0")
+                cell.titleLabel?.text = indexBreakfast.title?.capitalized
+                highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
+                cell.homeVC = self
+                // Düzeltme: Değerleri Float'a dönüştür
+                if let calories = Float(indexBreakfast.calori ?? "0"),
+                   let fat = Float(indexBreakfast.fat ?? "0"),
+                   let protein = Float(indexBreakfast.protein ?? "0"),
+                   let carbs = Float(indexBreakfast.carbon ?? "0") {
+                   
+                   // Update progress views in HomeCell
+                    cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
+                }
             }
         case 3:
-            if let indexSnack = self.coredata.snack?[row] {
+            if let indexBreakfast = self.coredata.snack?[row] {
                 // Baş harfi büyük yap
-                cell.titleLabel?.text = indexSnack.title?.capitalized
-                highestValueColor = determineHighestValueColor(carbons: indexSnack.carbon ?? "0", fat: indexSnack.fat ?? "0", protein: indexSnack.protein ?? "0")
+                cell.titleLabel?.text = indexBreakfast.title?.capitalized
+                highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
+                cell.homeVC = self
+                // Düzeltme: Değerleri Float'a dönüştür
+                if let calories = Float(indexBreakfast.calori ?? "0"),
+                   let fat = Float(indexBreakfast.fat ?? "0"),
+                   let protein = Float(indexBreakfast.protein ?? "0"),
+                   let carbs = Float(indexBreakfast.carbon ?? "0") {
+                   
+                   // Update progress views in HomeCell
+                    cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
+                }
             }
         default:
             break
@@ -869,8 +916,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Get the selected index path
+        guard let indexPath = tableView.indexPathForSelectedRow else {
+            print("Selected index path is nil.")
+            return
+        }
+        
+        // Get the selected cell
+        guard let cell = tableView.cellForRow(at: indexPath) as? HomeCell else {
+            print("Cell at selected index path is not of type YourCellType.")
+            return
+        }
         
         if selectedIndexPath == indexPath {
             // If the same cell is selected again, reset the state
@@ -942,15 +1004,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 redInfoLabel.text = String(format: "%.0f", Float(protein) ?? 0.0)
                 yellowInfoLabel.text = String(format: "%.0f", Float(fat) ?? 0.0)
                 greenInfoLabel.text = String(format: "%.0f", Float(carbon) ?? 0.0)
-
                 
                 purpleTotal.text = String(maxCal)
                 redTotal.text = "\(maxPro)"
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
+               
                 
-                // Convert String values to Double
+                
+                // Convert String values to Float
                 if let caloriDouble = Float(calori),
                    let proteinDouble = Float(protein),
                    let fatDouble = Float(fat),

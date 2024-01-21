@@ -27,7 +27,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNx-me-WoE">
                                                 <rect key="frame" x="0.0" y="0.0" width="319" height="56"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPI-tr-WiL">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="fPI-tr-WiL">
                                                         <rect key="frame" x="0.0" y="0.0" width="319" height="56"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIe-EH-4hE">
@@ -49,7 +49,7 @@
                                                                     <action selector="deleteSearchAndManuel:" destination="od0-hI-xVp" eventType="touchUpInside" id="yia-5g-lMs"/>
                                                                 </connections>
                                                             </button>
-                                                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Ara" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-an-wo1">
+                                                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Ara" translatesAutoresizingMaskIntoConstraints="NO" id="4hE-an-wo1">
                                                                 <rect key="frame" x="71" y="0.0" width="248" height="56"/>
                                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="barTintColor" name="Dark mod Background"/>
@@ -77,9 +77,30 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="4hE-an-wo1" firstAttribute="leading" secondItem="cIe-EH-4hE" secondAttribute="trailing" id="VAI-23-Ptc"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W3X-jA-ZwR">
+                                        <rect key="frame" x="16" y="486" width="311" height="50"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="css-N3-ES4">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="lNL-hV-MvF"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Besinler"/>
+                                                    <segment title="Gıda Listem"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="rwY-oQ-APZ"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HDS-GO-TIz">
@@ -164,24 +185,6 @@
                                             <outlet property="delegate" destination="od0-hI-xVp" id="76M-1P-cna"/>
                                         </connections>
                                     </tableView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W3X-jA-ZwR">
-                                        <rect key="frame" x="16" y="486" width="311" height="50"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="css-N3-ES4">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="51"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="lNL-hV-MvF"/>
-                                                </constraints>
-                                                <segments>
-                                                    <segment title="Besinler"/>
-                                                    <segment title="Gıda Listem"/>
-                                                </segments>
-                                                <connections>
-                                                    <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="rwY-oQ-APZ"/>
-                                                </connections>
-                                            </segmentedControl>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>

@@ -103,12 +103,10 @@ class Ui {
             self.totalFat = totalFat
             self.totalCarbon = totalCarbon
 
-            self.homeviewController?.purpleLabel?.text = String(format: "%.2f", purpleTotal - Float(totalCalori))
-            self.homeviewController?.redLabel?.text = String(format: "%.2f", redTotal - Float(totalProtein))
-            self.homeviewController?.yellowLabel?.text = String(format: "%.2f", yellowTotal - Float(totalFat))
-            self.homeviewController?.greenLabel?.text = String(format: "%.2f", greenTotal - Float(totalCarbon))
-
-
+            self.homeviewController?.purpleLabel?.text = String(Int(purpleTotal - Float(totalCalori)))
+            self.homeviewController?.redLabel?.text = String(Int(redTotal - Float(totalProtein)))
+            self.homeviewController?.yellowLabel?.text = String(Int(yellowTotal - Float(totalFat)))
+            self.homeviewController?.greenLabel?.text = String(Int(greenTotal - Float(totalCarbon)))
 
             let normalizedProgress1 = CGFloat((totalCalori / Float(purpleTotal)))
             let normalizedProgress2 = CGFloat((totalProtein / Float(redTotal)))

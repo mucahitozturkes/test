@@ -47,6 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         coredata.fetchLastSearch()
         tableView.reloadData()
         addButton.isHidden = true
+        
     }
     
     func saveFoodToCoreData(title: String, food: Food, mealEntityName: String, grams: Float) {
@@ -313,8 +314,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         let breakfastOption = UIAlertAction(title: "Kahvaltı", style: .default) { [weak self] _ in
-            
             self?.searchBar.resignFirstResponder() // Klavyeyi kapat
+            if let searchBar = self?.searchBar {
+                searchBar.setShowsCancelButton(false, animated: true)
+            }
+      
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
                 print("Selected index path is nil.")
@@ -500,7 +504,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         let lunchOption = UIAlertAction(title: "Öğle Yemeği", style: .default) { [weak self] _ in
-            self?.searchBar.resignFirstResponder() // Klavyeyi kapat
+         
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
                 print("Selected index path is nil.")
@@ -687,7 +691,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let dinnerOption = UIAlertAction(title: "Akşam Yemeği", style: .default) { [weak self] _ in
-            self?.searchBar.resignFirstResponder() // Klavyeyi kapat
+          
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
                 print("Selected index path is nil.")
@@ -872,7 +876,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let snackOption = UIAlertAction(title: "Atıştırma", style: .default) { [weak self] _ in
-            self?.searchBar.resignFirstResponder() // Klavyeyi kapat
+
             // Get the selected index path
             guard let indexPath = tableView.indexPathForSelectedRow else {
                 print("Selected index path is nil.")
@@ -1219,6 +1223,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return !isSearching
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+            // Swipe başladığında klavyeyi gizle
+            view.endEditing(true)
+
+            // Search bar'ın iptal butonunu gizle
+            if let searchBar = searchBar {
+                searchBar.setShowsCancelButton(false, animated: true)
+            }
+      
+        }
 }
 // Search Bar
 extension ViewController: UISearchBarDelegate {
@@ -1236,12 +1251,18 @@ extension ViewController: UISearchBarDelegate {
         }
         tableView.reloadData()
     }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
+            cancelButton.setTitle("İptal", for: .normal)
+        }
+    }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // This function is called when the Cancel button is clicked
-        searchBar.text = "" // Clear the content of the search bar
-        searchBar.resignFirstResponder() // Close the keyboard
-        searchResults = [:] // Clear search results
+        searchBar.text = "" // Arama çubuğu içeriğini temizle
+        searchBar.resignFirstResponder() // Klavyeyi kapat
+        searchBar.showsCancelButton = false // Cancel butonunu gizle
+        searchResults = [:] // Arama sonuçlarını temizle
         isSearching = false
         coredata.fetchLastSearch()
         tableView.reloadData()

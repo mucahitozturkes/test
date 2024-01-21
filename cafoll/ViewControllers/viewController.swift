@@ -104,27 +104,47 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         switch currentSegmentIndex {
         case 0:
+            let alert = UIAlertController(title: "Uyarı", message: "Tüm Favori Aramaları silmek istediğinize emin misiniz?", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Evet", style: .destructive, handler: { action in
             let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
             feedbackGenerator.impactOccurred()
             // Delete all records from LastSearch
-            if let lastSearch = coredata.lastSearch {
+                if let lastSearch = self.coredata.lastSearch {
                 for item in lastSearch {
-                    coredata.context.delete(item)
+                    self.coredata.context.delete(item)
                 }
-                coredata.saveData()
-                coredata.fetchLastSearch()
+                    self.coredata.saveData()
+                    self.coredata.fetchLastSearch()
+                    self.tableView.reloadData()
             }
+            }))
+
+            alert.addAction(UIAlertAction(title: "Hayır", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         case 1:
-            let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-            feedbackGenerator.impactOccurred()
-            // Delete all records from Foods
-            if let foods = coredata.foods {
-                for item in foods {
-                    coredata.context.delete(item)
+            let alert = UIAlertController(title: "Uyarı", message: "Tüm kayıtları silmek istediğinize emin misiniz?", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Evet", style: .destructive, handler: { action in
+                // Kullanıcının "Evet" dediği durumda silme işlemini gerçekleştir
+                let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+                feedbackGenerator.impactOccurred()
+
+                if let foods = self.coredata.foods {
+                    for item in foods {
+                        self.coredata.context.delete(item)
+                    }
+                    self.coredata.saveData()
+                    self.coredata.fetchFoods()
+                    self.tableView.reloadData()
                 }
-                coredata.saveData()
-                coredata.fetchFoods()
-            }
+            }))
+
+            alert.addAction(UIAlertAction(title: "Hayır", style: .cancel, handler: nil))
+
+            // Uyarıyı göster
+            self.present(alert, animated: true, completion: nil)
+
         default:
             break
         }
@@ -134,7 +154,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addNewFoodButtonPressed(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Yeni Yemek", message: "özel değerlere sahip yemekler ekliyebilirisin", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Yeni Besin", message: "özel değerlere sahip Besin ekliyebilirisin", preferredStyle: .alert)
         
         alert.addTextField { textfield in
             textfield.placeholder = " + İsim"
@@ -236,13 +256,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? Cell else {
             return UITableViewCell()
         }
-
+        
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             if isSearching {
                 let foodTitle = Array(searchResults.keys)[indexPath.row]
                 cell.foodTitleLabelUI?.text = foodTitle
-
+                
                 if let selectedFood = searchResults[foodTitle] {
                     cell.infoLabel.text = selectedFood.info
                 } else {
@@ -251,15 +271,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.lastSearchImage.isHidden = true
             } else {
                 if let lastFood = coredata.lastSearch?[indexPath.row] {
-                  
+                    
                     cell.foodTitleLabelUI?.text = lastFood.title
-
+                    
                     if let lastFoodInfo = lastFood.info, !lastFoodInfo.isEmpty {
                         cell.infoLabel.text = lastFoodInfo
                     } else {
                         cell.infoLabel.text = "Info not available"
                     }
-
+                    
                     cell.lastSearchImage.isHidden = false
                 } else {
                     
@@ -267,21 +287,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.infoLabel.text = "Info not available"
                     cell.lastSearchImage.isHidden = true
                 }
-
+                
             }
-
+            
         case 1:
             let indexFavorite = self.coredata.foods?[indexPath.row]
             cell.foodTitleLabelUI.text = indexFavorite?.title
-           
+            
             cell.lastSearchImage.isHidden = true
         default:
             break
         }
-
+        
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Öğünler", message: "Hangi öğüne eklemek istersin?", preferredStyle: .actionSheet)
         let indexOfHomeViewController = 0
@@ -343,26 +363,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // Handle the case when indexPath.row is out of range.
                         }
                     }
-                
+                    
                     if let selectedCellFoodName = self.selectedCellFoodName,
-                           let nutrientValues = searchResults[selectedCellFoodName] {
-
-                            // If a record with the same title exists, create a new LastSearch entity
-                          
-                            let newLastSearch = LastSearch(context: self.coredata.context)
-                            newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
-                            newLastSearch.info = nutrientValues.info
-
-                            // Save the new LastSearch entity to Core Data
-                            self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Breakfast", grams: grams)
-                            
-                            // Print added LastSearch entity
-                            print("Added LastSearch Entity: \(newLastSearch)")
-                       
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+                        
+                        // If a record with the same title exists, create a new LastSearch entity
+                        
+                        let newLastSearch = LastSearch(context: self.coredata.context)
+                        newLastSearch.title = selectedCellFoodName
+                        newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                        newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                        newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                        newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
+                        newLastSearch.info = nutrientValues.info
+                        
+                        // Save the new LastSearch entity to Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Breakfast", grams: grams)
+                        
+                        // Print added LastSearch entity
+                        print("Added LastSearch Entity: \(newLastSearch)")
+                        
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
@@ -382,25 +402,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                                 newFood.title = selectedCellFoodNameLast
                                 // Önce 100'e bölme işlemini gerçekleştir
                                 let divisor: Float = 100.0
-
+                                
                                 // Seçili yemek için bilgileri al
                                 let selectedCalories = Float(selectedFood.calori ?? "0.0") ?? 0.0
                                 let selectedCarbs = Float(selectedFood.carbon ?? "0.0") ?? 0.0
                                 let selectedFat = Float(selectedFood.fat ?? "0.0") ?? 0.0
                                 let selectedProtein = Float(selectedFood.protein ?? "0.0") ?? 0.0
-
+                                
                                 // Grams ile çarpma işlemini gerçekleştir
                                 let multipliedCalories = selectedCalories / divisor * Float(grams)
                                 let multipliedCarbs = selectedCarbs / divisor * Float(grams)
                                 let multipliedFat = selectedFat / divisor * Float(grams)
                                 let multipliedProtein = selectedProtein / divisor * Float(grams)
-
+                                
                                 // Sonuçları String olarak kaydet
                                 newFood.calori = String(multipliedCalories)
                                 newFood.carbon = String(multipliedCarbs)
                                 newFood.fat = String(multipliedFat)
                                 newFood.protein = String(multipliedProtein)
-
+                                
                                 newFood.date = datePickerDate
                                 
                                 // Save the new Breakfast entity to Core Data
@@ -435,26 +455,48 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 let datePickerDate = homeViewController.datePicker.date
                 self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                 print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
-                
-                if let context = self?.coredata.context {
-                    let newFood = Breakfast(context: context)
-                    newFood.title   = self?.coredata.foods?[indexPath.row].title
-                    newFood.calori  = self?.coredata.foods?[indexPath.row].calori
-                    newFood.protein = self?.coredata.foods?[indexPath.row].protein
-                    newFood.fat     = self?.coredata.foods?[indexPath.row].fat
-                    newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                    newFood.date    = datePickerDate
-                    
-                    print("added", "\(newFood.title ?? "0")")
-                } else {
-                    // Handle the case when the context is nil.
-                    print("Error: NSManagedObjectContext is nil.")
+
+                let editAlert = UIAlertController(title: "Adet", message: "Bir adet sayısı gir.", preferredStyle: .alert)
+
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Adet"
+                    textField.textAlignment = .center
                 }
-                self?.coredata.saveData()
+
+                let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
+                    guard let textfieldAdet = editAlert.textFields?[0],
+                          let adet = Float(textfieldAdet.text ?? "1.0") else {
+                        return
+                    }
+
+                    if let context = self?.coredata.context {
+                        let newFood = Breakfast(context: context)
+                        newFood.title   = self?.selectedCellFoodNameManuel
+                        newFood.calori  = String((Float(self?.coredata.foods?[indexPath.row].calori ?? "0.0") ?? 0.0) * adet)
+                        newFood.protein = String((Float(self?.coredata.foods?[indexPath.row].protein ?? "0.0") ?? 0.0) * adet)
+                        newFood.fat     = String((Float(self?.coredata.foods?[indexPath.row].fat ?? "0.0") ?? 0.0) * adet)
+                        newFood.carbon  = String((Float(self?.coredata.foods?[indexPath.row].carbon ?? "0.0") ?? 0.0) * adet)
+                        newFood.date    = datePickerDate
+
+                        print("added", "\(newFood.title ?? "0")")
+                        self?.coredata.saveData()
+                        homeViewController.badgeCount[0] += 1
+                    }
+                }
+
+                let cancelButton = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+
+                editAlert.addAction(saveButton)
+                editAlert.addAction(cancelButton)
+
+                self?.present(editAlert, animated: true, completion: nil)
+                } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
+                }
                 print("Segment 1 selected")
-                homeViewController.badgeCount[0] += 1
-            }
-        }
+
+ }
         
         
         let lunchOption = UIAlertAction(title: "Öğle Yemeği", style: .default) { [weak self] _ in
@@ -602,25 +644,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                 print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                 
-                if let context = self?.coredata.context {
-                    let newFood = Lunch(context: context)
-                    newFood.title   = self?.coredata.foods?[indexPath.row].title
-                    newFood.calori  = self?.coredata.foods?[indexPath.row].calori
-                    newFood.protein = self?.coredata.foods?[indexPath.row].protein
-                    newFood.fat     = self?.coredata.foods?[indexPath.row].fat
-                    newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                    newFood.date    = datePickerDate
-                    
-                    print("added", "\(newFood.title ?? "0")")
-                } else {
-                    // Handle the case when the context is nil.
-                    print("Error: NSManagedObjectContext is nil.")
+                let editAlert = UIAlertController(title: "Adet", message: "Bir adet sayısı gir.", preferredStyle: .alert)
+                
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Adet"
+                    textField.textAlignment = .center
                 }
-                self?.coredata.saveData()
-                print("Segment 1 selected")
-                homeViewController.badgeCount[0] += 1
+                
+                let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
+                    guard let textfieldAdet = editAlert.textFields?[0],
+                          let adet = Float(textfieldAdet.text ?? "1.0") else {
+                        return
+                    }
+                    
+                    if let context = self?.coredata.context {
+                        let newFood = Lunch(context: context)
+                        newFood.title   = self?.selectedCellFoodNameManuel
+                        newFood.calori  = String((Float(self?.coredata.foods?[indexPath.row].calori ?? "0.0") ?? 0.0) * adet)
+                        newFood.protein = String((Float(self?.coredata.foods?[indexPath.row].protein ?? "0.0") ?? 0.0) * adet)
+                        newFood.fat     = String((Float(self?.coredata.foods?[indexPath.row].fat ?? "0.0") ?? 0.0) * adet)
+                        newFood.carbon  = String((Float(self?.coredata.foods?[indexPath.row].carbon ?? "0.0") ?? 0.0) * adet)
+                        newFood.date    = datePickerDate
+                        
+                        print("added", "\(newFood.title ?? "0")")
+                        self?.coredata.saveData()
+                        homeViewController.badgeCount[0] += 1
+                    }
+                }
+                
+                let cancelButton = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+
+                editAlert.addAction(saveButton)
+                editAlert.addAction(cancelButton)
+                self?.present(editAlert, animated: true, completion: nil)
+            } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
             }
-            
+            print("Segment 1 selected")
             
             
         }
@@ -769,24 +830,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                 print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                 
-                if let context = self?.coredata.context {
-                    let newFood = Dinner(context: context)
-                    newFood.title   = self?.coredata.foods?[indexPath.row].title
-                    newFood.calori  = self?.coredata.foods?[indexPath.row].calori
-                    newFood.protein = self?.coredata.foods?[indexPath.row].protein
-                    newFood.fat     = self?.coredata.foods?[indexPath.row].fat
-                    newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                    newFood.date    = datePickerDate
-                    
-                    print("added", "\(newFood.title ?? "0")")
-                } else {
-                    // Handle the case when the context is nil.
-                    print("Error: NSManagedObjectContext is nil.")
+                let editAlert = UIAlertController(title: "Adet", message: "Bir adet sayısı gir.", preferredStyle: .alert)
+                
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Adet"
+                    textField.textAlignment = .center
                 }
-                self?.coredata.saveData()
-                print("Segment 1 selected")
-                homeViewController.badgeCount[0] += 1
+                
+                let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
+                    guard let textfieldAdet = editAlert.textFields?[0],
+                          let adet = Float(textfieldAdet.text ?? "1.0") else {
+                        return
+                    }
+                    
+                    if let context = self?.coredata.context {
+                        let newFood = Dinner(context: context)
+                        newFood.title   = self?.selectedCellFoodNameManuel
+                        newFood.calori  = String((Float(self?.coredata.foods?[indexPath.row].calori ?? "0.0") ?? 0.0) * adet)
+                        newFood.protein = String((Float(self?.coredata.foods?[indexPath.row].protein ?? "0.0") ?? 0.0) * adet)
+                        newFood.fat     = String((Float(self?.coredata.foods?[indexPath.row].fat ?? "0.0") ?? 0.0) * adet)
+                        newFood.carbon  = String((Float(self?.coredata.foods?[indexPath.row].carbon ?? "0.0") ?? 0.0) * adet)
+                        newFood.date    = datePickerDate
+                        
+                        print("added", "\(newFood.title ?? "0")")
+                        self?.coredata.saveData()
+                        homeViewController.badgeCount[0] += 1
+                    }
+                }
+                
+                let cancelButton = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+
+                editAlert.addAction(saveButton)
+                editAlert.addAction(cancelButton)
+                self?.present(editAlert, animated: true, completion: nil)
+            } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
             }
+            print("Segment 1 selected")
             
         }
         
@@ -933,24 +1014,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.selectedCellFoodNameManuel = self?.coredata.foods?[indexPath.row].title
                 print("Selected Cell Food Name: \(self?.selectedCellFoodNameManuel ?? "nil")")
                 
-                if let context = self?.coredata.context {
-                    let newFood = Snack(context: context)
-                    newFood.title   = self?.coredata.foods?[indexPath.row].title
-                    newFood.calori  = self?.coredata.foods?[indexPath.row].calori
-                    newFood.protein = self?.coredata.foods?[indexPath.row].protein
-                    newFood.fat     = self?.coredata.foods?[indexPath.row].fat
-                    newFood.carbon  = self?.coredata.foods?[indexPath.row].carbon
-                    newFood.date    = datePickerDate
-                    
-                    print("added", "\(newFood.title ?? "0")")
-                } else {
-                    // Handle the case when the context is nil.
-                    print("Error: NSManagedObjectContext is nil.")
+                let editAlert = UIAlertController(title: "Adet", message: "Bir adet sayısı gir.", preferredStyle: .alert)
+                
+                editAlert.addTextField { textField in
+                    textField.placeholder = "Adet"
+                    textField.textAlignment = .center
                 }
-                self?.coredata.saveData()
-                print("Segment 1 selected")
-                homeViewController.badgeCount[0] += 1
+                
+                let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
+                    guard let textfieldAdet = editAlert.textFields?[0],
+                          let adet = Float(textfieldAdet.text ?? "1.0") else {
+                        return
+                    }
+                    
+                    if let context = self?.coredata.context {
+                        let newFood = Snack(context: context)
+                        newFood.title   = self?.selectedCellFoodNameManuel
+                        newFood.calori  = String((Float(self?.coredata.foods?[indexPath.row].calori ?? "0.0") ?? 0.0) * adet)
+                        newFood.protein = String((Float(self?.coredata.foods?[indexPath.row].protein ?? "0.0") ?? 0.0) * adet)
+                        newFood.fat     = String((Float(self?.coredata.foods?[indexPath.row].fat ?? "0.0") ?? 0.0) * adet)
+                        newFood.carbon  = String((Float(self?.coredata.foods?[indexPath.row].carbon ?? "0.0") ?? 0.0) * adet)
+                        newFood.date    = datePickerDate
+                        
+                        print("added", "\(newFood.title ?? "0")")
+                        self?.coredata.saveData()
+                        homeViewController.badgeCount[0] += 1
+                    }
+                }
+                
+                let cancelButton = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+
+                editAlert.addAction(saveButton)
+                editAlert.addAction(cancelButton)
+                self?.present(editAlert, animated: true, completion: nil)
+            } else {
+                // Handle the case when the context is nil.
+                print("Error: NSManagedObjectContext is nil.")
             }
+            print("Segment 1 selected")
             
         }
         

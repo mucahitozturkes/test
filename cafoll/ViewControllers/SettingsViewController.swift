@@ -70,6 +70,7 @@ class SettingsViewController: UIViewController {
             let greenUserDefaultsKey = "breakfastgreenSliderValue"
             if let savedGreenValue = UserDefaults.standard.value(forKey: greenUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circleGreen, value: savedGreenValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+                print("Green Slider Value: \(sender.value)")
             }
         } else if sender == sliderYellow {
             updateLabelWithVibration(label: sliderValueYellow, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -77,6 +78,7 @@ class SettingsViewController: UIViewController {
             let yellowUserDefaultsKey = "breakfastyellowSliderValue"
             if let savedYellowValue = UserDefaults.standard.value(forKey: yellowUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circleYellow, value: savedYellowValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+                print("Yellow Slider Value: \(sender.value)")
             }
         } else if sender == sliderRed {
             updateLabelWithVibration(label: sliderValueRed, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -84,6 +86,7 @@ class SettingsViewController: UIViewController {
             let redUserDefaultsKey = "breakfastredSliderValue"
             if let savedRedValue = UserDefaults.standard.value(forKey: redUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circleRed, value: savedRedValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+                print("Red Slider Value: \(sender.value)")
             }
         } else if sender == sliderPurple {
             updateLabelWithVibration(label: sliderValuePurple, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -91,6 +94,7 @@ class SettingsViewController: UIViewController {
             let purpleUserDefaultsKey = "breakfastpurpleSliderValue"
             if let savedPurpleValue = UserDefaults.standard.value(forKey: purpleUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circlePurple, value: savedPurpleValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
+                print("Purple Slider Value: \(sender.value)")
             }
         }
         
@@ -98,14 +102,23 @@ class SettingsViewController: UIViewController {
         circleTotal()
     }
 
-
     func saveSliderValues(forSegment segment: Int) {
         let segmentKey = segmentKeyForIndex(segment)
-        userDefaults.set(sliderGreen.value, forKey: "\(segmentKey)greenSliderValue")
-        userDefaults.set(sliderYellow.value, forKey: "\(segmentKey)yellowSliderValue")
-        userDefaults.set(sliderRed.value, forKey: "\(segmentKey)redSliderValue")
-        userDefaults.set(sliderPurple.value, forKey: "\(segmentKey)purpleSliderValue")
+        
+        // Round the slider values to remove decimal places
+        let roundedGreenValue = round(sliderGreen.value)
+        let roundedYellowValue = round(sliderYellow.value)
+        let roundedRedValue = round(sliderRed.value)
+        let roundedPurpleValue = round(sliderPurple.value)
+        
+        print("Saving Slider Values - Green: \(roundedGreenValue), Yellow: \(roundedYellowValue), Red: \(roundedRedValue), Purple: \(roundedPurpleValue)")
+        
+        userDefaults.set(roundedGreenValue, forKey: "\(segmentKey)greenSliderValue")
+        userDefaults.set(roundedYellowValue, forKey: "\(segmentKey)yellowSliderValue")
+        userDefaults.set(roundedRedValue, forKey: "\(segmentKey)redSliderValue")
+        userDefaults.set(roundedPurpleValue, forKey: "\(segmentKey)purpleSliderValue")
     }
+
 
     func loadDefaults(forSegment segment: Int) {
         let segmentKey = segmentKeyForIndex(segment)
@@ -158,6 +171,7 @@ class SettingsViewController: UIViewController {
         }
 
     }
+    
     func updateLabelWithVibration(label: UILabel, value: Float, color: UIColor, scaleX: CGFloat, scaleY: CGFloat) {
         label.text = String(format: "%.0f", value)
         
@@ -181,8 +195,6 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-
-
 
     func segmentKeyForIndex(_ index: Int) -> String {
         switch index {
@@ -217,6 +229,7 @@ class SettingsViewController: UIViewController {
             return ""
         }
     }
+    
     func circleTotal() {
         let meals = ["breakfast", "lunch", "dinner", "snack"]
         let colors = ["green", "yellow", "red", "purple"]

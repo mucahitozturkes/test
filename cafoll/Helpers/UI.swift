@@ -36,6 +36,7 @@ class Ui {
         UiOfCircle()
         updateButtonTapped()
     }
+    
     func UiOfCircle() {
         // Dairesel ilerleme çubuklarını oluştur
         circularProgressBar1 = CircularProgressBar(frame: CGRect(x: 0, y: 0, width: 150, height: 150), color: UIColor.systemPurple.withAlphaComponent(0.60))
@@ -56,6 +57,7 @@ class Ui {
         // Görünüme ekle
         homeviewController?.firstLook.addSubview(circularProgressBar1)
     }
+    
     @objc func updateButtonTapped() {
       
         guard let totalCaloriText = homeviewController?.totalCalori?.text,
@@ -101,10 +103,10 @@ class Ui {
             self.totalFat = totalFat
             self.totalCarbon = totalCarbon
 
-            self.homeviewController?.purpleLabel?.text = String(format: "%.0f", purpleTotal - Float(totalCalori))
-            self.homeviewController?.redLabel?.text = String(format: "%.0f", redTotal - Float(totalProtein))
-            self.homeviewController?.yellowLabel?.text = String(format: "%.0f", yellowTotal - Float(totalFat))
-            self.homeviewController?.greenLabel?.text = String(format: "%.0f", greenTotal - Float(totalCarbon))
+            self.homeviewController?.purpleLabel?.text = String(format: "%.2f", purpleTotal - Float(totalCalori))
+            self.homeviewController?.redLabel?.text = String(format: "%.2f", redTotal - Float(totalProtein))
+            self.homeviewController?.yellowLabel?.text = String(format: "%.2f", yellowTotal - Float(totalFat))
+            self.homeviewController?.greenLabel?.text = String(format: "%.2f", greenTotal - Float(totalCarbon))
 
 
 
@@ -143,7 +145,6 @@ class Ui {
 
            return (greenTotal0, yellowTotal1, redTotal2, purpleTotal3)
        }
-
 
     //View shadows
     func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 0, cornerRadius: CGFloat = 24) {

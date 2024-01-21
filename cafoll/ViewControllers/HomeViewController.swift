@@ -282,15 +282,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
-            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-            redInfoLabel.text = String(format: "%.0f", totalProtein)
-            yellowInfoLabel.text = String(format: "%.0f", totalFats)
-            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-            
-            purpleTotal.text = String(format: "%.0f", maxPurple)
-            redTotal.text = String(format: "%.0f", maxRed)
-            yellowTotal.text = String(format: "%.0f", maxYellow)
-            greenTotal.text = String(format: "%.0f", maxGreen)
+            purpleInfoLabel.text = String(Int(totalCalories))
+            redInfoLabel.text = String(Int(totalProtein))
+            yellowInfoLabel.text = String(Int(totalFats))
+            greenInfoLabel.text = String(Int(totalCarbs))
+
+            purpleTotal.text = String(Int(maxPurple))
+            redTotal.text = String(Int(maxRed))
+            yellowTotal.text = String(Int(maxYellow))
+            greenTotal.text = String(Int(maxGreen))
+
             
             updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
             updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
@@ -345,15 +346,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
-            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-            redInfoLabel.text = String(format: "%.0f", totalProtein)
-            yellowInfoLabel.text = String(format: "%.0f", totalFats)
-            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-            
-            purpleTotal.text = String(format: "%.0f", maxPurple)
-            redTotal.text = String(format: "%.0f", maxRed)
-            yellowTotal.text = String(format: "%.0f", maxYellow)
-            greenTotal.text = String(format: "%.0f", maxGreen)
+            purpleInfoLabel.text = String(Int(totalCalories))
+            redInfoLabel.text = String(Int(totalProtein))
+            yellowInfoLabel.text = String(Int(totalFats))
+            greenInfoLabel.text = String(Int(totalCarbs))
+
+            purpleTotal.text = String(Int(maxPurple))
+            redTotal.text = String(Int(maxRed))
+            yellowTotal.text = String(Int(maxYellow))
+            greenTotal.text = String(Int(maxGreen))
             
             updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
             updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
@@ -407,15 +408,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
-            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-            redInfoLabel.text = String(format: "%.0f", totalProtein)
-            yellowInfoLabel.text = String(format: "%.0f", totalFats)
-            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-            
-            purpleTotal.text = String(format: "%.0f", maxPurple)
-            redTotal.text = String(format: "%.0f", maxRed)
-            yellowTotal.text = String(format: "%.0f", maxYellow)
-            greenTotal.text = String(format: "%.0f", maxGreen)
+            purpleInfoLabel.text = String(Int(totalCalories))
+            redInfoLabel.text = String(Int(totalProtein))
+            yellowInfoLabel.text = String(Int(totalFats))
+            greenInfoLabel.text = String(Int(totalCarbs))
+
+            purpleTotal.text = String(Int(maxPurple))
+            redTotal.text = String(Int(maxRed))
+            yellowTotal.text = String(Int(maxYellow))
+            greenTotal.text = String(Int(maxGreen))
             
             updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
             updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
@@ -469,15 +470,15 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
             // Toplam değerleri ekrana yazdır
-            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-            redInfoLabel.text = String(format: "%.0f", totalProtein)
-            yellowInfoLabel.text = String(format: "%.0f", totalFats)
-            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-            
-            purpleTotal.text = String(format: "%.0f", maxPurple)
-            redTotal.text = String(format: "%.0f", maxRed)
-            yellowTotal.text = String(format: "%.0f", maxYellow)
-            greenTotal.text = String(format: "%.0f", maxGreen)
+            purpleInfoLabel.text = String(Int(totalCalories))
+            redInfoLabel.text = String(Int(totalProtein))
+            yellowInfoLabel.text = String(Int(totalFats))
+            greenInfoLabel.text = String(Int(totalCarbs))
+
+            purpleTotal.text = String(Int(maxPurple))
+            redTotal.text = String(Int(maxRed))
+            yellowTotal.text = String(Int(maxYellow))
+            greenTotal.text = String(Int(maxGreen))
             
             updateVisibility(markPurple, value: Float(totalCalories), threshold: maxPurple)
             updateVisibility(markRed, value: Float(totalProtein), threshold: maxRed)
@@ -508,10 +509,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     func updateProgressViews(calories: Float, fat: Float, protein: Float, carbs: Float, maxGreen: Float, maxYellow: Float, maxRed: Float, maxPurple: Float, duration: TimeInterval = 1.0) {
         // Set initial progress to 0.0
-        progressPurple.progress = 0.00
-        progressYellow.progress = 0.00
-        progressRed.progress = 0.00
-        progressGreen.progress = 0.00
+        progressPurple.progress = 0
+        progressYellow.progress = 0
+        progressRed.progress = 0
+        progressGreen.progress = 0
         
         // Calculate target progress values
         let targetProgressPurple = min(Float(calories) / maxPurple, 1.0)
@@ -588,10 +589,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
         }
         
-        totalCalori.text = String(format: "%.0f", totalCalories)
-        totalPRotein.text = String(format: "%.0f", totalProtein)
-        totalFat.text = String(format: "%.0f", totalFats)
-        totalCarbon.text = String(format: "%.0f", totalCarbs)
+        totalCalori.text = String(format: "%.2f", totalCalories)
+        totalPRotein.text = String(format: "%.2f", totalProtein)
+        totalFat.text = String(format: "%.2f", totalFats)
+        totalCarbon.text = String(format: "%.2f", totalCarbs)
         
         let circleTotalValues = ui.circleTotal()
       
@@ -718,10 +719,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         } else {
             let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
                     
-            var totalCalories: Float = 0.0
-            var totalFats: Float = 0.0
-            var totalProtein: Float = 0.0
-            var totalCarbs: Float = 0.0
+            var totalCalories: Float = 0.00
+            var totalFats: Float = 0.00
+            var totalProtein: Float = 0.00
+            var totalCarbs: Float = 0.00
             guard let breakfastItems = self.coredata.breakfast else {
                 return
             }
@@ -777,15 +778,16 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
             nameOfMeals.text = "Günlük Hedef"
             
-            purpleInfoLabel.text = String(format: "%.0f", totalCalories)
-            redInfoLabel.text = String(format: "%.0f", totalProtein)
-            yellowInfoLabel.text = String(format: "%.0f", totalFats)
-            greenInfoLabel.text = String(format: "%.0f", totalCarbs)
-            
-            purpleTotal.text = String(format: "%.0f", purpleTotal3)
-            redTotal.text = String(format: "%.0f", redTotal2)
-            yellowTotal.text = String(format: "%.0f", yellowTotal1)
-            greenTotal.text = String(format: "%.0f", greenTotal0)
+            purpleInfoLabel.text = String(Int(totalCalories))
+            redInfoLabel.text = String(Int(totalProtein))
+            yellowInfoLabel.text = String(Int(totalFats))
+            greenInfoLabel.text = String(Int(totalCarbs))
+
+            purpleTotal.text = String(Int(purpleTotal3))
+            redTotal.text = String(Int(redTotal2))
+            yellowTotal.text = String(Int(yellowTotal1))
+            greenTotal.text = String(Int(greenTotal0))
+
             
             totalCalori.text = String(purpleTotal3)
             totalFat.text = String(yellowTotal1)
@@ -932,10 +934,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Breakfast)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
-                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
-                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
-                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
+                purpleInfoLabel.text = String(format: "%.0f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.0f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.0f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.0f", Float(carbon) ?? 0.0)
 
                 
                 purpleTotal.text = String(maxCal)
@@ -982,10 +984,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Lunch)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
-                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
-                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
-                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
+                purpleInfoLabel.text = String(format: "%.0f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.0f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.0f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.0f", Float(carbon) ?? 0.0)
                 
                 purpleTotal.text = "\(maxCal)"
                 redTotal.text = "\(maxPro)"
@@ -1029,10 +1031,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Dinner)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
-                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
-                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
-                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
+                purpleInfoLabel.text = String(format: "%.0f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.0f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.0f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.0f", Float(carbon) ?? 0.0)
                 
                 purpleTotal.text = "\(maxCal)"
                 redTotal.text = "\(maxPro)"
@@ -1075,10 +1077,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let calori = (food as? Snack)?.calori ?? ""
                 
                 nameOfMeals.text = foodName
-                purpleInfoLabel.text = String(format: "%.2f", Float(calori) ?? 0.0)
-                redInfoLabel.text = String(format: "%.2f", Float(protein) ?? 0.0)
-                yellowInfoLabel.text = String(format: "%.2f", Float(fat) ?? 0.0)
-                greenInfoLabel.text = String(format: "%.2f", Float(carbon) ?? 0.0)
+                purpleInfoLabel.text = String(format: "%.0f", Float(calori) ?? 0.0)
+                redInfoLabel.text = String(format: "%.0f", Float(protein) ?? 0.0)
+                yellowInfoLabel.text = String(format: "%.0f", Float(fat) ?? 0.0)
+                greenInfoLabel.text = String(format: "%.0f", Float(carbon) ?? 0.0)
                 
                 purpleTotal.text = "\(maxCal)"
                 redTotal.text = "\(maxPro)"

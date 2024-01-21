@@ -43,7 +43,7 @@ class Coredata {
     func fetchLastSearch() {
         do {
             let request = LastSearch.fetchRequest()
-            var lastSearchArray = try context.fetch(request)
+            let lastSearchArray = try context.fetch(request)
 
             // Remove duplicates based on the "title" attribute
             var uniqueLastSearch = [LastSearch]()
@@ -62,8 +62,6 @@ class Coredata {
             print("fetch LastSearch: ", error)
         }
     }
-
-
     //Fetch Breakfast
     func fetchBreakfast(forDate date: Date) {
         do {

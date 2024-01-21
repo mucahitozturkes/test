@@ -173,8 +173,8 @@
                                                     <constraint firstAttribute="height" constant="50" id="lNL-hV-MvF"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="Yemekler"/>
-                                                    <segment title="Özel Yemek"/>
+                                                    <segment title="Besinler"/>
+                                                    <segment title="Gıda Listem"/>
                                                 </segments>
                                                 <connections>
                                                     <action selector="segmentButtonPressed:" destination="od0-hI-xVp" eventType="valueChanged" id="rwY-oQ-APZ"/>

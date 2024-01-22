@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController {
     var ui: Ui!
     var helper: Helper!
     var coredata: Coredata!
@@ -43,6 +43,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         ui.applyShadow(to: mainView, offset: CGSize(width: 0, height: 6), radius: 12)
         coredata = Coredata(viewController: self)
         searchBar.delegate = self
+        
         coredata.fetchFoods()
         coredata.fetchLastSearch()
         tableView.reloadData()
@@ -161,12 +162,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             textfield.placeholder = " + İsim"
             textfield.textAlignment = .center
             textfield.borderStyle = .none
+            
         }
-        alert.addTextField { textfield in
-            textfield.placeholder = " + Kalori"
-            textfield.keyboardType = .decimalPad
-            textfield.borderStyle = .none
+        alert.addTextField { textField in
+            textField.placeholder = "+ Kalori"
+            textField.borderStyle = .none
+            textField.keyboardType = .decimalPad
+            textField.delegate = self
         }
+
+
         
         alert.addTextField { textfield in
             textfield.placeholder = " + Protein"
@@ -189,10 +194,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let addButton = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
             // Check if all textfields are filled
             let foodTitle = alert.textFields?[0].text
-            let foodProtein = alert.textFields?[1].text
-            let foodCarbon = alert.textFields?[2].text
+            let foodCalori = alert.textFields?[1].text
+            let foodProtein = alert.textFields?[2].text
             let foodFat = alert.textFields?[3].text
-            let foodCalori = alert.textFields?[4].text
+            let foodCarbon = alert.textFields?[4].text
             
             // Equal with Labels
             let equalInfo = Foods(context: (self?.coredata.context)!)
@@ -473,6 +478,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 editAlert.addTextField { textField in
                     textField.placeholder = "Adet"
                     textField.textAlignment = .center
+                    textField.keyboardType = .numberPad
                 }
 
                 let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
@@ -665,6 +671,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 editAlert.addTextField { textField in
                     textField.placeholder = "Adet"
                     textField.textAlignment = .center
+                    textField.keyboardType = .numberPad
                 }
                 
                 let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
@@ -855,6 +862,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 editAlert.addTextField { textField in
                     textField.placeholder = "Adet"
                     textField.textAlignment = .center
+                    textField.keyboardType = .numberPad
                 }
                 
                 let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
@@ -1044,6 +1052,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 editAlert.addTextField { textField in
                     textField.placeholder = "Adet"
                     textField.textAlignment = .center
+                    textField.keyboardType = .numberPad
                 }
                 
                 let saveButton = UIAlertAction(title: "Ekle", style: .default) { (action) in
@@ -1088,11 +1097,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 // Edit Row
                 let editAlert = UIAlertController(title: "Düzenle", message: "Yeni değer ekleyebilirsin", preferredStyle: .alert)
+                
                 editAlert.addTextField { textField in
                     textField.placeholder = "İsim"
                     textField.text = food.title
                     textField.textAlignment = .center
-                    
                 }
                 editAlert.addTextField { textField in
                     textField.placeholder = "Kalori"
@@ -1117,13 +1126,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
               
                
                 
-                // Save button
                 let saveButton = UIAlertAction(title: "Düzenle", style: .default) { (action) in
                     guard let textfieldTitle = editAlert.textFields?[0],
-                          let textfieldProtein = editAlert.textFields?[1],
-                          let textfieldCarbon = editAlert.textFields?[2],
+                          let textfieldCalori = editAlert.textFields?[1],
+                          let textfieldProtein = editAlert.textFields?[2],
                           let textfieldFat = editAlert.textFields?[3],
-                          let textfieldCalori = editAlert.textFields?[4] else {
+                          let textfieldCarbon = editAlert.textFields?[4] else {
                         return
                     }
                     
@@ -1132,13 +1140,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                         editedTitle = editedTitle.capitalized // Büyük harfle başlatma işlemi
                         food.title = editedTitle
                     }
-                    
-                    food.protein = textfieldProtein.text
-                    food.carbon = textfieldCarbon.text
-                    food.fat = textfieldFat.text
                     food.calori = textfieldCalori.text
+                    food.protein = textfieldProtein.text
+                    food.fat = textfieldFat.text
+                    food.carbon = textfieldCarbon.text
                 
-                    
                     self.coredata.saveData()
                     self.coredata.fetchFoods()
                     tableView.reloadData()
@@ -1289,3 +1295,28 @@ extension ViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+// UITextFieldDelegate protokolünü uygulayın
+extension ViewController: UITextFieldDelegate {
+    // UITextFieldDelegate protokolünü uygulayın
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            // Eğer yeni karakter bir sayı veya nokta değilse, eklenmez.
+            let allowedCharacterSet = CharacterSet(charactersIn: "0123456789.,")
+            let replacementStringCharacterSet = CharacterSet(charactersIn: string)
+            
+            if allowedCharacterSet.isSuperset(of: replacementStringCharacterSet) {
+                // Mevcut metin içindeki uygun karakterleri koru.
+                let currentText = textField.text ?? ""
+                let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+                
+                // Eğer metinde birden fazla nokta veya virgül varsa, değişikliği reddet.
+                if newText.components(separatedBy: CharacterSet(charactersIn: ".,")).count > 2 {
+                    return false
+                }
+                
+                return true
+            } else {
+                return false
+            }
+        }
+}
+

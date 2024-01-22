@@ -998,7 +998,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwg-Fn-SiA">
-                                        <rect key="frame" x="112" y="15" width="31" height="12"/>
+                                        <rect key="frame" x="113" y="15" width="31" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="jub-iz-vFU"/>
                                         </constraints>
@@ -1077,7 +1077,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="Dark mod Background"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Wwg-Fn-SiA" secondAttribute="trailing" constant="7" id="1D6-3d-l2u"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wwg-Fn-SiA" secondAttribute="trailing" constant="6" id="1D6-3d-l2u"/>
                                     <constraint firstItem="Voz-vz-rdA" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" id="4MB-Bt-Mgy"/>
                                     <constraint firstItem="rfp-qS-Rhn" firstAttribute="top" secondItem="MvZ-Oo-kmV" secondAttribute="top" constant="8" id="6en-KP-u9R"/>
                                     <constraint firstAttribute="trailing" secondItem="WqM-02-3bB" secondAttribute="trailing" constant="7" id="CVI-1b-pug"/>

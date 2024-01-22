@@ -168,11 +168,9 @@ class ViewController: UIViewController {
             textField.placeholder = "+ Kalori"
             textField.borderStyle = .none
             textField.keyboardType = .decimalPad
-            textField.delegate = self
+         
         }
 
-
-        
         alert.addTextField { textfield in
             textfield.placeholder = " + Protein"
             textfield.keyboardType = .decimalPad
@@ -194,11 +192,10 @@ class ViewController: UIViewController {
         let addButton = UIAlertAction(title: "Ekle", style: .default) { [weak self] _ in
             // Check if all textfields are filled
             let foodTitle = alert.textFields?[0].text
-            let foodCalori = alert.textFields?[1].text
-            let foodProtein = alert.textFields?[2].text
-            let foodFat = alert.textFields?[3].text
-            let foodCarbon = alert.textFields?[4].text
-            
+            let foodCalori = alert.textFields?[1].text?.replacingOccurrences(of: ",", with: ".")
+            let foodProtein = alert.textFields?[2].text?.replacingOccurrences(of: ",", with: ".")
+            let foodFat = alert.textFields?[3].text?.replacingOccurrences(of: ",", with: ".")
+            let foodCarbon = alert.textFields?[4].text?.replacingOccurrences(of: ",", with: ".")
             // Equal with Labels
             let equalInfo = Foods(context: (self?.coredata.context)!)
             equalInfo.title = foodTitle?.capitalized
@@ -1294,29 +1291,5 @@ extension ViewController: UISearchBarDelegate {
         coredata.fetchLastSearch()
         tableView.reloadData()
     }
-}
-// UITextFieldDelegate protokolünü uygulayın
-extension ViewController: UITextFieldDelegate {
-    // UITextFieldDelegate protokolünü uygulayın
-        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            // Eğer yeni karakter bir sayı veya nokta değilse, eklenmez.
-            let allowedCharacterSet = CharacterSet(charactersIn: "0123456789.,")
-            let replacementStringCharacterSet = CharacterSet(charactersIn: string)
-            
-            if allowedCharacterSet.isSuperset(of: replacementStringCharacterSet) {
-                // Mevcut metin içindeki uygun karakterleri koru.
-                let currentText = textField.text ?? ""
-                let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-                
-                // Eğer metinde birden fazla nokta veya virgül varsa, değişikliği reddet.
-                if newText.components(separatedBy: CharacterSet(charactersIn: ".,")).count > 2 {
-                    return false
-                }
-                
-                return true
-            } else {
-                return false
-            }
-        }
 }
 

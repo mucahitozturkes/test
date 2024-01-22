@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     var selectedCellFoodNameManuel: String?
     var selectedCellFoodNameLast: String?
     var isSearching: Bool = false
-    @IBOutlet weak var addButton: UIButton!
     
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     //Views
@@ -301,7 +301,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Öğünler", message: "Hangi öğüne eklemek istersin?", preferredStyle: .actionSheet)
@@ -1261,7 +1260,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 // Search Bar
 extension ViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             // Update searchResults based on the search text
@@ -1275,6 +1273,7 @@ extension ViewController: UISearchBarDelegate {
         }
         tableView.reloadData()
     }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {

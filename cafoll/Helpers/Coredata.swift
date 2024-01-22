@@ -35,33 +35,27 @@ class Coredata {
         do {
             let request = Foods.fetchRequest()
             self.foods = try context.fetch(request)
+            print("succesed: fetchFoods")
         } catch {
-            print("fetch Foods: ", error)
+            print("fetch fetchFoods: ", error)
         }
     }
     //Fetch Favorite
     func fetchLastSearch() {
         do {
             let request = LastSearch.fetchRequest()
-            let lastSearchArray = try context.fetch(request)
+            self.lastSearch = try context.fetch(request)
+            
+            // Sonuçları tersine çevir
+            self.lastSearch = self.lastSearch?.reversed()
 
-            // Remove duplicates based on the "title" attribute
-            var uniqueLastSearch = [LastSearch]()
-            var uniqueTitles = Set<String>()
-
-            for lastSearchItem in lastSearchArray.reversed() {
-                if let title = lastSearchItem.title, !uniqueTitles.contains(title) {
-                    uniqueTitles.insert(title)
-                    uniqueLastSearch.append(lastSearchItem) // Eklenen öğeyi en alta ekler
-                }
-            }
-
-            // Assign the unique lastSearch array
-            self.lastSearch = uniqueLastSearch
+            print("success: fetchLastSearch")
         } catch {
             print("fetch LastSearch: ", error)
         }
     }
+
+    
     //Fetch Breakfast
     func fetchBreakfast(forDate date: Date) {
         do {
@@ -81,6 +75,7 @@ class Coredata {
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
                 }
+            print("succesed: fetchBreakfast")
             } catch {
                 print("fetch Foods: ", error)
             }
@@ -104,6 +99,7 @@ class Coredata {
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
             }
+            print("succesed: fetchLunch")
         } catch {
             print("fetch Foods: ", error)
         }
@@ -127,6 +123,7 @@ class Coredata {
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
             }
+            print("succesed: fetchDinner")
         } catch {
             print("fetch Foods: ", error)
         }
@@ -150,6 +147,7 @@ class Coredata {
             DispatchQueue.main.async {
                 self.homeViewController?.tableView.reloadData()
             }
+            print("succesed: fetchSnack")
         } catch {
             print("fetch Foods: ", error)
         }

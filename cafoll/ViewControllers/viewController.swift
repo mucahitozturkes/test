@@ -89,11 +89,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case 0:
             addButton.isHidden = true
             searchBar.isHidden = false
+            coredata.fetchLastSearch()
             tableView.reloadData()
         case 1:
             addButton.isHidden = false
             searchBar.isHidden = true
-            coredata.fetchFoods()
             tableView.reloadData()
         default:
             return
@@ -368,9 +368,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if let selectedCellFoodName = self.selectedCellFoodName,
                        let nutrientValues = searchResults[selectedCellFoodName] {
-                        
-                        // If a record with the same title exists, create a new LastSearch entity
-                        
+            
+                        // Yeni aramayı oluştur
                         let newLastSearch = LastSearch(context: self.coredata.context)
                         newLastSearch.title = selectedCellFoodName
                         newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
@@ -381,11 +380,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                         
                         // Save the new LastSearch entity to Core Data
                         self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Breakfast", grams: grams)
-                        
+                     
                         // Print added LastSearch entity
                         print("Added LastSearch Entity: \(newLastSearch)")
                         
+                        // Aynı başlığa sahip önceki aramaları bul ve sil
+                        if let existingSearches = coredata.lastSearch {
+                               let filteredSearches = existingSearches.filter { $0.title == selectedCellFoodName }
+                               for existingSearch in filteredSearches {
+                                          coredata.context.delete(existingSearch)
+                               }
+                           }
+                        coredata.fetchLastSearch()
+                        tableView.reloadData()
+                        coredata.saveData()
                     }
+
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
                         if let selectedFood = self.coredata.lastSearch?[indexPath.row] {
@@ -551,31 +561,35 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // Handle the case when indexPath.row is out of range.
                         }
                     }
-                    
-                    
-                  
-                        if let selectedCellFoodName = self.selectedCellFoodName,
-                           let nutrientValues = searchResults[selectedCellFoodName] {
-
-                            // If a record with the same title exists, create a new LastSearch entity
-                            // instead of updating the existing LastSearch entity
-                            let newLastSearch = LastSearch(context: self.coredata.context)
-                            newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
-                            newLastSearch.info = nutrientValues.info
-
-
-                            
-                            // Print updated nutritional values
-                            print("Updated Nutrient Values: \(nutrientValues)")
-                            
-                            // Create a new Breakfast entity in Core Data
-                            self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Lunch", grams: grams)
-                            print("saveFoodToCoreData called successfully")
-                    
+                    if let selectedCellFoodName = self.selectedCellFoodName,
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+                      
+                        // Yeni aramayı oluştur
+                        let newLastSearch = LastSearch(context: self.coredata.context)
+                        newLastSearch.title = selectedCellFoodName
+                        newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                        newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                        newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                        newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
+                        newLastSearch.info = nutrientValues.info
+                        
+                        // Save the new LastSearch entity to Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Lunch", grams: grams)
+                        
+                        // Print added LastSearch entity
+                        print("Added LastSearch Entity: \(newLastSearch)")
+                        
+                        // Aynı başlığa sahip önceki aramaları bul ve sil
+                        if let existingSearches = coredata.lastSearch {
+                               let filteredSearches = existingSearches.filter { $0.title == selectedCellFoodName }
+                               for existingSearch in filteredSearches {
+                                          coredata.context.delete(existingSearch)
+                               }
+                           }
+                        coredata.fetchLastSearch()
+                        tableView.reloadData()
+                        coredata.saveData()
+                      
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
@@ -738,30 +752,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // Handle the case when indexPath.row is out of range.
                         }
                     }
-                    
-                    
-                   
-                        if let selectedCellFoodName = self.selectedCellFoodName,
-                           let nutrientValues = searchResults[selectedCellFoodName] {
-
-                            // If a record with the same title exists, create a new LastSearch entity
-                            // instead of updating the existing LastSearch entity
-                            let newLastSearch = LastSearch(context: self.coredata.context)
-                            newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
-                            newLastSearch.info = nutrientValues.info
-
-
-
-                            print("Updated Nutrient Values: \(nutrientValues)")
-                            
-                            // Create a new Breakfast entity in Core Data
-                            self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Dinner", grams: grams)
-                            print("saveFoodToCoreData called successfully")
-                      
+                    if let selectedCellFoodName = self.selectedCellFoodName,
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+            
+                        // Yeni aramayı oluştur
+                        let newLastSearch = LastSearch(context: self.coredata.context)
+                        newLastSearch.title = selectedCellFoodName
+                        newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                        newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                        newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                        newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
+                        newLastSearch.info = nutrientValues.info
+                        
+                        // Save the new LastSearch entity to Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Dinner", grams: grams)
+                        
+                        // Print added LastSearch entity
+                        print("Added LastSearch Entity: \(newLastSearch)")
+                        
+                        // Aynı başlığa sahip önceki aramaları bul ve sil
+                        if let existingSearches = coredata.lastSearch {
+                               let filteredSearches = existingSearches.filter { $0.title == selectedCellFoodName }
+                               for existingSearch in filteredSearches {
+                                          coredata.context.delete(existingSearch)
+                               }
+                           }
+                        coredata.fetchLastSearch()
+                        tableView.reloadData()
+                        coredata.saveData()
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date
@@ -923,29 +941,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                             // Handle the case when indexPath.row is out of range.
                         }
                     }
-                    
-                    
-                   
-                        if let selectedCellFoodName = self.selectedCellFoodName,
-                           let nutrientValues = searchResults[selectedCellFoodName] {
-
-                            // If a record with the same title exists, create a new LastSearch entity
-                            // instead of updating the existing LastSearch entity
-                            let newLastSearch = LastSearch(context: self.coredata.context)
-                            newLastSearch.title = selectedCellFoodName
-                            newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
-                            newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
-                            newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
-                            newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
-                            newLastSearch.info = nutrientValues.info
-
-                            // Print updated nutritional values
-                            print("Updated Nutrient Values: \(nutrientValues)")
-                            
-                            // Create a new Breakfast entity in Core Data
-                            self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Snack", grams: grams)
-                            print("saveFoodToCoreData called successfully")
-                 
+                    if let selectedCellFoodName = self.selectedCellFoodName,
+                       let nutrientValues = searchResults[selectedCellFoodName] {
+            
+                        // Yeni aramayı oluştur
+                        let newLastSearch = LastSearch(context: self.coredata.context)
+                        newLastSearch.title = selectedCellFoodName
+                        newLastSearch.calori = String(format: "%.2f", nutrientValues.caloriesDict)
+                        newLastSearch.carbon = String(format: "%.2f", nutrientValues.carbsDict)
+                        newLastSearch.fat = String(format: "%.2f", nutrientValues.fatDict)
+                        newLastSearch.protein = String(format: "%.2f", nutrientValues.proteinDict)
+                        newLastSearch.info = nutrientValues.info
+                        
+                        // Save the new LastSearch entity to Core Data
+                        self.saveFoodToCoreData(title: selectedCellFoodName, food: nutrientValues, mealEntityName: "Snack", grams: grams)
+                        
+                        // Print added LastSearch entity
+                        print("Added LastSearch Entity: \(newLastSearch)")
+                        
+                        // Aynı başlığa sahip önceki aramaları bul ve sil
+                        if let existingSearches = coredata.lastSearch {
+                               let filteredSearches = existingSearches.filter { $0.title == selectedCellFoodName }
+                               for existingSearch in filteredSearches {
+                                          coredata.context.delete(existingSearch)
+                               }
+                           }
+                        coredata.fetchLastSearch()
+                        tableView.reloadData()
+                        coredata.saveData()
                     }
                     if isSearching == false {
                         let datePickerDate = homeViewController.datePicker.date

@@ -81,10 +81,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         rotateLabel(redLabel, degrees: -45)
         rotateLabel(yellowLabel, degrees: -45)
         rotateLabel(greenLabel, degrees: 45)
-        
-        sumBreakfast(forDate: datePicker.date)
-        
-        
     }
     
     func updateBadge() {
@@ -159,7 +155,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         //Fetch items
         coredata = Coredata(homeViewController: self)
         datePicker.maximumDate = Date()
-        coredata.fetchBreakfast(forDate: datePicker.date)
+       
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
         coredata.fetchSnack(forDate: datePicker.date)
@@ -220,7 +216,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         switch currentSegmentIndex {
         case 0:
             tableView.reloadData()
-            coredata.fetchBreakfast(forDate: datePicker.date)
+         
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             updateLabel()
@@ -229,7 +225,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         case 1:
             tableView.reloadData()
-            coredata.fetchLunch(forDate: datePicker.date)
+          
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             updateLabel()
@@ -238,7 +234,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         case 2:
             tableView.reloadData()
-            coredata.fetchDinner(forDate: datePicker.date)
+         
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             sumDinner(forDate: datePicker.date)
@@ -246,7 +242,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         case 3:
             tableView.reloadData()
-            coredata.fetchSnack(forDate: datePicker.date)
+          
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             sumSnack(forDate: datePicker.date)
@@ -685,7 +681,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             switch currentSegmentIndex {
             case 0:
                 tableView.reloadData()
-                coredata.fetchBreakfast(forDate: datePicker.date)
+              
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumBreakfast(forDate: datePicker.date)
@@ -693,7 +689,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 
             case 1:
                 tableView.reloadData()
-                coredata.fetchLunch(forDate: datePicker.date)
+             
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumLunch(forDate: datePicker.date)
@@ -701,7 +697,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 
             case 2:
                 tableView.reloadData()
-                coredata.fetchDinner(forDate: datePicker.date)
+               
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumDinner(forDate: datePicker.date)
@@ -709,7 +705,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 
             case 3:
                 tableView.reloadData()
-                coredata.fetchSnack(forDate: datePicker.date)
+           
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumSnack(forDate: datePicker.date)
@@ -921,7 +917,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let maxCal = 350
+        let maxPro = 30
+        let maxFat = 30
+        let maxCarbs = 30
         // Get the selected index path
         guard let indexPath = tableView.indexPathForSelectedRow else {
             print("Selected index path is nil.")
@@ -988,11 +987,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let selectedFood = coredata.breakfast?[indexPath.row] {
                     food = selectedFood
                 }
-                let maxCal = 500
-                let maxPro = 35
-                let maxFat = 35
-                let maxCarbs = 35
-                
+             
                 let foodName = (food as? Breakfast)?.title ?? ""
                 let protein = (food as? Breakfast)?.protein ?? ""
                 let carbon = (food as? Breakfast)?.carbon ?? ""
@@ -1039,10 +1034,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let selectedFood = coredata.lunch?[indexPath.row] {
                     food = selectedFood
                 }
-                let maxCal = 500
-                let maxPro = 35
-                let maxFat = 35
-                let maxCarbs = 35
+             
                 
                 let foodName = (food as? Lunch)?.title ?? ""
                 let protein = (food as? Lunch)?.protein ?? ""
@@ -1086,10 +1078,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let selectedFood = coredata.dinner?[indexPath.row] {
                     food = selectedFood
                 }
-                let maxCal = 500
-                let maxPro = 35
-                let maxFat = 35
-                let maxCarbs = 35
+           
                 
                 let foodName = (food as? Dinner)?.title ?? ""
                 let protein = (food as? Dinner)?.protein ?? ""
@@ -1132,10 +1121,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let selectedFood = coredata.snack?[indexPath.row] {
                     food = selectedFood
                 }
-                let maxCal = 500
-                let maxPro = 35
-                let maxFat = 35
-                let maxCarbs = 35
+           
                 
                 let foodName = (food as? Snack)?.title ?? ""
                 let protein = (food as? Snack)?.protein ?? ""

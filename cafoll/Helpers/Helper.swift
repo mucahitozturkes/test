@@ -2,7 +2,7 @@ import UIKit
 
 class Helper {
     var homeViewController = HomeViewController()
-
+    
     func helperTools(homeViewController: HomeViewController) {
         self.homeViewController = homeViewController
     }
@@ -12,7 +12,7 @@ class Helper {
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()
     }
+    // calculate meals
 
-    // Helper - if value is equal, show check marks
     
 }

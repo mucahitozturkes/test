@@ -493,6 +493,62 @@ var foodDictionary: [String: Food] = [
         fatDict: 0.46,
          info: "*Bir avuç Kabak Çekirdeği 10 gr."
      ),
+    "etli lahana sarması": Food(
+        proteinDict: 4.26,
+        carbsDict: 4.19,
+        caloriesDict: 58.00,
+        fatDict: 2.57,
+         info: "*Bir orta porsiyon Etli Lahana Sarması 210 gr."
+     ),
+    "etli pazı sarması": Food(
+        proteinDict: 7.71,
+        carbsDict: 5.77,
+        caloriesDict: 109.0,
+        fatDict: 5.96,
+         info: "*Bir orta porsiyon Etli Pazı Sarması 200 gr."
+     ),
+    "şalgam suyu": Food(
+        proteinDict: 0.52,
+        carbsDict: 1.06,
+        caloriesDict: 5.00,
+        fatDict: 0.11,
+         info: "*Bir su bardağı Şalgam Suyu 200 gr. "
+     ),
+    "sivas tulum peyniri": Food(
+        proteinDict: 17.00,
+        carbsDict: 1.50,
+        caloriesDict: 300.0,
+        fatDict: 25.00,
+         info: "*Bir orta dilim Sivas Tulum Peyniri 30 gr."
+     ),
+    "erzincan tulum peyniri": Food(
+        proteinDict: 19.59,
+        carbsDict: 9.21,
+        caloriesDict: 334.0,
+        fatDict: 24.32,
+         info: "*Bir orta dilim Erzincan Tulum Peyniri 30 gr."
+     ),
+    "yeşil zeytin": Food(
+        proteinDict: 1.30,
+        carbsDict: 3.84,
+        caloriesDict: 145.0,
+        fatDict: 15.32,
+         info: "*Bir adet Yeşil Zeytin 4 gr."
+     ),
+    "kaymak": Food(
+        proteinDict: 0.96,
+        carbsDict: 3.31,
+        caloriesDict: 585.0,
+        fatDict: 63.1,
+         info: "Bir çorba kaşığı Kaymak 10 gr."
+     ),
+    "kaju fıstığı (kavrulmamış)": Food(
+        proteinDict: 18.22,
+        carbsDict: 30.19,
+        caloriesDict: 553.0,
+        fatDict: 43.85,
+         info: "Bir avuç Kaju Fıstığı 25 gr."
+     ),
     "XXXXXXXXX": Food(
          proteinDict: 0,
          carbsDict: 0,

@@ -9,7 +9,6 @@ import UIKit
 
 class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
-    
     //Header
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
@@ -62,6 +61,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     
     var selectedIndexPath: IndexPath?
     var isInfoVisible = false
+    
     let maxPurple = 350
     let maxRed = 30
     let maxYellow = 30
@@ -87,10 +87,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         let totalBadgeCount = badgeCount.reduce(0, +)
         
         if totalBadgeCount > 0 {
-            // Eğer toplam badge sayısı 0'dan büyükse, tabBarItem'a badge ekleyin
             tabBarItem.badgeValue = "\(totalBadgeCount)"
         } else {
-            // Eğer toplam badge sayısı 0 veya daha küçükse, badge'i kaldırın
             tabBarItem.badgeValue = nil
         }
     }
@@ -101,9 +99,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchLunch(forDate: sender.date)
         coredata.fetchDinner(forDate: sender.date)
         coredata.fetchSnack(forDate: sender.date)
-        
         // 2. Update UI based on fetched data
-        sumBreakfast(forDate: sender.date) // Assuming this function uses the fetched data
+        sumBreakfast(forDate: sender.date)
         sumLunch(forDate: sender.date)
         sumDinner(forDate: sender.date)
         sumSnack(forDate: sender.date)
@@ -116,16 +113,14 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
     }
     
     func rotateLabel(_ label: UILabel, degrees: CGFloat) {
-        // Dereceyi radyana çevir
         let radians = degrees * .pi / 180
-        
-        // UILabel'ı belirtilen dereceyle döndür
         label.transform = CGAffineTransform(rotationAngle: -radians)
     }
-    // UITabBarControllerDelegate metodunu implement et
+    
+    // UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController is HomeViewController {
-            // start up
+            // startup
             coredata.fetchBreakfast(forDate: datePicker.date)
             coredata.fetchLunch(forDate: datePicker.date)
             coredata.fetchDinner(forDate: datePicker.date)
@@ -139,7 +134,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateLabel()
             ui.updateButtonTapped()
             fetchDataAndUpdateUI()
-            
             // 4. Reload table view to reflect changes
             tableView.reloadData()
             badgeCount = [0, 0, 0, 0]
@@ -159,8 +153,8 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchLunch(forDate: datePicker.date)
         coredata.fetchDinner(forDate: datePicker.date)
         coredata.fetchSnack(forDate: datePicker.date)
-        fetchDataAndUpdateUI()
         
+        fetchDataAndUpdateUI()
         ui.updateButtonTapped()
         updateLabel()
         badgeCount = [0, 0, 0, 0]
@@ -201,7 +195,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         default:
             break
         }
-        
         // Update the table
         tableView.reloadData()
     }
@@ -216,7 +209,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         switch currentSegmentIndex {
         case 0:
             tableView.reloadData()
-         
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             updateLabel()
@@ -225,7 +217,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         case 1:
             tableView.reloadData()
-          
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             updateLabel()
@@ -234,7 +225,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         case 2:
             tableView.reloadData()
-         
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             sumDinner(forDate: datePicker.date)
@@ -242,7 +232,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
         case 3:
             tableView.reloadData()
-          
             fetchDataAndUpdateUI()
             ui.updateButtonTapped()
             sumSnack(forDate: datePicker.date)
@@ -301,7 +290,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
-            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
             print("Hata: Bir değer nil veya dönüştürülemez.")
             if settingsViewController.progressGreen?.text == nil {
                 print("Green is nil")
@@ -310,7 +298,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 print("Yellow is nil")
             }
             if settingsViewController.progressRed?.text == nil {
-                print("sRed is nil")
+                print("Red is nil")
             }
             if settingsViewController.progressPurple?.text == nil {
                 print("Purple is nil")
@@ -323,7 +311,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             return
         }
         
-        
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories: Float = 0.00
         var totalFats: Float = 0.00
@@ -331,7 +318,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         var totalCarbs: Float = 0.00
         
         for item in lunchItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -347,7 +333,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
-            // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(Int(totalCalories))
             redInfoLabel.text = String(Int(totalProtein))
             yellowInfoLabel.text = String(Int(totalFats))
@@ -364,7 +349,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
-            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
             print("Hata: Bir değer nil veya dönüştürülemez.")
             if settingsViewController.progressGreen?.text == nil {
                 print("sliderValueGreen is nil")
@@ -393,7 +377,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         var totalCarbs: Float = 0.00
         
         for item in dinnerItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -409,7 +392,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
-            // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(Int(totalCalories))
             redInfoLabel.text = String(Int(totalProtein))
             yellowInfoLabel.text = String(Int(totalFats))
@@ -426,7 +408,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
-            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
             print("Hata: Bir değer nil veya dönüştürülemez.")
             if settingsViewController.progressGreen?.text == nil {
                 print("sliderValueGreen is nil")
@@ -447,7 +428,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         guard let snackItems = self.coredata.snack else {
             return
         }
-        
         // Calculate the sum of values for calories, fat, protein, and carbohydrates for the given date
         var totalCalories: Float = 0.00
         var totalFats: Float = 0.00
@@ -455,7 +435,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         var totalCarbs: Float = 0.00
         
         for item in snackItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -471,7 +450,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             
             updateProgressViews(calories: Float(totalCalories), fat: Float(totalFats), protein: Float(totalProtein), carbs: Float(totalCarbs), maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple))
             
-            // Toplam değerleri ekrana yazdır
             purpleInfoLabel.text = String(Int(totalCalories))
             redInfoLabel.text = String(Int(totalProtein))
             yellowInfoLabel.text = String(Int(totalFats))
@@ -488,7 +466,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             updateVisibility(markGreen, value: Float(totalCarbs), threshold: maxGreen)
             
         } else {
-            // Eğer bir değer nil veya dönüştürülemezse buraya girecek
             print("Hata: Bir değer nil veya dönüştürülemez.")
             if settingsViewController.progressGreen?.text == nil {
                 print("sliderValueGreen is nil")
@@ -543,7 +520,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
         
         for item in breakfastItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -556,7 +532,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
         
         for item in lunchItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -569,7 +544,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         }
         
         for item in dinnerItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -582,7 +556,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             return
         }
         for item in snackItems {
-            // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
             if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                 totalCalories += Float(item.calori ?? "0") ?? 0.00
                 totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -611,19 +584,14 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             checkMarkMaxValue.isHidden = true
             goalTextLAbel.isHidden = false
         }
-
-        
-        
     }
     
-    // Sağa tıklandığında tarihi bir gün ileri al
     @IBAction func rightDate(_ sender: UIButton) {
         var currentDate = datePicker.date
             let today = Date()
 
             // Check if the selected date is today or in the past
             if currentDate <= today {
-                // Bir gün ekleyerek tarihi güncelle
                 currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
                 datePicker.setDate(currentDate, animated: true)
             }
@@ -632,7 +600,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchDinner(forDate: datePicker.date)
         coredata.fetchSnack(forDate: datePicker.date)
         // 2. Update UI based on fetched data
-        sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+        sumBreakfast(forDate: datePicker.date)
         sumLunch(forDate: datePicker.date)
         sumDinner(forDate: datePicker.date)
         sumSnack(forDate: datePicker.date)
@@ -643,12 +611,10 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         // 4. Reload table view to reflect changes
         tableView.reloadData()
     }
-    
-    // Sola tıklandığında tarihi bir gün geri al
+
     @IBAction func leftDate(_ sender: UIButton) {
         var currentDate = datePicker.date
 
-            // Bir gün çıkartarak tarihi güncelle
             currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
             datePicker.setDate(currentDate, animated: true)
         
@@ -657,7 +623,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         coredata.fetchDinner(forDate: datePicker.date)
         coredata.fetchSnack(forDate: datePicker.date)
         // 2. Update UI based on fetched data
-        sumBreakfast(forDate: datePicker.date) // Assuming this function uses the fetched data
+        sumBreakfast(forDate: datePicker.date)
         sumLunch(forDate: datePicker.date)
         sumDinner(forDate: datePicker.date)
         sumSnack(forDate: datePicker.date)
@@ -667,7 +633,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
         fetchDataAndUpdateUI()
         // 4. Reload table view to reflect changes
         tableView.reloadData()
-        
     }
     
     @IBAction func circleButtonShowInfo(_ sender: UIButton) {
@@ -681,7 +646,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             switch currentSegmentIndex {
             case 0:
                 tableView.reloadData()
-              
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumBreakfast(forDate: datePicker.date)
@@ -689,7 +653,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 
             case 1:
                 tableView.reloadData()
-             
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumLunch(forDate: datePicker.date)
@@ -697,7 +660,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 
             case 2:
                 tableView.reloadData()
-               
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumDinner(forDate: datePicker.date)
@@ -705,7 +667,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 
             case 3:
                 tableView.reloadData()
-           
                 fetchDataAndUpdateUI()
                 ui.updateButtonTapped()
                 sumSnack(forDate: datePicker.date)
@@ -714,10 +675,7 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             default:
                 break
             }
-            // Update the table
             tableView.reloadData()
-            
-            
         } else {
             let (greenTotal0, yellowTotal1, redTotal2, purpleTotal3) = ui.circleTotal()
                     
@@ -730,7 +688,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
             
             for item in breakfastItems {
-                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                     totalCalories += Float(item.calori ?? "0") ?? 0.00
                     totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -743,7 +700,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
             
             for item in lunchItems {
-                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                     totalCalories += Float(item.calori ?? "0") ?? 0.00
                     totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -756,7 +712,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
             }
             
             for item in dinnerItems {
-                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                     totalCalories += Float(item.calori ?? "0") ?? 0.00
                     totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -769,7 +724,6 @@ class HomeViewController: UIViewController,UITabBarControllerDelegate {
                 return
             }
             for item in snackItems {
-                // Eğer öğünün tarihi, istediğiniz tarih ile aynıysa, değerleri topla
                 if let itemDate = item.date, Calendar.current.isDate(itemDate, inSameDayAs: date) {
                     totalCalories += Float(item.calori ?? "0") ?? 0.00
                     totalFats += Float(item.fat ?? "0") ?? 0.00
@@ -815,16 +769,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segment.selectedSegmentIndex {
         case 0:
-            
             return self.coredata.breakfast?.count ?? 0
         case 1:
-            
             return self.coredata.lunch?.count ?? 0
         case 2:
-            
             return self.coredata.dinner?.count ?? 0
         case 3:
-            
             return self.coredata.snack?.count ?? 0
         default:
             return 0
@@ -840,16 +790,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch segment.selectedSegmentIndex {
         case 0:
             if let indexBreakfast = self.coredata.breakfast?[row] {
-                // Baş harfi büyük yap
                 cell.titleLabel?.text = indexBreakfast.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
                 cell.homeVC = self
-                // Düzeltme: Değerleri Float'a dönüştür
                 if let calories = Float(indexBreakfast.calori ?? "0"),
                    let fat = Float(indexBreakfast.fat ?? "0"),
                    let protein = Float(indexBreakfast.protein ?? "0"),
                    let carbs = Float(indexBreakfast.carbon ?? "0") {
-                   
                    // Update progress views in HomeCell
                     cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
                 }
@@ -857,16 +804,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
         case 1:
             if let indexBreakfast = self.coredata.lunch?[row] {
-                // Baş harfi büyük yap
                 cell.titleLabel?.text = indexBreakfast.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
                 cell.homeVC = self
-                // Düzeltme: Değerleri Float'a dönüştür
                 if let calories = Float(indexBreakfast.calori ?? "0"),
                    let fat = Float(indexBreakfast.fat ?? "0"),
                    let protein = Float(indexBreakfast.protein ?? "0"),
                    let carbs = Float(indexBreakfast.carbon ?? "0") {
-                   
                    // Update progress views in HomeCell
                     cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
                 }
@@ -877,28 +821,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.titleLabel?.text = indexBreakfast.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
                 cell.homeVC = self
-                // Düzeltme: Değerleri Float'a dönüştür
                 if let calories = Float(indexBreakfast.calori ?? "0"),
                    let fat = Float(indexBreakfast.fat ?? "0"),
                    let protein = Float(indexBreakfast.protein ?? "0"),
                    let carbs = Float(indexBreakfast.carbon ?? "0") {
-                   
                    // Update progress views in HomeCell
                     cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
                 }
             }
         case 3:
             if let indexBreakfast = self.coredata.snack?[row] {
-                // Baş harfi büyük yap
                 cell.titleLabel?.text = indexBreakfast.title?.capitalized
                 highestValueColor = determineHighestValueColor(carbons: indexBreakfast.carbon ?? "0", fat: indexBreakfast.fat ?? "0", protein: indexBreakfast.protein ?? "0")
                 cell.homeVC = self
-                // Düzeltme: Değerleri Float'a dönüştür
                 if let calories = Float(indexBreakfast.calori ?? "0"),
                    let fat = Float(indexBreakfast.fat ?? "0"),
                    let protein = Float(indexBreakfast.protein ?? "0"),
                    let carbs = Float(indexBreakfast.carbon ?? "0") {
-                   
                    // Update progress views in HomeCell
                     cell.updateProgressViews(calories: calories, fat: fat, protein: protein, carbs: carbs, maxGreen: Float(maxGreen), maxYellow: Float(maxYellow), maxRed: Float(maxRed), maxPurple: Float(maxPurple), duration: 1.0)
                 }
@@ -906,7 +845,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-        
         // Set the background color of colorView based on the highest value
         cell.colorView.backgroundColor = highestValueColor
         
@@ -926,13 +864,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             print("Selected index path is nil.")
             return
         }
-        
-        // Get the selected cell
-        guard let cell = tableView.cellForRow(at: indexPath) as? HomeCell else {
-            print("Cell at selected index path is not of type YourCellType.")
-            return
-        }
-        
+      
         if selectedIndexPath == indexPath {
             // If the same cell is selected again, reset the state
             selectedIndexPath = nil
@@ -1053,7 +985,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-                
                 // Convert String values to Double
                 if let caloriDouble = Float(calori),
                    let proteinDouble = Float(protein),
@@ -1065,10 +996,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case where conversion fails
                     print("Error: Could not convert one or more values to Double.")
                 }
+                
                 updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
                 updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
                 updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
                 updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
+                
             case 2:
                 
                 selectedIndexPath = indexPath
@@ -1079,7 +1012,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     food = selectedFood
                 }
            
-                
                 let foodName = (food as? Dinner)?.title ?? ""
                 let protein = (food as? Dinner)?.protein ?? ""
                 let carbon = (food as? Dinner)?.carbon ?? ""
@@ -1097,7 +1029,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-                
                 // Convert String values to Double
                 if let caloriDouble = Float(calori),
                    let proteinDouble = Float(protein),
@@ -1109,10 +1040,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case where conversion fails
                     print("Error: Could not convert one or more values to Double.")
                 }
+                
                 updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
                 updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
                 updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
                 updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
+                
             case 3:
                 selectedIndexPath = indexPath
                 
@@ -1121,7 +1054,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let selectedFood = coredata.snack?[indexPath.row] {
                     food = selectedFood
                 }
-           
                 
                 let foodName = (food as? Snack)?.title ?? ""
                 let protein = (food as? Snack)?.protein ?? ""
@@ -1140,7 +1072,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-                
                 // Convert String values to Double
                 if let caloriDouble = Float(calori),
                    let proteinDouble = Float(protein),
@@ -1152,10 +1083,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     // Handle the case where conversion fails
                     print("Error: Could not convert one or more values to Double.")
                 }
+                
                 updateVisibility(markPurple, value: Float(calori)!, threshold: Float(maxCal))
                 updateVisibility(markRed, value: Float(protein)!, threshold: Float(maxPro))
                 updateVisibility(markYellow, value: Float(fat)!, threshold: Float(maxFat))
                 updateVisibility(markGreen, value: Float(carbon)!, threshold: Float(maxCarbs))
+                
             default:
                 break
             }
@@ -1168,7 +1101,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // Convert string representations to float
         if let carbsValue = Float(carbons), let fatValue = Float(fat), let proteinValue = Float(protein) {
             let maxValue = max(carbsValue, fatValue, proteinValue)
-            
             if maxValue == carbsValue {
                 highestValueColor = .systemGreen
             } else if maxValue == fatValue {
@@ -1177,7 +1109,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 highestValueColor = .systemRed
             }
         }
-        
         return highestValueColor
     }
     
@@ -1190,7 +1121,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self?.deleteItem(at: indexPath)
             completionHandler(true)
         }
-        
         // Customize the appearance of the delete action if needed
         deleteAction.image = UIImage(systemName: "trash.fill")
         
@@ -1235,7 +1165,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-        
         do {
             try context.save()
             tableView.deleteRows(at: [indexPath], with: .fade)

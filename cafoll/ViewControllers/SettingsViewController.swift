@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController {
     
     var ui: Ui!
     let userDefaults = UserDefaults.standard
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ui = Ui()
@@ -54,15 +54,15 @@ class SettingsViewController: UIViewController {
         updateSliderValues()
         progressName.text = segmentName(forIndex: initialSegment)
     }
-
+    
     @IBAction func segmentedControlPanel(_ sender: UISegmentedControl) {
         let segment = segmentedControl.selectedSegmentIndex
-
+        
         progressName.text = segmentName(forIndex: segment)
         loadDefaults(forSegment: segment)
         updateSliderValues()
     }
-
+    
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         if sender == sliderGreen {
             updateLabelWithVibration(label: sliderValueGreen, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -101,7 +101,7 @@ class SettingsViewController: UIViewController {
         saveSliderValues(forSegment: segmentedControl.selectedSegmentIndex)
         circleTotal()
     }
-
+    
     func saveSliderValues(forSegment segment: Int) {
         let segmentKey = segmentKeyForIndex(segment)
         
@@ -118,84 +118,76 @@ class SettingsViewController: UIViewController {
         userDefaults.set(roundedRedValue, forKey: "\(segmentKey)redSliderValue")
         userDefaults.set(roundedPurpleValue, forKey: "\(segmentKey)purpleSliderValue")
     }
-
-
+    
+    
     func loadDefaults(forSegment segment: Int) {
         let segmentKey = segmentKeyForIndex(segment)
-
+        
         if let savedGreenValue = userDefaults.value(forKey: "\(segmentKey)greenSliderValue") as? Float {
             sliderGreen.value = savedGreenValue
             sliderValueGreen.text = String(format: "%.0f", savedGreenValue)
         }
-
+        
         if let savedYellowValue = userDefaults.value(forKey: "\(segmentKey)yellowSliderValue") as? Float {
             sliderYellow.value = savedYellowValue
             sliderValueYellow.text = String(format: "%.0f", savedYellowValue)
         }
-
+        
         if let savedRedValue = userDefaults.value(forKey: "\(segmentKey)redSliderValue") as? Float {
             sliderRed.value = savedRedValue
             sliderValueRed.text = String(format: "%.0f", savedRedValue)
         }
-
+        
         if let savedPurpleValue = userDefaults.value(forKey: "\(segmentKey)purpleSliderValue") as? Float {
             sliderPurple.value = savedPurpleValue
             sliderValuePurple.text = String(format: "%.0f", savedPurpleValue)
         }
     }
-
+    
     func updateSliderValues() {
         updateLabelWithVibration(label: sliderValueGreen, value: sliderGreen.value, color: .white, scaleX: 1.03, scaleY: 1.03)
         updateLabelWithVibration(label: sliderValueYellow, value: sliderYellow.value, color: .white, scaleX: 1.03, scaleY: 1.03)
         updateLabelWithVibration(label: sliderValueRed, value: sliderRed.value, color: .white, scaleX: 1.03, scaleY: 1.03)
         updateLabelWithVibration(label: sliderValuePurple, value: sliderPurple.value, color: .white, scaleX: 1.03, scaleY: 1.03)
 
-        // progressGreen için
         if let sliderValueGreenText = sliderValueGreen.text {
             updateLabelWithVibration(label: progressGreen, value: (sliderValueGreenText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
         }
 
-        // progressYellow için
         if let sliderValueYellowText = sliderValueYellow.text {
             updateLabelWithVibration(label: progressYellow, value: (sliderValueYellowText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
         }
 
-        // progressRed için
         if let sliderValueRedText = sliderValueRed.text {
             updateLabelWithVibration(label: progressRed, value: (sliderValueRedText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
         }
 
-        // progressPurple için
         if let sliderValuePurpleText = sliderValuePurple.text {
             updateLabelWithVibration(label: progressPurple, value: (sliderValuePurpleText as NSString).floatValue, color: .cgrayWhiteAnyDark, scaleX: 1.03, scaleY: 1.03)
         }
-
+        
     }
     
     func updateLabelWithVibration(label: UILabel, value: Float, color: UIColor, scaleX: CGFloat, scaleY: CGFloat) {
         label.text = String(format: "%.0f", value)
-        
-        // Orijinal rengi sakla
+
         let originalColor = label.textColor
 
-        // Renk belirleme
         label.textColor = color
 
-        // Ayrı ayrı scaleX ve scaleY değerleri ile CGAffineTransform oluştur
         let scaleTransform = CGAffineTransform(scaleX: scaleX, y: scaleY)
 
-        // Animasyon ekle
         UIView.animate(withDuration: 0.1, animations: {
             label.transform = scaleTransform
         }) { _ in
             UIView.animate(withDuration: 1) {
                 label.transform = .identity
-                // Animasyon bittiğinde orijinal rengine geri dön
+
                 label.textColor = originalColor
             }
         }
     }
-
+    
     func segmentKeyForIndex(_ index: Int) -> String {
         switch index {
         case 0:
@@ -210,7 +202,7 @@ class SettingsViewController: UIViewController {
             return ""
         }
     }
-
+    
     func segmentName(forIndex index: Int) -> String {
         switch index {
         case 0:
@@ -233,9 +225,9 @@ class SettingsViewController: UIViewController {
     func circleTotal() {
         let meals = ["breakfast", "lunch", "dinner", "snack"]
         let colors = ["green", "yellow", "red", "purple"]
-
+        
         var totalValues = [Float](repeating: 0.0, count: colors.count)
-
+        
         for meal in meals {
             for color in colors {
                 if let value = UserDefaults.standard.value(forKey: "\(meal)\(color)SliderValue") as? Float {
@@ -244,15 +236,15 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-
+        
         let (greenTotal, yellowTotal, redTotal, purpleTotal) = (totalValues[0], totalValues[1], totalValues[2], totalValues[3])
-
+        
         circleRed.text = String(format: "%.0f", redTotal)
         circleGreen.text = String(format: "%.0f", greenTotal)
         circlePurple.text = String(format: "%.0f", purpleTotal)
         circleYellow.text = String(format: "%.0f", yellowTotal)
-
-    
-
+        
+        
+        
     }
 }

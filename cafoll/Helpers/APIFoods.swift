@@ -549,6 +549,13 @@ var foodDictionary: [String: Food] = [
         fatDict: 43.85,
          info: "Bir avuç Kaju Fıstığı 25 gr."
      ),
+    "kaşık dökmesi": Food(
+        proteinDict: 3.19,
+        carbsDict: 32.42,
+        caloriesDict: 321.0,
+        fatDict: 19.92,
+         info: "Bir kaşık Kaşık Dökmesi 10 gr."
+     ),
     "XXXXXXXXX": Food(
          proteinDict: 0,
          carbsDict: 0,

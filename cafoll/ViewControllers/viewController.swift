@@ -1173,15 +1173,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 print("Searching mode is active. Deletion is not allowed.")
             }
-            
             completionHandler(true)
         }
         
-        // Set the trash bin image for the delete action and tint it pink
         if let trashImage = UIImage(systemName: "trash")?.withTintColor(.systemPink) {
-            deleteAction.image = trashImage
+               deleteAction.image = trashImage
         }
-        
+       
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }

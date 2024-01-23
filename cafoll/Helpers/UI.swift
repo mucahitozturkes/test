@@ -145,7 +145,6 @@ class Ui {
             let normalizedProgress4 = CGFloat((totalCarbon / greenTotal))
 
             self.circularProgressBar1.animateProgress(to: normalizedProgress1, duration: duration)
-            print("Animation Duration: \(duration)")
             self.circularProgressBar2.animateProgress(to: normalizedProgress2, duration: duration)
             self.circularProgressBar3.animateProgress(to: normalizedProgress3, duration: duration)
             self.circularProgressBar4.animateProgress(to: normalizedProgress4, duration: duration)

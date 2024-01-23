@@ -325,12 +325,12 @@ var foodDictionary: [String: Food] = [
          fatDict: 9.82,
         info: "*Bir porsiyon Hindi But 90 gr."
     ),
-    "karnabahar": Food(
+    "karnabahar (pişmiş)": Food(
          proteinDict: 1.84,
          carbsDict: 4.11,
          caloriesDict: 23.00,
          fatDict: 0.45,
-        info: "*Bir porsion pişmiş Karnabahar 150 gr."
+        info: "*Bir porsion Karnabahar 150 gr."
     ),
     "kuru fasulye": Food(
          proteinDict: 6.57,
@@ -555,6 +555,13 @@ var foodDictionary: [String: Food] = [
         caloriesDict: 321.0,
         fatDict: 19.92,
          info: "Bir kaşık Kaşık Dökmesi 10 gr."
+     ),
+    "karnabahar graten": Food(
+        proteinDict: 3.86,
+        carbsDict: 26.45,
+        caloriesDict: 177.0,
+        fatDict: 6.57,
+         info: "*Bir porsiyon Karnabahar Graten 120 gr."
      ),
     "XXXXXXXXX": Food(
          proteinDict: 0,

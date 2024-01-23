@@ -44,8 +44,8 @@ class CircularProgressBar: UIView {
         backgroundLayer.strokeColor = color.withAlphaComponent(0.1).cgColor
         backgroundLayer.fillColor = UIColor.clear.cgColor
         backgroundLayer.lineWidth = 10.0
-        backgroundLayer.lineCap = .round // Yuvarlak uçlar ekleyerek köşeleri yumuşatır.
-        backgroundLayer.cornerRadius = 8.0 // Corner radius değeri
+        backgroundLayer.lineCap = .round
+        backgroundLayer.cornerRadius = 8.0
 
         layer.addSublayer(backgroundLayer)
     }
@@ -64,8 +64,8 @@ class CircularProgressBar: UIView {
         progressLayer.strokeColor = color.cgColor
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineWidth = 10.0
-        progressLayer.lineCap = .round // Yuvarlak uçlar ekleyerek köşeleri yumuşatır.
-        progressLayer.cornerRadius = 8.0 // Corner radius değeri
+        progressLayer.lineCap = .round
+        progressLayer.cornerRadius = 8.0
         progressLayer.strokeEnd = 0.0
 
         layer.addSublayer(progressLayer)

@@ -70,7 +70,6 @@ class SettingsViewController: UIViewController {
             let greenUserDefaultsKey = "breakfastgreenSliderValue"
             if let savedGreenValue = UserDefaults.standard.value(forKey: greenUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circleGreen, value: savedGreenValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
-                print("Green Slider Value: \(sender.value)")
             }
         } else if sender == sliderYellow {
             updateLabelWithVibration(label: sliderValueYellow, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -78,7 +77,6 @@ class SettingsViewController: UIViewController {
             let yellowUserDefaultsKey = "breakfastyellowSliderValue"
             if let savedYellowValue = UserDefaults.standard.value(forKey: yellowUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circleYellow, value: savedYellowValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
-                print("Yellow Slider Value: \(sender.value)")
             }
         } else if sender == sliderRed {
             updateLabelWithVibration(label: sliderValueRed, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -86,7 +84,6 @@ class SettingsViewController: UIViewController {
             let redUserDefaultsKey = "breakfastredSliderValue"
             if let savedRedValue = UserDefaults.standard.value(forKey: redUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circleRed, value: savedRedValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
-                print("Red Slider Value: \(sender.value)")
             }
         } else if sender == sliderPurple {
             updateLabelWithVibration(label: sliderValuePurple, value: sender.value, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
@@ -94,10 +91,8 @@ class SettingsViewController: UIViewController {
             let purpleUserDefaultsKey = "breakfastpurpleSliderValue"
             if let savedPurpleValue = UserDefaults.standard.value(forKey: purpleUserDefaultsKey) as? Float {
                 updateLabelWithVibration(label: circlePurple, value: savedPurpleValue, color: .cgrayWhiteAnyDark, scaleX: 1.04, scaleY: 1.04)
-                print("Purple Slider Value: \(sender.value)")
             }
         }
-        
         saveSliderValues(forSegment: segmentedControl.selectedSegmentIndex)
         circleTotal()
     }
@@ -110,9 +105,7 @@ class SettingsViewController: UIViewController {
         let roundedYellowValue = round(sliderYellow.value)
         let roundedRedValue = round(sliderRed.value)
         let roundedPurpleValue = round(sliderPurple.value)
-        
-        print("Saving Slider Values - Green: \(roundedGreenValue), Yellow: \(roundedYellowValue), Red: \(roundedRedValue), Purple: \(roundedPurpleValue)")
-        
+
         userDefaults.set(roundedGreenValue, forKey: "\(segmentKey)greenSliderValue")
         userDefaults.set(roundedYellowValue, forKey: "\(segmentKey)yellowSliderValue")
         userDefaults.set(roundedRedValue, forKey: "\(segmentKey)redSliderValue")

@@ -138,7 +138,6 @@ class Ui {
                 label?.isHidden = (total - current < 0)
             }
 
-
             let normalizedProgress1 = CGFloat((totalCalori / purpleTotal))
             let normalizedProgress2 = CGFloat((totalProtein / redTotal))
             let normalizedProgress3 = CGFloat((totalFat / yellowTotal))
@@ -150,7 +149,6 @@ class Ui {
             self.circularProgressBar4.animateProgress(to: normalizedProgress4, duration: duration)
         }
     }
-
 
     //View shadows
     func applyShadow(to view: UIView, opacity: Float = 0.2, offset: CGSize = .zero, radius: CGFloat = 0, cornerRadius: CGFloat = 24) {
@@ -165,9 +163,7 @@ class Ui {
         applyShadow(to: homeviewController!.secondLook, offset: CGSize(width: 0, height: 6), radius: 12)
         applyShadow(to: homeviewController!.dateView, offset: CGSize(width: 0, height: 6), radius: 12)
         applyShadow(to: homeviewController!.segmentView, offset: CGSize(width: 0, height: 6), radius: 12)
-      
     }
-  
 }
 
 //color of Circle Backgrounds

@@ -337,7 +337,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                         return
                     }
                     
-                    
                     //check if list is empty?
                     let keysArray = Array(searchResults.keys)
                     
@@ -525,7 +524,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                         return
                     }
                     
-                    
                     //check if list is empty?
                     let keysArray = Array(searchResults.keys)
                     
@@ -576,8 +574,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                         if let selectedFood = self.coredata.lastSearch?[indexPath.row] {
                             let selectedCellFoodNameLast = selectedFood.title
                             print("Selected Cell Food Name: \(selectedCellFoodNameLast ?? "nil")")
-                            
-                            // ... rest of your code related to selectedCellFoodName
                             
                             // Check if selectedCellFoodName is not nil
                             if let gramsText = alertLunch.textFields?.first?.text,

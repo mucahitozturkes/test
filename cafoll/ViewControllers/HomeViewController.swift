@@ -937,9 +937,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 yellowTotal.text = "\(maxFat)"
                 greenTotal.text = "\(maxCarbs)"
                 
-               
-                
-                
                 // Convert String values to Float
                 if let caloriDouble = Float(calori),
                    let proteinDouble = Float(protein),

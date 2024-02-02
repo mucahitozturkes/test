@@ -487,10 +487,10 @@ var foodDictionary: [String: Food] = [
          info: "*Bir kase Tarhana Çorbası 200 gr."
      ),
     "kabak çekirdeği": Food(
-        proteinDict: 0.24,
-        carbsDict: 0.14,
-        caloriesDict: 6.00,
-        fatDict: 0.46,
+        proteinDict: 24.40,
+        carbsDict: 14.22,
+        caloriesDict: 560.0,
+        fatDict: 45.60,
          info: "*Bir avuç Kabak Çekirdeği 10 gr."
      ),
     "etli lahana sarması": Food(
@@ -540,21 +540,21 @@ var foodDictionary: [String: Food] = [
         carbsDict: 3.31,
         caloriesDict: 585.0,
         fatDict: 63.1,
-         info: "Bir çorba kaşığı Kaymak 10 gr."
+         info: "*Bir çorba kaşığı Kaymak 10 gr."
      ),
     "kaju fıstığı (kavrulmamış)": Food(
         proteinDict: 18.22,
         carbsDict: 30.19,
         caloriesDict: 553.0,
         fatDict: 43.85,
-         info: "Bir avuç Kaju Fıstığı 25 gr."
+         info: "*Bir avuç Kaju Fıstığı 25 gr."
      ),
     "kaşık dökmesi": Food(
         proteinDict: 3.19,
         carbsDict: 32.42,
         caloriesDict: 321.0,
         fatDict: 19.92,
-         info: "Bir kaşık Kaşık Dökmesi 10 gr."
+         info: "*Bir kaşık Kaşık Dökmesi 10 gr."
      ),
     "karnabahar graten": Food(
         proteinDict: 3.86,

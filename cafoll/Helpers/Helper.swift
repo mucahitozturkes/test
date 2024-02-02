@@ -12,7 +12,5 @@ class Helper {
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()
     }
-    // calculate meals
-
-    
+  
 }

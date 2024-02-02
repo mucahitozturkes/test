@@ -54,8 +54,6 @@ class Coredata {
             print("fetch LastSearch: ", error)
         }
     }
-
-    
     //Fetch Breakfast
     func fetchBreakfast(forDate date: Date) {
         do {

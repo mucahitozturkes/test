@@ -45,17 +45,104 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addLongPressGesture(to: sliderGreen)
+        addLongPressGesture(to: sliderYellow)
+        addLongPressGesture(to: sliderRed)
+        addLongPressGesture(to: sliderPurple)
         ui = Ui()
         ui.applyShadow(to: FirstViewLayer, offset: CGSize(width: 0, height: 6), radius: 12)
         ui.applyShadow(to: circileView, offset: CGSize(width: 0, height: 6), radius: 12)
         ui.applyShadow(to: rightView, offset: CGSize(width: 0, height: 6), radius: 12)
         circleTotal()
+        loadSavedSliderValues()
+        loadSavedSliderMaxValues()
         let initialSegment = segmentedControl.selectedSegmentIndex
         loadDefaults(forSegment: initialSegment)  // Yüklenen defaults, başlangıç segmenti için yapılıyor
         updateSliderValues()
         progressName.text = segmentName(forIndex: initialSegment)
+       
     }
+    
+    func addLongPressGesture(to slider: UISlider) {
+          let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+          slider.addGestureRecognizer(longPressGesture)
+      }
+
+      @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+          guard let slider = gesture.view as? UISlider else { return }
+
+          if gesture.state == .began {
+              // Basılı tutma işlemi başladığında alert göster
+              showSliderMaxValueAlert(for: slider)
+          }
+      }
+
+      func showSliderMaxValueAlert(for slider: UISlider) {
+          let alert = UIAlertController(title: "Lütfen bir değer gir", message: "", preferredStyle: .alert)
+
+          alert.addTextField { textField in
+              textField.keyboardType = .numberPad
+              textField.placeholder = "En yüksek değer"
+          }
+
+          let setAction = UIAlertAction(title: "Uygula", style: .default) { [weak self] _ in
+              if let textField = alert.textFields?.first, let text = textField.text, let newValue = Float(text) {
+                  // Yeni max değeri slider'a uygula
+                  slider.maximumValue = newValue
+                  // Yeni değeri UserDefaults'a kaydet
+                  self?.saveSliderMaxValue(for: slider, value: newValue)
+              }
+          }
+
+          let cancelAction = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+
+          alert.addAction(setAction)
+          alert.addAction(cancelAction)
+
+          present(alert, animated: true, completion: nil)
+      }
+
+      func saveSliderMaxValue(for slider: UISlider, value: Float) {
+          let key = sliderMaxValueKey(for: slider)
+          userDefaults.set(value, forKey: key)
+      }
+
+      func savedSliderMaxValue(for slider: UISlider) -> Float {
+          let key = sliderMaxValueKey(for: slider)
+          return userDefaults.float(forKey: key)
+      }
+
+      func sliderMaxValueKey(for slider: UISlider) -> String {
+          return "Slider_\(slider.tag)_MaxValue"
+      }
+
+      func saveSliderValue(for slider: UISlider, value: Float) {
+          let key = sliderValueKey(for: slider)
+          userDefaults.set(value, forKey: key)
+      }
+
+      func savedSliderValue(for slider: UISlider) -> Float {
+          let key = sliderValueKey(for: slider)
+          return userDefaults.float(forKey: key)
+      }
+
+      func sliderValueKey(for slider: UISlider) -> String {
+          return "Slider_\(slider.tag)_Value"
+      }
+
+      func loadSavedSliderValues() {
+          sliderGreen.value = savedSliderValue(for: sliderGreen)
+          sliderYellow.value = savedSliderValue(for: sliderYellow)
+          sliderRed.value = savedSliderValue(for: sliderRed)
+          sliderPurple.value = savedSliderValue(for: sliderPurple)
+      }
+
+      func loadSavedSliderMaxValues() {
+          sliderGreen.maximumValue = savedSliderMaxValue(for: sliderGreen)
+          sliderYellow.maximumValue = savedSliderMaxValue(for: sliderYellow)
+          sliderRed.maximumValue = savedSliderMaxValue(for: sliderRed)
+          sliderPurple.maximumValue = savedSliderMaxValue(for: sliderPurple)
+      }
     
     @IBAction func segmentedControlPanel(_ sender: UISegmentedControl) {
         let segment = segmentedControl.selectedSegmentIndex
@@ -112,7 +199,6 @@ class SettingsViewController: UIViewController {
         userDefaults.set(roundedRedValue, forKey: "\(segmentKey)redSliderValue")
         userDefaults.set(roundedPurpleValue, forKey: "\(segmentKey)purpleSliderValue")
     }
-    
     
     func loadDefaults(forSegment segment: Int) {
         let segmentKey = segmentKeyForIndex(segment)

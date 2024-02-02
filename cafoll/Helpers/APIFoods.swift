@@ -569,13 +569,6 @@ var foodDictionary: [String: Food] = [
          caloriesDict: 0,
          fatDict: 0,
          info: ""
-     ),
-    "XXXXXXXXXtest": Food(
-         proteinDict: 0,
-         carbsDict: 0,
-         caloriesDict: 0,
-         fatDict: 0,
-         info: ""
      )
    
 ]

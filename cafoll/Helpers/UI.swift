@@ -31,7 +31,7 @@ class Ui {
     }
 
     func setupCoreData() {
-      
+       
         totalBar()
         UiOfCircle()
         updateButtonTapped()
@@ -81,7 +81,7 @@ class Ui {
         return (greenTotal0, yellowTotal1, redTotal2, purpleTotal3)
     }
 
-    @objc func updateButtonTapped() {
+    func updateButtonTapped() {
           
         guard let totalCaloriText = homeviewController?.totalCalori?.text,
               let totalProteinText = homeviewController?.totalPRotein?.text,
@@ -106,7 +106,7 @@ class Ui {
                               yellowTotal: yellowTotal1,
                               redTotal: redTotal2,
                               purpleTotal: purpleTotal3,
-                              duration: 100.0)
+                              duration: 5)
     }
 
     func updateUIWithAnimation(totalCalori: Float,

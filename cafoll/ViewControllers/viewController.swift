@@ -293,6 +293,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Öğünler", message: "Hangi öğüne eklemek istersin?", preferredStyle: .actionSheet)
         let indexOfHomeViewController = 0
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        alert.popoverPresentationController?.permittedArrowDirections = []
         guard let tabBarController = self.tabBarController,
               let homeViewController = tabBarController.viewControllers?[indexOfHomeViewController] as? HomeViewController else {
             print("Hata: Tab barından HomeViewController'a erişilemiyor.")

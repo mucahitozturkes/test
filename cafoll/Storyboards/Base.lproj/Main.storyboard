@@ -260,7 +260,7 @@
                                 <rect key="frame" x="16" y="202" width="343" height="386"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JkZ-aq-0Qx">
-                                        <rect key="frame" x="16" y="16" width="311" height="339.5"/>
+                                        <rect key="frame" x="16" y="16" width="311" height="343.5"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rde-uR-645">
                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="46"/>
@@ -284,10 +284,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gLU-et-mAr">
-                                                <rect key="frame" x="0.0" y="103.5" width="311" height="236"/>
+                                                <rect key="frame" x="0.0" y="103.5" width="311" height="240"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MAZ-k2-SfC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="47"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="48"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="sPy-ad-Jaf">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
@@ -309,17 +309,28 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <slider opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="b1S-6l-iWd">
-                                                                <rect key="frame" x="-2" y="17" width="315" height="31"/>
-                                                                <color key="minimumTrackTintColor" systemColor="systemPurpleColor"/>
-                                                                <connections>
-                                                                    <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="O2U-dB-27m"/>
-                                                                </connections>
-                                                            </slider>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="gC2-HS-kHf">
+                                                                <rect key="frame" x="0.0" y="17" width="311" height="31"/>
+                                                                <subviews>
+                                                                    <slider opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="b1S-6l-iWd">
+                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <color key="minimumTrackTintColor" systemColor="systemPurpleColor"/>
+                                                                        <connections>
+                                                                            <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="O2U-dB-27m"/>
+                                                                        </connections>
+                                                                    </slider>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsV-Cx-EEq">
+                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Omc-4R-kzt">
-                                                        <rect key="frame" x="0.0" y="63" width="311" height="47"/>
+                                                        <rect key="frame" x="0.0" y="64" width="311" height="48"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="2vJ-1m-3vy">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
@@ -341,17 +352,28 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fzP-WA-WzE">
-                                                                <rect key="frame" x="-2" y="17" width="315" height="31"/>
-                                                                <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
-                                                                <connections>
-                                                                    <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="sun-rE-dDa"/>
-                                                                </connections>
-                                                            </slider>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="Vww-do-3Ho">
+                                                                <rect key="frame" x="0.0" y="17" width="311" height="31"/>
+                                                                <subviews>
+                                                                    <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fzP-WA-WzE">
+                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
+                                                                        <connections>
+                                                                            <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="sun-rE-dDa"/>
+                                                                        </connections>
+                                                                    </slider>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vL-GI-QuT">
+                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-IO-JDp">
-                                                        <rect key="frame" x="0.0" y="126" width="311" height="47"/>
+                                                        <rect key="frame" x="0.0" y="128" width="311" height="48"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="nDS-zs-pMG">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
@@ -373,17 +395,28 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ht8-pz-Pw1">
-                                                                <rect key="frame" x="-2" y="17" width="315" height="31"/>
-                                                                <color key="minimumTrackTintColor" systemColor="systemYellowColor"/>
-                                                                <connections>
-                                                                    <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="DsY-RX-srn"/>
-                                                                </connections>
-                                                            </slider>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="Vjj-fI-Pmm">
+                                                                <rect key="frame" x="0.0" y="17" width="311" height="31"/>
+                                                                <subviews>
+                                                                    <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ht8-pz-Pw1">
+                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <color key="minimumTrackTintColor" systemColor="systemYellowColor"/>
+                                                                        <connections>
+                                                                            <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="DsY-RX-srn"/>
+                                                                        </connections>
+                                                                    </slider>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-5Q-HjY">
+                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="C4h-yw-GsT">
-                                                        <rect key="frame" x="0.0" y="189" width="311" height="47"/>
+                                                        <rect key="frame" x="0.0" y="192" width="311" height="48"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="1eH-0t-SMr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
@@ -405,13 +438,24 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="7RZ-zA-weL">
-                                                                <rect key="frame" x="-2" y="17" width="315" height="31"/>
-                                                                <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
-                                                                <connections>
-                                                                    <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="rS3-Et-F5P"/>
-                                                                </connections>
-                                                            </slider>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="Ffx-fD-rFW">
+                                                                <rect key="frame" x="0.0" y="17" width="311" height="31"/>
+                                                                <subviews>
+                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="7RZ-zA-weL">
+                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
+                                                                        <connections>
+                                                                            <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="rS3-Et-F5P"/>
+                                                                        </connections>
+                                                                    </slider>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST8-ND-QqG">
+                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -1289,7 +1333,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nOu-2H-cYL">
                                         <rect key="frame" x="24" y="5" width="146" height="14.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kalori" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="eml-Hf-tII">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kalori" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="eml-Hf-tII">
                                                 <rect key="frame" x="0.0" y="0.0" width="146" height="14.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="11"/>
                                                 <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>

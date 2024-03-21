@@ -312,19 +312,19 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="gC2-HS-kHf">
                                                                 <rect key="frame" x="0.0" y="17" width="311" height="31"/>
                                                                 <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsV-Cx-EEq">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <slider opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="b1S-6l-iWd">
-                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <rect key="frame" x="-2" y="1" width="315" height="31"/>
                                                                         <color key="minimumTrackTintColor" systemColor="systemPurpleColor"/>
                                                                         <connections>
                                                                             <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="O2U-dB-27m"/>
                                                                         </connections>
                                                                     </slider>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsV-Cx-EEq">
-                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
-                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
-                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -355,19 +355,19 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="Vww-do-3Ho">
                                                                 <rect key="frame" x="0.0" y="17" width="311" height="31"/>
                                                                 <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vL-GI-QuT">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fzP-WA-WzE">
-                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <rect key="frame" x="-2" y="1" width="315" height="31"/>
                                                                         <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
                                                                         <connections>
                                                                             <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="sun-rE-dDa"/>
                                                                         </connections>
                                                                     </slider>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vL-GI-QuT">
-                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
-                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
-                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -398,19 +398,19 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="Vjj-fI-Pmm">
                                                                 <rect key="frame" x="0.0" y="17" width="311" height="31"/>
                                                                 <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-5Q-HjY">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ht8-pz-Pw1">
-                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <rect key="frame" x="-2" y="1" width="315" height="31"/>
                                                                         <color key="minimumTrackTintColor" systemColor="systemYellowColor"/>
                                                                         <connections>
                                                                             <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="DsY-RX-srn"/>
                                                                         </connections>
                                                                     </slider>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-5Q-HjY">
-                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
-                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
-                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -441,19 +441,19 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="Ffx-fD-rFW">
                                                                 <rect key="frame" x="0.0" y="17" width="311" height="31"/>
                                                                 <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST8-ND-QqG">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="12"/>
+                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
+                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="7RZ-zA-weL">
-                                                                        <rect key="frame" x="-2" y="0.0" width="315" height="31"/>
+                                                                        <rect key="frame" x="-2" y="1" width="315" height="31"/>
                                                                         <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
                                                                         <connections>
                                                                             <action selector="sliderValueChanged:" destination="A7F-m5-KCR" eventType="valueChanged" id="rS3-Et-F5P"/>
                                                                         </connections>
                                                                     </slider>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Değer vermek için basılı tut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST8-ND-QqG">
-                                                                        <rect key="frame" x="0.0" y="19" width="311" height="12"/>
-                                                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="9"/>
-                                                                        <color key="textColor" name="Cgray-White ~ Ant &amp; Dark"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>

@@ -1,5 +1,4 @@
-Youtube Video
-https://www.youtube.com/watch?v=LZTXJ6tlBY4
+
 ![Screenshot 2024-03-22 at 15 22 30](https://github.com/mucahitozturkes/Calori-App/assets/138803167/4b769535-37e5-4e4d-a483-71c52e106ac7)
 ![Screenshot 2024-03-22 at 15 22 24](https://github.com/mucahitozturkes/Calori-App/assets/138803167/3a853197-8c9f-45c5-a074-10fb0a096828)
 ![Screenshot 2024-03-22 at 15 22 17](https://github.com/mucahitozturkes/Calori-App/assets/138803167/f2c6eb6c-890b-4a75-8137-8ecbc399b9e2)
